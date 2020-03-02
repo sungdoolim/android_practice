@@ -21,6 +21,11 @@
         android:layout_width="116dp"
         android:layout_height="71dp"
         android:text="update" />
+    <Button
+        android:id="@+id/resetbt"
+        android:layout_width="116dp"
+        android:layout_height="71dp"
+        android:text="reset" />
 
     <ListView
         android:id="@+id/listView"
