@@ -1,16 +1,20 @@
 package com.example.mysqltest;
 
+        import android.content.Intent;
         import android.net.Uri;
         import android.os.Bundle;
 //package com.jy.dbconnection;
         import android.app.Activity;
         import android.os.AsyncTask;
+        import android.util.Log;
         import android.view.View;
         import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.ListAdapter;
         import android.widget.ListView;
         import android.widget.SimpleAdapter;
+        import android.widget.TextView;
+
         import com.android.volley.Request;
         import com.android.volley.RequestQueue;
         import com.android.volley.Response;
@@ -19,16 +23,26 @@ package com.example.mysqltest;
         import org.json.JSONArray;
         import org.json.JSONException;
         import org.json.JSONObject;
+        import org.w3c.dom.Text;
+
         import java.io.BufferedReader;
         import java.io.DataOutputStream;
+        import java.io.IOException;
         import java.io.InputStreamReader;
         import java.net.HttpURLConnection;
         import java.net.URL;
         import java.util.ArrayList;
         import java.util.HashMap;
 
+        import okhttp3.Call;
+        import okhttp3.Callback;
+
 
 public class MainActivity extends Activity {
+
+    private static final String TAG = "TestActivity";
+    private HttpConnection httpConn = HttpConnection.getInstance();
+
 
     String myJSON;
 
@@ -50,6 +64,28 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         list = (ListView) findViewById(R.id.listView);
         personList = new ArrayList<HashMap<String, String>>();
+        TextView tv=findViewById(R.id.tv);
+        Intent intent=getIntent();
+        tv.setText(intent.getStringExtra("str"));
+
+Button register=findViewById(R.id.register);
+register.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        Intent intent=new Intent(MainActivity.this,register.class);
+        startActivity(intent);
+
+    }
+});
+
+Button okh=findViewById(R.id.okh);
+okh.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        sendData();
+    }
+});
+
 
 
 Button selectbt=findViewById(R.id.selectbt);
@@ -90,6 +126,37 @@ System.out.println(personList.isEmpty());//false
 
 
 
+    }
+
+
+
+
+    /** 웹 서버로 데이터 전송 */
+    private void sendData() {
+// 네트워크 통신하는 작업은 무조건 작업스레드를 생성해서 호출 해줄 것!!
+        new Thread() {
+            public void run() {
+// 파라미터 2개와 미리정의해논 콜백함수를 매개변수로 전달하여 호출
+                httpConn.requestWebServer("데이터1","데이터2", callback);
+            }
+        }.start();;
+    }
+
+    private final Callback callback;
+
+    {
+        callback = new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d(TAG, "콜백오류:" + e.getMessage());
+            }
+
+            @Override
+            public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                String body = response.body().string();
+                Log.d(TAG, "서버에서 응답한 Body:" + body);
+            }
+        };
     }
 
 
