@@ -1,15 +1,20 @@
 package com.example.mysqltest;
 
+        import android.app.AlertDialog;
+        import android.content.DialogInterface;
         import android.content.Intent;
+        import android.content.SharedPreferences;
         import android.net.Uri;
         import android.os.Bundle;
 //package com.jy.dbconnection;
         import android.app.Activity;
         import android.os.AsyncTask;
+        import android.provider.Settings;
         import android.util.Log;
         import android.view.View;
         import android.widget.ArrayAdapter;
         import android.widget.Button;
+        import android.widget.EditText;
         import android.widget.ListAdapter;
         import android.widget.ListView;
         import android.widget.SimpleAdapter;
@@ -46,11 +51,12 @@ public class MainActivity extends Activity {
 
     String myJSON;
 
+
     private static final String TAG_RESULTS = "result";
     private static final String TAG_ID = "id";
     private static final String TAG_NAME = "name";
     private static final String TAG_ADD = "address";
-    private static final String TAGC = "content";
+    private static final String TAGC = "pw";
 
     JSONArray peoples = null;
 
@@ -62,13 +68,20 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SharedPreferences sp=getSharedPreferences("testsp",Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor=sp.edit();
+        editor.putString("key","세션 전달!!!!");
+        editor.commit();
+
+
+
         list = (ListView) findViewById(R.id.listView);
         personList = new ArrayList<HashMap<String, String>>();
         TextView tv=findViewById(R.id.tv);
         Intent intent=getIntent();
         tv.setText(intent.getStringExtra("str"));
 
-Button register=findViewById(R.id.register);
+        Button register=findViewById(R.id.register);
 register.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View view) {
@@ -76,6 +89,65 @@ register.setOnClickListener(new View.OnClickListener() {
         startActivity(intent);
 
     }
+});
+Button login=findViewById(R.id.login);
+
+login.setOnClickListener(new View.OnClickListener() {
+     String id=null;
+     String pw=null;
+    @Override
+    public void onClick(View view) {
+        AlertDialog.Builder ad=new AlertDialog.Builder(MainActivity.this);
+        ad.setMessage("pw 입력하세요 :");
+       final EditText etid=new EditText(MainActivity.this);
+        ad.setView(etid);
+        ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+            pw=etid.getText().toString();
+            /*
+            Intent intent=new Intent(MainActivity.this,login.class);
+            intent.putExtra("id",id);
+            intent.putExtra("pw",pw);
+            startActivity(intent);
+                   실험용 sysout으로 register에서 찍어줌 */
+            login l=new login();
+            l.selidpw(id);
+
+
+
+            }
+
+        });
+        ad.setNegativeButton("id 취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+       ad.show();
+
+
+
+        ad.setMessage("id 입력하세요 :");
+        final EditText etpw=new EditText(MainActivity.this);
+        ad.setView(etpw);
+        ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+id=etpw.getText().toString();
+            }
+        });
+        ad.setNegativeButton(" 취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        ad.show();
+
+    }
+
 });
 
 Button okh=findViewById(R.id.okh);
@@ -160,10 +232,19 @@ System.out.println(personList.isEmpty());//false
     }
 
 
+
+
+
+
+
     protected void showList() {
+
+        System.out.println("############################################################3show list 입니다");
         try {
-            JSONObject jsonObj = new JSONObject(myJSON);
-            peoples = jsonObj.getJSONArray(TAG_RESULTS);
+            System.out.println(myJSON);
+            JSONObject jsonObj = new JSONObject(myJSON);//string으로 저장되어있구나
+            peoples = jsonObj.getJSONArray(TAG_RESULTS);// string으로 result=으로 되어있으니까 result에 있는 리스트를 얻어오기
+            // peopels는 jsonarray이라는데~ JSONArray peoples=null;
 
             for (int i = 0; i < peoples.length(); i++) {//select 부분이구나
 
@@ -214,35 +295,44 @@ System.out.println(personList.isEmpty());//false
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     StringBuilder sb = new StringBuilder();
                     if(c=="u") {
-                        System.out.println("u로 들어옴");
+
                         con.setDoOutput(true); // POST 로 데이터를 넘겨주겠다는 옵션
                         con.setRequestMethod("POST");
                         String name = "name=" + Uri.encode("2") + "&id=" + Uri.encode("2") + "&address=" + Uri.encode("2")+ "&content=" + Uri.encode("2");
-                        System.out.println("post");
+
                         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-                        System.out.println("1");
+
                         wr.writeBytes(name);
-                        System.out.println("2");
-                        wr.flush();   System.out.println("3");
-                        wr.close();   System.out.println("4");
+
+                        wr.flush();
+                        wr.close();
                     }else if(c=="d"){
                         System.out.println("d로 들어옴");
                         con.setDoOutput(true); // POST 로 데이터를 넘겨주겠다는 옵션
                         con.setRequestMethod("POST");
                         String name = "id=" + Uri.encode("2");
-                        System.out.println("post");
+
                         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-                        System.out.println("1");
+
                         wr.writeBytes(name);
-                        System.out.println("2");
-                        wr.flush();   System.out.println("3");
-                        wr.close();   System.out.println("4");
+
+                        wr.flush();
+                        wr.close();
                     }
+
+
+
+
+
+
+                    System.out.println("############################################################### select 부분 이동.?");
                         bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                         String json;
                         while ((json = bufferedReader.readLine()) != null) {
                             sb.append(json + "\n");
+
                         }
+                    System.out.println(sb.toString().trim());
                         return sb.toString().trim();
                 } catch (Exception e) {
                     return null;

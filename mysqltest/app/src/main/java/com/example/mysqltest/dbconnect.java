@@ -25,37 +25,10 @@ public class dbconnect {
 
     ArrayList<HashMap<String, String>> personList;
     ArrayAdapter<HashMap<String,String>> ad;
-    protected void showList() {
-        try {
-            JSONObject jsonObj = new JSONObject(myJSON);
-            peoples = jsonObj.getJSONArray(TAG_RESULTS);
 
-            for (int i = 0; i < peoples.length(); i++) {//select 부분이구나
+    public String getData(String url,final String c,final String[] ar) {
+        String resultString=new String();
 
-                JSONObject c = peoples.getJSONObject(i);
-                String id = c.getString(TAG_ID);
-                String name = c.getString(TAG_NAME);
-                String address = c.getString(TAG_ADD);
-                String content = c.getString(TAGC);
-
-                HashMap<String, String> persons = new HashMap<String, String>();
-
-                persons.put(TAG_ID, id);System.out.println(id);
-                persons.put(TAG_NAME, name);System.out.println(name);
-                persons.put(TAG_ADD, address);System.out.println(address);
-                persons.put(TAGC, content);System.out.println(content);
-
-                personList.add(persons);
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
-    public void getData(String url,final String c,final String[] ar) {
         class GetDataJSON extends AsyncTask<String, Void, String> {
 
             @Override
@@ -68,37 +41,51 @@ public class dbconnect {
                     URL url = new URL(uri);
                     HttpURLConnection con = (HttpURLConnection) url.openConnection();
                     StringBuilder sb = new StringBuilder();
+
+
                     if(c=="u") {
-                        System.out.println("u로 들어옴");
                         con.setDoOutput(true); // POST 로 데이터를 넘겨주겠다는 옵션
                         con.setRequestMethod("POST");
                         String name = "name=" + ar[0] + "&id=" + ar[1] + "&address=" + ar[2]+ "&pw=" + ar[3];
-                        System.out.println(name);
-                        System.out.println("post");
+
                         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-                        System.out.println("1");
+
                         wr.writeBytes(name);
-                        System.out.println("2");
-                        wr.flush();   System.out.println("3");
-                        wr.close();   System.out.println("4");
+
+                        wr.flush();
+                        wr.close();
                     }else if(c=="d"){
-                        System.out.println("d로 들어옴");
+
                         con.setDoOutput(true); // POST 로 데이터를 넘겨주겠다는 옵션
                         con.setRequestMethod("POST");
                         String name = "id=" + Uri.encode("2");
-                        System.out.println("post");
+
                         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-                        System.out.println("1");
+
                         wr.writeBytes(name);
-                        System.out.println("2");
-                        wr.flush();   System.out.println("3");
-                        wr.close();   System.out.println("4");
+
+                        wr.flush();
+                        wr.close();
+                    }else if(c.equals("selid")){
+
+                        con.setDoOutput(true); // POST 로 데이터를 넘겨주겠다는 옵션
+                        con.setRequestMethod("POST");
+                        String name="id="+ar[0];
+                        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+                        wr.writeBytes(name);
+                       System.out.println("#########################################################select id test.....");
+                        wr.flush();
+                        wr.close();
+
                     }
+
+
+                    System.out.println("############################################################### select 부분 이동.?");
                     bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
                     String json;
                     while ((json = bufferedReader.readLine()) != null) {
                         sb.append(json + "\n");
-                    }
+                    } System.out.println("결과값 #########################################:"+sb.toString().trim());
                     return sb.toString().trim();
                 } catch (Exception e) {
                     return null;
@@ -107,12 +94,15 @@ public class dbconnect {
             @Override
             protected void onPostExecute(String result) {
                 myJSON = result;
-                showList();
             }
         }
         GetDataJSON g = new GetDataJSON();
-        g.execute(url);
-    }
+try {
+    return g.execute(url).get();
+}catch(Exception e){
+    return e.getMessage();
+        }
+}
 
 
 
