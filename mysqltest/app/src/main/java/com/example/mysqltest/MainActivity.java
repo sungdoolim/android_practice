@@ -15,20 +15,15 @@ package com.example.mysqltest;
         import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.EditText;
-        import android.widget.ListAdapter;
+
         import android.widget.ListView;
-        import android.widget.SimpleAdapter;
+
         import android.widget.TextView;
 
-        import com.android.volley.Request;
-        import com.android.volley.RequestQueue;
-        import com.android.volley.Response;
-        import com.android.volley.toolbox.StringRequest;
-        import com.android.volley.toolbox.Volley;
         import org.json.JSONArray;
         import org.json.JSONException;
         import org.json.JSONObject;
-        import org.w3c.dom.Text;
+
 
         import java.io.BufferedReader;
         import java.io.DataOutputStream;
@@ -80,6 +75,17 @@ public class MainActivity extends Activity {
         TextView tv=findViewById(R.id.tv);
         Intent intent=getIntent();
         tv.setText(intent.getStringExtra("str"));
+
+        Button Main2=findViewById(R.id.Main2);
+        Main2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(MainActivity.this,Main2Activity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
         Button register=findViewById(R.id.register);
 register.setOnClickListener(new View.OnClickListener() {
