@@ -12,6 +12,10 @@ package com.example.mysqltest;
         import android.provider.Settings;
         import android.util.Log;
         import android.view.View;
+        import android.webkit.WebChromeClient;
+        import android.webkit.WebSettings;
+        import android.webkit.WebView;
+        import android.webkit.WebViewClient;
         import android.widget.ArrayAdapter;
         import android.widget.Button;
         import android.widget.EditText;
@@ -43,6 +47,8 @@ public class MainActivity extends Activity {
     private static final String TAG = "TestActivity";
     private HttpConnection httpConn = HttpConnection.getInstance();
 
+    private WebView webView;
+    private WebSettings webSettings;
 
     String myJSON;
 
@@ -68,6 +74,25 @@ public class MainActivity extends Activity {
         editor.putString("key","세션 전달!!!!");
         editor.commit();
 
+        webView=findViewById(R.id.webv);
+        webView.setWebViewClient(new WebViewClient());
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebChromeClient(new WebChromeClient());
+
+     /*   webSettings.setJavaScriptEnabled(true);
+        webSettings.setSupportMultipleWindows(false);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(false);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setSupportZoom(false);
+        webSettings.setBuiltInZoomControls(false);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webSettings.setDomStorageEnabled(true);
+       */
+
+     //webView.loadUrl("http://www.naver.com");
+webView.loadUrl("http://192.168.56.1:8052/controller/board/board_list");
 
 
         list = (ListView) findViewById(R.id.listView);

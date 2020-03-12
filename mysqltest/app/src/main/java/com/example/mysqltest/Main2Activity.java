@@ -39,6 +39,7 @@ public class Main2Activity extends AppCompatActivity implements Runnable {
     ListView listView1;
     List<SampleVO> items;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +48,15 @@ public class Main2Activity extends AppCompatActivity implements Runnable {
         listView1 = (ListView)findViewById(R.id.listView1);
         items = new ArrayList<SampleVO>();
         Thread th = new Thread(this);
-        th.start();
+       // th.start();// 스프링과 통신
+        thread1 thre=new thread1(1,"a","","");
+        thre.start();
+        System.out.println("thread에서 return 받기 : "+thre.getP());
+
+        try {
+            thre.join();
+        }catch(Exception e){System.out.println("오 마이 쓰레드 오류....");}System.out.println("thread에서 return 받기2 : "+thre.getP());
+
     }
 
     @Override

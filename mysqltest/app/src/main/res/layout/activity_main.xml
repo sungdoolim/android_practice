@@ -6,14 +6,19 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
-
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:orientation="vertical">
+    <WebView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/webv"/></LinearLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Main2"
-        android:text="Main2"/>
+        android:text="Main2Spring"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="okhttptest"
-        android:id="@+id/okh"/>d
+        android:id="@+id/okh"/>
 
     <Button
         android:layout_width="wrap_content"
