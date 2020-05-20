@@ -92,7 +92,7 @@ public class MainActivity extends Activity {
        */
 
      //webView.loadUrl("http://www.naver.com");
-webView.loadUrl("http://192.168.56.1:8052/controller/board/board_list");
+webView.loadUrl("http://192.168.56.1:8052/web/index");
 
 
         list = (ListView) findViewById(R.id.listView);
