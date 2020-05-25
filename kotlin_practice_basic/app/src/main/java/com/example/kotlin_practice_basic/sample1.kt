@@ -1,10 +1,11 @@
 package com.example.kotlin_practice_basic
 
 fun main(){
+    var a="sungdoolim"
+    println(a)
+    var b=a.toUpperCase();
+    println(b)
 
-
-helloWorild()
-println(add(3,5))
 
 }
 fun helloWorild():Unit{//Unit 이란 void형!
