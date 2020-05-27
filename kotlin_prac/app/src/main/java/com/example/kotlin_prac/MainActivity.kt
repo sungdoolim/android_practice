@@ -23,6 +23,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
 
         }
+        bt3.setOnClickListener(){
+            var intent=Intent(this,Main3Activity::class.java)
+            startActivity(intent)
+        }
 
 
     }
