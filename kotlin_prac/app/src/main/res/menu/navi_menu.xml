@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/access"
+            android:icon="@drawable/ic_attach_money_black_24dp"
+            android:title="show me the money"/>
+
+        <item android:id="@+id/email"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="show me the money"/>
+
+        <item android:id="@+id/message"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="show me the money"/>
+
+
+
+
+
+
+
+
+    </group>
+</menu>
