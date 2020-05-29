@@ -12,6 +12,18 @@
     android:layout_height="match_parent">
 
     <Button
+        android:id="@+id/spring"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="spring"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/pref"
+        app:layout_constraintHorizontal_bias="0.216"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_navi"
+        app:layout_constraintVertical_bias="0.111" />
+
+    <Button
         android:id="@+id/rec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

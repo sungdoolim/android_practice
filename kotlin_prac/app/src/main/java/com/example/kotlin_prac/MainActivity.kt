@@ -15,6 +15,11 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        spring.setOnClickListener(){
+            var intent=Intent(this,Spring::class.java)
+
+            startActivity(intent)
+        }
         rec.setOnClickListener(){
             var intent=Intent(this,Main5Activity::class.java)
 
