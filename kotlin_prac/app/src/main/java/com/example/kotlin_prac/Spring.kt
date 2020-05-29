@@ -3,6 +3,8 @@ package com.example.kotlin_prac
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import org.json.JSONObject
+import org.json.JSONTokener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,7 +34,10 @@ class Spring : AppCompatActivity() {
                 println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~onresponse")
                 if (response.isSuccessful) {
                     println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~onresponse success")
+
                     val body = response.body()
+                    val jsonObj = JSONTokener(body.toString())
+
                     body?.let {
                         //text_text.text = body.toString response 잘 받아왔는지 확인.
                         println(body.toString())
