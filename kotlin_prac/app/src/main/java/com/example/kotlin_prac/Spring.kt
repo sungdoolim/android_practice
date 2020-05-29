@@ -7,7 +7,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import org.json.JSONArray
 import org.json.JSONObject
-import org.json.JSONTokener
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -47,8 +46,16 @@ class Spring : AppCompatActivity() {
                     println("jsonobj:${jsonObj}")
                     val jArray = jsonObj as JSONArray
                     println(jArray.length())
-                    println(jArray.get(0))
-                    println(jArray.getJSONObject(0).get("f"))
+                    var ptmp :PhotoModel
+                    var tmpar= arrayListOf<PhotoModel>()
+                    for(i in 0..jArray.length()-1){
+                        ptmp= PhotoModel(jArray.getJSONObject(i).getString("f"),jArray.getJSONObject(i).getString("l"),null,null)
+                        tmpar.add(ptmp)
+                    }
+                    for(i in 0..tmpar.size-1){
+                        println(tmpar.get(i).toString())
+                    }
+
                     body?.let {
                         //text_text.text = body.toString response 잘 받아왔는지 확인.
                         println(body.toString())
