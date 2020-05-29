@@ -1,8 +1,11 @@
 package com.example.kotlin_prac
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import org.json.JSONArray
 import org.json.JSONObject
 import org.json.JSONTokener
 import retrofit2.Call
@@ -19,10 +22,52 @@ class Spring : AppCompatActivity() {
         setContentView(R.layout.activity_spring)
         println("--------------------------------------------------------------------넘어옴 ")
         f()
+        f2()
 
 
     }
 
+    fun f2(){
+        var retrofit = Retrofit.Builder()
+            .baseUrl("http://192.168.56.1:8052")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val retrofitService = retrofit.create(inter2::class.java)
+        retrofitService.requestAllData().enqueue(object : Callback<PhotoModel> {
+            @RequiresApi(Build.VERSION_CODES.KITKAT)
+            override fun onResponse(call: Call<PhotoModel>, response: Response<PhotoModel>) {
+                println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~onresponse this is f2")
+                if (response.isSuccessful) {
+                    println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~onresponse success")
+
+                    val body = response.body()
+
+                    //val jsonObj = JSONTokener(body.toString())
+                    val jsonObj =  JSONObject.wrap(body?.sendData)
+                    println("jsonobj:${jsonObj}")
+                    val jArray = jsonObj as JSONArray
+                    println(jArray.length())
+                    println(jArray.get(0))
+                    println(jArray.getJSONObject(0).get("f"))
+                    body?.let {
+                        //text_text.text = body.toString response 잘 받아왔는지 확인.
+                        println(body.toString())
+                        println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~onresponse    let")
+
+                    }
+                }
+                else {
+                    println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~onresponse   else")
+                }
+            }
+            override fun onFailure(call: Call<PhotoModel>, t: Throwable) {
+                println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~fail f2")
+                Log.d("this is error",t.message)
+            }
+
+
+        })
+    }
     fun f(){
         var retrofit = Retrofit.Builder()
             .baseUrl("http://192.168.56.1:8052")
@@ -31,13 +76,15 @@ class Spring : AppCompatActivity() {
         val retrofitService = retrofit.create(inter::class.java)
         retrofitService.requestAllData().enqueue(object : Callback<PhotoModel> {
             override fun onResponse(call: Call<PhotoModel>, response: Response<PhotoModel>) {
-                println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~onresponse")
+                println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~onresponse this is f")
                 if (response.isSuccessful) {
                     println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~onresponse success")
 
                     val body = response.body()
-                    val jsonObj = JSONTokener(body.toString())
-
+                    //val jsonObj = JSONTokener(body.toString())
+                  //  val jsonObj =  JSONObject.quote(body.toString());
+                 //   println("jsonobj:${jsonObj}")
+                 //   val jArray = jsonObj[2]   as JSONArray?
                     body?.let {
                         //text_text.text = body.toString response 잘 받아왔는지 확인.
                         println(body.toString())
@@ -50,7 +97,7 @@ class Spring : AppCompatActivity() {
                 }
                 }
             override fun onFailure(call: Call<PhotoModel>, t: Throwable) {
-                println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~fail")
+                println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~fail f")
                 Log.d("this is error",t.message)
             }
 
