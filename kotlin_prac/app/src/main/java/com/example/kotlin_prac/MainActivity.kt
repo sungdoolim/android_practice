@@ -60,7 +60,8 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
             layout_drawer.openDrawer(GravityCompat.START)// END는 오른쪽
 
         }
-        naviView.setNavigationItemSelectedListener (this)
+        naviView.setNavigationItemSelectedListener (this) // layout쪽 맨 밑에 가보면 menu/navi_menu로 연결됨을 확인 가능
+
 
 
     }

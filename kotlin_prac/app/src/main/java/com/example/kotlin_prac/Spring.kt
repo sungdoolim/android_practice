@@ -88,7 +88,7 @@ class Spring : AppCompatActivity() {
                     println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~onresponse success")
 
                     val body = response.body()
-                    //val jsonObj = JSONTokener(body.toString())
+                    //val jsonObj = JSONTokener(body.toString())x`
                   //  val jsonObj =  JSONObject.quote(body.toString());
                  //   println("jsonobj:${jsonObj}")
                  //   val jArray = jsonObj[2]   as JSONArray?

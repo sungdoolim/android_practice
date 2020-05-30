@@ -21,13 +21,7 @@ class ProfilesAdapter (val profileList:ArrayList<profiles>): RecyclerView.Adapte
                 val curPos:Int=adapterPosition
                 var profile:profiles=profileList.get(curPos)
                 Toast.makeText(parent.context,"이름 :${profile.name}",Toast.LENGTH_SHORT).show()
-
-
-
-
             }
-
-
         }
     }
 
