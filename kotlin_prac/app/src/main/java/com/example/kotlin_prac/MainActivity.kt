@@ -6,8 +6,16 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.view.GravityCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
+
 
 class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener {
 
@@ -15,6 +23,33 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
+
+        val db= Room.databaseBuilder(
+            applicationContext,
+            Roomdb::class.java,"firstdb"
+        ).build()
+        var str:String?;
+
+
+        roomdb.setOnClickListener(){
+        //    println("???????????????????????????????????????????????????????????????")
+       var j=lifecycleScope.launch(Dispatchers.IO) {
+           print("1")
+           db.userDao().insert(UserVO(insertroot.text.toString()))
+           print("2")
+       }
+          //  print("j가 뭘까...${j.toString()}")
+
+            //    str=db.userDao().getAll().toString();
+         //   println(str)
+          //  println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!?")
+        }
+        db.userDao().getAll().observe(this, Observer {
+            //str=db.userDao().getAll().toString();
+            str=it.toString()
+            println(str)
+        })
         spring.setOnClickListener(){
             var intent=Intent(this,Spring::class.java)
 
