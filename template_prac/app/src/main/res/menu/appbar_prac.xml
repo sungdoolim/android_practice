@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/appbar1"
+            android:checkable="false"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="appbar1"
+            android:iconTint="@color/colorPrimaryDark"/>
+
+        <item
+            android:id="@+id/appbar2"
+            android:checkable="false"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="appbar2"
+            android:iconTint="@color/colorPrimaryDark"/>
+
+    </group>
+</menu>

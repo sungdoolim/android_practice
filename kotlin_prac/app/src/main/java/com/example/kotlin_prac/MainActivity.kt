@@ -39,15 +39,20 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
            db.userDao().insert(UserVO(insertroot.text.toString()))
            print("2")
        }
+
           //  print("j가 뭘까...${j.toString()}")
 
-            //    str=db.userDao().getAll().toString();
+//                var str2=db.userDao().getAll();
+//            var str3=str2.value;
+//            var b= str3!![3].title;
+
          //   println(str)
           //  println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!?")
         }
         db.userDao().getAll().observe(this, Observer {
             //str=db.userDao().getAll().toString();
             str=it.toString()
+
             println(str)
         })
         spring.setOnClickListener(){
