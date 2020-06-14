@@ -1,0 +1,838 @@
+kotlin android
+
+// 만들면 일단 ㅔ러부터 나는데...
+gradle-wrapper.properties :
+distributionUrl=https\://services.gradle.org/distributions/gradle-6.4.1-all.zip
+
+이거 하고 ㅣㅇ크하면  되는데 ㅏㄴ되는척 함... 그냥 ㅣㄹ행 ㅣ켜봐
+
+
+액션바 지우고 가쟈
+manifest에 들어가서
+android:theme="@style/Theme.AppCompat.Light.NoActionbar"
+
+Main : 
+Main2 : intent/ toast
+MAin3 : listview
+Main4 : webview
+Main5 : recyclerview
+
+
+
+쉬운 화면 변경 navigation
+
+
+room : sqlpllus 비슷한거
+쓰려면 build.graddle :
+apply plugin: 'kotlin-kapt'
+
+   implementation 'androidx.room:room-runtime:2.1.0' 하고 
+  implementation 대신 kapt 'androidx.room:room-compiler:2.1.0'
+
+   val db= Room.databaseBuilder(
+            applicationContext,
+            Roomdb::class.java,"firstdb"
+        ).allowMainThreadQueries().build()
+ var str=db.userDao().getAll().toString();
+        print(str)
+db.userDao().insert(UserVO(insertroot.text.toString()))
+메인에서는 ㅣ런식으로 사용
+
+@Database(entities=arrayOf(UserVO::class),version=1)
+abstract class Roomdb:RoomDatabase(){
+    abstract fun userDao():UserDAO
+
+}
+@Dao
+public interface UserDAO{
+ @Query("select * from UserVO")
+ fun getAll():List<UserVO>;
+    @Insert
+    fun insert(uservo:UserVO)
+    @Update
+    fun update(uservo:UserVO)
+    @Delete
+    fun delete(uservo:UserVO)
+
+
+}
+@Entity
+data class UserVO(var title:String){
+    @PrimaryKey(autoGenerate=true)
+    var id:Int=0
+
+    
+}
+
+
+livedata라는 게 있는대 trigger늒ㅁ이었어
+@Query(“SELECT * FROM Users WHERE userid = :id”)
+   protected abstract fun getUserById(id: String): LiveData<User>
+이런식
+
+@Query("select * from UserVO")
+ fun getAll(): LiveData<List<UserVO>>;
+
+  db.userDao().getAll().observe(this, Observer {
+            //str=db.userDao().getAll().toString();
+            str=it.toString()
+            print(str)
+        })
+
+
+
+비동기 : ㅗthread, async, coroutine
+kotlim은 coroutine를 ㅏ용한다
+build.gradle :
+implementation androidx.lifecycle:lifecycle-runtime-ktx:2.2.0-alpha01
+
+var j=lifecycleScope.launch(Dispatchers.IO) {
+           print("1")
+           db.userDao().insert(UserVO(insertroot.text.toString()))
+           print("2")
+       }
+비동기 할 ㅓㅅ을 감싸면 ㅣㅁ
+
+
+
+
+
+뷰단 아이디를 정하면 findbiview이제는 필요 없음
+바로 id.setText 가능
+
+edittext : text로 안하고 hint로 !!! placehoder임
+
+
+intent!!
+bt.setonclic{ 
+            var intent=Intent(this,Main2Activity::class.java)
+            intent.putExtra("intentvalue","hi second?")
+            startActivity(intent)
+}
+===>// 받는 곳에서 다시 intent 변수 선언 없이 사용 가능
+            tv.text="secon"
+            tv.text=intent.getStringExtra("intentvue")?:"null?"
+          // null체크도 가능
+           if(intent.hasExtra("intentvalue"){로도 가능하지만!}
+ 
+intent 로 넘기고나서 다시 돌아올 것이 아니라면 startact이후에 finish()를 써주는게 좋음 자원 반납
+
+imageview: src조작 하면 됨 drawable뭐시기..
+버튼 내에서 
+imgviewid.setImageResource(R.drawable.ic_launcher_foreground)
+// 이미지 변경
+배경 설정은 bacground속성 :
+android:background="@drawable/android"
+버튼에도 background주면 가능함
+
+
+toast:
+버튼 내에서 
+Toast.makeText(this,"toast test",Toast.LENGTH_SHORT).show()
+            
+
+
+
+
+아이콘 받아오기!
+직접 이미지 넣을수 있지만..
+drawable->new->vectorasset->ClipArt->
+여기서 menu모양 자주 ㅅ쓰일듯
+
+
+
+
+
+
+
+----------------------------------------------------------------drawer 뷰 :
+build.gradle : 에서 추가해야함
+dependeicies안에다가
+implementation 'com.google.android.material:material:1.0.0'
+res->new->android resource directory -> resoure type=menu 생성
+만든 폴더에 new -> menu resource file 생성(디자인 xml나옴)
+<group android:checkableBehavior="single">
+        <item android:id="@+id/access"
+            android:icon="@drawable/ic_attach_money_black_24dp"
+            android:title="show me the money"/>
+ 이 아이템들이 뜰꺼야
+
+</group>
+이런 식으로 그룹만들고 
+사용할 item지정하는 것
+
+그리고 메인에서는 
+<androidx.drawerlayout.widget.DrawerLayout 이거로 바꿔야함
+그리고 
+메인xml에 
+  <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navi_menu"/>
+이거 추가 : 여기서 menu라는건 만들어 놓은 xml이야
+gravity는 버튼과 연결 했을때만 보이도록 하는 설정
+
+이제 메인 에서
+,NavigationView.OnNavigationItemSelectedListener  상속하고 override해야해
+
+버튼 {
+  layout_drawer.openDrawer(GravityCompat.START)// END는 오른쪽
+}
+        naviView.setNavigationItemSelectedListener (this)
+// 온클릭 리스너 하려면 !! 즉 밑에 코드 실행하려면 이거 해야함
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+ when(item.itemId){
+            R.id.access-> Toast.makeText(~~~).show()
+        }
+        layout_drawer.closeDrawers()// 근데 이거 실행 안됨
+        return false;
+    }// 이 메서드가 override되는데 메뉴에서 아이템 누르면 실행 되는 onclic 메서드
+
+
+  override fun onBackPressed() {
+        if(layout_drawer.isDrawerOpen(GravityCompat.START)){
+            layout_drawer.closeDrawers()
+        }else{
+            super.onBackPressed()
+        }
+
+
+
+
+
+바텀네비------------------------------------------------------------------------
+ <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="404dp"
+            android:layout_height="276dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.428"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/bottomnavi_prac"/>
+끝   
+
+
+
+내부 db = preference Shard!!!
+   fun saveData(){
+    val pref=getSharedPreferences("pref",0)
+    var edit=pref.edit()
+        edit.putString("name","inner db test = prefS")
+        edit.apply()
+    }
+    fun loadData(): String? {
+        val pref=getSharedPreferences("pref",0)
+        var str=pref.getString("name","defValue!!!!")
+        return str
+    }
+// db table같은 역할 = pref
+칼럼, session이름?? 그런 역할 =name
+
+
+
+대망의 웹 뷰 
+매니피스트에 인터넷 허용 해주고 밑에
+        android:usesCleartextTraffic="true"   뭐하는 애인지는 잘 모름
+  wv.settings.javaScriptEnabled=true
+        wv.webViewClient= WebViewClient()
+        wv.webChromeClient= WebChromeClient()
+        wv.loadUrl("https://www.naver.com")
+끝
+onbackpressd 는 아까처럼 해주면 됨
+
+
+
+listView 시작 
+
+{
+
+var item=arrayOf(3,5,"star",'q')
+
+lv.adapter=ArrayAdapter <Any>(this, android.R.layout.simple_list_item_1, item)
+간단한데??
+
+리스트 부에 arrayList넣기
+adapter를 바꿔야해!
+val adpt=customAdpt(this,Userl)
+ lv.adapter=adpt
+// 메인은 간단
+
+data class Users(var profile:Int,var name:String, var age:Int)
+Users(R.drawable.ic_launcher_foreground,"hama",24) 
+어레이 리스트는 oncreate전에 만들어 놔야해
+//이미지 주소는 int형인가 보다
+
+리스트를 담을 xml을 layout 밑에 새로 생성 해 줘야 해~
+custom_lv로 하고  객체 만큼 뷰를 추가 하면 되 위에꺼는 img,text,text 뷰 로 구성되어있고 listview는 여기서 쓰는게 아니야
+
+문제는 바로바로...
+class customAdpt(val context: Context,val Userl:ArrayList<Users> ):BaseAdapter(){}
+얘 오버라이드 하면 
+   override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+        val view:View =LayoutInflater.from(context).inflate(R.layout.custom_lv ,null)
+// 이건 뭔소린지 모르겠는데 핵심인듯 해
+
+        var age=Userl[position].age
+        var vage=view.findViewById<TextView>(R.id.cusage)
+        vage.text=age.toString()
+
+        return view
+    }
+    override fun getItem(position: Int): Any {
+        //TODO("Not yet implemented")
+        return Userl[position]
+    }이것도 리턴 중요!!  -  - 클릭 리스너에서 사용
+
+ lv.onItemClickListener=AdapterView.OnItemClickListener{parent,view,position,id->
+   val selItem=parent.getItemAtPosition(position) as Users         Toast.makeText(this,selItem.name,Toast.LENGTH_SHORT).show()
+        }// 람다 식인것 같고 객체를 가져올수 있어!
+
+
+} - 리스트 뷰 끝
+
+recycler view....리스트 뷰 끝판{
+
+메인[
+rv_profile.layoutManager=LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
+        rv_profile.setHasFixedSize(true)
+        rv_profile.adapter=ProfilesAdapter(profileList)
+]
+[profilesadapter 일단 상속 : : RecyclerView.Adapter<ProfilesAdapter.CustomViewHolder>()
+{
+  override fun onCreateViewHolder( parent: ViewGroup,   viewType: Int): ProfilesAdapter.CustomViewHolder {
+     val view=LayoutInflater.from(parent.context).inflate(R.layout.custom_rev,parent,false)
+        return CustomViewHolder(view).apply {
+            itemView.setOnClickListener {
+                val curPos:Int=adapterPosition
+                var profile:profiles=profileList.get(curPos)
+                Toast.makeText(parent.context,"이름 :${profile.name}",Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return profileList.size
+    }
+
+    override fun onBindViewHolder(holder: ProfilesAdapter.CustomViewHolder, position: Int) {
+
+
+     holder.gender.setImageResource(profileList.get(position).gender)
+        holder.name.text=profileList.get(position).name
+        holder.age.text=profileList.get(position).age.toString()
+        holder.job.text=profileList.get(position).job
+
+    }
+
+
+
+    class CustomViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
+
+        val gender=itemView.findViewById<ImageView>(R.id.iv_profile)
+        val name=itemView.findViewById<TextView>(R.id.tv_name)
+        val age=itemView.findViewById<TextView>(R.id.tv_age)
+        val job=itemView.findViewById<TextView>(R.id.tv_job)
+
+
+    }
+
+
+
+}
+
+
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+mp3?
+
+fragment?
+
+alert?
+
+db?
+
+
+
+
+통신!!![[[[[[[[[[[[[
+
+
+	@RequestMapping("/andtest")
+	public @ResponseBody JSONObject andtest(String id,String pw) {
+		System.out.println("getpw");
+		System.out.println(id);System.out.println(pw);
+			 JSONObject jsonMain = new JSONObject(); // json 객체
+			 String pwd="1234";
+			 jsonMain.put("Bpw", pwd);
+			// System.out.println(pwd);		 
+			return jsonMain;
+	
+	}
+
+이거는 스프링
+
+
+
+코틀린에서는 
+
+data class PhotoModel (
+    var Bid : String,
+    var Bname : String,
+    var Bpw : Int,
+    var sendData:ArrayList<Any>  // 리스트 보내면 여기로 ㅏ더라고...
+
+)
+
+interface inter {
+    @GET("/web/andtest.json")
+    fun requestAllData(@Query("id") id:String="s",@Query("pw")pw:String="_pwd") : Call<PhotoModel>
+
+    /*
+    @POST(~/{id})
+    @Query("id") id: String ="s"
+     */
+}
+ fun f(){  // 하나의 객체만 받기
+        var retrofit = Retrofit.Builder()
+            .baseUrl("http://192.168.56.1:8052")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val retrofitService = retrofit.create(inter::class.java)
+        retrofitService.requestAllData().enqueue(object : Callback<PhotoModel> {
+            override fun onResponse(call: Call<PhotoModel>, response: Response<PhotoModel>) {
+                    val body = response.body()
+// 여기 바디에는 photomodel이라는 객체가 있고 스프링에서 이름에 맞는 ㄷ이터가 들어가 있게됨
+// 하나의 객체만 리턴 받음
+
+
+
+                
+                 }
+            override fun onFailure(call: Call<PhotoModel>, t: Throwable) {
+                Log.d("this is error",t.message)
+            }
+        })
+    }}
+
+
+
+
+
+
+
+
+
+
+
+
+스프링 :리스트 보내기
+@RequestMapping("/androidtest")
+	public @ResponseBody JSONObject andr(String id,String pw) {
+		System.out.println("오오ㅗ오오오오ㅗ오오");
+		System.out.println(id+","+pw);
+        // json-simple 라이브러리 추가 필요(JSON 객체 생성)
+        JSONObject jsonMain = new JSONObject(); // json 객체
+        // {변수명:값, 변수명:값}
+        // {sendData:[{변수명:값},{변수명:값},...]}
+        List<BankVO> items = new ArrayList<>();
+        JSONArray jArray = new JSONArray(); // json배열
+        
+        
+    	for(int i=0;i<10;i++) {
+    		BankVO vo=new BankVO();
+			vo.setBid(""+i);
+			vo.setBname("세종");
+		
+			items.add(vo);
+		}
+    	
+    	
+        for(int i=0; i<items.size(); i++){
+        	BankVO dto = items.get(i);
+            JSONObject row = new JSONObject();
+            // json객체.put("변수명",값)
+       
+            row.put("f", dto.getBid());
+            row.put("l", dto.getBname());
+      
+            // 배열에 추가
+            // json배열.add(인덱스,json객체)
+            jArray.add(i,row);
+        }
+        // json객체에 배열을 넣음
+        jsonMain.put("sendData", jArray);
+        return jsonMain;
+	}
+
+
+ fun f2(){
+        var retrofit = Retrofit.Builder()
+            .baseUrl("http://192.168.56.1:8052")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        val retrofitService = retrofit.create(inter2::class.java)
+        retrofitService.requestAllData().enqueue(object : Callback<PhotoModel> {
+            @RequiresApi(Build.VERSION_CODES.KITKAT)
+            override fun onResponse(call: Call<PhotoModel>, response: Response<PhotoModel>) {
+
+                if (response.isSuccessful) {
+
+                    val body = response.body()
+객체에  속성에 맞는 데이터가 올꺼야
+근데 리스트 형식으로 오게 될꺼야 
+즉 지금은 photomodel에 senddata라는 string에 json 리스트가 tostring형식으로 들어가있어
+body는 photomodel객체 ㅎㅏ나이고
+
+
+                    val jsonObj =  JSONObject.wrap(body?.sendData)
+// 객체에서 sendData속성만 빼서 json형식을 유지시켜
+                
+                    val jArray = jsonObj as JSONArray
+// 그걸 array로 만들어
+       
+                    var ptmp :PhotoModel
+                    var tmpar= arrayListOf<PhotoModel>()
+// 리스트 담을 그릇이지
+
+                    for(i in 0..jArray.length()-1){
+                        ptmp= PhotoModel(jArray.getJSONObject(i).getString("f"),jArray.getJSONObject(i).getString("l"),null,null)
+                        tmpar.add(ptmp)
+                    }
+                    for(i in 0..tmpar.size-1){
+                        println(tmpar.get(i).toString())
+                    }
+// 요래 보면 참 간단해 보이눈대
+       }
+
+
+
+]]]]]]]]]]]]]]]]]]]]
+
+
+----------------------------------------------------------------------------------------------------------------------------
+kotlin 기본 문법
+
+gradle-wrapper.properties :
+distributionUrl=https\://services.gradle.org/distributions/gradle-6.4.1-all.zip
+
+함수 작성
+리턴 타입 안씀
+fun main(){}
+func아니고 fun
+
+
+리턴 없는 함수 - Unit  - void랑 같은 뜻
+fun a() : Unit{}
+
+파라미터 - 리턴타입 적용
+fun add(a:Int , b:Int): Int{
+    return a+b
+}
+
+
+val: 바뀌지 않는 값(final 느낌인가)
+var: 변수
+val a : Int =10
+var b : Int =10
+a=100    -> error
+b=100 가능
+근데 타입 안써줘도 상관은 없음 (자동)
+var b=10;
+바로 초기화 안하는 변수 만들려면 타입 줘야함
+var b
+하면 error
+var b : String
+$ 로 변수를 출력가능
+println("my name is &a")
+==println("my name is &{a}")
+=>println("my name is &{a+b}")
+전체 주석 -> ctrl + / 하면 전체 주석/풀기
+
+
+
+조건식 if는 같음
+
+when!!! -switch case?
+이거는 else if 식으로 가게 되네... 그리고 in 1..3은 1,3둘다 포함
+func checknum(score : Int){
+   when(score){
+   0-> println("0이야")
+   1->~~~
+   2,3->~~~
+  else -> ~~~
+                 }
+ 
+또는 이렇계!
+  when(score){
+  in 90..100 -> ~~~  // 90에서 100 사이일때
+
+  }
+
+
+}
+
+
+
+
+배열 :
+array는 값을 변경가능
+list는 설정에 따라 달라
+기본적으로 list는 get함수 존재{remove/removeall/
+set가능(!mutablelist!!)} 요거 aray에는 없고 arraylist에는 존재
+
+val array=arrayOf(1,2,3,4,5)== 
+var array:Array<int>=arrayOf(1,2,3,4,5)
+근데 얘도 추가는 못하는 것 같아
+copy가 존재
+
+val array2=arrayOf(1,"d",3.4f);
+== val array2:Array<Any>=arraOf(~~)
+
+val list=listOf(1,2,3,4,5)
+얘는 번경 불가/ get으로 가져오기 가능
+mutablelist는 arrayList!!!!자바랑 동일-get/set가능
+val arlist=arrayListOf<Int>() 
+copy대신 clone이 존재 
+
+arlist.add(~)
+객체 담을 때는
+ val cars : MutableList<Car>=mutableListOf<Car>()
+
+
+
+
+반복 - 포문
+for (a in arlist){}
+for (i in 1..10 step 2){}   // 1부터 10 까지 10도 포함 // step조절 가능
+for (i in 10 down to 1){} 10부터 1까지
+for(i in 1 until 100){}    100 포함 안함 ..별필요 없는듯
+
+보통 포문이 못 쓰이네...흠...
+
+while() 자바 문법 같음
+
+리스트에서 포문 돌려 뽑아 올때 순서도 주고 싶으면.. 솔직히 불필요 할것 같지만...
+for(index,name) in a.withindex()){println("${index+1} : ${name}")}
+
+
+자바의 nullpointexception
+자바는 compile때 잡을수 없는 exception임
+코틀린에서는?! 컴파일에서 잡아버리겠다는 개념
+
+변수 선언시 기본적으로 null 불허
+var a=null : error:
+var a : String? =null 가능
+타입선언이 필수면 서 ? 사용
+그래서 a에 대해서 메서드 사용시
+var b= a.toUpperCase()는 a가 null 이었다면 사실 error
+var b=a?.toUpperCase()는 만약 a가 null이면 그냥 null 반환
+null말고 default값 정해서 주고 싶을때는 ?:
+
+val lname:String?=null
+val fullname= name+(lname?:"default 지정 ")
+
+
+
+
+val a: String?=null
+a?.let{//a가 null이 아니면 이거 실행 해라!
+
+}
+
+
+
+클래 스 : 생성자를 생략 가능
+class A(val b="default"){
+  constructor(name : String. age : Int) : this(name){
+   //생성자인데 이거 클래스 만들때 생성자 먼저 만들잖아? 그거 상속 무조건!   
+}  
+
+//이거 자체가 클래스 이자 생성자
+ fun eat(){println("eat"+b)}
+
+}
+
+
+class A(){
+
+  constructor(name : String. age : Int) {
+   //생성자인데 
+}  
+   init{
+    // 생성자 역할 하는 것 같은데...
+// 생성 될때 마다 실행 되고...근데 생성자 보다 먼저 실행됨!
+   }
+}
+
+
+
+
+클래스를 상속하려면 상속하려는 클래스 앞에 open 이 되어있어야해
+마찬가지로 fun을 override할때도 open 해야해
+open class parent(){
+   open fun s(){}
+   fund ss(){}
+}
+class child : parent(){
+ override fun s(){} // 가능
+
+fun sp(){super.s()} 
+//호출할때 override 된애가 호출되겠지만 부모꺼 호출하고 싶을때는 super.s()하면 된대
+
+ override fun ss(){}// 불가
+}
+
+객체 생성시 new 따위 없어짐
+val a= A()
+ 
+
+
+람다? - 익명함수   어쨌든 함수
+얘는 함수 매개 변수로서 들어갈 수 있고, return 값으로도 사용가능
+== 변수 처럼 사용하는 함수..?
+
+val lamdaname : Type={argument -> code}  ..????
+val square:(Int)->(Int)={number->number*number}
+println(square(3))  ==> 9
+
+확장 함수
+예를 들어 String클래스를 확장 해보자!
+
+val addfunc:String.()->(Int)={this.length}   
+var a="hello"
+   println(a.addfunc())
+
+또는 val addfunc2:String.()->(String)={this+"hi"}
+println(a.addfunc2())   -> hellohi
+
+val introduce : String.(Int)->String={"I am ${this} and ${it} years old"}
+println(a.introduce(25))  -> i am hello and 25 years old
+String에서 인수 1개 들어가니까 그건ㄴ it 로 대체 가능
+이거 진짜 혁명 아님????
+
+val calc:(Int)->String={// 함수 같네...
+   when(it){
+    0..40->"fail"
+    else->"pass"
+    }
+}
+
+
+
+fun invokeLamda(lamda:(Double)->Boolean) :Boolena {
+// 인수로 받는 람다식은 double을 받고 bool리턴하는 람다고
+// 이 함수는 bool을 리턴 할 꺼야
+return lamda(5.2)    // 불리언 리턴
+
+}
+val test:(Double)->boolean={number:Double -> number==5.2}
+println(invokeLamda(test))
+또는
+println(invokeLamda({it>3.2}))  === > true나오겠지
+
+
+
+
+
+
+
+
+data class A(val a : String, val b: String, val c: Int)
+얘는 일반 클래스와 다르게 자료 담는것이고 중괄호 필요 없음
+자바의 VO정도인데 get/set등을 안 만드는 건가??
+얘를  class B(val a : String, val b: String, val c: Int) 이렇게 하면?
+val a=A("1","3",2)
+val b=B("2","3",3)
+하고 println(a)println(b)
+해보면  a는 데이터가 출력되고 b는 이상한 클래스 이름이 출력됨
+
+
+
+companion object
+class A private constructor(val id : Int, val name : String){
+ companion object facName : Id{// 밑 인터페이스 가져온거
+// 왜 쓰는거지???
+    override fun GetID():Int{return 444}
+    val name="A1"
+   fun create()=A(3,name)
+  }
+
+
+}
+interface Id{fun GetID():Int}
+val a= A.facName.create() 로 생성
+
+
+object : 클래스를 정돈하는 느낌인데??
+object CarFactory{
+val cars: MutableList<Car>=mutableListOf<Car>()
+fun makeCar(horse : Int): Car{
+val car=Car(horse)
+cars.add(car)
+return car
+}
+}
+data class Car(val horse: Int)
+
+main(){
+
+val car=CarFactory.makeCar(10)
+val car2=CarFactory.makeCar(20)
+// 별 의미는 없어 보이는데..뭐....
+//리스트에 자동 추가 느낌이 있으니까..?
+
+}
+
+-------------------------------------------------------------------------------------
+웹뷰를 위해
+권한: 인터넷
++
+ android:usesCleartextTraffic="true"
++
+
+
+
+
+       super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+
+        webView=findViewById(R.id.webv);
+        webView.setWebViewClient(new WebViewClient());
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebChromeClient(new WebChromeClient());
+
+/*
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setSupportMultipleWindows(false);
+        webSettings.setJavaScriptCanOpenWindowsAutomatically(false);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setSupportZoom(false);
+        webSettings.setBuiltInZoomControls(false);
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webSettings.setDomStorageEnabled(true);
+       */
+
+       // webView.loadUrl("http://www.naver.com");
+        webView.loadUrl("http://192.168.56.1:8052/web/index");
