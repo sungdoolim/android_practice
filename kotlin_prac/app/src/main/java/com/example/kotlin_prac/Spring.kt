@@ -26,12 +26,12 @@ class Spring : AppCompatActivity() {
 
     }
 
-    fun f2(){
+    fun f2(){// 리스트를 받음
         var retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.56.1:8052")
+            .baseUrl("http://staris.freehongs.net")//http://192.168.56.1:8052
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val retrofitService = retrofit.create(inter2::class.java)
+        val retrofitService = retrofit.create(inter2::class.java)//내가만든 inter2 클래스 사용
         retrofitService.requestAllData().enqueue(object : Callback<PhotoModel> {
             @RequiresApi(Build.VERSION_CODES.KITKAT)
             override fun onResponse(call: Call<PhotoModel>, response: Response<PhotoModel>) {
@@ -75,12 +75,13 @@ class Spring : AppCompatActivity() {
 
         })
     }
-    fun f(){
+    fun f(){// 단일 클래스를 받음
+
         var retrofit = Retrofit.Builder()
-            .baseUrl("http://192.168.56.1:8052")
+            .baseUrl("http://staris.freehongs.net")//http://192.168.56.1:8052
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-        val retrofitService = retrofit.create(inter::class.java)
+        val retrofitService = retrofit.create(inter::class.java)// 내가만든 inter 클래스 사용
         retrofitService.requestAllData().enqueue(object : Callback<PhotoModel> {
             override fun onResponse(call: Call<PhotoModel>, response: Response<PhotoModel>) {
                 println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~onresponse this is f")

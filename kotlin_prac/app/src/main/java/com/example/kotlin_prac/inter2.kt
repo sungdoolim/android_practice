@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface inter2 {// /web/androidtest.json
-    @GET("/web/androidtest.json")
+    @GET("/web/androidtest.do")
     fun requestAllData(@Query("id") id:String="s",@Query("pw")pw:String="_pwd") : Call<PhotoModel>
 
     /*
