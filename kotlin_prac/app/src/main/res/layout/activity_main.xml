@@ -11,6 +11,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
+
     <EditText
         android:id="@+id/insertroot"
         android:layout_width="wrap_content"
@@ -49,23 +52,23 @@
         android:id="@+id/spring"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="8dp"
         android:text="spring"
         app:layout_constraintBottom_toTopOf="@+id/framelayout"
         app:layout_constraintEnd_toStartOf="@+id/pref"
-        app:layout_constraintHorizontal_bias="0.236"
+        app:layout_constraintHorizontal_bias="0.205"
         app:layout_constraintStart_toStartOf="parent" />
+
 
     <Button
         android:id="@+id/rec"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="4dp"
-        android:layout_marginRight="4dp"
         android:text="recycle view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.866"
+        app:layout_constraintHorizontal_bias="0.929"
         app:layout_constraintStart_toEndOf="@+id/et"
         app:layout_constraintTop_toBottomOf="@+id/roomdb" />
 
@@ -106,10 +109,12 @@
         android:id="@+id/bt1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="92dp"
+        android:layout_marginTop="153dp"
+        android:layout_marginBottom="48dp"
         android:text="tv바꾸기"
         app:layout_constraintBottom_toTopOf="@+id/tv"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rec" />
 
     <Button
         android:id="@+id/bt3"
@@ -153,12 +158,12 @@
         android:id="@+id/pref"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="89dp"
+        android:layout_marginBottom="56dp"
         android:text="Sharedpref"
+        app:layout_constraintBottom_toTopOf="@+id/tv"
         app:layout_constraintEnd_toStartOf="@+id/bt1"
-        app:layout_constraintHorizontal_bias="0.757"
+        app:layout_constraintHorizontal_bias="0.816"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rec"
         tools:ignore="MissingConstraints" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

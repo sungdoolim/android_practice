@@ -45,4 +45,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
     implementation 'com.google.firebase:firebase-database:18.0.1'
     implementation 'com.google.firebase:firebase-firestore:20.2.0'
+    implementation "com.kakao.sdk:v2-talk-rx:2.0.0-beta02"
+    implementation "com.kakao.sdk:v2-user-rx:2.0.0-beta02"
 }

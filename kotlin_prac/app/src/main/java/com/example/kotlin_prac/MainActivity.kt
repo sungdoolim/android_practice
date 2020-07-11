@@ -1,10 +1,16 @@
 package com.example.kotlin_prac
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.Toast
+import androidx.annotation.Nullable
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -13,19 +19,31 @@ import com.example.template_prac.farg1
 import com.example.template_prac.frag2
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+import com.kakao.sdk.auth.AuthApiClient
+import com.kakao.sdk.auth.AuthCodeClient
+import com.kakao.sdk.auth.rx
+import com.kakao.sdk.user.UserApiClient
+import com.kakao.sdk.user.rx
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
+import io.reactivex.schedulers.Schedulers
+
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.appbar_prac.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
-import okhttp3.Dispatcher
-
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
+
+    val disposables: CompositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
         appbarbt1.setOnClickListener(){Toast.makeText(this,"appbar1",Toast.LENGTH_SHORT).show()}
         appbarbt2.setOnClickListener(){Toast.makeText(this,"appbar2",Toast.LENGTH_SHORT).show()}
@@ -138,4 +156,26 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
             super.onBackPressed()
         }
     }
+
+//    private fun getHashKey() {
+//        var packageInfo: PackageInfo? = null
+//        try {
+//            packageInfo =
+//                packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
+//        } catch (e: PackageManager.NameNotFoundException) {
+//            e.printStackTrace()
+//        }
+//        if (packageInfo == null) Log.e("KeyHash", "KeyHash:null")
+//        for (signature in packageInfo!!.signatures) {
+//            try {
+//                val md: MessageDigest = MessageDigest.getInstance("SHA")
+//                md.update(signature.toByteArray())
+//                Log.d("KeyHash", Base64.encodeToString(md.digest(), Base64.DEFAULT))
+//            } catch (e: NoSuchAlgorithmException) {
+//                Log.e("KeyHash", "Unable to get MessageDigest. signature=$signature", e)
+//            }
+//        }
+//    }
+
+
 }
