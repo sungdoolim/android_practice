@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".fireActivity"></activity>
+        <activity android:name=".myhair.mypage"></activity>
+        <activity android:name=".myhair.MyHair" />
+        <activity android:name=".fireActivity" />
         <activity android:name=".Spring" />
         <activity android:name=".Main5Activity" />
         <activity android:name=".Main4Activity" />
@@ -26,7 +28,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

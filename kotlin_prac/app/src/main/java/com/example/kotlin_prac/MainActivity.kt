@@ -15,6 +15,7 @@ import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
+import com.example.kotlin_prac.myhair.MyHair
 import com.example.template_prac.farg1
 import com.example.template_prac.frag2
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -45,7 +46,13 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 
 
 
-        appbarbt1.setOnClickListener(){Toast.makeText(this,"appbar1",Toast.LENGTH_SHORT).show()}
+        appbarbt1.setOnClickListener(){
+            var intent=Intent(this, MyHair::class.java)
+            startActivity(intent)
+
+
+
+        }
         appbarbt2.setOnClickListener(){Toast.makeText(this,"appbar2",Toast.LENGTH_SHORT).show()}
         appbarbt3.setOnClickListener(){Toast.makeText(this,"appbar3",Toast.LENGTH_SHORT).show()}
 
