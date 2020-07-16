@@ -3,19 +3,31 @@ package com.example.myhairdiary
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.myhairdiary.maps.navermaps
+import android.view.MenuItem
+import androidx.core.view.GravityCompat
+import com.example.myhairdiary.social.navermaps
 import com.example.myhairdiary.register.Register
+import com.google.android.material.navigation.NavigationView
 
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.mypage
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
+{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        print("hi")
+        //var id=intent.getStringExtra("id")
+        val pref=getSharedPreferences("ins",0)
+        var sesid=pref.getString("id","null")
+        print("session : ${sesid}")
+        testid.text=sesid
+
+
 
         register.setOnClickListener(){
             var intent= Intent(this, Register::class.java)
@@ -38,5 +50,9 @@ class MainActivity : AppCompatActivity() {
             var intent= Intent(this, navermaps::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onNavigationItemSelected(p0: MenuItem): Boolean {
+return true
     }
 }

@@ -1,49 +1,18 @@
-package com.example.myhairdiary.register
+package com.example.myhairdiary.firedb
 
+import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.util.Log
-import com.example.myhairdiary.MainActivity
-import com.example.myhairdiary.R
+import androidx.core.content.ContextCompat.startActivity
 import com.example.myhairdiary.designer
-import com.example.myhairdiary.firedb.fireDB
+import com.example.myhairdiary.designers.designer_inter
+import com.example.myhairdiary.register.Register
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_register.*
 
-class Register : AppCompatActivity() {
+class fireDB(){
+    var firestore = FirebaseFirestore.getInstance()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
-
-        val db=fireDB()
-//        var firestore = FirebaseFirestore.getInstance()
-//        selectList(firestore)
-       // db.selectList()
-        register_bt.setOnClickListener(){
-            var id=etid.getText()
-            var name=etpw.getText()
-            db.createData(id.toString(),name.toString())
-           // createData(firestore,id.toString(),pw.toString())
-            var intent= Intent(this, MainActivity::class.java)
-
-            startActivity(intent)
-        }
-
-        login_bt.setOnClickListener(){
-            var intent= Intent(this, MainActivity::class.java)
-            var id=etloginid.getText()
-
-            val pref=getSharedPreferences("ins",0)
-            var edit=pref.edit()
-            edit.putString("id",id.toString())
-            edit.apply()
-            startActivity(intent)
-        }
-    }
-    private fun createData(firestore: FirebaseFirestore, a:String, b:String){// 실제 되는거 확인 했음
-        var userDTO= designer(a,1,b,1,"1",1,"memo 입니다")
+    public fun createData( a:String, b:String){// 실제 되는거 확인 했음
+        var userDTO= designer(a,1,b,1,"2",3,"1")
         // 밑에 document를 공백으로 두면 임의의 아이디를 생성해서 추가함
         firestore?.collection("hair_diary")?.document()?.set(userDTO)
             .addOnCompleteListener {
@@ -51,31 +20,42 @@ class Register : AppCompatActivity() {
                     print("create성공")
             }
     }
-    private fun selectList(firestore:FirebaseFirestore){
+    public fun selectList() {
         println("read")
+
         firestore?.collection("hair_diary").get()
             .addOnCompleteListener {
-                var userDTO=ArrayList<designer>()
+
                 var len=0
                 if(it.isSuccessful){
+                    var userDTO=ArrayList<designer>()
                     for(dc in it.result!!.documents){
-                      //  println("${len+1} : ${dc.toString()}")
+                        //  println("${len+1} : ${dc.toString()}")
                         dc.toObject(designer::class.java)?.let { it1 -> userDTO.add(it1) }
-                       // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                        // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                         len++
+
                     }
                     print("select list clear")
                     len=0
                     for(a in userDTO){
                         print("${len} : ${a.name}")
+                        designer_inter.designerL.add(a)
+                        len++
                     }
+                  //  return@addOnCompleteListener userDTO
+
+
                 }else{
                     println("fail")
                 }
+
+
             }
         println("read end")
+
     }
-    private fun readQueryWhereEqulToData(firestore:FirebaseFirestore){
+    public fun readQueryWhereEqulToData(){
         println("read")
         firestore?.collection("hair_diary").whereEqualTo("email","서울").get()
             .addOnCompleteListener {
@@ -95,7 +75,7 @@ class Register : AppCompatActivity() {
         //   firestore?.collection("User").whereLessThanOrEqualTo("age",9).get()
 
     }
-    private fun updateData(firestore:FirebaseFirestore){// 잘됨
+    public fun updateData(){// 잘됨
         var map= mutableMapOf<String,Any>()
         map["mail"] ="staris"
         firestore?.collection("baby").document("document1").update(map)
@@ -105,7 +85,7 @@ class Register : AppCompatActivity() {
                 }
             }
     }
-    private fun deleteData(firestore:FirebaseFirestore) {// 잘됨
+    public fun deleteData() {// 잘됨
         firestore?.collection("baby").document("document1").delete()
             .addOnCompleteListener {
                 if (it.isSuccessful) {

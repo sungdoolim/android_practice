@@ -4,18 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".social.navermaps"
-    android:orientation="vertical">
-    <!--<FrameLayout
-        android:id="@+id/Nmap"
-        android:name="com.naver.maps.map.MapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"/>-->
-
+    tools:context=".social.faceB">
     <WebView
-        android:id="@+id/wv"
+        android:id="@+id/wvface"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
-
 </LinearLayout>

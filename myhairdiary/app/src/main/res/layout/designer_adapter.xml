@@ -35,6 +35,12 @@
             android:layout_height="wrap_content"
             android:text="staris"
     />
+        <TextView
+            android:id="@+id/Did"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="staris"
+            />
 
         <TextView
             android:id="@+id/Dage"

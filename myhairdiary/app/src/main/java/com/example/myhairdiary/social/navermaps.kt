@@ -1,16 +1,11 @@
-package com.example.myhairdiary.maps
+package com.example.myhairdiary.social
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
-import android.widget.Toast
 import com.example.myhairdiary.R
-import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.LocationTrackingMode
-import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
-import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import kotlinx.android.synthetic.main.activity_navermaps.*
@@ -26,7 +21,8 @@ class navermaps : AppCompatActivity()  {//,OnMapReadyCallback
                 wv.settings.javaScriptEnabled=true
         wv.webViewClient= WebViewClient()
         wv.webChromeClient= WebChromeClient()
-        wv.loadUrl("https://m.place.naver.com/restaurant/34616224/location?subtab=location")
+        val url="https://m.place.naver.com/hairshop/34883169/location?subtab=location"
+        wv.loadUrl(url)
 
 
 //https://m.place.naver.com/restaurant/34616224/location?subtab=location   - 김포 스벅

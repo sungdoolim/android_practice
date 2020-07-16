@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myhairdiary">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -12,12 +13,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".maps.navermaps"></activity>
-
+        <activity android:name=".social.youtube"></activity>
+        <activity android:name=".social.insta" />
+        <activity android:name=".social.faceB" />
+        <activity android:name=".designers.detaildesigner" />
+        <activity android:name=".social.navermaps" />
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="cgy00qd0hd" />
+
         <activity android:name=".register.Register" />
         <activity android:name=".designers_profile" />
         <activity android:name=".mainpage" />

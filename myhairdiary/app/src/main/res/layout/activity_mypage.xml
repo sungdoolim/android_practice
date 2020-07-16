@@ -6,7 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".Mypage"
     android:orientation="vertical">
-
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/myid"
+    android:text="myid"
+    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/myyear"
+        android:text="myyear"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/mymemo"
+        android:text="mymemo"
+        />
 
 
 
