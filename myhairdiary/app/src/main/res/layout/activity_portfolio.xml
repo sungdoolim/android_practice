@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".designers.portfolio"
+    android:orientation="vertical">
+
+    <EditText android:id="@+id/Modmemo"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:lines="10" android:gravity="top|left" android:inputType="textMultiLine"
+        android:scrollHorizontally="false"
+        android:minWidth="10.0dip"
+        android:hint="자기소개서를 작성해 주세요"
+        android:maxWidth="5.0dip"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/Modyear"
+        android:hint="당신의 경력은 몇년인가요??"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="수정"
+        android:id="@+id/modify"/>
+
+</LinearLayout>

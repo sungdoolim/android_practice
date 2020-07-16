@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".social.youtube"></activity>
+        <activity android:name=".designers.portfolio"></activity>
+        <activity android:name=".social.youtube" />
         <activity android:name=".social.insta" />
         <activity android:name=".social.faceB" />
         <activity android:name=".designers.detaildesigner" />

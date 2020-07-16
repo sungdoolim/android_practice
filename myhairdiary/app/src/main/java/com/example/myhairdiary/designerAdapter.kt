@@ -56,6 +56,7 @@ class designerAdapter (val context:Context, val designerList:ArrayList<designer>
         val phone=itemView.findViewById<TextView>(R.id.Dphone)
         val year=itemView.findViewById<TextView>(R.id.Dyear)
 
+
     }
 
 

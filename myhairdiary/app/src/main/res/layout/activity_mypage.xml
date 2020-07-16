@@ -24,6 +24,11 @@
         android:id="@+id/mymemo"
         android:text="mymemo"
         />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/designer_bt"
+        android:text="designer"/>
 
 
 

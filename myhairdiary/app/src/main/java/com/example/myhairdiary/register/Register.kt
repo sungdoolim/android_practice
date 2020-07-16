@@ -9,6 +9,7 @@ import com.example.myhairdiary.R
 import com.example.myhairdiary.designer
 import com.example.myhairdiary.firedb.fireDB
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_mypage.*
 import kotlinx.android.synthetic.main.activity_register.*
 
 class Register : AppCompatActivity() {
@@ -33,13 +34,33 @@ class Register : AppCompatActivity() {
 
         login_bt.setOnClickListener(){
             var intent= Intent(this, MainActivity::class.java)
-            var id=etloginid.getText()
+            var id=etloginid.text
 
             val pref=getSharedPreferences("ins",0)
             var edit=pref.edit()
             edit.putString("id",id.toString())
             edit.apply()
+
+            var firestore = FirebaseFirestore.getInstance()
+            firestore?.collection("hair_diary").whereEqualTo("id",id.toString()).get()
+                .addOnCompleteListener {
+                    var userDTO=ArrayList<designer>()
+                    var len=0
+                    if(it.isSuccessful){
+                        for(dc in it.result!!.documents){
+                            //  println("${len+1} : ${dc.toString()}")
+                            edit.putString("perm",dc.toObject(designer::class.java)?.perm.toString())
+
+                            edit.apply()
+
+                        }
+                    }else{
+                        println("fail")
+                    }
+                }
+
             startActivity(intent)
+
         }
     }
     private fun createData(firestore: FirebaseFirestore, a:String, b:String){// 실제 되는거 확인 했음
