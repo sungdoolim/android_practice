@@ -2,13 +2,16 @@ package com.example.kotlin_prac.myhair
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcel
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kotlin_prac.ProfilesAdapter
 import com.example.kotlin_prac.R
 import com.example.kotlin_prac.profiles
 import kotlinx.android.synthetic.main.activity_designers.*
+import kotlinx.android.synthetic.main.activity_main5.*
 
-class designers : AppCompatActivity() {
+class designers: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,4 +32,7 @@ class designers : AppCompatActivity() {
 
 
     }
+
+
+
 }

@@ -14,14 +14,15 @@ class fireActivity : AppCompatActivity() {
         //createData(firestore)
        // firestore?.collection("baby").document().set(firevo("캘시퍼","부산"))
         println("firestore")
+        createData(firestore,"hi","hello")
         readQueryWhereEqulToData(firestore)
         updateData(firestore)
-        deleteData(firestore)
+     //   deleteData(firestore)
     }
-    private fun createData(firestore:FirebaseFirestore){// 실제 되는거 확인 했음
-        var userDTO= firevo("범석","서울")
+    private fun createData(firestore:FirebaseFirestore,a:String,b:String){// 실제 되는거 확인 했음
+        var userDTO= firevo(a,b)
         // 밑에 document를 공백으로 두면 임의의 아이디를 생성해서 추가함
-        firestore?.collection("baby")?.document("document1")?.set(userDTO)
+        firestore?.collection("baby")?.document()?.set(userDTO)
             .addOnCompleteListener {
                 if(it.isSuccessful)
                     print("create성공")
