@@ -43,7 +43,7 @@ class portfolio : AppCompatActivity() {
                         var map= mutableMapOf<String,Any>()
                         map["memo"] =memo
 
-                        firestore?.collection("hair_diary").document(it.result!!.documents[0]["DocumentSnapshot"].toString()).update(map)
+                        firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
                             .addOnCompleteListener {
                                 if(it.isSuccessful){
                                     print("update")
@@ -53,9 +53,12 @@ class portfolio : AppCompatActivity() {
                                 }
                             }
                         map["year"]=year
-                        Log.d("1","${it.result!!.documents[0].toString()}")
-                        Log.d("11","${it.result!!.documents[0]["key"].toString()}")
-                        firestore?.collection("hair_diary").document(it.result!!.documents[0]["doc"].toString()).update(map)
+                        //Log.d("1","${it.result!!.documents[0].toString()}")
+                        //Log.d("11","${it.result!!.documents[0]["ref"].toString()}")
+                        //Log.d("11","${it.result!!.documents[0].reference.toString()}")
+                       // Log.d("11","${it.result!!.documents[0].metadata.toString()}")
+                        Log.d("11","${it.result!!.documents[0].id.toString()}")
+                        firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
                             .addOnCompleteListener {
                                 if(it.isSuccessful){
                                     print("update")
