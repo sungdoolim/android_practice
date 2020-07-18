@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">kotlin_prac</string>
     <string name="kakao_app_key">앱 키</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

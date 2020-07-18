@@ -53,7 +53,11 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 
 
         }
-        appbarbt2.setOnClickListener(){Toast.makeText(this,"appbar2",Toast.LENGTH_SHORT).show()}
+        appbarbt2.setOnClickListener(){
+            // 구글맵
+            var intent=Intent(this, MapsActivity::class.java)
+            startActivity(intent)
+        }
         appbarbt3.setOnClickListener(){Toast.makeText(this,"appbar3",Toast.LENGTH_SHORT).show()}
 
         fire.setOnClickListener(){
