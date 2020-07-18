@@ -3,11 +3,13 @@ package com.example.myhairdiary.designers
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myhairdiary.R
 import com.example.myhairdiary.social.faceB
 import com.example.myhairdiary.social.insta
 import com.example.myhairdiary.social.navermaps
 import com.example.myhairdiary.social.youtube
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_detaildesigner.*
 
 class detaildesigner : AppCompatActivity() {
@@ -30,6 +32,9 @@ class detaildesigner : AppCompatActivity() {
         detailyear.text=year;
         detailmemo.text=memo;
         detailid.text=id;
+
+        var firestore = FirebaseFirestore.getInstance()
+        selectList(firestore)
         gotonaver.setOnClickListener(){
             val intent = Intent(this, navermaps::class.java)
             startActivity(intent)
@@ -47,5 +52,25 @@ class detaildesigner : AppCompatActivity() {
             startActivity(intent)
         }
         print("intent!!!")
+    }
+    public fun selectList(firestore:FirebaseFirestore) {
+        println("read")
+
+        val profileList=arrayListOf(
+            Dimgs(R.drawable.ic_launcher_foreground,R.drawable.ic_launcher_foreground,R.drawable.ic_launcher_foreground),
+            Dimgs(R.drawable.ic_launcher_foreground,R.drawable.ic_launcher_foreground,R.drawable.ic_launcher_foreground),
+            Dimgs(R.drawable.ic_launcher_foreground,R.drawable.ic_launcher_foreground,R.drawable.ic_launcher_foreground)
+
+        )
+
+
+        // dimglistrv.layoutManager=LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+        designerimg_rv.setHasFixedSize(true)
+        val mLayoutManager =  LinearLayoutManager(this);
+        designerimg_rv.layoutManager = mLayoutManager;
+        designerimg_rv.adapter=dimgAdapter(profileList)
+
+        println("read end")
+
     }
 }
