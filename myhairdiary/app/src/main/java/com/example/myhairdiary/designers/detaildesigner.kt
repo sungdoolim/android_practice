@@ -37,18 +37,22 @@ class detaildesigner : AppCompatActivity() {
         selectList(firestore)
         gotonaver.setOnClickListener(){
             val intent = Intent(this, navermaps::class.java)
+            intent.putExtra("id",id)
             startActivity(intent)
         }
         gotoface.setOnClickListener(){
             val intent = Intent(this, faceB::class.java)
+            intent.putExtra("id",id)
             startActivity(intent)
         }
         gotoyoutube.setOnClickListener(){
             val intent = Intent(this, youtube::class.java)
+            intent.putExtra("id",id)
             startActivity(intent)
         }
         gotoinsta.setOnClickListener(){
             val intent = Intent(this, insta::class.java)
+            intent.putExtra("id",id)
             startActivity(intent)
         }
         print("intent!!!")

@@ -62,6 +62,9 @@ load_photo.setOnClickListener(){
         }
 
         modify.setOnClickListener(){
+            var youtubeurl=youurl.text.toString()
+            var facebookurl=faceurl.text.toString()
+            var instagramurl=instaurl.text.toString()
             var memo=Modmemo.text
             var year=Modyear.text
 
@@ -71,7 +74,7 @@ load_photo.setOnClickListener(){
             Log.d("id````````````````````",sesid)
 
             var firestore = FirebaseFirestore.getInstance()
-            updateData(firestore,memo.toString(),Integer.parseInt(year.toString()),sesid.toString())
+            updateData(firestore,youtubeurl,facebookurl,instagramurl,memo.toString(),Integer.parseInt(year.toString()),sesid.toString())
         }
 
 
@@ -189,7 +192,7 @@ load_photo.setOnClickListener(){
         }
     }
 
-    public fun updateData(firestore:FirebaseFirestore,memo:String,year:Int,sesid:String){// 잘됨
+    public fun updateData(firestore:FirebaseFirestore,youtubeurl:String,facebookurl:String,instaurl:String,memo:String,year:Int,sesid:String){// 잘됨
              firestore?.collection("hair_diary").whereEqualTo("id",sesid).get()
             .addOnCompleteListener {
 
@@ -203,13 +206,11 @@ load_photo.setOnClickListener(){
                         // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                         var map= mutableMapOf<String,Any>()
                         map["memo"] =memo
-
                         firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
                             .addOnCompleteListener {
                                 if(it.isSuccessful){
                                     print("update")
                                 }else{
-
                                     Log.d("fail","fail update........................................1")
                                 }
                             }
@@ -224,7 +225,35 @@ load_photo.setOnClickListener(){
                                 if(it.isSuccessful){
                                     print("update")
                                 }else{
+                                    Log.d("fail","fail update........................................2")
+                                }
+                            }
 
+                        map["youurl"]=youtubeurl
+                        firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
+                            .addOnCompleteListener {
+                                if(it.isSuccessful){
+                                    print("update")
+                                }else{
+                                    Log.d("fail","fail update........................................2")
+                                }
+                            }
+                        map["faceurl"]=facebookurl
+                        firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
+                            .addOnCompleteListener {
+                                if(it.isSuccessful){
+                                    print("update")
+                                }else{
+                                    Log.d("fail","fail update........................................2")
+                                }
+                            }
+
+                        map["instaurl"]=instaurl
+                        firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
+                            .addOnCompleteListener {
+                                if(it.isSuccessful){
+                                    print("update")
+                                }else{
                                     Log.d("fail","fail update........................................2")
                                 }
                             }

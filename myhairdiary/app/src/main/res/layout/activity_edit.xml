@@ -7,52 +7,120 @@
     tools:context=".calendar.EditActivity"
     android:orientation="vertical">
 
+
     <CalendarView
         android:id="@+id/calendarView"
-        android:layout_width="481dp"
-        android:layout_height="341dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="402dp"
+        android:layout_height="333dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/todoEditText"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_width="411dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
+        android:hint="memo"
         android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView"
-        app:layout_constraintVertical_bias="0.175"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+
+    <EditText
+        android:id="@+id/customname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="cutomer_name"
+        app:layout_constraintTop_toBottomOf="@+id/todoEditText"
+        tools:layout_editor_absoluteX="3dp" />
+
+    <LinearLayout
+        android:layout_width="411dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/customname"
+        tools:layout_editor_absoluteX="0dp">
+
+        <EditText
+            android:id="@+id/hour"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:hint="13" />
+
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:text=" : " />
+
+        <EditText
+            android:id="@+id/minute"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:hint="30" />
+
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:text="     ~ " />
+
+        <EditText
+            android:id="@+id/hour2"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:hint="13" />
+
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:text=" : " />
+
+        <EditText
+            android:id="@+id/minute2"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:hint="30" />
+
+        <Button
+            android:id="@+id/submitlist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="submit" />
+
+        <Button
+            android:id="@+id/todolist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="일정보기" />
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatbt"
         android:layout_width="73dp"
         android:layout_height="104dp"
 
+        android:layout_marginBottom="80dp"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.884"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/todoEditText"
-        app:layout_constraintVertical_bias="0.431" />
+        app:layout_constraintHorizontal_bias="0.896"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/floatbt"
-        app:layout_constraintHorizontal_bias="0.281"
+        app:layout_constraintHorizontal_bias="0.305"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/todoEditText"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

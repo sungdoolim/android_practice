@@ -26,10 +26,24 @@
 
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="50dp"
         android:id="@+id/Modyear"
         android:hint="당신의 경력은 몇년인가요??"/>
-
+    <EditText
+        android:hint="youtubeurl"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/youurl"/>
+    <EditText
+        android:hint="faceurl"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/faceurl"/>
+    <EditText
+        android:hint="instaurl"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/instaurl"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,6 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/delete_filename_edittext"/>
+
 
     <Button
         android:layout_width="wrap_content"
@@ -75,6 +90,6 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="delete photo"
+        android:text="download photo"
         android:id="@+id/download_photo"/>
 </LinearLayout>

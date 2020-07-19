@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import com.example.myhairdiary.R
+import com.example.myhairdiary.designers.designer
+import com.google.firebase.firestore.FirebaseFirestore
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
+import kotlinx.android.synthetic.main.activity_face_b.*
 import kotlinx.android.synthetic.main.activity_navermaps.*
 
 class navermaps : AppCompatActivity()  {//,OnMapReadyCallback
@@ -21,8 +24,13 @@ class navermaps : AppCompatActivity()  {//,OnMapReadyCallback
                 wv.settings.javaScriptEnabled=true
         wv.webViewClient= WebViewClient()
         wv.webChromeClient= WebChromeClient()
-        val url="https://m.place.naver.com/hairshop/34883169/location?subtab=location"
-        wv.loadUrl(url)
+
+
+        val id=intent.getStringExtra("id")?:"null"
+        readQueryWhereEqulToData(id)
+
+       // val url="https://m.place.naver.com/hairshop/34883169/location?subtab=location"
+       // wv.loadUrl(url)
 
 
 //https://m.place.naver.com/restaurant/34616224/location?subtab=location   - 김포 스벅
@@ -43,6 +51,24 @@ class navermaps : AppCompatActivity()  {//,OnMapReadyCallback
 //
 
     }
+    public fun readQueryWhereEqulToData(id:String){
+        println("read")
+        var firestore = FirebaseFirestore.getInstance()
+        firestore?.collection("hair_diary").whereEqualTo("id",id).get()
+            .addOnCompleteListener {
+                if(it.isSuccessful){
+                    for(dc in it.result!!.documents){
+                        var userDTO =dc.toObject(designer::class.java)
+                        println("success ${userDTO.toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                        wv.loadUrl(userDTO!!.naverurl)
+                    }
+                }else{
+                    println("fail")
+                }
+            }
+        println("read end")
+    }
+
 //    override fun onRequestPermissionsResult(requestCode: Int,
 //                                            permissions: Array<String>,
 //                                            grantResults: IntArray) {
