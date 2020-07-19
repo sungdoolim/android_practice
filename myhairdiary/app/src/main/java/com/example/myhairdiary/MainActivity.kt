@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.core.view.GravityCompat
+import com.example.myhairdiary.calendar.EditActivity
+import com.example.myhairdiary.calendar.mainpage
+import com.example.myhairdiary.designers.designers_profile
 import com.example.myhairdiary.social.navermaps
 import com.example.myhairdiary.register.Register
 import com.google.android.material.navigation.NavigationView
@@ -35,7 +37,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         }
         calendar.setOnClickListener(){
-            var intent= Intent(this, mainpage::class.java)
+            var intent= Intent(this, EditActivity::class.java)//mainpage
             startActivity(intent)
         }
         mypage.setOnClickListener(){

@@ -1,10 +1,10 @@
-package com.example.myhairdiary
+package com.example.myhairdiary.calendar
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.content.Intent
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.myhairdiary.R
 
 import kotlinx.android.synthetic.main.activity_my_hair.*
 
@@ -25,7 +25,8 @@ class mainpage : AppCompatActivity() {
 
         fun initView() {
 
-            scheduleRecyclerViewAdapter = RecyclerViewAdapter(this)
+            scheduleRecyclerViewAdapter =
+                RecyclerViewAdapter(this)
 
             rv_schedule.layoutManager = GridLayoutManager(this, BaseCalendar.DAYS_OF_WEEK)
             rv_schedule.adapter = this.scheduleRecyclerViewAdapter

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".designers_profile">
+    tools:context=".designers.designers_profile">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/designerlist"
         android:layout_width="match_parent"

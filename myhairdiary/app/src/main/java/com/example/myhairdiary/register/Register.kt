@@ -3,13 +3,11 @@ package com.example.myhairdiary.register
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.example.myhairdiary.MainActivity
 import com.example.myhairdiary.R
-import com.example.myhairdiary.designer
+import com.example.myhairdiary.designers.designer
 import com.example.myhairdiary.firedb.fireDB
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_mypage.*
 import kotlinx.android.synthetic.main.activity_register.*
 
 class Register : AppCompatActivity() {
@@ -50,6 +48,7 @@ class Register : AppCompatActivity() {
                         for(dc in it.result!!.documents){
                             //  println("${len+1} : ${dc.toString()}")
                             edit.putString("perm",dc.toObject(designer::class.java)?.perm.toString())
+                            edit.putString("index",dc.toObject(designer::class.java)?.index.toString())
 
                             edit.apply()
 
@@ -64,7 +63,15 @@ class Register : AppCompatActivity() {
         }
     }
     private fun createData(firestore: FirebaseFirestore, a:String, b:String){// 실제 되는거 확인 했음
-        var userDTO= designer(a,1,b,1,"1",1,"memo 입니다")
+        var userDTO= designer(
+            a,
+            1,
+            b,
+            1,
+            "1",
+            1,
+            "memo 입니다"
+        )
         // 밑에 document를 공백으로 두면 임의의 아이디를 생성해서 추가함
         firestore?.collection("hair_diary")?.document()?.set(userDTO)
             .addOnCompleteListener {

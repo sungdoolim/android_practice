@@ -1,9 +1,9 @@
-package com.example.myhairdiary
+package com.example.myhairdiary.calendar
 
 import android.view.View
 import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myhairdiary.R
 
 import kotlinx.android.extensions.LayoutContainer
 

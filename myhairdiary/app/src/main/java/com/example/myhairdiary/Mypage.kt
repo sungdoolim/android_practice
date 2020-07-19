@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.example.myhairdiary.R
+import com.example.myhairdiary.designers.designer
 import com.example.myhairdiary.designers.portfolio
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_mypage.*

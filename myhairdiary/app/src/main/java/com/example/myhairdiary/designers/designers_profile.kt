@@ -1,10 +1,9 @@
-package com.example.myhairdiary
+package com.example.myhairdiary.designers
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myhairdiary.designers.designer_inter
-import com.example.myhairdiary.firedb.fireDB
+import com.example.myhairdiary.R
 import com.google.firebase.firestore.FirebaseFirestore
 
 import kotlinx.android.synthetic.main.activity_designers_profile.*
@@ -64,7 +63,11 @@ class designers_profile : AppCompatActivity() {
                     designerlist.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     designerlist.setHasFixedSize(true)
-                    designerlist.adapter= designerAdapter(this,userDTO)
+                    designerlist.adapter=
+                        designerAdapter(
+                            this,
+                            userDTO
+                        )
 
 
 

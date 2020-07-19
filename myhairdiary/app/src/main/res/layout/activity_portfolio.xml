@@ -7,6 +7,11 @@
     tools:context=".designers.portfolio"
     android:orientation="vertical">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="home"
+        android:id="@+id/port_home"/>
     <EditText
         android:id="@+id/Modmemo"
         android:layout_width="match_parent"

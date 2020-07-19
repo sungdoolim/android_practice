@@ -1,4 +1,4 @@
-package com.example.myhairdiary
+package com.example.myhairdiary.calendar
 
 import java.util.*
 

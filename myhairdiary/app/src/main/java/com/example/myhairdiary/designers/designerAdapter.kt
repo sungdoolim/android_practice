@@ -1,4 +1,4 @@
-package com.example.myhairdiary
+package com.example.myhairdiary.designers
 
 import android.content.Context
 import android.content.Intent
@@ -7,18 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myhairdiary.designers.detaildesigner
+import com.example.myhairdiary.R
 
 class designerAdapter (val context:Context, val designerList:ArrayList<designer>): RecyclerView.Adapter<designerAdapter.CustomViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): designerAdapter.CustomViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view= LayoutInflater.from(parent.context).inflate(R.layout.designer_adapter,parent,false)
         // 내가 쓸 custom_rev지정!
-        return CustomViewHolder(view).apply {
+        return CustomViewHolder(
+            view
+        ).apply {
             itemView.setOnClickListener {
                 val curPos:Int=adapterPosition
-                var dl:designer=designerList.get(curPos)
+                var dl: designer =designerList.get(curPos)
 
                 val intent = Intent(view.getContext(), detaildesigner::class.java)
                 intent.putExtra("id",dl.id)
@@ -36,7 +37,7 @@ class designerAdapter (val context:Context, val designerList:ArrayList<designer>
     override fun getItemCount(): Int {
         return designerList.size
     }
-    override fun onBindViewHolder(holder: designerAdapter.CustomViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
        // holder.memo.setImageResource(1)
 
         holder.name.text=designerList.get(position).name

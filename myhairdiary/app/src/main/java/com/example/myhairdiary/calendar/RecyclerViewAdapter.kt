@@ -1,10 +1,10 @@
-package com.example.myhairdiary
+package com.example.myhairdiary.calendar
 
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myhairdiary.R
 
 
 import java.text.SimpleDateFormat

@@ -1,18 +1,15 @@
 package com.example.myhairdiary.firedb
 
-import android.content.Context
-import android.content.Intent
-import androidx.core.content.ContextCompat.startActivity
-import com.example.myhairdiary.designer
+import com.example.myhairdiary.designers.designer
 import com.example.myhairdiary.designers.designer_inter
-import com.example.myhairdiary.register.Register
 import com.google.firebase.firestore.FirebaseFirestore
 
 class fireDB(){
     var firestore = FirebaseFirestore.getInstance()
 
     public fun createData( a:String, b:String){// 실제 되는거 확인 했음
-        var userDTO= designer(a,1,b,1,"2",3,"1")
+        var userDTO=
+            designer(a, 1, b, 1, "2", 3, "1")
         // 밑에 document를 공백으로 두면 임의의 아이디를 생성해서 추가함
         firestore?.collection("hair_diary")?.document()?.set(userDTO)
             .addOnCompleteListener {

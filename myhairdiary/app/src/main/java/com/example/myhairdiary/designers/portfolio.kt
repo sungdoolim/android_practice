@@ -2,10 +2,6 @@ package com.example.myhairdiary.designers
 
 import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Canvas
 import android.net.Uri
 import android.os.AsyncTask
 import android.os.Build
@@ -14,19 +10,11 @@ import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
 import com.bumptech.glide.Glide
+import com.example.myhairdiary.MainActivity
 import com.example.myhairdiary.R
-import com.example.myhairdiary.designer
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.ktx.storage
-import com.google.firebase.storage.ktx.storageMetadata
-import com.google.protobuf.compiler.PluginProtos
 import kotlinx.android.synthetic.main.activity_portfolio.*
 import java.io.*
 import java.net.URL
@@ -36,12 +24,19 @@ import kotlin.collections.ArrayList
 
 class portfolio : AppCompatActivity() {
 val GALLERY=0
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_portfolio)
+        val pref=getSharedPreferences("ins",0)
+        var sesid=pref.getString("id","null")
+       // var permis=pref.getString("perm","null")
 
-
-
+        port_home.setOnClickListener(){
+            var intent= Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
         upload_photo.setOnClickListener(){
 openAlbum()
             }
@@ -130,14 +125,48 @@ load_photo.setOnClickListener(){
         startActivityForResult(intent, GALLERY)
     }
 
-    fun uploadPhoto(photoUri: Uri) {
-        var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
-        var fileName = "IMAGE_" + timestamp + "_.png"// 파일 이름 지정 timestamp를 key로 해도...
+    fun uploadPhoto(photoUri: Uri,sesid:String,index:Int) {
+     //   var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        var firestore = FirebaseFirestore.getInstance()
+        var fileName = sesid + "_."+index// 파일 이름 지정 timestamp를 key로 해도...
 
         var storageRef = FirebaseStorage.getInstance().reference.child("images").child(fileName)
+        val pref=getSharedPreferences("ins",0)
+        var edit=pref.edit()
 
         storageRef.putFile(photoUri).addOnSuccessListener {
-            Toast.makeText(this, "Upload photo completed", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Upload photo completed", Toast.LENGTH_SHORT).show()
+            edit.putInt("index",index+1)
+            edit.apply()
+
+
+            var map= mutableMapOf<String,Any>()
+            map["index"] =index+1
+            firestore?.collection("hair_diary").whereEqualTo("id",sesid).get()
+                .addOnCompleteListener {
+                    if(it.isSuccessful){
+                        var userDTO=ArrayList<designer>()
+
+                        for(dc in it.result!!.documents){
+                            dc.toObject(designer::class.java)?.let { it1 -> userDTO.add(it1) }
+                            firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
+                                .addOnCompleteListener {
+                                    if(it.isSuccessful){
+                                        print("update")
+                                    }else{
+
+                                        Log.d("fail","fail update........................................1")
+                                    }
+                                }
+                        }
+                    }else{
+                        Log.d("fail","fail update........................................")
+                        println("fail")
+                    }
+                }
+
+
+            Toast.makeText(this, "index : ${index-1} index : ${index}", Toast.LENGTH_LONG).show()
         }
     }
     fun deletePhoto() {
@@ -152,8 +181,11 @@ load_photo.setOnClickListener(){
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==GALLERY){
             var photoUri=data?.data!!
+            val pref=getSharedPreferences("ins",0)
+            var sesid=pref.getString("id","null")
+            var index= pref.getString("index","0")?.let { Integer.parseInt(it) }
             album_imageview.setImageURI(photoUri)
-            uploadPhoto(photoUri)
+            uploadPhoto(photoUri,sesid!!,index!!)
         }
     }
 
