@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_detaildesigner.*
 
 class dimgAdapter( val dimglist: ArrayList<Dimgs>): RecyclerView.Adapter<dimgAdapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): dimgAdapter.CustomViewHolder {
@@ -40,6 +42,8 @@ class dimgAdapter( val dimglist: ArrayList<Dimgs>): RecyclerView.Adapter<dimgAda
         holder.Dimg1.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
         holder.Dimg2.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
         holder.Dimg3.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
+
+       // Glide.with(this).load(downloadUrl).into(holder.Dimg3)
     }
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val Dimg1=itemView.findViewById<ImageView>(R.id.Dimg1)
