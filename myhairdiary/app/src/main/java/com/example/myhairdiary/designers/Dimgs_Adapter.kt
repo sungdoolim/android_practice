@@ -1,5 +1,7 @@
 package com.example.myhairdiary.designers
 
+import android.app.Activity
+import android.content.Context
 import com.example.myhairdiary.R
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +12,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_detaildesigner.*
 
-class dimgAdapter( val dimglist: ArrayList<Dimgs>): RecyclerView.Adapter<dimgAdapter.CustomViewHolder>() {
+class dimgAdapter(val context: Context, val dimglist: ArrayList<Dimgs>): RecyclerView.Adapter<dimgAdapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): dimgAdapter.CustomViewHolder {
         val view= LayoutInflater.from(parent.context).inflate(R.layout.designerimgs_adapter,parent,false)
         // 내가 쓸 custom_rev지정!
         return CustomViewHolder(view).apply {
+
+
             itemView.setOnClickListener {
                 val curPos:Int=adapterPosition
                 Toast.makeText(parent.context,"이름 :${curPos}", Toast.LENGTH_SHORT).show()
@@ -37,13 +41,15 @@ class dimgAdapter( val dimglist: ArrayList<Dimgs>): RecyclerView.Adapter<dimgAda
     }
     override fun onBindViewHolder(holder: dimgAdapter.CustomViewHolder, position: Int) {
         // holder.memo.setImageResource(1)
-
-
         holder.Dimg1.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
         holder.Dimg2.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
         holder.Dimg3.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
 
-       // Glide.with(this).load(downloadUrl).into(holder.Dimg3)
+
+        Glide.with(context).load(dimglist.get(position).dimg1).into(holder.Dimg1)
+        Glide.with(context).load(dimglist.get(position).dimg2).into(holder.Dimg2)
+        Glide.with(context).load(dimglist.get(position).dimg3).into(holder.Dimg3)
+
     }
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val Dimg1=itemView.findViewById<ImageView>(R.id.Dimg1)

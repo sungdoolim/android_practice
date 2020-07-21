@@ -1,3 +1,3 @@
 package com.example.myhairdiary.designers
 
-data class Dimgs(val Dimg1 : Int, val Dimg2 : Int,val Dimg3:Int)
+data class Dimgs(val dimg1 : String, val dimg2 : String,val dimg3:String)

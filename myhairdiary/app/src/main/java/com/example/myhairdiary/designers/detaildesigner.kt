@@ -38,7 +38,12 @@ class detaildesigner : AppCompatActivity() {
         detailid.text=id;
 
         var firestore = FirebaseFirestore.getInstance()
-        selectList(firestore)
+        selectList(firestore)// 리사이클러뷰 띄우기
+        //selectList2(firestore)
+// 얘는 원래 recycler뷰를 적용하려했는데...
+
+
+
         gotonaver.setOnClickListener(){
             val intent = Intent(this, navermaps::class.java)
             intent.putExtra("id",id)
@@ -59,6 +64,11 @@ class detaildesigner : AppCompatActivity() {
             intent.putExtra("id",id)
             startActivity(intent)
         }
+        adpt_list.setOnClickListener(){
+            val intent = Intent(this, dimg_adpt_list::class.java)
+            intent.putExtra("id",id)
+            startActivity(intent)
+        }
         print("intent!!!")
     }
     fun loadPhoto(downloadUrl : String,i :Int) {
@@ -72,11 +82,103 @@ class detaildesigner : AppCompatActivity() {
             6->  Glide.with(this).load(downloadUrl).into(testimgview6)
             7->  Glide.with(this).load(downloadUrl).into(testimgview7)
             8->  Glide.with(this).load(downloadUrl).into(testimgview8)
+            9->  Glide.with(this).load(downloadUrl).into(testimgview4)
+            10->  Glide.with(this).load(downloadUrl).into(testimgview5)
+            11->  Glide.with(this).load(downloadUrl).into(testimgview6)
+            12->  Glide.with(this).load(downloadUrl).into(testimgview7)
+            13->  Glide.with(this).load(downloadUrl).into(testimgview8)
+            14->  Glide.with(this).load(downloadUrl).into(testimgview7)
+            15->  Glide.with(this).load(downloadUrl).into(testimgview8)
+
+
+
             else->""
 
         }
        // Glide.with(this).load(downloadUrl).into(testimgview1)
     }
+    public fun selectList2(firestore:FirebaseFirestore) {
+        println("read")
+        val pref=getSharedPreferences("ins",0)
+        var sesid=pref.getString("id","null")
+        var max: Int = pref.getInt("index",0)
+
+        val profileList=ArrayList<Dimgs>()
+        //    Dimgs(a,b,a),Dimgs(b,a,b),Dimgs(a,b,a)
+
+        var url1=""
+        var url2=""
+        var url3=""
+
+        for(i in 0..max-1){
+            var storageRef = FirebaseStorage.getInstance().reference.child("images")
+                .child(sesid + "_." + i.toString())
+            println({"i : ${i},max : ${max}"})
+            Log.d("", "i : ${i},max : ${max}")
+           // println("dwurl : ${storageRef.downloadUrl}")
+            storageRef.downloadUrl.addOnSuccessListener { uri ->
+              //  println("dwrul2 : ${uri}")
+
+                //   loadPhoto(uri.toString(),i)
+
+                println("i:${i}")
+                when((i)%3){
+                    0->{url1=uri.toString()
+                        println(url1)
+                    }
+                    1->{url2=uri.toString()
+                        println(url2)
+                    }
+                    2->{url3=uri.toString()
+                    profileList.add(Dimgs(url1,url2,url3))
+                            ""}
+                  else->""
+
+                }
+            }
+
+
+        }
+        if((max-1)/3!=2){
+            profileList.add(Dimgs(url1,url2,url3))
+        }
+       // profileList.add(Dimgs(url1,url2,url3))
+
+        var a="https://firebasestorage.googleapis.com/v0/b/flut-template.appspot.com/o/images%2F1234_.0?" +
+                "alt=media&token=ab8a984f-0441-4d1b-92d9-980d514f3568"
+        var b="https://firebasestorage.googleapis.com/v0/b/flut-template.appspot.com/o/images%2F1234_.1?" +
+                "alt=media&token=bc8a1336-2872-488c-8808-ea540f46cda1"
+        var c="https://firebasestorage.googleapis.com/v0/b/flut-template.appspot.com/o/images%2F1234_.1?" +
+                "alt=media&token=bc8a1336-2872-488c-8808-ea540f46cda1"
+
+
+
+
+      //  profileList.add(Dimgs(a,b,c))
+        // dimglistrv.layoutManager=LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
+
+
+
+
+
+
+
+//        designerimg_rv.setHasFixedSize(true)
+//        val mLayoutManager =  LinearLayoutManager(this);
+//        designerimg_rv.layoutManager = mLayoutManager;
+//        designerimg_rv.adapter=dimgAdapter(this,profileList)
+
+        println("read end")
+
+    }
+
+
+
+
+
+
+
+
 
     public fun selectList(firestore:FirebaseFirestore) {
         println("read")
@@ -85,7 +187,7 @@ class detaildesigner : AppCompatActivity() {
 
         val pref=getSharedPreferences("ins",0)
         var sesid=pref.getString("id","null")
-        var max: Int = pref.getInt("index",0)
+        var max: Int = Integer.parseInt(pref.getString("index","0")!!)
         Log.d(""," max : ${max}")
         println("max : ${max}")
 
@@ -94,28 +196,38 @@ class detaildesigner : AppCompatActivity() {
             var storageRef = FirebaseStorage.getInstance().reference.child("images")
                 .child(sesid + "_." + i.toString())
             println(i)
+            println("dwurl : ${storageRef.downloadUrl}")
             storageRef.downloadUrl.addOnSuccessListener { uri ->
+                println("dwrul2 : ${uri}")
                 loadPhoto(uri.toString(),i)
                 println("i:${i}")
             }
         }
 
 
-
+var a="https://firebasestorage.googleapis.com/v0/b/flut-template.appspot.com/o/images%2F1234_.0?alt=media&token=ab8a984f-0441-4d1b-92d9-980d514f3568"
+        var b="https://firebasestorage.googleapis.com/v0/b/flut-template.appspot.com/o/images%2F1234_.1?alt=media&token=bc8a1336-2872-488c-8808-ea540f46cda1"
 
         val profileList=arrayListOf(
-            Dimgs(R.drawable.ic_launcher_foreground,R.drawable.ic_launcher_foreground,R.drawable.ic_launcher_foreground),
-            Dimgs(R.drawable.ic_launcher_foreground,R.drawable.ic_launcher_foreground,R.drawable.ic_launcher_foreground),
-            Dimgs(R.drawable.ic_launcher_foreground,R.drawable.ic_launcher_foreground,R.drawable.ic_launcher_foreground)
+
+
+            Dimgs(a,b,a),Dimgs(b,a,b),Dimgs(a,b,a)
+
 
         )
 
 
         // dimglistrv.layoutManager=LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
-        designerimg_rv.setHasFixedSize(true)
-        val mLayoutManager =  LinearLayoutManager(this);
-        designerimg_rv.layoutManager = mLayoutManager;
-        designerimg_rv.adapter=dimgAdapter(profileList)
+
+
+
+
+
+
+//        designerimg_rv.setHasFixedSize(true)
+//        val mLayoutManager =  LinearLayoutManager(this);
+//        designerimg_rv.layoutManager = mLayoutManager;
+//        designerimg_rv.adapter=dimgAdapter(this,profileList)
 
         println("read end")
 
