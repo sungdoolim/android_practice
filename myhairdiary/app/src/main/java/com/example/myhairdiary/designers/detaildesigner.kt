@@ -101,7 +101,7 @@ class detaildesigner : AppCompatActivity() {
         println("read")
         val pref=getSharedPreferences("ins",0)
         var sesid=pref.getString("id","null")
-        var max: Int = pref.getInt("index",0)
+        var max: Int = Integer.parseInt(pref.getString("index","0")!!)
 
         val profileList=ArrayList<Dimgs>()
         //    Dimgs(a,b,a),Dimgs(b,a,b),Dimgs(a,b,a)

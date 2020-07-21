@@ -139,7 +139,7 @@ load_photo.setOnClickListener(){
 
         storageRef.putFile(photoUri).addOnSuccessListener {
             Toast.makeText(this, "Upload photo completed", Toast.LENGTH_SHORT).show()
-            edit.putInt("index",index+1)
+            edit.putString("index",(index+1).toString())
             edit.apply()
 
 
@@ -186,7 +186,7 @@ load_photo.setOnClickListener(){
             var photoUri=data?.data!!
             val pref=getSharedPreferences("ins",0)
             var sesid=pref.getString("id","null")
-            var index= pref.getString("index","0")?.let { Integer.parseInt(it) }
+            var index= Integer.parseInt(pref.getString("index","0")!!)
             album_imageview.setImageURI(photoUri)
             uploadPhoto(photoUri,sesid!!,index!!)
         }
