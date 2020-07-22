@@ -62,7 +62,7 @@ val calendar: Calendar= Calendar.getInstance()
             var dateint=Integer.parseInt(date)
 
             var intent=Intent(this,CalbasicActivity::class.java)
-            intent.putExtra("dateint",dateint)
+            intent.putExtra("dateint",dateint.toString())
 
             startActivity(intent)
 

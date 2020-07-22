@@ -15,7 +15,10 @@
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/testid"
@@ -53,6 +56,17 @@
                 android:layout_height="wrap_content"
                 android:text="naver_map" />
 
+            <Button
+                android:id="@+id/Rcalendar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rcalendar" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/testmain"
+                android:text="testmain"/>
+
 
         </LinearLayout>
 
@@ -60,10 +74,11 @@
             android:layout_width="407dp"
             android:layout_height="131dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
             app:layout_constraintVertical_bias="0.952"
-            app:menu="@menu/bottomnavi_x"
-            tools:layout_editor_absoluteX="0dp" />
+            app:menu="@menu/bottomnavi_x" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

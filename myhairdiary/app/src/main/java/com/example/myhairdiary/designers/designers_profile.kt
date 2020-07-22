@@ -42,7 +42,7 @@ class designers_profile : AppCompatActivity() {
     public fun selectList(firestore:FirebaseFirestore) {
         println("read")
 
-        firestore?.collection("hair_diary").get()
+        firestore?.collection("hair_diary").whereEqualTo("perm",1).get()
             .addOnCompleteListener {
 
                 var len=0

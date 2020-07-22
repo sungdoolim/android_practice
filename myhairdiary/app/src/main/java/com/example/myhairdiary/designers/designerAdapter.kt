@@ -27,6 +27,7 @@ class designerAdapter (val context:Context, val designerList:ArrayList<designer>
                 intent.putExtra("memo",dl.memo)
                 intent.putExtra("name",dl.name)
                 intent.putExtra("phone",dl.phone)
+                intent.putExtra("index",dl.index.toString())
                 intent.putExtra("year",dl.year)
                 context.startActivity(intent)
 
@@ -46,6 +47,7 @@ class designerAdapter (val context:Context, val designerList:ArrayList<designer>
         holder.year.text=designerList.get(position).year.toString()
         holder.phone.text=designerList.get(position).phone
         holder.memo.text=designerList.get(position).memo
+
         holder.dimg.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
     }
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

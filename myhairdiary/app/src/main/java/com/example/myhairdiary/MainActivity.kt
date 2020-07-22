@@ -37,6 +37,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         }
         calendar.setOnClickListener(){
+            var intent= Intent(this, mainpage::class.java)//mainpage
+            startActivity(intent)
+        }
+        Rcalendar.setOnClickListener(){
             var intent= Intent(this, EditActivity::class.java)//mainpage
             startActivity(intent)
         }
@@ -50,6 +54,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         naver_map.setOnClickListener(){
             var intent= Intent(this, navermaps::class.java)
+            startActivity(intent)
+        }
+        testmain.setOnClickListener(){
+            var intent= Intent(this, testMain::class.java)
             startActivity(intent)
         }
     }

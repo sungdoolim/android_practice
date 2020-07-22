@@ -43,8 +43,8 @@ interface  designer_img_inter {
                //   println("dwurl : ${storageRef.downloadUrl}")
 
 
-               runBlocking {
-                   launch {
+
+
                        var asy = storageRef.downloadUrl.addOnSuccessListener { uri ->
                            //      println("dwrul2 : ${uri}")
                            //   loadPhoto(uri.toString(),i)
@@ -54,28 +54,21 @@ interface  designer_img_inter {
                                    url1 = uri.toString()
                                    println("url1 : ${url1}")
                                    if (i == max - 1) {
-
                                        profileList.add(Dimgs(url1, url1, url1))
-
                                    }
-
                                }
                                1 -> {
                                    url2 = uri.toString()
                                    println("url2 : ${url2}")
                                    if (i == max - 1) {
                                        println("add!")
-
                                        profileList.add(Dimgs(url1, url2, url2))
-
                                    }
                                }
                                2 -> {
                                    url3 = uri.toString()
                                    println("url3 : ${url3}")
-
                                    profileList.add(Dimgs(url1, url2, url3))
-
                                }
                                else -> ""
                            }
@@ -86,8 +79,8 @@ interface  designer_img_inter {
 
 
                        }
-                   }//launch
-               }//block
+
+               //block
                if(i==max-1){
                    println("add!")
                    // val a= findViewById(R.id.dimglistrv)

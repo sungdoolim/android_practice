@@ -9,17 +9,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.example.myhairdiary.MainActivity
 import com.example.myhairdiary.R
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_portfolio.*
 import java.io.*
 import java.net.URL
-import java.text.SimpleDateFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 class portfolio : AppCompatActivity() {
@@ -29,6 +31,10 @@ val GALLERY=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_portfolio)
+
+
+
+
         val pref=getSharedPreferences("ins",0)
         var sesid=pref.getString("id","null")
        // var permis=pref.getString("perm","null")
@@ -43,6 +49,25 @@ openAlbum()
         delete_photo.setOnClickListener(){
             deletePhoto()
         }
+        upload_photo_custom.setOnClickListener(){
+            var builder=AlertDialog.Builder(this);
+            builder.setTitle("고객의 아이디를 입력해 주세요")
+            val et= EditText(this)
+
+
+            builder.setView(et).setPositiveButton("확인"){
+                dialogInterface,i->
+                val customid=et.text
+
+
+                openAlbum(customid.toString())
+            }.setNegativeButton("취소"){
+                    dialogInterface,i-> ""
+            }.show()
+
+        }
+
+
 load_photo.setOnClickListener(){
     var storageRef = FirebaseStorage.getInstance().reference.child("images").child(load_filename_edittext.text.toString())
     storageRef.downloadUrl.addOnSuccessListener { uri ->
@@ -122,53 +147,140 @@ load_photo.setOnClickListener(){
         Glide.with(this).load(downloadUrl).into(album_imageview)
     }
 
-    fun openAlbum() {
+    fun openAlbum(customid:String="") {
         var intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
+        println("openalbum : ${customid}")
+        val pref=getSharedPreferences("ins",0)
+        val edit=pref.edit()
+        edit.putString("customid",customid)
+        edit.apply()
+
         startActivityForResult(intent, GALLERY)
     }
 
-    fun uploadPhoto(photoUri: Uri,sesid:String,index:Int) {
-     //   var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+    fun customidget( photoUri: Uri, sesid: String, index: Int,customid:String):Long{
+        if(customid=="")
+            return 0
+
         var firestore = FirebaseFirestore.getInstance()
-        var fileName = sesid + "_."+index// 파일 이름 지정 timestamp를 key로 해도...
-
-        var storageRef = FirebaseStorage.getInstance().reference.child("images").child(fileName)
-        val pref=getSharedPreferences("ins",0)
-        var edit=pref.edit()
-
-        storageRef.putFile(photoUri).addOnSuccessListener {
-            Toast.makeText(this, "Upload photo completed", Toast.LENGTH_SHORT).show()
-            edit.putString("index",(index+1).toString())
-            edit.apply()
-
-
-            var map= mutableMapOf<String,Any>()
-            map["index"] =index+1
-            firestore?.collection("hair_diary").whereEqualTo("id",sesid).get()
-                .addOnCompleteListener {
-                    if(it.isSuccessful){
-                        var userDTO=ArrayList<designer>()
-
-                        for(dc in it.result!!.documents){
-                            dc.toObject(designer::class.java)?.let { it1 -> userDTO.add(it1) }
+        var customcount:Long=0
+        var asy=firestore?.collection("hair_diary").whereEqualTo("id",sesid.toString()).get()
+            .addOnCompleteListener {
+                if(it.isSuccessful){
+                    for(dc in it.result!!.documents){
+                        if(dc.get(customid)==null){
+                            var map= mutableMapOf<String,Any>()
+                            map[customid] =0
+                            customcount=0
                             firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
                                 .addOnCompleteListener {
                                     if(it.isSuccessful){
                                         print("update")
-                                    }else{
+                                        uploadPhoto(photoUri,sesid,index,customid,customcount)//   photoUri: Uri, sesid: String, index: Int, customid: String = "", customcount: Long
 
+                                    }else{
                                         Log.d("fail","fail update........................................1")
                                     }
                                 }
+                        }else{
+                            customcount= dc.get(customid) as Long
+                            println("얻어와보자 ${customcount}")
+                                        uploadPhoto(photoUri,sesid,index,customid,customcount)//   photoUri: Uri, sesid: String, index: Int, customid: String = "", customcount: Long
+
+
                         }
-                    }else{
-                        Log.d("fail","fail update........................................")
-                        println("fail")
                     }
+                }else{
+                    println("fail")
                 }
+            }
 
 
+
+
+        return customcount
+    }
+    fun uploadPhoto(        photoUri: Uri, sesid: String, index: Int, customid: String = "", customcount: Long) {
+     //   var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        var firestore = FirebaseFirestore.getInstance()
+        val preff=getSharedPreferences("ins",0)
+        var sesid=preff.getString("id","null")
+       // var customcount:Long=0
+
+        var fileName = sesid + "_." + index// 파일 이름 지정 timestamp를 key로 해도...
+        if(customid!="") {
+            fileName = sesid +"_"+customid+ "_." + customcount// 파일 이름 지정 timestamp를 key로 해도...
+        }
+        var storageRef = FirebaseStorage.getInstance().reference.child("images").child(fileName)
+        val pref=getSharedPreferences("ins",0)
+        var edit=pref.edit()
+       // edit.putString("customid","")
+        storageRef.putFile(photoUri).addOnSuccessListener {
+            Toast.makeText(this, "Upload photo completed", Toast.LENGTH_SHORT).show()
+            var map = mutableMapOf<String, Any>()
+            if(customid=="") {
+                edit.putString("index", (index + 1).toString())
+                edit.apply()
+
+                map["index"] = index + 1
+                firestore?.collection("hair_diary").whereEqualTo("id", sesid).get()
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            var userDTO = ArrayList<designer>()
+                            for (dc in it.result!!.documents) {
+                                dc.toObject(designer::class.java)?.let { it1 -> userDTO.add(it1) }
+                                firestore?.collection("hair_diary")
+                                    .document(it.result!!.documents[0].id).update(map)
+                                    .addOnCompleteListener {
+                                        if (it.isSuccessful) {
+                                            print("update")
+                                        } else {
+                                            Log.d(
+                                                "fail",
+                                                "fail update........................................1"
+                                            )
+                                        }
+                                    }
+                            }
+                        } else {
+                            Log.d("fail", "fail update........................................")
+                            println("fail")
+                        }
+                    }
+            }
+
+
+else {
+                map[customid] = customcount + 1
+                firestore?.collection("hair_diary").whereEqualTo("id", sesid).get()
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            var userDTO = ArrayList<designer>()
+
+                            for (dc in it.result!!.documents) {
+                                dc.toObject(designer::class.java)?.let { it1 -> userDTO.add(it1) }
+                                firestore?.collection("hair_diary")
+                                    .document(it.result!!.documents[0].id).update(map)
+                                    .addOnCompleteListener {
+                                        if (it.isSuccessful) {
+                                            print("update")
+                                        } else {
+
+                                            Log.d(
+                                                "fail",
+                                                "fail update........................................1"
+                                            )
+                                        }
+                                    }
+                            }
+                        } else {
+                            Log.d("fail", "fail update........................................")
+                            println("fail")
+                        }
+                    }
+
+            }
             Toast.makeText(this, "index : ${index-1} index : ${index}", Toast.LENGTH_LONG).show()
         }
     }
@@ -183,13 +295,21 @@ load_photo.setOnClickListener(){
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==GALLERY){
-            var photoUri=data?.data!!
+
             val pref=getSharedPreferences("ins",0)
+            var customid=pref.getString("customid","")
+            println("onAct  : ${customid}")
+            var photoUri=data?.data!!
             var sesid=pref.getString("id","null")
             var index= Integer.parseInt(pref.getString("index","0")!!)
             album_imageview.setImageURI(photoUri)
-            uploadPhoto(photoUri,sesid!!,index!!)
-        }
+            if(customid!="") {
+                var customcount = customidget(photoUri,sesid.toString()!!,index!!, customid.toString())
+            }else {
+                uploadPhoto(photoUri, sesid!!, index!!, "", 0)
+            }
+
+            }
     }
 
     public fun updateData(firestore:FirebaseFirestore,youtubeurl:String,facebookurl:String,instaurl:String,memo:String,year:Int,sesid:String){// 잘됨

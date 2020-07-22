@@ -46,6 +46,8 @@ class Register : AppCompatActivity() {
                     var len=0
                     if(it.isSuccessful){
                         for(dc in it.result!!.documents){
+
+                            println("\nget test!!! : ${dc.getString("ttttt")}")
                             //  println("${len+1} : ${dc.toString()}")
                             edit.putString("perm",dc.toObject(designer::class.java)?.perm.toString())
                             edit.putString("index",dc.toObject(designer::class.java)?.index.toString())

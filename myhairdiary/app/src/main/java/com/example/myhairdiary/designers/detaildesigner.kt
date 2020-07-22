@@ -26,6 +26,8 @@ class detaildesigner : AppCompatActivity() {
         val year=intent.getStringExtra("year")?:"null"
         val memo=intent.getStringExtra("memo")?:"null"
         val phone=intent.getStringExtra("phone")?:"null"
+        val index : Int=Integer.parseInt(intent.getStringExtra("index")?:"0")
+        print("index : ! ${index}")
         val id=intent.getStringExtra("id")?:"null"
         println(age)
         println(name)
@@ -38,7 +40,7 @@ class detaildesigner : AppCompatActivity() {
         detailid.text=id;
 
         var firestore = FirebaseFirestore.getInstance()
-        selectList(firestore)// 리사이클러뷰 띄우기
+        selectList(firestore,id,index)// 리사이클러뷰 띄우기
         //selectList2(firestore)
 // 얘는 원래 recycler뷰를 적용하려했는데...
 
@@ -68,6 +70,15 @@ class detaildesigner : AppCompatActivity() {
             val intent = Intent(this, dimg_adpt_list::class.java)
             intent.putExtra("id",id)
             startActivity(intent)
+        }
+        trace.setOnClickListener(){
+
+            val intent = Intent(this, Tracking::class.java)
+            intent.putExtra("id",id)
+            intent.putExtra("index",index.toString())
+            startActivity(intent)
+
+
         }
         print("intent!!!")
     }
@@ -180,21 +191,21 @@ class detaildesigner : AppCompatActivity() {
 
 
 
-    public fun selectList(firestore:FirebaseFirestore) {
+    public fun selectList(firestore:FirebaseFirestore,id:String,index:Int) {
         println("read")
 
 
 
         val pref=getSharedPreferences("ins",0)
-        var sesid=pref.getString("id","null")
-        var max: Int = Integer.parseInt(pref.getString("index","0")!!)
-        Log.d(""," max : ${max}")
-        println("max : ${max}")
+        //var sesid=pref.getString("id","null")
+       // var max: Int = Integer.parseInt(pref.getString("index","0")!!)
+       // Log.d(""," max : ${max}")
+        //println("max : ${max}")
 
 
-        for(i in 0..max-1){
+        for(i in 0..index-1){
             var storageRef = FirebaseStorage.getInstance().reference.child("images")
-                .child(sesid + "_." + i.toString())
+                .child(id + "_." + i.toString())
             println(i)
             println("dwurl : ${storageRef.downloadUrl}")
             storageRef.downloadUrl.addOnSuccessListener { uri ->
