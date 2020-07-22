@@ -31,14 +31,9 @@ val GALLERY=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_portfolio)
-
-
-
-
         val pref=getSharedPreferences("ins",0)
         var sesid=pref.getString("id","null")
        // var permis=pref.getString("perm","null")
-
         port_home.setOnClickListener(){
             var intent= Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -50,32 +45,23 @@ openAlbum()
             deletePhoto()
         }
         upload_photo_custom.setOnClickListener(){
-            var builder=AlertDialog.Builder(this);
+            var builder=AlertDialog.Builder(this)
             builder.setTitle("고객의 아이디를 입력해 주세요")
             val et= EditText(this)
-
-
             builder.setView(et).setPositiveButton("확인"){
                 dialogInterface,i->
                 val customid=et.text
-
-
                 openAlbum(customid.toString())
             }.setNegativeButton("취소"){
                     dialogInterface,i-> ""
             }.show()
-
         }
-
-
 load_photo.setOnClickListener(){
     var storageRef = FirebaseStorage.getInstance().reference.child("images").child(load_filename_edittext.text.toString())
     storageRef.downloadUrl.addOnSuccessListener { uri ->
         loadPhoto(uri.toString())
     }
-
 }
-
         download_photo.setOnClickListener(){
             var storageRef = FirebaseStorage.getInstance().reference.child("images").child(download_filename_edittext.text.toString())
             storageRef.downloadUrl.addOnSuccessListener { uri ->
@@ -85,49 +71,40 @@ load_photo.setOnClickListener(){
                 requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
             }
         }
-
         modify.setOnClickListener(){
             var youtubeurl=youurl.text.toString()
             var facebookurl=faceurl.text.toString()
             var instagramurl=instaurl.text.toString()
             var memo=Modmemo.text
             var year=Modyear.text
-
+            val major=Modmajor.text
+            val monthc=Integer.parseInt(Modmonthc.text.toString())
             val pref=getSharedPreferences("ins",0)
-
             var sesid=pref.getString("id","null")
-            Log.d("id````````````````````",sesid)
-
             var firestore = FirebaseFirestore.getInstance()
-            updateData(firestore,youtubeurl,facebookurl,instagramurl,memo.toString(),Integer.parseInt(year.toString()),sesid.toString())
+            updateData(firestore,monthc,major.toString(),youtubeurl,facebookurl,instagramurl,memo.toString(),Integer.parseInt(year.toString()),sesid.toString())
         }
 
 
     }
     inner class DownloadFileFromURL : AsyncTask<String?, String?, String?>() {
-
         override fun doInBackground(vararg p0: String?): String? {
             //file download path
             val downloadFolder = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString()
-
             //image download url
             val url = URL(p0[0])
             val conection = url.openConnection()
             conection.connect()
-
             // input stream to read file - with 8k buffer
             val input = BufferedInputStream(url.openStream(), 8192)
-
             // output stream to write file
             val output = FileOutputStream(downloadFolder + "/howl_Dfile.jpg")
             val data = ByteArray(1024)
             var total = 0L
-
             // writing data to file
             var count : Int
             while (input.read(data).also { count = it } != -1) {
                 total += count.toLong()
-
                 output.write(data, 0, count)
             }
             // flushing output
@@ -135,7 +112,6 @@ load_photo.setOnClickListener(){
             // closing streams
             output.close()
             input.close()
-
             return null
         }
         override fun onPostExecute(result: String?) {
@@ -155,14 +131,12 @@ load_photo.setOnClickListener(){
         val edit=pref.edit()
         edit.putString("customid",customid)
         edit.apply()
-
         startActivityForResult(intent, GALLERY)
     }
 
     fun customidget( photoUri: Uri, sesid: String, index: Int,customid:String):Long{
         if(customid=="")
-            return 0
-
+        { return 0}
         var firestore = FirebaseFirestore.getInstance()
         var customcount:Long=0
         var asy=firestore?.collection("hair_diary").whereEqualTo("id",sesid.toString()).get()
@@ -177,8 +151,8 @@ load_photo.setOnClickListener(){
                                 .addOnCompleteListener {
                                     if(it.isSuccessful){
                                         print("update")
-                                        uploadPhoto(photoUri,sesid,index,customid,customcount)//   photoUri: Uri, sesid: String, index: Int, customid: String = "", customcount: Long
-
+                                        uploadPhoto(photoUri,sesid,index,customid,customcount)
+                                        //   photoUri: Uri, sesid: String, index: Int, customid: String = "", customcount: Long
                                     }else{
                                         Log.d("fail","fail update........................................1")
                                     }
@@ -186,28 +160,21 @@ load_photo.setOnClickListener(){
                         }else{
                             customcount= dc.get(customid) as Long
                             println("얻어와보자 ${customcount}")
-                                        uploadPhoto(photoUri,sesid,index,customid,customcount)//   photoUri: Uri, sesid: String, index: Int, customid: String = "", customcount: Long
-
-
+                        uploadPhoto(photoUri,sesid,index,customid,customcount)//   photoUri: Uri, sesid: String, index: Int, customid: String = "", customcount: Long
                         }
                     }
                 }else{
                     println("fail")
                 }
             }
-
-
-
-
         return customcount
     }
-    fun uploadPhoto(        photoUri: Uri, sesid: String, index: Int, customid: String = "", customcount: Long) {
+    fun uploadPhoto(photoUri: Uri, sesid: String, index: Int, customid: String = "", customcount: Long) {
      //   var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         var firestore = FirebaseFirestore.getInstance()
         val preff=getSharedPreferences("ins",0)
         var sesid=preff.getString("id","null")
        // var customcount:Long=0
-
         var fileName = sesid + "_." + index// 파일 이름 지정 timestamp를 key로 해도...
         if(customid!="") {
             fileName = sesid +"_"+customid+ "_." + customcount// 파일 이름 지정 timestamp를 key로 해도...
@@ -222,7 +189,6 @@ load_photo.setOnClickListener(){
             if(customid=="") {
                 edit.putString("index", (index + 1).toString())
                 edit.apply()
-
                 map["index"] = index + 1
                 firestore?.collection("hair_diary").whereEqualTo("id", sesid).get()
                     .addOnCompleteListener {
@@ -249,34 +215,27 @@ load_photo.setOnClickListener(){
                         }
                     }
             }
-
-
 else {
                 map[customid] = customcount + 1
                 firestore?.collection("hair_diary").whereEqualTo("id", sesid).get()
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             var userDTO = ArrayList<designer>()
-
                             for (dc in it.result!!.documents) {
                                 dc.toObject(designer::class.java)?.let { it1 -> userDTO.add(it1) }
                                 firestore?.collection("hair_diary")
                                     .document(it.result!!.documents[0].id).update(map)
                                     .addOnCompleteListener {
                                         if (it.isSuccessful) {
-                                            print("update")
+                                        //   print("update")
                                         } else {
-
-                                            Log.d(
-                                                "fail",
-                                                "fail update........................................1"
-                                            )
+                                         //   Log.d("fail","fail update........................................1")
                                         }
                                     }
                             }
                         } else {
-                            Log.d("fail", "fail update........................................")
-                            println("fail")
+                        //    Log.d("fail", "fail update........................................")
+                        //    println("fail")
                         }
                     }
 
@@ -295,7 +254,6 @@ else {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode==GALLERY){
-
             val pref=getSharedPreferences("ins",0)
             var customid=pref.getString("customid","")
             println("onAct  : ${customid}")
@@ -304,19 +262,17 @@ else {
             var index= Integer.parseInt(pref.getString("index","0")!!)
             album_imageview.setImageURI(photoUri)
             if(customid!="") {
-                var customcount = customidget(photoUri,sesid.toString()!!,index!!, customid.toString())
+            customidget(photoUri,sesid.toString()!!,index!!, customid.toString())
             }else {
                 uploadPhoto(photoUri, sesid!!, index!!, "", 0)
             }
-
             }
     }
 
-    public fun updateData(firestore:FirebaseFirestore,youtubeurl:String,facebookurl:String,instaurl:String,memo:String,year:Int,sesid:String){// 잘됨
+    public fun updateData(firestore:FirebaseFirestore,  monthc:Int=0,  major:String="",youtubeurl:String="",
+                          facebookurl:String="", instaurl:String="",  memo:String="",  year:Int=0, sesid:String=""){// 잘됨
              firestore?.collection("hair_diary").whereEqualTo("id",sesid).get()
             .addOnCompleteListener {
-
-                var len=0
                 if(it.isSuccessful){
                     var userDTO=ArrayList<designer>()
                     Log.d("success","success update........................................")
@@ -325,6 +281,7 @@ else {
                         dc.toObject(designer::class.java)?.let { it1 -> userDTO.add(it1) }
                         // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                         var map= mutableMapOf<String,Any>()
+                        if(memo!=""){
                         map["memo"] =memo
                         firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
                             .addOnCompleteListener {
@@ -334,64 +291,81 @@ else {
                                     Log.d("fail","fail update........................................1")
                                 }
                             }
-                        map["year"]=year
-                        //Log.d("1","${it.result!!.documents[0].toString()}")
-                        //Log.d("11","${it.result!!.documents[0]["ref"].toString()}")
-                        //Log.d("11","${it.result!!.documents[0].reference.toString()}")
-                       // Log.d("11","${it.result!!.documents[0].metadata.toString()}")
-                        Log.d("11","${it.result!!.documents[0].id.toString()}")
-                        firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
-                            .addOnCompleteListener {
-                                if(it.isSuccessful){
-                                    print("update")
-                                }else{
-                                    Log.d("fail","fail update........................................2")
+                        }
+                        if(year!=0) {
+                            map["year"] = year
+                            //Log.d("1","${it.result!!.documents[0].toString()}")
+                            //Log.d("11","${it.result!!.documents[0]["ref"].toString()}")
+                            //Log.d("11","${it.result!!.documents[0].reference.toString()}")
+                            // Log.d("11","${it.result!!.documents[0].metadata.toString()}")/
+                         //Log.d("11", "${it.result!!.documents[0].id.toString()}")
+                            firestore?.collection("hair_diary")
+                                .document(it.result!!.documents[0].id).update(map)
+                                .addOnCompleteListener {
+                                    if (it.isSuccessful) {
+                                   //     print("update")
+                                    } else {
+                                  //      Log.d( "fail", "fail update........................................2"   )
+                                    }
                                 }
-                            }
-
+                        }
+                        if(youtubeurl!=""){
                         map["youurl"]=youtubeurl
                         firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
                             .addOnCompleteListener {
                                 if(it.isSuccessful){
-                                    print("update")
+                                 //   print("update")
                                 }else{
-                                    Log.d("fail","fail update........................................2")
+                                 //   Log.d("fail","fail update........................................2")
                                 }
-                            }
+                            }}
+                        if(facebookurl!=""){
                         map["faceurl"]=facebookurl
                         firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
                             .addOnCompleteListener {
                                 if(it.isSuccessful){
-                                    print("update")
+                                  //  print("update")
                                 }else{
-                                    Log.d("fail","fail update........................................2")
+                                  //  Log.d("fail","fail update........................................2")
                                 }
-                            }
-
+                            }}
+                        if(instaurl!=""){
                         map["instaurl"]=instaurl
                         firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
                             .addOnCompleteListener {
                                 if(it.isSuccessful){
-                                    print("update")
+                                //    print("update")
                                 }else{
-                                    Log.d("fail","fail update........................................2")
+                                  //  Log.d("fail","fail update........................................2")
+                                }
+                            }}
+                        if(major!=""){
+                        map["major"]=major
+                        firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
+                            .addOnCompleteListener {
+                                if(it.isSuccessful){
+                               //     print("update")
+                                }else{
+                                 //   Log.d("fail","fail update........................................2")
+                                }
+                            }}
+                    if(monthc!=0) {
+                        map["monthc"] = monthc
+                        firestore?.collection("hair_diary").document(it.result!!.documents[0].id)
+                            .update(map)
+                            .addOnCompleteListener {
+                                if (it.isSuccessful) {
+                                    print("update")
+                                } else {
+                                  //  Log.d( "fail",   "fail update........................................2"  )
                                 }
                             }
-
+                    }
                     }
                 }else{
-                    Log.d("fail","fail update........................................")
-                    println("fail")
+                 //   Log.d("fail","fail update........................................")
+                    //println("fail")
                 }
-
-
             }
-
-
-
-
-
-
     }
-
 }

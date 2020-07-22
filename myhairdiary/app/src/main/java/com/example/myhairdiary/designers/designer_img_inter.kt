@@ -17,34 +17,23 @@ interface  designer_img_inter {
    companion object{
        val designer_imgL = ArrayList<Dimgs>()
        public fun selectList_interface(firestore: FirebaseFirestore,context:Context,itemView: View){
-
                selectList(firestore, context, itemView)
            }
        public fun selectList(firestore: FirebaseFirestore,context:Context,itemView: View) {
-           //(itemView: View): RecyclerView.ViewHolder(itemView)
            println("read")
            val pref=context.getSharedPreferences("ins",0)
            var sesid=pref.getString("id","null")
            var max: Int = Integer.parseInt(pref.getString("index","0")!!)
-
            val profileList=ArrayList<Dimgs>()
            //    Dimgs(a,b,a),Dimgs(b,a,b),Dimgs(a,b,a)
-
            var url1=""
            var url2=""
            var url3=""
-
-
-
            for(i in 0..max-1) {
                var storageRef = FirebaseStorage.getInstance().reference.child("images")
                    .child(sesid + "_." + i.toString())
-               println(i)
-               //   println("dwurl : ${storageRef.downloadUrl}")
-
-
-
-
+               //println(i)
+               //println("dwurl : ${storageRef.downloadUrl}")
                        var asy = storageRef.downloadUrl.addOnSuccessListener { uri ->
                            //      println("dwrul2 : ${uri}")
                            //   loadPhoto(uri.toString(),i)
@@ -73,14 +62,7 @@ interface  designer_img_inter {
                                else -> ""
                            }
                            println("i==?${i}")
-
-
-                           //  profileList.add(Dimgs(url1,url2,url3))
-
-
                        }
-
-               //block
                if(i==max-1){
                    println("add!")
                    // val a= findViewById(R.id.dimglistrv)
@@ -89,37 +71,15 @@ interface  designer_img_inter {
                    val mLayoutManager =  LinearLayoutManager(context);
                    a.layoutManager = mLayoutManager;
                    a.adapter=dimgAdapter(context,profileList)
-
                }
-             // Tasks.await(asy)// 이거 wait 하는건가!?
            }//for
-
-
-
-           var a="https://firebasestorage.googleapis.com/v0/b/flut-template.appspot.com/o/images%2F1234_.0?" +
-                   "alt=media&token=ab8a984f-0441-4d1b-92d9-980d514f3568"
-           var b=""
+            var a="https://firebasestorage.googleapis.com/v0/b/flut-template.appspot.com/o/images%2F1234_.0?alt=media&token=ab8a984f-0441-4d1b-92d9-980d514f3568"
            // profileList.add(Dimgs(a,a,a))
-
-           // profileList.add(Dimgs(b,b,b))
-
-           //profileList.add(Dimgs(a,a,a))
            // dimglistrv.layoutManager=LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false)
-
-
-
-
-
            println("for ${profileList.size} ")
            for(pro in profileList){
                println("list : ${pro.dimg1}, ${pro.dimg2}, ${pro.dimg3}")
            }
-
-
-
-           println("read end")
-
        }
    }
-
 }

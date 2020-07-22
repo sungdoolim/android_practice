@@ -31,7 +31,6 @@ class dimgAdapter(val context: Context, val dimglist: ArrayList<Dimgs>): Recycle
 //                intent.putExtra("phone",dl.phone)
 //                intent.putExtra("year",dl.year)
 //                context.startActivity(intent)
-
                 //  Toast.makeText(parent.context,"이름 :${profile.name}", Toast.LENGTH_SHORT).show()
             }
         }
@@ -44,18 +43,14 @@ class dimgAdapter(val context: Context, val dimglist: ArrayList<Dimgs>): Recycle
         holder.Dimg1.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
         holder.Dimg2.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
         holder.Dimg3.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
-
-
         Glide.with(context).load(dimglist.get(position).dimg1).into(holder.Dimg1)
         Glide.with(context).load(dimglist.get(position).dimg2).into(holder.Dimg2)
         Glide.with(context).load(dimglist.get(position).dimg3).into(holder.Dimg3)
-
     }
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val Dimg1=itemView.findViewById<ImageView>(R.id.Dimg1)
         val Dimg2=itemView.findViewById<ImageView>(R.id.Dimg2)
         val Dimg3=itemView.findViewById<ImageView>(R.id.Dimg3)
-
     }
 
 
