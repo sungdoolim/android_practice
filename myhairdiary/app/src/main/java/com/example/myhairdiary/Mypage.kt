@@ -27,41 +27,28 @@ class Mypage : AppCompatActivity() {
                         myid.text=userDTO?.id
                         mymemo.text=userDTO?.memo
                         myyear.text=userDTO?.year.toString()
-
-
-
-                        println("success ${userDTO.toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                   //     println("success ${userDTO.toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
                 }else{
                     println("fail")
                 }
                 if(!permis.equals("null")) {
                     var per = Integer.parseInt(permis.toString())
-                    print("성공!!!!!!!!!!!!!!!!!!!!!!!!${per}")
-                    Log.d("d","성공!!!!!!!!!!!!!!!!!!!!!!!!${per}.........")
+//                    print("성공!!!!!!!!!!!!!!!!!!!!!!!!${per}")
+//                    Log.d("d","성공!!!!!!!!!!!!!!!!!!!!!!!!${per}.........")
                     when (per) {
-
                         1 -> designer_bt.visibility = View.VISIBLE;
-
                         2 -> designer_bt.visibility = View.VISIBLE;
-
                         else -> designer_bt.visibility = View.INVISIBLE;
                     }
                 }else{designer_bt.visibility = View.INVISIBLE;
-                    print("실패!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
-                    Log.d("d","실패.........")
+//                    print("실패!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
+//                    Log.d("d","실패.........")
                 }
                 designer_bt.setOnClickListener(){
                     var intent= Intent(this, portfolio::class.java)
                     startActivity(intent)
                 }
             }
-
-
-
-
-
-
-
     }
 }

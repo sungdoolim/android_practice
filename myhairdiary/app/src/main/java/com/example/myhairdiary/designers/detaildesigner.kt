@@ -4,9 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myhairdiary.R
+import com.example.myhairdiary.designers.test.dimg_adpt_list
+import com.example.myhairdiary.designers.trace.Tracking
+import com.example.myhairdiary.designers.trace.TrackingMemo
 import com.example.myhairdiary.social.faceB
 import com.example.myhairdiary.social.insta
 import com.example.myhairdiary.social.navermaps
@@ -14,16 +16,15 @@ import com.example.myhairdiary.social.youtube
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_detaildesigner.*
-import kotlinx.android.synthetic.main.activity_portfolio.*
 
 class detaildesigner : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detaildesigner)
-        val age=intent.getStringExtra("age")?:"null"
+        val age=intent.getIntExtra("age",0)
         val name=intent.getStringExtra("name")?:"null"
-        val year=intent.getStringExtra("year")?:"null"
+        val year=intent.getIntExtra("year",0)
         val memo=intent.getStringExtra("memo")?:"null"
         val phone=intent.getStringExtra("phone")?:"null"
         val index : Int=Integer.parseInt(intent.getStringExtra("index")?:"0")
@@ -33,15 +34,17 @@ class detaildesigner : AppCompatActivity() {
         println(name)
         println(year)
         println(memo)
-        detailage.text=age;
+        detailage.text=age.toString();
         datailname.text=name;
-        detailyear.text=year;
+        detailyear.text=year.toString();
         detailmemo.text=memo;
         detailid.text=id;
         var firestore = FirebaseFirestore.getInstance()
-        selectList(firestore,id,index)// 리사이클러뷰 띄우기
-        //selectList2(firestore)
+        selectList(firestore,id,index)// 이미지뷰 띄우기
+       // selectList2(firestore)
 // 얘는 원래 recycler뷰를 적용하려했는데...
+
+
         gotonaver.setOnClickListener(){
             val intent = Intent(this, navermaps::class.java)
             intent.putExtra("id",id)
@@ -67,12 +70,19 @@ class detaildesigner : AppCompatActivity() {
             intent.putExtra("id",id)
             startActivity(intent)
         }
-        trace.setOnClickListener(){
+        tracephoto.setOnClickListener(){
             val intent = Intent(this, Tracking::class.java)
             intent.putExtra("id",id)
             intent.putExtra("index",index.toString())
             startActivity(intent)
         }
+        tracememo.setOnClickListener(){
+            val intent = Intent(this, TrackingMemo::class.java)
+            intent.putExtra("id",id)
+          //  intent.putExtra("index",index.toString())
+            startActivity(intent)
+        }
+
     }
     fun loadPhoto(downloadUrl : String,i :Int) {
         when(i){
@@ -81,6 +91,7 @@ class detaildesigner : AppCompatActivity() {
             2->  Glide.with(this).load(downloadUrl).into(testimgview2)
             3->  Glide.with(this).load(downloadUrl).into(testimgview3)
             4->  Glide.with(this).load(downloadUrl).into(testimgview4)
+            //   Glide.with(this).load(downloadUrl).into(DrawableImageViewTarget(testimgview4))
             5->  Glide.with(this).load(downloadUrl).into(testimgview5)
             6->  Glide.with(this).load(downloadUrl).into(testimgview6)
             7->  Glide.with(this).load(downloadUrl).into(testimgview7)

@@ -10,18 +10,22 @@ import android.os.Bundle
 import android.os.Environment
 import android.util.Log
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.example.myhairdiary.MainActivity
 import com.example.myhairdiary.R
+import com.example.myhairdiary.calendar.calist
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.Tasks
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_portfolio.*
 import java.io.*
 import java.net.URL
+import java.util.*
 import kotlin.collections.ArrayList
 
 class portfolio : AppCompatActivity() {
@@ -34,6 +38,32 @@ val GALLERY=0
         val pref=getSharedPreferences("ins",0)
         var sesid=pref.getString("id","null")
        // var permis=pref.getString("perm","null")
+        tractext.setOnClickListener(){
+            var builder=AlertDialog.Builder(this)
+            builder.setTitle("고객 사항???")
+            val li=LinearLayout(this)
+            li.setHorizontalGravity(1)
+
+            val et= EditText(this)
+            et.width=300
+            et.hint="customer id"
+
+            val et2= EditText(this)
+            et2.width=300
+            et2.hint="memo"
+            li.addView(et)
+            li.addView(et2)
+            builder.setView(li).setPositiveButton("확인"){
+                    dialogInterface,i->
+                var memo=et2.text
+                val customid=et.text
+                registerTracText(memo.toString(),customid.toString())
+            }.setNegativeButton("취소"){
+                    dialogInterface,i-> ""
+            }.show()
+
+
+        }
         port_home.setOnClickListener(){
             var intent= Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -87,6 +117,37 @@ load_photo.setOnClickListener(){
 
 
     }
+
+    fun registerTracText(memo:String="",customid:String=""){
+
+        var pref=getSharedPreferences("ins",0)
+        var sesid=pref.getString("id","")
+        var count=pref.getInt("feedcount",0)
+
+      var firestore=FirebaseFirestore.getInstance()
+        val docData = hashMapOf(
+            "id" to sesid,
+            "customid" to customid,
+            "memo" to memo,
+            "timestamp" to Timestamp(Date()),
+            "count" to count
+        )
+        var edit=pref.edit()
+        edit.putInt("feedcount",count+1)
+        edit.apply()
+
+        // 밑에 document를 공백으로 두면 임의의 아이디를 생성해서 추가함
+            firestore?.collection("hair_feed")?.document()?.set(docData)
+                .addOnCompleteListener {
+                    if(it.isSuccessful)
+                        print("create성공")
+                    //println(docData["dateExample"])
+                }
+
+
+    }
+
+
     inner class DownloadFileFromURL : AsyncTask<String?, String?, String?>() {
         override fun doInBackground(vararg p0: String?): String? {
             //file download path

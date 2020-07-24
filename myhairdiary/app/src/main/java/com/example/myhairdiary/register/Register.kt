@@ -15,53 +15,37 @@ class Register : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-
         val db=fireDB()
-//        var firestore = FirebaseFirestore.getInstance()
-//        selectList(firestore)
-       // db.selectList()
         register_bt.setOnClickListener(){
             var id=etid.getText()
             var name=etpw.getText()
             db.createData(id.toString(),name.toString())
-           // createData(firestore,id.toString(),pw.toString())
             var intent= Intent(this, MainActivity::class.java)
-
             startActivity(intent)
         }
-
         login_bt.setOnClickListener(){
             var intent= Intent(this, MainActivity::class.java)
             var id=etloginid.text
-
             val pref=getSharedPreferences("ins",0)
             var edit=pref.edit()
             edit.putString("id",id.toString())
             edit.apply()
-
             var firestore = FirebaseFirestore.getInstance()
             firestore?.collection("hair_diary").whereEqualTo("id",id.toString()).get()
                 .addOnCompleteListener {
-                    var userDTO=ArrayList<designer>()
-                    var len=0
                     if(it.isSuccessful){
                         for(dc in it.result!!.documents){
-
                             println("\nget test!!! : ${dc.getString("ttttt")}")
                             //  println("${len+1} : ${dc.toString()}")
                             edit.putString("perm",dc.toObject(designer::class.java)?.perm.toString())
                             edit.putString("index",dc.toObject(designer::class.java)?.index.toString())
-
                             edit.apply()
-
                         }
                     }else{
                         println("fail")
                     }
                 }
-
             startActivity(intent)
-
         }
     }
     private fun createData(firestore: FirebaseFirestore, a:String, b:String){// 실제 되는거 확인 했음

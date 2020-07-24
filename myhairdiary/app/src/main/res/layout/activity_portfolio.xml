@@ -86,6 +86,11 @@
         android:layout_height="wrap_content"
         android:text="photoup_custom"
         android:id="@+id/upload_photo_custom"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tractext"
+        android:id="@+id/tractext"/>
 </LinearLayout>
 
     <EditText

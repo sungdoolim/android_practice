@@ -1,13 +1,13 @@
-package com.example.myhairdiary.designers
+package com.example.myhairdiary.designers.trace
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.bumptech.glide.Glide
 import com.example.myhairdiary.R
+import com.example.myhairdiary.designers.designer
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import kotlinx.android.synthetic.main.activity_detaildesigner.*
 import kotlinx.android.synthetic.main.activity_tracking.*
 
 class Tracking : AppCompatActivity() {

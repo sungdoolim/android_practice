@@ -41,8 +41,13 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="photo"
-            android:id="@+id/trace"/>
+            android:text="tracphoto"
+            android:id="@+id/tracephoto"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="tracmemo"
+            android:id="@+id/tracememo"/>
     </LinearLayout>
 
 <LinearLayout
@@ -89,9 +94,10 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_launcher_foreground"
-            android:id="@+id/testimgview2"/></LinearLayout>
+            android:id="@+id/testimgview2"/>
+    </LinearLayout>
     <LinearLayout
-        android:layout_width="100dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <ImageView
@@ -99,6 +105,7 @@
             android:layout_height="100dp"
             android:src="@drawable/ic_launcher_foreground"
             android:id="@+id/testimgview3"/>
+
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -108,7 +115,8 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_launcher_foreground"
-            android:id="@+id/testimgview5"/></LinearLayout>
+            android:id="@+id/testimgview5"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

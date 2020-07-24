@@ -60,6 +60,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             var intent= Intent(this, testMain::class.java)
             startActivity(intent)
         }
+        nlogin.setOnClickListener(){
+
+            var intent= Intent(this, NLogin::class.java)
+            startActivity(intent)
+
+        }
     }
 
     override fun onNavigationItemSelected(p0: MenuItem): Boolean {

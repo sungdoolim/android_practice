@@ -20,9 +20,7 @@ class faceB : AppCompatActivity() {
         wvface.webChromeClient= WebChromeClient()
         val id=intent.getStringExtra("id")?:"null"
         readQueryWhereEqulToData(id)
-
         //wvface.loadUrl("https://www.facebook.com/profile.php?id=100011043121912")
-
     }
     public fun readQueryWhereEqulToData(id:String){
         println("read")
