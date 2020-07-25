@@ -93,26 +93,28 @@
         android:id="@+id/tractext"/>
 </LinearLayout>
 
-    <EditText
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/album_imageview"
         android:layout_width="match_parent"
+        android:layout_height="96dp" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <EditText
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:hint="del photo"
         android:id="@+id/delete_filename_edittext"/>
-
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="delete photo"
         android:id="@+id/delete_photo"/>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/album_imageview"
-        android:layout_width="match_parent"
-        android:layout_height="96dp" />
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:hint="load photo"
         android:id="@+id/load_filename_edittext"/>
 
     <Button
@@ -121,8 +123,9 @@
         android:text="load photo"
         android:id="@+id/load_photo"/>
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:hint="deletephoto"
         android:id="@+id/download_filename_edittext"/>
 
     <Button
@@ -130,4 +133,5 @@
         android:layout_height="wrap_content"
         android:text="download photo"
         android:id="@+id/download_photo"/>
+</LinearLayout>
 </LinearLayout>

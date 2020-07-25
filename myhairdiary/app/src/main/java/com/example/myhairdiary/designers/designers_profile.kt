@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myhairdiary.R
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 
 import kotlinx.android.synthetic.main.activity_designers_profile.*
 
@@ -26,12 +27,16 @@ class designers_profile : AppCompatActivity() {
 //        designerlist.adapter= designerAdapter(this,designerLi)
     }
     public fun selectList(firestore:FirebaseFirestore) {
+
         firestore?.collection("hair_diary").whereEqualTo("perm",1).get()
             .addOnCompleteListener {
                 var len=0
                 if(it.isSuccessful){
                     var userDTO=ArrayList<designer>()
                     for(dc in it.result!!.documents){
+
+
+
                         //  println("${len+1} : ${dc.toString()}")
                         dc.toObject(designer::class.java)?.let { it1 -> userDTO.add(it1) }
                         // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네

@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myhairdiary.R
+import com.google.firebase.storage.FirebaseStorage
 
 class designerAdapter (val context:Context, val designerList:ArrayList<designer>): RecyclerView.Adapter<designerAdapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -49,6 +51,10 @@ class designerAdapter (val context:Context, val designerList:ArrayList<designer>
         holder.memo.text=designerList.get(position).memo
 
         holder.dimg.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
+
+        Glide.with(context).load(designerList.get(position).dimgurl).into(holder.dimg)
+
+
     }
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val did=itemView.findViewById<TextView>(R.id.Did)
@@ -61,6 +67,9 @@ class designerAdapter (val context:Context, val designerList:ArrayList<designer>
 
 
     }
+
+
+
 
 
 }

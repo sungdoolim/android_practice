@@ -89,6 +89,8 @@ openAlbum()
 load_photo.setOnClickListener(){
     var storageRef = FirebaseStorage.getInstance().reference.child("images").child(load_filename_edittext.text.toString())
     storageRef.downloadUrl.addOnSuccessListener { uri ->
+        println("downloadurl : ${storageRef.downloadUrl.toString()}")
+        println("url : ${uri.toString()}")
         loadPhoto(uri.toString())
     }
 }
@@ -244,10 +246,20 @@ load_photo.setOnClickListener(){
         val pref=getSharedPreferences("ins",0)
         var edit=pref.edit()
        // edit.putString("customid","")
+
+
+
+
+
+
+
         storageRef.putFile(photoUri).addOnSuccessListener {
+            println("strageref : ${storageRef.toString()}")
+            println("photoUri : ${photoUri.toString()}")
             Toast.makeText(this, "Upload photo completed", Toast.LENGTH_SHORT).show()
             var map = mutableMapOf<String, Any>()
             if(customid=="") {
+
                 edit.putString("index", (index + 1).toString())
                 edit.apply()
                 map["index"] = index + 1
@@ -255,21 +267,42 @@ load_photo.setOnClickListener(){
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             var userDTO = ArrayList<designer>()
-                            for (dc in it.result!!.documents) {
-                                dc.toObject(designer::class.java)?.let { it1 -> userDTO.add(it1) }
-                                firestore?.collection("hair_diary")
-                                    .document(it.result!!.documents[0].id).update(map)
-                                    .addOnCompleteListener {
-                                        if (it.isSuccessful) {
-                                            print("update")
-                                        } else {
-                                            Log.d(
-                                                "fail",
-                                                "fail update........................................1"
-                                            )
-                                        }
+                            storageRef.downloadUrl.addOnSuccessListener { uri ->
+                                for (dc in it.result!!.documents) {
+                                    dc.toObject(designer::class.java)?.let { it1 ->
+                                        userDTO.add(it1)
                                     }
+                                    firestore?.collection("hair_diary")
+                                        .document(it.result!!.documents[0].id).update(map)
+                                        .addOnCompleteListener {
+                                            if (it.isSuccessful) {
+                                                print("update")
+                                            } else {
+                                                Log.d(
+                                                    "fail",
+                                                    "fail update........................................1"
+                                                )
+                                            }
+                                        }
+                                    if (index == 0){
+                                        map["dimgurl"] = uri.toString()
+                                    firestore?.collection("hair_diary")
+                                        .document(it.result!!.documents[0].id).update(map)
+                                        .addOnCompleteListener {
+                                            if (it.isSuccessful) {
+                                                print("update")
+                                            } else {
+                                                Log.d(
+                                                    "fail",
+                                                    "fail update........................................1"
+                                                )
+                                            }
+                                        }
+                                }
+                                }
                             }
+
+
                         } else {
                             Log.d("fail", "fail update........................................")
                             println("fail")
