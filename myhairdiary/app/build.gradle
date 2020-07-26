@@ -68,6 +68,4 @@ dependencies {
     compile files('libs/naveridlogin_android_sdk_4.2.6.aar')
 
 
-
-
 }

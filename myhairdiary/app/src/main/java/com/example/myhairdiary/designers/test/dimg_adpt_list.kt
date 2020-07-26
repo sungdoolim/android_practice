@@ -27,7 +27,8 @@ class dimg_adpt_list : AppCompatActivity() {
     public fun selectList(firestore:FirebaseFirestore,profileList: ArrayList<Dimgs>) {
         println("read")
         val pref=getSharedPreferences("ins",0)
-        var sesid=pref.getString("id","null")// 이거 뭐여
+     //   var sesid=pref.getString("id","null")// 이거 뭐여
+        var sesid=intent.getStringExtra("id")
         var max: Int = Integer.parseInt(pref.getString("index","0")!!)
       //  val profileList=ArrayList<Dimgs>()
         var url1=""

@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NLogin"></activity>
+        <activity android:name=".designers.ReView.write_review"></activity>
+        <activity android:name=".designers.ReView.Review" />
+        <activity android:name=".NLogin" />
         <activity android:name=".designers.trace.TrackingMemo" />
         <activity android:name=".testMain" />
         <activity android:name=".designers.trace.Tracking" />

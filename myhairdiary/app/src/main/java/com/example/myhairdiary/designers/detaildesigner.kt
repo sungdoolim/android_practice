@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import com.bumptech.glide.Glide
 import com.example.myhairdiary.R
+import com.example.myhairdiary.designers.ReView.Review
 import com.example.myhairdiary.designers.test.dimg_adpt_list
 import com.example.myhairdiary.designers.trace.Tracking
 import com.example.myhairdiary.designers.trace.TrackingMemo
@@ -28,6 +29,7 @@ class detaildesigner : AppCompatActivity() {
         val memo=intent.getStringExtra("memo")?:"null"
         val phone=intent.getStringExtra("phone")?:"null"
         val index : Int=Integer.parseInt(intent.getStringExtra("index")?:"0")
+        val reviewcount=intent.getIntExtra("reviewcount",-1)
         print("index : ! ${index}")
         val id=intent.getStringExtra("id")?:"null"
         println(age)
@@ -80,6 +82,13 @@ class detaildesigner : AppCompatActivity() {
             val intent = Intent(this, TrackingMemo::class.java)
             intent.putExtra("id",id)
           //  intent.putExtra("index",index.toString())
+            startActivity(intent)
+        }
+        review.setOnClickListener(){
+            val intent = Intent(this, Review::class.java)
+            intent.putExtra("id",id)
+            intent.putExtra("reviewcount",reviewcount)
+            //  intent.putExtra("index",index.toString())
             startActivity(intent)
         }
 

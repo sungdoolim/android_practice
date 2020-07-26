@@ -38,7 +38,9 @@ class designers_profile : AppCompatActivity() {
 
 
                         //  println("${len+1} : ${dc.toString()}")
-                        dc.toObject(designer::class.java)?.let { it1 -> userDTO.add(it1) }
+                        dc.toObject(designer::class.java)?.let { it1 ->
+                            println("reviewcount : ${it1.reviewcount}")
+                            userDTO.add(it1) }
                         // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                         len++
                     }

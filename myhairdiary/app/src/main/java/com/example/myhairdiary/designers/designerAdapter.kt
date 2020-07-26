@@ -33,6 +33,8 @@ class designerAdapter (val context:Context, val designerList:ArrayList<designer>
                 intent.putExtra("year",dl.year)
                 intent.putExtra("monthc",dl.monthc)
                 intent.putExtra("major",dl.major)
+                intent.putExtra("reviewcount",dl.reviewcount)
+
 
                 context.startActivity(intent)
 

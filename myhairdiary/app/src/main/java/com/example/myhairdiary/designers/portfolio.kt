@@ -267,7 +267,7 @@ load_photo.setOnClickListener(){
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             var userDTO = ArrayList<designer>()
-                            storageRef.downloadUrl.addOnSuccessListener { uri ->
+                            storageRef.downloadUrl.addOnSuccessListener { uri ->// 이거가 256번째 줄의 download 주소야!
                                 for (dc in it.result!!.documents) {
                                     dc.toObject(designer::class.java)?.let { it1 ->
                                         userDTO.add(it1)
@@ -356,11 +356,11 @@ else {
             var index= Integer.parseInt(pref.getString("index","0")!!)
             album_imageview.setImageURI(photoUri)
             if(customid!="") {
-            customidget(photoUri,sesid.toString()!!,index!!, customid.toString())
+                customidget(photoUri,sesid.toString()!!,index!!, customid.toString())
             }else {
                 uploadPhoto(photoUri, sesid!!, index!!, "", 0)
             }
-            }
+        }
     }
 
     public fun updateData(firestore:FirebaseFirestore,  monthc:Int=0,  major:String="",youtubeurl:String="",

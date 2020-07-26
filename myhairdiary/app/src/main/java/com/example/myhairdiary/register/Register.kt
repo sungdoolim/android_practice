@@ -24,7 +24,6 @@ class Register : AppCompatActivity() {
             startActivity(intent)
         }
         login_bt.setOnClickListener(){
-            var intent= Intent(this, MainActivity::class.java)
             var id=etloginid.text
             val pref=getSharedPreferences("ins",0)
             var edit=pref.edit()
@@ -41,11 +40,14 @@ class Register : AppCompatActivity() {
                             edit.putString("index",dc.toObject(designer::class.java)?.index.toString())
                             edit.apply()
                         }
+                        var intent= Intent(this, MainActivity::class.java)
+                        startActivity(intent)
                     }else{
                         println("fail")
                     }
                 }
-            startActivity(intent)
+
+
         }
     }
     private fun createData(firestore: FirebaseFirestore, a:String, b:String){// 실제 되는거 확인 했음
