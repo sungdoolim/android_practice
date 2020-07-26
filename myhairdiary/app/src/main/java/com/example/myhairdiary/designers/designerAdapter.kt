@@ -31,6 +31,9 @@ class designerAdapter (val context:Context, val designerList:ArrayList<designer>
                 intent.putExtra("phone",dl.phone)
                 intent.putExtra("index",dl.index.toString())
                 intent.putExtra("year",dl.year)
+                intent.putExtra("monthc",dl.monthc)
+                intent.putExtra("major",dl.major)
+
                 context.startActivity(intent)
 
               //  Toast.makeText(parent.context,"이름 :${profile.name}", Toast.LENGTH_SHORT).show()
@@ -49,6 +52,8 @@ class designerAdapter (val context:Context, val designerList:ArrayList<designer>
         holder.year.text=designerList.get(position).year.toString()
         holder.phone.text=designerList.get(position).phone
         holder.memo.text=designerList.get(position).memo
+        holder.major.text=designerList.get(position).major
+        holder.monthc.text= designerList.get(position).monthc.toString()
 
         holder.dimg.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
 
@@ -64,7 +69,8 @@ class designerAdapter (val context:Context, val designerList:ArrayList<designer>
         val age=itemView.findViewById<TextView>(R.id.Dage)
         val phone=itemView.findViewById<TextView>(R.id.Dphone)
         val year=itemView.findViewById<TextView>(R.id.Dyear)
-
+        val major=itemView.findViewById<TextView>(R.id.Dmajor)
+        val monthc=itemView.findViewById<TextView>(R.id.Dmonthc)
 
     }
 
