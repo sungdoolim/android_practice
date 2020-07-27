@@ -14,12 +14,12 @@ class Review : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_review)
 
-        var did=intent.getStringExtra("id")
+        var did=intent.getStringExtra("did")
         var reviewcount=intent.getIntExtra("reviewcount",-1)
         println("did : ${did} reviewcount : ${reviewcount}")
         writeReview.setOnClickListener(){
             val intent = Intent(this, write_review::class.java)
-            intent.putExtra("id",did)
+            intent.putExtra("did",did)
             intent.putExtra("reviewcount",reviewcount)
             startActivity(intent)
         }

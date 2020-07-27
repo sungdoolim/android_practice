@@ -33,7 +33,7 @@ class dimg_adpt_list : AppCompatActivity() {
         var kount=0
 
         for(i in 0..max-1){
-            var storageRef = FirebaseStorage.getInstance().reference.child("images")
+            var storageRef = FirebaseStorage.getInstance().reference.child("images").child(sesid.toString())
             println("세션 : ${sesid} : ${i}")
 
 
@@ -74,7 +74,7 @@ class dimg_adpt_list : AppCompatActivity() {
         println("read")
        // val pref=getSharedPreferences("ins",0)
      //   var sesid=pref.getString("id","null")// 이거 뭐여
-        var sesid=intent.getStringExtra("id")
+        var sesid=intent.getStringExtra("did")
         var max: Int = intent.getIntExtra("index",0)
       //  val profileList=ArrayList<Dimgs>()
         var url1=""
@@ -87,13 +87,9 @@ println("max : ${max}")
         var kount=0
         for(i in 0..max-1){
             var storageRef = FirebaseStorage.getInstance().reference.child("images")
+                .child(sesid.toString()).child(""+i.toString())
             println("세션 : ${sesid} : ${i}")
-            if(storageRef.child(sesid + "_." + i.toString())==null){
-                println("삭제된거 보이는 건가?")
-                return
-            }else{
-                storageRef = storageRef.child(sesid + "_." + i.toString())
-            }
+
             println(i)
             var  asy= storageRef.downloadUrl.addOnSuccessListener { uri ->
                //profileList.add(Dimgs(uri.toString()))
@@ -144,7 +140,7 @@ println("max : ${max}")
 
         val profileList=ArrayList<Dimgs>()
         var storageRef = FirebaseStorage.getInstance().reference.child("images")
-            .child(sesid + "_." + i.toString())
+            .child(sesid).child(i.toString())
         println(i)
         //   println("dwurl : ${storageRef.downloadUrl}")
         var asy= storageRef.downloadUrl.addOnSuccessListener { uri ->

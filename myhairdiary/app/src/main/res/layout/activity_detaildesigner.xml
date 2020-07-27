@@ -60,25 +60,33 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
     <Button
-    android:layout_width="wrap_content"
+    android:layout_width="80dp"
     android:layout_height="35dp"
-    android:text="예약하러 가기"
+    android:text="Naver"
     android:id="@+id/gotonaver"/>
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="35dp"
         android:text="faceBook"
         android:id="@+id/gotoface"/>
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="35dp"
         android:text="Instagram"
         android:id="@+id/gotoinsta"/>
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="35dp"
         android:text="Youtube"
         android:id="@+id/gotoyoutube"/>
+    <Button
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:text="kakao"
+        android:id="@+id/gotokakao"/>
+
+
+
 </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

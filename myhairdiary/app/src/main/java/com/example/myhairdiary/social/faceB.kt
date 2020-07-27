@@ -18,7 +18,7 @@ class faceB : AppCompatActivity() {
         wvface.settings.javaScriptEnabled=true
         wvface.webViewClient= WebViewClient()
         wvface.webChromeClient= WebChromeClient()
-        val id=intent.getStringExtra("id")?:"null"
+        val id=intent.getStringExtra("did")?:"null"
         readQueryWhereEqulToData(id)
         //wvface.loadUrl("https://www.facebook.com/profile.php?id=100011043121912")
     }

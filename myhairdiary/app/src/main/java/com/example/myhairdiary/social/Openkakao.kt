@@ -7,23 +7,18 @@ import android.webkit.WebViewClient
 import com.example.myhairdiary.R
 import com.example.myhairdiary.designers.designer
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_face_b.*
-import kotlinx.android.synthetic.main.activity_youtube.*
+import kotlinx.android.synthetic.main.activity_openkakao.*
 
-class youtube : AppCompatActivity() {
+class Openkakao : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_youtube)
+        setContentView(R.layout.activity_openkakao)
 
-        wvyoutube.settings.javaScriptEnabled=true
-        wvyoutube.webViewClient= WebViewClient()
-        wvyoutube.webChromeClient= WebChromeClient()
 
         val id=intent.getStringExtra("did")?:"null"
         readQueryWhereEqulToData(id)
-        //wvyoutube.loadUrl("https://www.youtube.com/channel/UC_7dp9NRfrnuWEZNEPZbYlA")
-
+        //wvinsta.loadUrl("https://www.instagram.com/gimseongmin4250/?hl=ko")
     }
     public fun readQueryWhereEqulToData(id:String){
         println("read")
@@ -34,7 +29,10 @@ class youtube : AppCompatActivity() {
                     for(dc in it.result!!.documents){
                         var userDTO =dc.toObject(designer::class.java)
                         println("success ${userDTO.toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
-                        wvyoutube.loadUrl(userDTO!!.youurl)
+
+
+                        wvkakaotext.text=userDTO!!.openkakaourl
+
                     }
                 }else{
                     println("fail")
@@ -42,5 +40,5 @@ class youtube : AppCompatActivity() {
             }
         println("read end")
     }
-    //https://www.youtube.com/channel/UC_7dp9NRfrnuWEZNEPZbYlA
+
 }

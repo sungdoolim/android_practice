@@ -19,7 +19,7 @@ class insta : AppCompatActivity() {
         wvinsta.webViewClient= WebViewClient()
         wvinsta.webChromeClient= WebChromeClient()
 
-        val id=intent.getStringExtra("id")?:"null"
+        val id=intent.getStringExtra("did")?:"null"
         readQueryWhereEqulToData(id)
         //wvinsta.loadUrl("https://www.instagram.com/gimseongmin4250/?hl=ko")
 

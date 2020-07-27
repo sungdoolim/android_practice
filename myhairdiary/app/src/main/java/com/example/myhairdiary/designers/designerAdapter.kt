@@ -24,7 +24,7 @@ class designerAdapter (val context:Context, val designerList:ArrayList<designer>
                 var dl: designer =designerList.get(curPos)
 
                 val intent = Intent(view.getContext(), detaildesigner::class.java)
-                intent.putExtra("id",dl.id)
+                intent.putExtra("did",dl.id)
                 intent.putExtra("age",dl.age)
                 intent.putExtra("memo",dl.memo)
                 intent.putExtra("name",dl.name)

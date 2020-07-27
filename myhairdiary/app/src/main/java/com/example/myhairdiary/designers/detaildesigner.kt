@@ -10,10 +10,7 @@ import com.example.myhairdiary.designers.ReView.Review
 import com.example.myhairdiary.designers.test.dimg_adpt_list
 import com.example.myhairdiary.designers.trace.Tracking
 import com.example.myhairdiary.designers.trace.TrackingMemo
-import com.example.myhairdiary.social.faceB
-import com.example.myhairdiary.social.insta
-import com.example.myhairdiary.social.navermaps
-import com.example.myhairdiary.social.youtube
+import com.example.myhairdiary.social.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_detaildesigner.*
@@ -31,7 +28,7 @@ class detaildesigner : AppCompatActivity() {
         val index : Int=Integer.parseInt(intent.getStringExtra("index")?:"0")
         val reviewcount=intent.getIntExtra("reviewcount",-1)
         print("index : ! ${index}")
-        val id=intent.getStringExtra("id")?:"null"
+        val did=intent.getStringExtra("did")?:"null"
         println(age)
         println(name)
         println(year)
@@ -40,54 +37,59 @@ class detaildesigner : AppCompatActivity() {
         datailname.text=name;
         detailyear.text=year.toString();
         detailmemo.text=memo;
-        detailid.text=id;
+        detailid.text=did;
         var firestore = FirebaseFirestore.getInstance()
-        selectList(firestore,id,index)// 이미지뷰 띄우기
+        selectList(firestore,did,index)// 이미지뷰 띄우기
        // selectList2(firestore)
 // 얘는 원래 recycler뷰를 적용하려했는데...
 
 
+        gotokakao.setOnClickListener(){
+            val intent = Intent(this, Openkakao::class.java)
+            intent.putExtra("did",did)
+            startActivity(intent)
+        }
         gotonaver.setOnClickListener(){
             val intent = Intent(this, navermaps::class.java)
-            intent.putExtra("id",id)
+            intent.putExtra("did",did)
             startActivity(intent)
         }
         gotoface.setOnClickListener(){
             val intent = Intent(this, faceB::class.java)
-            intent.putExtra("id",id)
+            intent.putExtra("did",did)
             startActivity(intent)
         }
         gotoyoutube.setOnClickListener(){
             val intent = Intent(this, youtube::class.java)
-            intent.putExtra("id",id)
+            intent.putExtra("did",did)
             startActivity(intent)
         }
         gotoinsta.setOnClickListener(){
             val intent = Intent(this, insta::class.java)
-            intent.putExtra("id",id)
+            intent.putExtra("did",did)
             startActivity(intent)
         }
         adpt_list.setOnClickListener(){
             val intent = Intent(this, dimg_adpt_list::class.java)
-            intent.putExtra("id",id)
+            intent.putExtra("did",did)
             intent.putExtra("index",index)
             startActivity(intent)
         }
         tracephoto.setOnClickListener(){
             val intent = Intent(this, Tracking::class.java)
-            intent.putExtra("id",id)
+            intent.putExtra("did",did)
             intent.putExtra("index",index.toString())
             startActivity(intent)
         }
         tracememo.setOnClickListener(){
             val intent = Intent(this, TrackingMemo::class.java)
-            intent.putExtra("id",id)
+            intent.putExtra("did",did)
           //  intent.putExtra("index",index.toString())
             startActivity(intent)
         }
         review.setOnClickListener(){
             val intent = Intent(this, Review::class.java)
-            intent.putExtra("id",id)
+            intent.putExtra("did",did)
             intent.putExtra("reviewcount",reviewcount)
             //  intent.putExtra("index",index.toString())
             startActivity(intent)
@@ -164,8 +166,8 @@ class detaildesigner : AppCompatActivity() {
         //println("read")
         val pref=getSharedPreferences("ins",0)
             for(i in 0..index-1){
-            var storageRef = FirebaseStorage.getInstance().reference.child("images")
-                .child(id + "_." + i.toString())
+            var storageRef = FirebaseStorage.getInstance().reference.child("images").child(id.toString())
+                .child("" + i.toString())
            // println(i)
           //  println("dwurl : ${storageRef.downloadUrl}")
             storageRef.downloadUrl.addOnSuccessListener { uri ->

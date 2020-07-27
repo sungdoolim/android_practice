@@ -37,6 +37,7 @@ val GALLERY=0
         setContentView(R.layout.activity_portfolio)
         val pref=getSharedPreferences("ins",0)
         var sesid=pref.getString("id","null")
+        println("sesid : ${sesid}")
        // var permis=pref.getString("perm","null")
         tractext.setOnClickListener(){
             var builder=AlertDialog.Builder(this)
@@ -104,6 +105,8 @@ load_photo.setOnClickListener(){
             }
         }
         modify.setOnClickListener(){
+            var openkakaourl=openkao.text.toString()
+            var region=region_edit.text.toString()
             var youtubeurl=youurl.text.toString()
             var facebookurl=faceurl.text.toString()
             var instagramurl=instaurl.text.toString()
@@ -112,9 +115,10 @@ load_photo.setOnClickListener(){
             val major=Modmajor.text
             val monthc=Integer.parseInt(Modmonthc.text.toString())
             val pref=getSharedPreferences("ins",0)
-            var sesid=pref.getString("id","null")
+            //var sesid=pref.getString("id","null")
             var firestore = FirebaseFirestore.getInstance()
-            updateData(firestore,monthc,major.toString(),youtubeurl,facebookurl,instagramurl,memo.toString(),Integer.parseInt(year.toString()),sesid.toString())
+            updateData(firestore,monthc,major.toString(),youtubeurl,facebookurl,instagramurl,
+                memo.toString(),Integer.parseInt(year.toString()),sesid.toString(),region,openkakaourl)
         }
 
 
@@ -238,12 +242,12 @@ load_photo.setOnClickListener(){
         val preff=getSharedPreferences("ins",0)
         var sesid=preff.getString("id","null")
        // var customcount:Long=0
-        var fileName = sesid + "_." + index// 파일 이름 지정 timestamp를 key로 해도...
+        var fileName = ""+index// 파일 이름 지정 timestamp를 key로 해도...
         if(customid!="") {
-            fileName = sesid +"_"+customid+ "_." + customcount// 파일 이름 지정 timestamp를 key로 해도...
+            fileName = ""+customid+ "_." + customcount// 파일 이름 지정 timestamp를 key로 해도...
         }
         else if(updatePhotourl.text.toString()!=""){
-            fileName = sesid + "_." + Integer.parseInt(updatePhotourl.text.toString())
+            fileName = ""+ Integer.parseInt(updatePhotourl.text.toString())
         }
         var storageRef = FirebaseStorage.getInstance().reference.child("images").child(sesid.toString()).child(fileName)
         val pref=getSharedPreferences("ins",0)
@@ -350,6 +354,7 @@ else {
             println("onAct  : ${customid}")
             var photoUri=data?.data!!
             var sesid=pref.getString("id","null")
+            println("sesid : ${sesid}")
             var index= Integer.parseInt(pref.getString("index","0")!!)
             album_imageview.setImageURI(photoUri)
             if(customid!="") {
@@ -361,7 +366,8 @@ else {
     }
 
     public fun updateData(firestore:FirebaseFirestore,  monthc:Int=0,  major:String="",youtubeurl:String="",
-                          facebookurl:String="", instaurl:String="",  memo:String="",  year:Int=0, sesid:String=""){// 잘됨
+                          facebookurl:String="", instaurl:String="",  memo:String="",
+                          year:Int=0, sesid:String="",region:String="",openkakaourl:String=""){// 잘됨
              firestore?.collection("hair_diary").whereEqualTo("id",sesid).get()
             .addOnCompleteListener {
                 if(it.isSuccessful){
@@ -400,6 +406,16 @@ else {
                                     }
                                 }
                         }
+                        if(openkakaourl!=""){
+                            map["youurl"]=openkakaourl
+                            firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
+                                .addOnCompleteListener {
+                                    if(it.isSuccessful){
+                                        //   print("update")
+                                    }else{
+                                        //   Log.d("fail","fail update........................................2")
+                                    }
+                                }}
                         if(youtubeurl!=""){
                         map["youurl"]=youtubeurl
                         firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
@@ -440,6 +456,16 @@ else {
                                  //   Log.d("fail","fail update........................................2")
                                 }
                             }}
+                        if(region!=""){
+                            map["region"]=region
+                            firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
+                                .addOnCompleteListener {
+                                    if(it.isSuccessful){
+                                        //     print("update")
+                                    }else{
+                                        //   Log.d("fail","fail update........................................2")
+                                    }
+                                }}
                     if(monthc!=0) {
                         map["monthc"] = monthc
                         firestore?.collection("hair_diary").document(it.result!!.documents[0].id)

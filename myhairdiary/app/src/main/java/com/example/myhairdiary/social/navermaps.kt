@@ -26,7 +26,7 @@ class navermaps : AppCompatActivity()  {//,OnMapReadyCallback
         wv.webChromeClient= WebChromeClient()
 
 
-        val id=intent.getStringExtra("id")?:"null"
+        val id=intent.getStringExtra("did")?:"null"
         readQueryWhereEqulToData(id)
 
        // val url="https://m.place.naver.com/hairshop/34883169/location?subtab=location"

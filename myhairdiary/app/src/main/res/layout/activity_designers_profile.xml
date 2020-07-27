@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".designers.designers_profile">
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="sort"
+        android:id="@+id/regionedit"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sortdesigner"
+        android:text="sort"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/designerlist"
         android:layout_width="match_parent"

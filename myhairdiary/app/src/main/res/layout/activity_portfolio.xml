@@ -48,6 +48,11 @@
             android:layout_height="50dp"
             android:id="@+id/Modmonthc"
             android:hint="월 평균 손님수 ??   "/>
+        <EditText
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/region_edit"
+            android:hint="region"/>
 
 
     </LinearLayout>
@@ -67,6 +72,11 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:id="@+id/instaurl"/>
+    <EditText
+        android:hint="instaurl"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/openkao"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
