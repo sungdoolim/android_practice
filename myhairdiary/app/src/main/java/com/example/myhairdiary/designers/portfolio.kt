@@ -87,7 +87,7 @@ openAlbum()
             }.show()
         }
 load_photo.setOnClickListener(){
-    var storageRef = FirebaseStorage.getInstance().reference.child("images").child(load_filename_edittext.text.toString())
+    var storageRef = FirebaseStorage.getInstance().reference.child("images").child(sesid+"_."+load_filename_edittext.text.toString())
     storageRef.downloadUrl.addOnSuccessListener { uri ->
         println("downloadurl : ${storageRef.downloadUrl.toString()}")
         println("url : ${uri.toString()}")
@@ -242,15 +242,12 @@ load_photo.setOnClickListener(){
         if(customid!="") {
             fileName = sesid +"_"+customid+ "_." + customcount// 파일 이름 지정 timestamp를 key로 해도...
         }
-        var storageRef = FirebaseStorage.getInstance().reference.child("images").child(fileName)
+        else if(updatePhotourl.text.toString()!=""){
+            fileName = sesid + "_." + Integer.parseInt(updatePhotourl.text.toString())
+        }
+        var storageRef = FirebaseStorage.getInstance().reference.child("images").child(sesid.toString()).child(fileName)
         val pref=getSharedPreferences("ins",0)
         var edit=pref.edit()
-       // edit.putString("customid","")
-
-
-
-
-
 
 
         storageRef.putFile(photoUri).addOnSuccessListener {

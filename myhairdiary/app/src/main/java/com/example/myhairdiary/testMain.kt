@@ -35,17 +35,10 @@ class testMain : AppCompatActivity() {
                 listResult.items.forEach { item ->
 
                     // All the items under listRef.
-                 //   Glide.with(this).load(item).into(test_image1)
-                    println("bucket : ${item.bucket}")
-                    println("parent : ${item.parent}")
-                    println("stream : ${item.stream}")
-                    println("url : ${item.downloadUrl}")
-                    println("name : ${item.name}")
-                    println("meta : ${item.metadata}")
-                    println("tostring : ${item.toString()}")
-                    println("path : ${item.path}")
-                    println("root : ${item.root}")
-                    println("storage : ${item.storage}")
+                    item.downloadUrl.addOnSuccessListener {
+                        Glide.with(this).load(it.toString()).into(test_image4)
+                    }
+
                 }
             }
             .addOnFailureListener {

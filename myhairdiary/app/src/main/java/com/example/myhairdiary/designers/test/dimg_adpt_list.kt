@@ -19,17 +19,63 @@ class dimg_adpt_list : AppCompatActivity() {
       //  designer_img_inter.selectList_interface(firestore,this, View(this))
         val profileList=ArrayList<Dimgs>()
         selectList(firestore,profileList)
-
+        //selectList2(firestore,profileList)
 
 
 
     }
+
+    public fun selectList2(firestore:FirebaseFirestore,profileList: ArrayList<Dimgs2>) {
+        println("read")
+        var sesid=intent.getStringExtra("id")
+        var max: Int = intent.getIntExtra("index",0)
+        println("max : ${max}")
+        var kount=0
+
+        for(i in 0..max-1){
+            var storageRef = FirebaseStorage.getInstance().reference.child("images")
+            println("세션 : ${sesid} : ${i}")
+
+
+            println(i)
+            var  asy= storageRef.downloadUrl.addOnSuccessListener {
+             //   if(it.)
+                println("uri ${it.toString()}")
+              profileList.add(Dimgs2(it.toString()))
+                println("${i} : ${profileList.size}")
+
+                if(kount==max-1){
+                    dimglistrv.setHasFixedSize(true)
+                    val mLayoutManager =  LinearLayoutManager(this);
+                    dimglistrv.layoutManager = mLayoutManager;
+                    dimglistrv.adapter=
+                        dimgAdapter2(this, profileList)
+                }
+                kount++
+            }
+
+
+//            Tasks.await(asy)
+        }
+
+//        var a="https://firebasestorage.googleapis.com/v0/b/flut-template.appspot.com/o/images%2F1234_.0?" +
+//                "alt=media&token=ab8a984f-0441-4d1b-92d9-980d514f3568"
+//        profileList.add(Dimgs2(a.toString()))
+//        println("for ${profileList.size} ")
+//        dimglistrv.setHasFixedSize(true)
+//        val mLayoutManager =  LinearLayoutManager(this);
+//        dimglistrv.layoutManager = mLayoutManager;
+//        dimglistrv.adapter=
+//            dimgAdapter2(this, profileList)
+    }
+
+
     public fun selectList(firestore:FirebaseFirestore,profileList: ArrayList<Dimgs>) {
         println("read")
-        val pref=getSharedPreferences("ins",0)
+       // val pref=getSharedPreferences("ins",0)
      //   var sesid=pref.getString("id","null")// 이거 뭐여
         var sesid=intent.getStringExtra("id")
-        var max: Int = Integer.parseInt(pref.getString("index","0")!!)
+        var max: Int = intent.getIntExtra("index",0)
       //  val profileList=ArrayList<Dimgs>()
         var url1=""
         var url2=""
@@ -41,7 +87,13 @@ println("max : ${max}")
         var kount=0
         for(i in 0..max-1){
             var storageRef = FirebaseStorage.getInstance().reference.child("images")
-                .child(sesid + "_." + i.toString())
+            println("세션 : ${sesid} : ${i}")
+            if(storageRef.child(sesid + "_." + i.toString())==null){
+                println("삭제된거 보이는 건가?")
+                return
+            }else{
+                storageRef = storageRef.child(sesid + "_." + i.toString())
+            }
             println(i)
             var  asy= storageRef.downloadUrl.addOnSuccessListener { uri ->
                //profileList.add(Dimgs(uri.toString()))

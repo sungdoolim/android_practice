@@ -70,6 +70,7 @@ class detaildesigner : AppCompatActivity() {
         adpt_list.setOnClickListener(){
             val intent = Intent(this, dimg_adpt_list::class.java)
             intent.putExtra("id",id)
+            intent.putExtra("index",index)
             startActivity(intent)
         }
         tracephoto.setOnClickListener(){
