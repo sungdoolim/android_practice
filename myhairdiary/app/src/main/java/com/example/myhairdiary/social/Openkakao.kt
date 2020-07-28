@@ -1,5 +1,7 @@
 package com.example.myhairdiary.social
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebChromeClient
@@ -29,10 +31,9 @@ class Openkakao : AppCompatActivity() {
                     for(dc in it.result!!.documents){
                         var userDTO =dc.toObject(designer::class.java)
                         println("success ${userDTO.toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
-
-
+                        intent =  Intent(Intent.ACTION_VIEW, Uri.parse(userDTO!!.openkakaourl));
                         wvkakaotext.text=userDTO!!.openkakaourl
-
+                        startActivity(intent);
                     }
                 }else{
                     println("fail")

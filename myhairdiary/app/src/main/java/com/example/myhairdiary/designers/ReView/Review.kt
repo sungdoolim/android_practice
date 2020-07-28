@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myhairdiary.R
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.android.synthetic.main.activity_review.*
 
 class Review : AppCompatActivity() {
@@ -29,16 +30,13 @@ class Review : AppCompatActivity() {
     }
     public fun selectList(firestore:FirebaseFirestore,did:String="") {
 
-        firestore?.collection("hair_review").whereEqualTo("designer_id",did).get()
+        firestore?.collection("hair_review").whereEqualTo("designer_id",did).orderBy("count", Query.Direction.DESCENDING).get()
             .addOnCompleteListener {
                 var len=0
                 if(it.isSuccessful){
                     println("review")
                     var userDTO=ArrayList<review_data>()
                     for(dc in it.result!!.documents){
-
-
-
                         //  println("${len+1} : ${dc.toString()}")
                         dc.toObject(review_data::class.java)?.let { it1 -> userDTO.add(it1) }
                         // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
@@ -48,12 +46,7 @@ class Review : AppCompatActivity() {
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     reviewList.setHasFixedSize(true)
                     reviewList.adapter=
-                        reviewAdapter(
-                            this,
-                            userDTO
-                        )
-                    //print("select list clear")
-                    len=0
+                        reviewAdapter(this, userDTO)
                 }else{
                     println("fail")
                 }

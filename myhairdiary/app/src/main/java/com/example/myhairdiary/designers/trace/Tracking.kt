@@ -18,7 +18,7 @@ class Tracking : AppCompatActivity() {
         var firestore=FirebaseFirestore.getInstance()
         var pref=getSharedPreferences("ins",0)
         var sesid=pref.getString("id","")
-        var id=intent.getStringExtra("id")
+        var id=intent.getStringExtra("did")
         var index=Integer.parseInt(intent.getStringExtra("index"))
         selectList(firestore,id,index,sesid!!)
     }
@@ -52,7 +52,7 @@ class Tracking : AppCompatActivity() {
                             var count=Integer.parseInt(dc.get(customid)!!.toString())
                             for(i in 0..count-1){
                                 var storageRef = FirebaseStorage.getInstance().reference.child("images")
-                                    .child(id +"_"+customid+ "_." + i.toString())
+                                    .child(id).child( customid).child(i.toString())
                                 println("exception? : ${storageRef.toString()}")
                                 println(i)
                                 println("dwurl : ${storageRef.downloadUrl}")

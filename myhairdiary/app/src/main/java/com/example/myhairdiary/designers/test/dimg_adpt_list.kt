@@ -72,16 +72,9 @@ class dimg_adpt_list : AppCompatActivity() {
 
     public fun selectList(firestore:FirebaseFirestore,profileList: ArrayList<Dimgs>) {
         println("read")
-       // val pref=getSharedPreferences("ins",0)
-     //   var sesid=pref.getString("id","null")// 이거 뭐여
         var sesid=intent.getStringExtra("did")
         var max: Int = intent.getIntExtra("index",0)
-      //  val profileList=ArrayList<Dimgs>()
-        var url1=""
-        var url2=""
-        var url3=""
-        // Dimgs(a,b,a),Dimgs(b,a,b),Dimgs(a,b,a)
-        var dimgar=ArrayList<String>()
+
 println("max : ${max}")
         var ard=ArrayList<String>()
         var kount=0
@@ -92,7 +85,6 @@ println("max : ${max}")
 
             println(i)
             var  asy= storageRef.downloadUrl.addOnSuccessListener { uri ->
-               //profileList.add(Dimgs(uri.toString()))
 
                 ard.add(uri.toString())
                 if(ard.size==3){

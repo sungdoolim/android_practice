@@ -1,5 +1,7 @@
 package com.example.myhairdiary.social
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebChromeClient
@@ -15,9 +17,11 @@ class insta : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_insta)
-        wvinsta.settings.javaScriptEnabled=true
-        wvinsta.webViewClient= WebViewClient()
-        wvinsta.webChromeClient= WebChromeClient()
+//        wvinsta.settings.javaScriptEnabled=true
+//        wvinsta.webViewClient= WebViewClient()
+//        wvinsta.webChromeClient= WebChromeClient()
+
+
 
         val id=intent.getStringExtra("did")?:"null"
         readQueryWhereEqulToData(id)
@@ -33,7 +37,10 @@ class insta : AppCompatActivity() {
                     for(dc in it.result!!.documents){
                         var userDTO =dc.toObject(designer::class.java)
                         println("success ${userDTO.toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
-                        wvinsta.loadUrl(userDTO!!.instaurl)
+                       // wvinsta.loadUrl(userDTO!!.instaurl)
+                        instatext.text=userDTO!!.instaurl
+                        intent =  Intent(Intent.ACTION_VIEW, Uri.parse(userDTO!!.instaurl));
+                        startActivity(intent);
                     }
                 }else{
                     println("fail")

@@ -88,7 +88,9 @@ openAlbum()
             }.show()
         }
 load_photo.setOnClickListener(){
-    var storageRef = FirebaseStorage.getInstance().reference.child("images").child(sesid+"_."+load_filename_edittext.text.toString())
+    var storageRef = FirebaseStorage.getInstance().reference.child("images")
+        .child(sesid.toString()).child(load_filename_edittext.text.toString())
+
     storageRef.downloadUrl.addOnSuccessListener { uri ->
         println("downloadurl : ${storageRef.downloadUrl.toString()}")
         println("url : ${uri.toString()}")
@@ -96,7 +98,8 @@ load_photo.setOnClickListener(){
     }
 }
         download_photo.setOnClickListener(){
-            var storageRef = FirebaseStorage.getInstance().reference.child("images").child(download_filename_edittext.text.toString())
+            var storageRef = FirebaseStorage.getInstance().reference.child("images")
+                .child(download_filename_edittext.text.toString())
             storageRef.downloadUrl.addOnSuccessListener { uri ->
                 DownloadFileFromURL().execute(uri.toString())
             }
@@ -243,13 +246,19 @@ load_photo.setOnClickListener(){
         var sesid=preff.getString("id","null")
        // var customcount:Long=0
         var fileName = ""+index// 파일 이름 지정 timestamp를 key로 해도...
+        var storageRef = FirebaseStorage.getInstance().reference.child("images")
         if(customid!="") {
-            fileName = ""+customid+ "_." + customcount// 파일 이름 지정 timestamp를 key로 해도...
+
+            fileName = ""+customcount// 파일 이름 지정 timestamp를 key로 해도...
+            storageRef=storageRef.child(sesid.toString()).child(customid).child(fileName)
         }
         else if(updatePhotourl.text.toString()!=""){
             fileName = ""+ Integer.parseInt(updatePhotourl.text.toString())
+           storageRef=storageRef.child(sesid.toString()).child(fileName)
+        }else {
+            storageRef=storageRef.child(sesid.toString()).child(fileName)
         }
-        var storageRef = FirebaseStorage.getInstance().reference.child("images").child(sesid.toString()).child(fileName)
+
         val pref=getSharedPreferences("ins",0)
         var edit=pref.edit()
 

@@ -13,7 +13,7 @@ class TrackingMemo : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tracking_memo)
-        var designerid=intent.getStringExtra("id")
+        var designerid=intent.getStringExtra("did")
         var pref=getSharedPreferences("ins",0)
         var sesid=pref.getString("id","")
 

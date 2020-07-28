@@ -1,5 +1,7 @@
 package com.example.myhairdiary.social
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebChromeClient
@@ -20,10 +22,10 @@ class navermaps : AppCompatActivity()  {//,OnMapReadyCallback
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navermaps)
-
-                wv.settings.javaScriptEnabled=true
-        wv.webViewClient= WebViewClient()
-        wv.webChromeClient= WebChromeClient()
+//
+//                wv.settings.javaScriptEnabled=true
+//        wv.webViewClient= WebViewClient()
+//        wv.webChromeClient= WebChromeClient()
 
 
         val id=intent.getStringExtra("did")?:"null"
@@ -60,7 +62,9 @@ class navermaps : AppCompatActivity()  {//,OnMapReadyCallback
                     for(dc in it.result!!.documents){
                         var userDTO =dc.toObject(designer::class.java)
                         println("success ${userDTO.toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
-                        wv.loadUrl(userDTO!!.naverurl)
+                      //  wv.loadUrl(userDTO!!.naverurl)
+                        intent =  Intent(Intent.ACTION_VIEW, Uri.parse(userDTO!!.naverurl));
+                        startActivity(intent);
                     }
                 }else{
                     println("fail")

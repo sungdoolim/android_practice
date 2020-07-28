@@ -1,5 +1,7 @@
 package com.example.myhairdiary.social
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebChromeClient
@@ -15,10 +17,10 @@ class youtube : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_youtube)
-
-        wvyoutube.settings.javaScriptEnabled=true
-        wvyoutube.webViewClient= WebViewClient()
-        wvyoutube.webChromeClient= WebChromeClient()
+//
+//        wvyoutube.settings.javaScriptEnabled=true
+//        wvyoutube.webViewClient= WebViewClient()
+//        wvyoutube.webChromeClient= WebChromeClient()
 
         val id=intent.getStringExtra("did")?:"null"
         readQueryWhereEqulToData(id)
@@ -34,7 +36,10 @@ class youtube : AppCompatActivity() {
                     for(dc in it.result!!.documents){
                         var userDTO =dc.toObject(designer::class.java)
                         println("success ${userDTO.toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
-                        wvyoutube.loadUrl(userDTO!!.youurl)
+                    //    wvyoutube.loadUrl(userDTO!!.youurl)
+
+                        intent =  Intent(Intent.ACTION_VIEW, Uri.parse(userDTO!!.youurl));
+                        startActivity(intent);
                     }
                 }else{
                     println("fail")

@@ -1,9 +1,11 @@
 package com.example.myhairdiary.designers
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myhairdiary.R
 import com.example.myhairdiary.designers.ReView.Review
@@ -40,34 +42,28 @@ class detaildesigner : AppCompatActivity() {
         detailid.text=did;
         var firestore = FirebaseFirestore.getInstance()
         selectList(firestore,did,index)// 이미지뷰 띄우기
+        selectList2(firestore)
        // selectList2(firestore)
 // 얘는 원래 recycler뷰를 적용하려했는데...
 
 
         gotokakao.setOnClickListener(){
-            val intent = Intent(this, Openkakao::class.java)
-            intent.putExtra("did",did)
-            startActivity(intent)
+//            val intent = Intent(this, Openkakao::class.java)
+//            intent.putExtra("did",did)
+//            startActivity(intent)
+            social(did,1)
         }
         gotonaver.setOnClickListener(){
-            val intent = Intent(this, navermaps::class.java)
-            intent.putExtra("did",did)
-            startActivity(intent)
+            social(did,2)
         }
         gotoface.setOnClickListener(){
-            val intent = Intent(this, faceB::class.java)
-            intent.putExtra("did",did)
-            startActivity(intent)
+            social(did,3)
         }
         gotoyoutube.setOnClickListener(){
-            val intent = Intent(this, youtube::class.java)
-            intent.putExtra("did",did)
-            startActivity(intent)
+            social(did,4)
         }
         gotoinsta.setOnClickListener(){
-            val intent = Intent(this, insta::class.java)
-            intent.putExtra("did",did)
-            startActivity(intent)
+            social(did,5)
         }
         adpt_list.setOnClickListener(){
             val intent = Intent(this, dimg_adpt_list::class.java)
@@ -96,6 +92,29 @@ class detaildesigner : AppCompatActivity() {
         }
 
     }
+    public fun social(id:String,num:Int){
+        var firestore = FirebaseFirestore.getInstance()
+        firestore?.collection("hair_diary").whereEqualTo("id",id).get()
+            .addOnCompleteListener {
+                if(it.isSuccessful){
+                    for(dc in it.result!!.documents){
+                        var userDTO =dc.toObject(designer::class.java)
+                        println("success ${userDTO.toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                        when(num){
+                            1-> intent =  Intent(Intent.ACTION_VIEW, Uri.parse(userDTO!!.openkakaourl));
+                            2-> intent =  Intent(Intent.ACTION_VIEW, Uri.parse(userDTO!!.naverurl));
+                            3-> intent =  Intent(Intent.ACTION_VIEW, Uri.parse(userDTO!!.faceurl));
+                            4-> intent =  Intent(Intent.ACTION_VIEW, Uri.parse(userDTO!!.youurl));
+                            else-> intent =  Intent(Intent.ACTION_VIEW, Uri.parse(userDTO!!.instaurl));
+                        }
+                        startActivity(intent);
+                    }
+                }else{
+                    println("fail")
+                }
+            }
+    }
+
     fun loadPhoto(downloadUrl : String,i :Int) {
         when(i){
             0->  Glide.with(this).load(downloadUrl).into(testimgview0)
@@ -120,34 +139,45 @@ class detaildesigner : AppCompatActivity() {
     }
     public fun selectList2(firestore:FirebaseFirestore) {
         println("read")
-        val pref=getSharedPreferences("ins",0)
-        var sesid=pref.getString("id","null")
-        var max: Int = Integer.parseInt(pref.getString("index","0")!!)
+        var sesid=intent.getStringExtra("did")
+        var max: Int = intent.getIntExtra("index",0)
         val profileList=ArrayList<Dimgs>()
         //    Dimgs(a,b,a),Dimgs(b,a,b),Dimgs(a,b,a)
         var url1=""
         var url2=""
         var url3=""
+        var ard=ArrayList<String>()
+        var kount=0
         for(i in 0..max-1){
             var storageRef = FirebaseStorage.getInstance().reference.child("images")
-                .child(sesid + "_." + i.toString())
+                .child(sesid).child(i.toString())
             println({"i : ${i},max : ${max}"})
-            Log.d("", "i : ${i},max : ${max}")
-           // println("dwurl : ${storageRef.downloadUrl}")
+
             storageRef.downloadUrl.addOnSuccessListener { uri ->
-                println("i:${i}")
-                when((i)%3){
-                    0->{url1=uri.toString()
-                        println(url1)
-                    }
-                    1->{url2=uri.toString()
-                        println(url2)
-                    }
-                    2->{url3=uri.toString()
-                    profileList.add(Dimgs(url1,url2,url3))
-                            ""}
-                  else->""
+                ard.add(uri.toString())
+                if(ard.size==3){
+                    profileList.add(Dimgs(ard[0],ard[1],ard[2]))
+                    ard.clear()
                 }
+                println("${i} : ${profileList.size}")
+                if(kount==max-1){
+                    if(ard.size!=0){
+                        var k=ard.size
+                        when(k){
+                            1-> profileList.add(Dimgs(ard[0],ard[0],ard[0]))
+                            2-> profileList.add(Dimgs(ard[0],ard[1],ard[1]))
+                            else->""
+                        }
+                        ard.clear()
+                        //  profileList.add(Dimgs(ard[0],ard[1],ard[2]))
+                    }
+                    detail_rv.setHasFixedSize(true)
+                    val mLayoutManager =  LinearLayoutManager(this);
+                    detail_rv.layoutManager = mLayoutManager;
+                    detail_rv.adapter=
+                        dimgAdapter(this, profileList)
+                }
+                kount++
             }
         }
         if((max-1)/3!=2){
@@ -163,17 +193,12 @@ class detaildesigner : AppCompatActivity() {
        // println("read end")
     }
     public fun selectList(firestore:FirebaseFirestore,id:String,index:Int) {
-        //println("read")
         val pref=getSharedPreferences("ins",0)
             for(i in 0..index-1){
-            var storageRef = FirebaseStorage.getInstance().reference.child("images").child(id.toString())
-                .child("" + i.toString())
-           // println(i)
-          //  println("dwurl : ${storageRef.downloadUrl}")
+            var storageRef = FirebaseStorage.getInstance().reference.child("images").child(id)
+                .child(i.toString())
             storageRef.downloadUrl.addOnSuccessListener { uri ->
-           //     println("dwrul2 : ${uri}")
                 loadPhoto(uri.toString(),i)
-            //    println("i:${i}")
             }
         }
     }
