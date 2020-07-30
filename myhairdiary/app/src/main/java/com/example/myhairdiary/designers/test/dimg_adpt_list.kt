@@ -80,7 +80,7 @@ println("max : ${max}")
         var kount=0
         for(i in 0..max-1){
             var storageRef = FirebaseStorage.getInstance().reference.child("images")
-                .child(sesid.toString()).child(""+i.toString())
+                .child(sesid).child(i.toString())
             println("세션 : ${sesid} : ${i}")
 
             println(i)

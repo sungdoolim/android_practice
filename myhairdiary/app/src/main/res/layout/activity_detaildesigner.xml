@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".designers.detaildesigner">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 <TextView
     android:layout_width="match_parent"
     android:layout_height="50dp"
@@ -119,7 +126,7 @@
         android:layout_height="100dp"
         android:src="@drawable/ic_launcher_foreground"
         android:id="@+id/testimgview1"/>
-        <ImageView
+        <VideoView
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_launcher_foreground"
@@ -196,5 +203,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />-->
-
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

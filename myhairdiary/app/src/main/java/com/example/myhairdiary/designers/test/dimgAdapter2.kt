@@ -41,7 +41,6 @@ class dimgAdapter2(val context: Context, val dimglist: ArrayList<Dimgs2>): Recyc
     override fun onBindViewHolder(holder: dimgAdapter2.CustomViewHolder, position: Int) {
         // holder.memo.setImageResource(1)
         holder.Dimg1.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
-
         Glide.with(context).load(dimglist.get(position).dimg1).into(holder.Dimg1)
 
     }

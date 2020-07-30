@@ -65,7 +65,7 @@ class designers_profile : AppCompatActivity() {
                         len++
                     }
                     designerlist.layoutManager=
-                        LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+                        LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
                     designerlist.setHasFixedSize(true)
                     designerlist.adapter=
                         designerAdapter(

@@ -195,7 +195,7 @@ load_photo.setOnClickListener(){
 
     fun openAlbum(customid:String="") {
         var intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
+        intent.type = "*/*"
         println("openalbum : ${customid}")
         val pref=getSharedPreferences("ins",0)
         val edit=pref.edit()

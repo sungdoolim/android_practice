@@ -58,7 +58,13 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
             var intent=Intent(this, MapsActivity::class.java)
             startActivity(intent)
         }
-        appbarbt3.setOnClickListener(){Toast.makeText(this,"appbar3",Toast.LENGTH_SHORT).show()}
+        appbarbt3.setOnClickListener(){
+            // 네이버 웹뷰
+
+            var intent=Intent(this, NMapsActivity::class.java)
+            startActivity(intent)
+
+        }
 
         fire.setOnClickListener(){
             var intent=Intent(this,fireActivity::class.java)

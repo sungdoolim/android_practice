@@ -53,8 +53,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             startActivity(intent)
         }
         naver_map.setOnClickListener(){
-            var intent= Intent(this, navermaps::class.java)
-            startActivity(intent)
+        //    var intent= Intent(this, NMAP::class.java)
+        //    startActivity(intent)
         }
         testmain.setOnClickListener(){
             var intent= Intent(this, testMain::class.java)

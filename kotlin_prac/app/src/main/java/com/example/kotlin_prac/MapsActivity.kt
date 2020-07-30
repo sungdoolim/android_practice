@@ -5,6 +5,8 @@ import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
@@ -22,9 +24,11 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
+import kotlinx.android.synthetic.main.activity_maps.*
 import org.jetbrains.anko.alert
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.yesButton
+import java.util.*
 
 
 private const val REQUEST_ACCESS_FINE_LOCATION = 1000
@@ -53,6 +57,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         locationInit()
+
     }
 
     // 위치 정보를 얻기 위한 각종 초기화
@@ -82,14 +87,26 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      * SupportMapFragment 안에 있습니다. 이 메소드는 한 번만 호출됩니다.
      * Google Play 서비스가 설치되고 앱으로 돌아 옵니다.
      */
+    object Constants {
+        const val SUCCESS_RESULT = 0
+        const val FAILURE_RESULT = 1
+        const val PACKAGE_NAME = "com.google.android.gms.location.sample.locationaddress"
+        const val RECEIVER = "$PACKAGE_NAME.RECEIVER"
+        const val RESULT_DATA_KEY = "${PACKAGE_NAME}.RESULT_DATA_KEY"
+        const val LOCATION_DATA_EXTRA = "${PACKAGE_NAME}.LOCATION_DATA_EXTRA"
+    }
     @SuppressLint("MissingPermission")
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap    // 3
+      //  val geocoder = Geocoder(this, Locale.getDefault())
 
+
+      //  val geocoder = Geocoder(this);
+        val geocoder = Geocoder(this, Locale.getDefault())
         // 시드니에 마커를 추가하고 카메라를 이동합니다     4
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+//        val sydney = LatLng(-34.0, 151.0)
+//        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
 
         // 권한 요청
         permissionCheck(cancel = {
@@ -97,6 +114,45 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         }, ok = {
             mMap.isMyLocationEnabled = true
         })
+        search_bt.setOnClickListener(){
+            var str=searchedit.text.toString()
+            println("str : ${str}")
+            var addressList: List<Address>? = null
+
+            while(addressList.isNullOrEmpty()) {
+                print("i")
+                addressList = geocoder.getFromLocationName(str, 1)
+                println("null : ${addressList.isNullOrEmpty()}")
+            }
+            println("null : ${addressList.isNullOrEmpty()}")
+            println("size : ${addressList?.size}")// 최대 검색 결과 개수
+            System.out.println(addressList?.get(0).toString());
+            val splitStr =
+                addressList!![0].toString().split(",").toTypedArray()
+            val address = splitStr[0]
+                .substring(splitStr[0].indexOf("\"") + 1, splitStr[0].length - 2) // 주소
+            val latitude =
+                splitStr[10].substring(splitStr[10].indexOf("=") + 1) // 위도
+
+            val longitude =
+                splitStr[12].substring(splitStr[12].indexOf("=") + 1) // 경도
+            val point =
+                LatLng(latitude.toDouble(), longitude.toDouble())
+            val mOptions2 = MarkerOptions()
+            mOptions2.title("search result")
+            mOptions2.snippet(address)
+            mOptions2.position(point)
+            // 마커 추가
+            // 마커 추가
+            mMap.addMarker(mOptions2)
+            // 해당 좌표로 화면 줌
+            // 해당 좌표로 화면 줌
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(point, 15f))
+            val sydney =
+                LatLng(-34.0, 151.0)
+            mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        }
     }
 
     override fun onResume() {
@@ -201,5 +257,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         }
     }
+
 
 }

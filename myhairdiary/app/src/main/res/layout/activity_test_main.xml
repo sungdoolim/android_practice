@@ -10,19 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <ImageView
+        <VideoView
             android:layout_width="135dp"
             android:layout_height="135dp"
             android:id="@+id/test_image1"
             android:src="@drawable/ic_launcher_foreground"
             />
-        <ImageView
+        <VideoView
             android:layout_width="135dp"
             android:layout_height="135dp"
             android:id="@+id/test_image2"
             android:src="@drawable/ic_launcher_foreground"
             />
-        <ImageView
+        <VideoView
             android:layout_width="135dp"
             android:layout_height="135dp"
             android:id="@+id/test_image3"
@@ -33,19 +33,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <ImageView
+        <VideoView
             android:layout_width="135dp"
             android:layout_height="135dp"
             android:id="@+id/test_image4"
             android:src="@drawable/ic_launcher_foreground"
             />
-        <ImageView
+        <VideoView
             android:layout_width="135dp"
             android:layout_height="135dp"
             android:id="@+id/test_image5"
             android:src="@drawable/ic_launcher_foreground"
             />
-        <ImageView
+        <VideoView
             android:layout_width="135dp"
             android:layout_height="135dp"
             android:id="@+id/test_image6"

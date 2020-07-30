@@ -5,6 +5,9 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+
+import android.widget.VideoView
+import android.widget.MediaController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myhairdiary.R
@@ -16,6 +19,7 @@ import com.example.myhairdiary.social.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_detaildesigner.*
+import java.io.File
 
 class detaildesigner : AppCompatActivity() {
 
@@ -119,7 +123,24 @@ class detaildesigner : AppCompatActivity() {
         when(i){
             0->  Glide.with(this).load(downloadUrl).into(testimgview0)
             1->  Glide.with(this).load(downloadUrl).into(testimgview1)
-            2->  Glide.with(this).load(downloadUrl).into(testimgview2)
+            2-> {
+                var mediaController= MediaController(this)
+                var v=findViewById<VideoView>(R.id.testimgview2)
+             //   mediaController.setAnchorView(testimgview2)
+                v.setMediaController(mediaController)
+                var url=Uri.parse(downloadUrl+".mp4")
+                println("url : ${url}")
+                v.setVideoURI(url)
+                v.requestFocus()
+                v.start()
+
+
+
+
+
+             //   Glide.with(this).load(Uri.fromFile(File(downloadUrl))).into(testimgview2)
+
+            }
             3->  Glide.with(this).load(downloadUrl).into(testimgview3)
             4->  Glide.with(this).load(downloadUrl).into(testimgview4)
             //   Glide.with(this).load(downloadUrl).into(DrawableImageViewTarget(testimgview4))
@@ -197,7 +218,9 @@ class detaildesigner : AppCompatActivity() {
             for(i in 0..index-1){
             var storageRef = FirebaseStorage.getInstance().reference.child("images").child(id)
                 .child(i.toString())
+
             storageRef.downloadUrl.addOnSuccessListener { uri ->
+
                 loadPhoto(uri.toString(),i)
             }
         }
