@@ -1,5 +1,12 @@
 kotlin android
 
+키스토어
+staris / tkdlek
+지역= seoul
+업체 staris
+
+
+
 // 만들면 일단 ㅔ러부터 나는데...
 gradle-wrapper.properties :
 distributionUrl=https\://services.gradle.org/distributions/gradle-6.4.1-all.zip

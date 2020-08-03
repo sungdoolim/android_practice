@@ -7,8 +7,10 @@ import android.view.MenuItem
 import com.example.myhairdiary.calendar.EditActivity
 import com.example.myhairdiary.calendar.mainpage
 import com.example.myhairdiary.designers.designers_profile
-import com.example.myhairdiary.social.navermaps
 import com.example.myhairdiary.register.Register
+import com.example.myhairdiary.test.Grid_Test
+import com.example.myhairdiary.test.NLogin
+import com.example.myhairdiary.test.testMain
 import com.google.android.material.navigation.NavigationView
 
 
@@ -65,6 +67,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             var intent= Intent(this, NLogin::class.java)
             startActivity(intent)
 
+        }
+        gridviewtest.setOnClickListener(){
+            var intent= Intent(this, Grid_Test::class.java)
+            startActivity(intent)
         }
     }
 

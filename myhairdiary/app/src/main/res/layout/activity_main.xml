@@ -63,23 +63,41 @@
                 android:layout_height="wrap_content"
                 android:text="naver_map" />
 
-            <Button
-                android:id="@+id/Rcalendar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Rcalendar" />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/testmain"
-                android:text="testmain"/>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/nlogin"
-                android:text="nlogin"/>
+
 
                 </LinearLayout>
+
+            </HorizontalScrollView>
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/Rcalendar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rcalendar" />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/testmain"
+                        android:text="testmain"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/nlogin"
+                        android:text="nlogin"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/gridviewtest"
+                        android:text="grid"/>
+
+                </LinearLayout>
+
 
             </HorizontalScrollView>
 

@@ -1,4 +1,4 @@
-package com.example.myhairdiary
+package com.example.myhairdiary.test
 
 import android.net.wifi.WifiConfiguration.AuthAlgorithm.strings
 import android.os.AsyncTask
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myhairdiary.R
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import kotlinx.android.synthetic.main.activity_n_login.*

@@ -1,14 +1,11 @@
-package com.example.myhairdiary
+package com.example.myhairdiary.test
 
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.MediaController
-import com.bumptech.glide.Glide
-import com.google.firebase.ktx.Firebase
+import com.example.myhairdiary.R
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
-import kotlinx.android.synthetic.main.activity_detaildesigner.*
 import kotlinx.android.synthetic.main.activity_test_main.*
 
 class testMain : AppCompatActivity() {

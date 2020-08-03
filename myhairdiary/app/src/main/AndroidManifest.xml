@@ -16,13 +16,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NMAP"></activity>
+        <activity android:name=".test.ImageActivity"></activity>
+        <activity android:name=".test.Grid_Test" />
+       <!-- <activity android:name=".NMAP" />-->
         <activity android:name=".social.Openkakao" />
         <activity android:name=".designers.ReView.write_review" />
         <activity android:name=".designers.ReView.Review" />
-        <activity android:name=".NLogin" />
+        <activity android:name=".test.NLogin" />
         <activity android:name=".designers.trace.TrackingMemo" />
-        <activity android:name=".testMain" />
+        <activity android:name=".test.testMain" />
         <activity android:name=".designers.trace.Tracking" />
         <activity
             android:name=".calendar.CalbasicActivity"
