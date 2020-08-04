@@ -3,17 +3,16 @@ package com.example.myhairdiary.test
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.myhairdiary.R
 import com.google.android.gms.tasks.Task
-import com.google.android.gms.tasks.Tasks
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import kotlinx.android.synthetic.main.activity_grid__test.*
@@ -39,11 +38,16 @@ class Grid_Test : AppCompatActivity() {
 
     }
 
-    internal class MyAdapter(context: Context, layout: Int, imgurl: ArrayList<String>) :
-        BaseAdapter() {
+    internal class MyAdapter(
+        context: Context,
+        layout: Int,
+        imgurl: ArrayList<String>,
+        tvurl: ArrayList<String>
+    ) : BaseAdapter() {
         var context: Context
         var layout: Int
         var imgurl: ArrayList<String>
+        var tvurl: ArrayList<String>
         var inf: LayoutInflater
 
 
@@ -68,10 +72,12 @@ class Grid_Test : AppCompatActivity() {
             if (convertView == null) convertView = inf.inflate(layout, null)
 //            val iv =
 //                convertView!!.findViewById<View>(R.id.imV) as ImageView
-         //   iv.setImageResource(img[position])
+            //   iv.setImageResource(img[position])
             val iv=convertView!!.findViewById<ImageView>(R.id.imV)
+            val tv=convertView!!.findViewById<TextView>(R.id.tv)
+            tv.text=tvurl[position].toString()
             Glide.with(context).load(imgurl[position]).into(iv)
-           // iv.setImageResource(imgurl[position])
+            // iv.setImageResource(imgurl[position])
             return convertView
         }
 
@@ -79,6 +85,7 @@ class Grid_Test : AppCompatActivity() {
             this.context = context
             this.layout = layout
             this.imgurl = imgurl
+            this.tvurl = tvurl
             inf = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         }
 
@@ -87,14 +94,15 @@ class Grid_Test : AppCompatActivity() {
     public fun selectList(id:String, index:Int) {
 
         var imgurl=ArrayList<String>()
+        var tvurl=ArrayList<String>()
         var kount=0
         for(i in 0..index-1){
 
             println("i : ${i}")
             var storageRef = FirebaseStorage.getInstance().reference.child("images").child(id)
                 .child(i.toString())
-                var k=selec(kount,imgurl,storageRef,index)
-            Tasks.await(k)
+                var k=selec(kount,imgurl,tvurl,storageRef,index)
+//            Tasks.await(k)
             println("k : ${kount}")
             kount++
 
@@ -104,13 +112,14 @@ class Grid_Test : AppCompatActivity() {
 
 
     }
-    public fun selec(kount:Int,imgurl:ArrayList<String>,storageRef:StorageReference,index:Int): Task<Uri> {
+    public fun selec(kount:Int,imgurl:ArrayList<String>,tvurl:ArrayList<String>,storageRef:StorageReference,index:Int): Task<Uri> {
 
 
 
         return storageRef.downloadUrl.addOnSuccessListener { uri ->
             //loadPhoto(uri.toString(),i)
             imgurl.add(uri.toString())
+            tvurl.add(uri.toString())
            // println("\n${i}:${kount}:${uri.toString()}")
 println("kount :  ${kount}  i:  ${index} ")
             if(kount==index-1) {
@@ -118,7 +127,7 @@ println("kount :  ${kount}  i:  ${index} ")
                 var adapter = MyAdapter(
                     applicationContext,
                     R.layout.grid_image,  // GridView 항목의 레이아웃 row.xml
-                    imgurl
+                    imgurl,tvurl
                 ) // 데이터
 
                 gridView1.adapter = adapter

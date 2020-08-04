@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="style">
+        <item>""</item>
+        <item>댄디컷</item>
+        <item>리젠트컷</item>
+        <item>스왓컷</item>
+        <item>크롭컷</item>
+        <item>포머드</item>
+        <item>쉼표머리</item>
+    </string-array>
+
+</resources>

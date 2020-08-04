@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="len">
+        <item>""</item>
+        <item>긴</item>
+        <item>짧은</item>
+        <item>중간</item>
+    </string-array>
+
+</resources>

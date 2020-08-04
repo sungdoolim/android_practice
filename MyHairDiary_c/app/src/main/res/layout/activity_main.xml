@@ -5,7 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="horizontal">
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
     <EditText
         android:layout_width="wrap_content"
@@ -44,7 +48,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="로그인"
-        android:id="@+id/login_bt"/>
+        android:id="@+id/login_bt"/></LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="profilephoto"
+        android:id="@+id/profilephoto"/>
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@color/cardview_dark_background"
+        android:id="@+id/album_imageview"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="그냥 사진 올리기"
+        android:id="@+id/upphoto"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="다이어리 사진 올리기"
+        android:id="@+id/upphoto_customer"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dlist"
+        android:text="디자이너 리스트"/>
+
 
 
 </LinearLayout>

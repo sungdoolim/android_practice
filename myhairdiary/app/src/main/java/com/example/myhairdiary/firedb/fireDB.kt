@@ -19,10 +19,8 @@ class fireDB(){
     }
     public fun selectList() {
         println("read")
-
         firestore?.collection("hair_diary").get()
             .addOnCompleteListener {
-
                 var len=0
                 if(it.isSuccessful){
                     var userDTO=ArrayList<designer>()

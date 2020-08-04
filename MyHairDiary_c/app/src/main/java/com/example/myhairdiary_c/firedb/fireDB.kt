@@ -1,11 +1,17 @@
 package com.example.myhairdiary_c.firedb
 
+import android.content.Context
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myhairdiary_c.designers.designer
 import com.example.myhairdiary_c.designers.designer_inter
+import com.example.myhairdiary_c.designers.photourl
 import com.google.firebase.firestore.FirebaseFirestore
 
-class fireDB(){
+class fireDB(parent :Context){
     var firestore = FirebaseFirestore.getInstance()
+    var parent=parent
+
+
 
     public fun createData( a:String, b:String){// 실제 되는거 확인 했음
         var userDTO=
@@ -17,6 +23,7 @@ class fireDB(){
                     print("create성공")
             }
     }
+
     public fun selectList() {
         println("read")
 
@@ -81,6 +88,48 @@ class fireDB(){
                     print("update")
                 }
             }
+    }
+
+    public fun updateData_one(filed:String,value:String,id:String){// 잘됨
+        var map= mutableMapOf<String,Any>()
+        map[filed] =value
+        firestore?.collection("hair_diary").whereEqualTo("id",id).get()
+            .addOnCompleteListener {
+                if(it.isSuccessful){
+                    firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
+                }
+            }
+    }
+    public fun updateData_oneInt(filed:String,value:Int,id:String){// 잘됨
+        var map= mutableMapOf<String,Any>()
+        map[filed] =value
+        firestore?.collection("hair_diary").whereEqualTo("id",id).get()
+            .addOnCompleteListener {
+                if(it.isSuccessful){
+                    firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
+                }
+            }
+    }
+    public fun insert_onephoto(
+        url: String = "",
+        id: String = "",
+        pcount: Int = -1,
+        name: String = "",
+        style: String = "",
+        length: String="",
+        gender:String=""
+    ){
+       // val url:String="",val id:String="",val pcount:Int=-1,val name:String=""
+        var userDTO=
+            photourl(url,id,pcount,name,style,length,gender)
+
+        firestore?.collection("hair_photo")?.document()?.set(userDTO)
+            .addOnCompleteListener {
+                if(it.isSuccessful)
+                    print("create성공")
+            }
+        updateData_oneInt("index",pcount+1,id)
+
     }
     public fun deleteData() {// 잘됨
         firestore?.collection("baby").document("document1").delete()
