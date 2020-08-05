@@ -45,21 +45,34 @@
                     android:layout_height="47dp"
                     android:src="@drawable/ic_launcher_foreground"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
 
+<!--                <EditText-->
+<!--                    android:id="@+id/editSearch"-->
+<!--                    android:layout_width="299dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:layout_marginTop="68dp"-->
+<!--                    android:background="@drawable/border"-->
+<!--                    android:clickable="true"-->
+<!--                    android:hint="검색하세요"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintHorizontal_bias="0.363"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
 
-                <EditText
+                <androidx.appcompat.widget.SearchView
                     android:id="@+id/editSearch"
                     android:layout_width="299dp"
                     android:layout_height="40dp"
-                    android:layout_marginTop="68dp"
+                    android:layout_marginTop="44dp"
                     android:background="@drawable/border"
                     android:clickable="true"
                     android:hint="검색하세요"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.363"
+                    app:layout_constraintHorizontal_bias="0.431"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -74,6 +87,15 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toEndOf="@+id/editSearch"
                     app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+                <TextView
+                    android:id="@+id/recent"
+                    android:layout_width="87dp"
+                    android:layout_height="51dp"
+                    android:layout_marginStart="60dp"
+                    tools:text="a\nb\nc\n"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editSearch" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

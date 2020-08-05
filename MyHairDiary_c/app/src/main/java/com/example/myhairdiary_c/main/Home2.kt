@@ -1,11 +1,14 @@
 package com.example.myhairdiary_c.main
 
+import android.app.SearchManager
 import android.content.Intent
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.SearchView
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.MainActivity
@@ -15,13 +18,11 @@ import com.example.myhairdiary_c.designers.designerAdapter
 import com.example.myhairdiary_c.designers.photourl
 import com.example.myhairdiary_c.firedb.album
 import com.example.myhairdiary_c.firedb.fireDB
-import com.example.myhairdiary_c.style.Style_Search
-
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
-
 import kotlinx.android.synthetic.main.activity_home.botnav
 import kotlinx.android.synthetic.main.activity_home2.*
+
 
 class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelectedListener{
 
@@ -49,16 +50,19 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
             Glide.with(this).load(profile).into(User_Profile_Photo)
 
         println("url : ${profile}")
-        editSearch.hint="ddfsefd"
+
         if(pref.getString("id","")!=""){
         User_greeting.text="환영합니다 "+pref.getString("id","")+" 님"
         }
+//        editSearch.hint="ddfsefd"
         search_bt.setOnClickListener(){
-            var key=editSearch.text.toString()
-            var intent= Intent(this, Style_Search::class.java)
-            intent.putExtra("style",key)
+//            var key=editSearch.text.toString()
+//            var intent= Intent(this, Style_Search::class.java)
+//            intent.putExtra("style",key)
             startActivity(intent)
         }
+
+
 
         settings.setOnClickListener(){
             var intent= Intent(this, MainActivity::class.java)
@@ -170,4 +174,5 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
             }
     }
 }
+
 
