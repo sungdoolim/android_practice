@@ -13,6 +13,15 @@ class home: Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        var param= arguments?.getString("param")
+        val fragment: Fragment = home() // Fragment 생성
+
+        val bundle=Bundle()
+
+        bundle.putString("param2", "dfsef") // Key, Value
+
+        fragment.arguments = bundle
+
         return inflater.inflate(R.layout.home,container,false)
 
     }

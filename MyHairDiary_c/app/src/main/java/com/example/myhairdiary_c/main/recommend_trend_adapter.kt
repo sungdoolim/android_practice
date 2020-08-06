@@ -40,15 +40,23 @@ class recommend_trend_adapter (val context: Context, val designerList:ArrayList<
 //                println("${dl.name}")
 
                 // 정보 다 받을수 있음
-                if(whatodo==0){
-                    val intent = Intent(view.getContext(), detailedRecommend::class.java)
-                    context.startActivity(intent)
 
-                }else{
-                    val intent = Intent(view.getContext(), detailedTrend::class.java)
-                    context.startActivity(intent)
+                when(whatodo){
+                    1->{
+                        val intent = Intent(view.getContext(), detailedTrend::class.java)
+                        context.startActivity(intent)
+                    }
+                    2->{
 
                 }
+                    3->{
+
+                }
+                    else->{
+                        val intent = Intent(view.getContext(), detailedRecommend::class.java)
+                        context.startActivity(intent)
+                    }
+                }//when
 
             }
         }

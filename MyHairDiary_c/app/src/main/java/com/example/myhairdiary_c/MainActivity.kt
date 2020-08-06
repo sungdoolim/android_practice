@@ -218,23 +218,15 @@ var db=fireDB(this)
         if(id==""){return ;}
         var storageRef = FirebaseStorage.getInstance().reference.child("images")
         storageRef=storageRef.child(id).child(name)//Timestamp(java.util.Date()).toString()
-
-
         storageRef.putFile(photoUri).addOnSuccessListener {
             storageRef.downloadUrl.addOnSuccessListener { uri->
                 //url:String="",id:String="",pcount:Int=-1,name:String="")
                 db.insert_onephoto(uri.toString(),id,index,name,style,length,gender)
                 edit.putInt("index",index+1)
                 edit.apply()
-
             }
             Toast.makeText(this, "url? :${it.toString()}", Toast.LENGTH_LONG).show()
-
-
             //
         }
-
     }
-
-
 }

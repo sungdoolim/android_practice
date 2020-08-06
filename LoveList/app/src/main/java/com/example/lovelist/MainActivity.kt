@@ -1,28 +1,53 @@
 package com.example.lovelist
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myhairdiary_c.frag.home
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.home.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity()  , BottomNavigationView.OnNavigationItemSelectedListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        selectList()
-        insertone.setOnClickListener(){
+        supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+        selectList(this)
+        insertone?.setOnClickListener(){
             var intent= Intent(this, insertpage::class.java)
-
             startActivity(intent)
-
         }
+
+        val fragment: Fragment = home() // Fragment 생성
+        val bundle=Bundle()
+        bundle.putString("param", "dfsef") // Key, Value
+        fragment.arguments = bundle
+
+        botnav.setOnNavigationItemSelectedListener(this)
     }
-    fun selectList(){
-        val firestore=FirebaseFirestore.getInstance()
+
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+                    R.id.bottom1->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()// fragment로 화면 전환 bottomnavi
+//            R.id.bottom2->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+//            R.id.bottom3->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+//            R.id.bottom4->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+//            R.id.bottom5->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+        else->""}
+        return true
+    }
+    fun selectList(container: Context){
+        val firestore= FirebaseFirestore.getInstance()
         firestore?.collection("ourlist").orderBy("index").get()
             .addOnCompleteListener {
                 if(it.isSuccessful){
@@ -37,11 +62,11 @@ class MainActivity : AppCompatActivity() {
                     // recommend_designer_list 는 id로 얻어온 recyclerview 임
 
                     listrv.layoutManager=
-                        LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+                        LinearLayoutManager(container, LinearLayoutManager.HORIZONTAL,false)
                     listrv.setHasFixedSize(true)
                     listrv.adapter=
                         list_adapter(
-                            this,
+                            container,
                             userDTO
                         )
                 }else{

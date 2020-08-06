@@ -34,18 +34,12 @@ class photorvAdapter (val context: Context, val designerList:ArrayList<photourl>
     }
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         // holder.memo.setImageResource(1)
-
+       // designerList.get(position)
         holder.name.text=designerList.get(position).name
         holder.did.text=designerList.get(position).id
-
         holder.memo.text=designerList.get(position).memo
-
-
         holder.dimg.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
-
        // Glide.with(context).load(designerList.get(position).profile).into(holder.dimg)
-
-
     }
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val did=itemView.findViewById<TextView>(R.id.Did)
@@ -57,7 +51,6 @@ class photorvAdapter (val context: Context, val designerList:ArrayList<photourl>
         val year=itemView.findViewById<TextView>(R.id.Dyear)
         val major=itemView.findViewById<TextView>(R.id.Dmajor)
         val monthc=itemView.findViewById<TextView>(R.id.Dmonthc)
-
     }
 
 

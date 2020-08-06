@@ -6,6 +6,8 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
+import com.example.myhairdiary_c.designers.designer
+import com.example.myhairdiary_c.designers.designerAdapter
 import com.example.myhairdiary_c.designers.designer_list
 import com.example.myhairdiary_c.designers.photourl
 import com.example.myhairdiary_c.firedb.fireDB
@@ -36,12 +38,12 @@ class detailedRecommend : AppCompatActivity() {
 
     }
     fun select_wecando(firestore:FirebaseFirestore,did:String){
-        firestore?.collection("hair_photo").whereEqualTo("id",did).get()
+        firestore?.collection("hair_diary").whereEqualTo("perm",1).get()
             .addOnCompleteListener {
                 if(it.isSuccessful){
-                    var userDTO=ArrayList<photourl>()
+                    var userDTO=ArrayList<designer>()
                     for(dc in it.result!!.documents){
-                        dc.toObject(photourl::class.java)?.let { it1 ->
+                        dc.toObject(designer::class.java)?.let { it1 ->
                             // println("reviewcount : ${it1.reviewcount}")
                             userDTO.add(it1) } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
@@ -50,9 +52,9 @@ class detailedRecommend : AppCompatActivity() {
                         LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
                     wecando_rv.setHasFixedSize(true)
                     wecando_rv.adapter=
-                        recommend_trend_adapter(
+                        designerAdapter(
                             this,
-                            userDTO,0
+                            userDTO
                         )
                 }else{
                     println("fail")
@@ -76,7 +78,7 @@ class detailedRecommend : AppCompatActivity() {
                     another_rv.adapter=
                         recommend_trend_adapter(
                             this,
-                            userDTO,0
+                            userDTO,3
                         )
                 }else{
                     println("fail")
