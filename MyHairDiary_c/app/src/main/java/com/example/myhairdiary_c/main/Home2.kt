@@ -6,6 +6,7 @@ import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.ArrayAdapter
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,7 @@ import com.example.myhairdiary_c.designers.designerAdapter
 import com.example.myhairdiary_c.designers.photourl
 import com.example.myhairdiary_c.firedb.album
 import com.example.myhairdiary_c.firedb.fireDB
+import com.example.myhairdiary_c.style.Style_Search
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_home.botnav
@@ -54,11 +56,26 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
         if(pref.getString("id","")!=""){
         User_greeting.text="환영합니다 "+pref.getString("id","")+" 님"
         }
-//        editSearch.hint="ddfsefd"
+        editSearch.hint="ddfsefd"
+        editSearch.setOnClickListener(){
+
+//            constraintLayout2.addView()
+//            var item=arrayOf("1","2","3")
+//            search_lv.adapter= ArrayAdapter <Any>(this, android.R.layout.simple_list_item_1, item)
+//            search_lv.setOnItemClickListener { parent, view, position, id ->
+//                println(position)
+//                println(search_lv.getItemAtPosition(position))
+//            }
+
+
+
+
+            Toast.makeText(this,"냐옹",Toast.LENGTH_SHORT).show()
+        }
         search_bt.setOnClickListener(){
-//            var key=editSearch.text.toString()
-//            var intent= Intent(this, Style_Search::class.java)
-//            intent.putExtra("style",key)
+            var key=editSearch.text.toString()
+            var intent= Intent(this, Style_Search::class.java)
+            intent.putExtra("style",key)
             startActivity(intent)
         }
 

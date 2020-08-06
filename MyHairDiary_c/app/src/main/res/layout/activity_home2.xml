@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     >
 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
@@ -21,11 +19,11 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
-                android:layout_width="415dp"
-                android:layout_height="118dp"
+                android:layout_width="410dp"
+                android:layout_height="160dp"
                 android:background="@color/cardview_shadow_start_color"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.333"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -45,57 +43,42 @@
                     android:layout_height="47dp"
                     android:src="@drawable/ic_launcher_foreground"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-<!--                <EditText-->
-<!--                    android:id="@+id/editSearch"-->
-<!--                    android:layout_width="299dp"-->
-<!--                    android:layout_height="40dp"-->
-<!--                    android:layout_marginTop="68dp"-->
-<!--                    android:background="@drawable/border"-->
-<!--                    android:clickable="true"-->
-<!--                    android:hint="검색하세요"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintHorizontal_bias="0.363"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
-
-
-                <androidx.appcompat.widget.SearchView
+                <EditText
                     android:id="@+id/editSearch"
                     android:layout_width="299dp"
                     android:layout_height="40dp"
-                    android:layout_marginTop="44dp"
+                    android:layout_marginTop="68dp"
                     android:background="@drawable/border"
                     android:clickable="true"
                     android:hint="검색하세요"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.431"
+                    app:layout_constraintHorizontal_bias="0.363"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <ListView
+                    android:id="@+id/search_lv"
+                    android:layout_width="310dp"
+                    android:layout_height="41dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editSearch" />
+
                 <ImageView
+                    android:id="@+id/search_bt"
                     android:layout_width="66dp"
                     android:layout_height="54dp"
                     android:layout_marginTop="4dp"
-                    android:id="@+id/search_bt"
+                    android:layout_marginBottom="52dp"
                     android:src="@drawable/ic_launcher_foreground"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/editSearch"
                     app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-                <TextView
-                    android:id="@+id/recent"
-                    android:layout_width="87dp"
-                    android:layout_height="51dp"
-                    android:layout_marginStart="60dp"
-                    tools:text="a\nb\nc\n"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editSearch" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -104,7 +87,7 @@
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_marginTop="172dp"
+                android:layout_marginTop="208dp"
                 android:background="@color/cardview_dark_background"
                 android:orientation="horizontal"
                 app:layout_constraintTop_toTopOf="parent"
@@ -158,6 +141,9 @@
                     app:layout_constraintHorizontal_bias="0.432"
                     app:layout_constraintStart_toEndOf="@+id/User_Profile_Photo"
                     app:layout_constraintTop_toBottomOf="@+id/User_greeting" />
+
+
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -234,7 +220,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recommend_designer_list"
                     android:layout_width="408dp"
-                    android:layout_height="150dp"
+                    android:layout_height="200dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView" />

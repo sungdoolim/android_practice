@@ -23,18 +23,37 @@ class designerAdapter (val context: Context, val designerList:ArrayList<designer
                 val curPos:Int=adapterPosition
                 var dl: designer =designerList.get(curPos)
 
-//                val intent = Intent(view.getContext(), detaildesigner::class.java)
-//                intent.putExtra("did",dl.id)
-//                intent.putExtra("age",dl.age)
-//                intent.putExtra("memo",dl.memo)
-//                intent.putExtra("name",dl.name)
-//                intent.putExtra("phone",dl.phone)
-//                intent.putExtra("index",dl.index.toString())
-//                intent.putExtra("year",dl.year)
-//                intent.putExtra("monthc",dl.monthc)
-//                intent.putExtra("major",dl.major)
-//                intent.putExtra("reviewcount",dl.reviewcount)
-//                context.startActivity(intent)
+                val intent = Intent(view.getContext(), detailedDesigner::class.java)
+                val pref=context.getSharedPreferences("selected",0)
+                val edit=pref.edit()
+                edit.clear()
+
+                edit.putString("did",dl.id)
+                edit.putInt("age",dl.age)
+                edit.putString("memo",dl.memo)
+                edit.putString("name",dl.name)
+                edit.putString("phone",dl.phone)
+                edit.putInt("index",dl.index)
+                edit.putInt("year",dl.year)
+                edit.putInt("monthc",dl.monthc)
+                edit.putString("major",dl.major)
+                edit.putInt("reviewcount",dl.reviewcount)
+                edit.putString("profile",dl.profile)
+                edit.apply()
+
+
+                intent.putExtra("did",dl.id)
+                intent.putExtra("age",dl.age)
+                intent.putExtra("memo",dl.memo)
+                intent.putExtra("name",dl.name)
+                intent.putExtra("phone",dl.phone)
+                intent.putExtra("index",dl.index.toString())
+                intent.putExtra("year",dl.year)
+                intent.putExtra("monthc",dl.monthc)
+                intent.putExtra("major",dl.major)
+                intent.putExtra("reviewcount",dl.reviewcount)
+                intent.putExtra("profile",dl.profile)
+                context.startActivity(intent)
 
                 //  Toast.makeText(parent.context,"이름 :${profile.name}", Toast.LENGTH_SHORT).show()
             }
@@ -57,7 +76,7 @@ class designerAdapter (val context: Context, val designerList:ArrayList<designer
 
         holder.dimg.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
 
-        Glide.with(context).load(designerList.get(position).dimgurl).into(holder.dimg)
+        Glide.with(context).load(designerList.get(position).profile).into(holder.dimg)
 
 
     }
