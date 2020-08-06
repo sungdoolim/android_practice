@@ -173,6 +173,18 @@ var db=fireDB(this)
         }
 
     }
+    fun deletePhoto() { // 이거 삭제인데 수정은 그냥 같은 이름으로 putfile하면 되는 거잖아???
+
+        FirebaseStorage.getInstance().reference.child("images")
+            .child("").delete()
+            .addOnSuccessListener {
+                Toast.makeText(this, "Delete photo completed", Toast.LENGTH_LONG).show()
+            }
+    }
+
+
+
+
     fun uploadPhoto_diary_to_Customer(photoUri: Uri) {
         var db=fireDB(this)
         val pref=getSharedPreferences("session",0)

@@ -40,6 +40,7 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
         val profile=pref.getString("profile","").toString()
         User_Profile_Photo.setBackground(ShapeDrawable(OvalShape()));
         User_Profile_Photo.setClipToOutline(true)
+
         select_recommend_list(db.firestore) // recommend 리스트 출력
 
         select_trend_list(db.firestore) // recommend 리스트 출력
@@ -107,7 +108,7 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
 
 
 
-    public fun select_recommend_designerList(firestore: FirebaseFirestore) {// 지금은 recommend리스트랑 똑같음
+    public fun select_recommend_designerList(firestore: FirebaseFirestore) {// 지금은 recommend리스트랑 똑같음 // 얘가 맨 마지막애인가바
 
         firestore?.collection("hair_diary").whereEqualTo("perm",1).get()
             .addOnCompleteListener {
@@ -155,7 +156,7 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
                     trendlist.adapter=
                         recommend_trend_adapter(
                             this,
-                            userDTO
+                            userDTO,1
                         )
                 }else{
                     println("fail")
@@ -183,7 +184,7 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
                     recommendlist.adapter=
                         recommend_trend_adapter(
                             this,
-                            userDTO
+                            userDTO,0
                         )
                 }else{
                     println("fail")

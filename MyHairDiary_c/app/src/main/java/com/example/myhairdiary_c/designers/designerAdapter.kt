@@ -70,7 +70,7 @@ class designerAdapter (val context: Context, val designerList:ArrayList<designer
         holder.age.text=designerList.get(position).age.toString()
         holder.year.text=designerList.get(position).year.toString()
         holder.phone.text=designerList.get(position).phone
-        holder.memo.text=designerList.get(position).memo
+     //   holder.memo.text=designerList.get(position).memo
         holder.major.text=designerList.get(position).major
         holder.monthc.text= designerList.get(position).monthc.toString()
 
