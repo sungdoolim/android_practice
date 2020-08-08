@@ -8,15 +8,7 @@
     <item android:id="@+id/bottom2"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="bottom2"/>
-    <item android:id="@+id/bottom3"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="bottom3"/>
-    <item android:id="@+id/bottom4"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="bottom4"/>
-    <item android:id="@+id/bottom5"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="bottom5"/>
+
 
 </group>
 </menu>

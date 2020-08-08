@@ -39,15 +39,16 @@ class list_adapter (val context: Context, val designerList:ArrayList<list_data>)
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         // holder.memo.setImageResource(1)
 
-        holder.title.text=designerList.get(position).title
-        holder.content.text=designerList.get(position).content
-
+        holder.place.text=  "장소는!? : "+designerList.get(position).place
+        holder.content.text="뭐 할까 우리??!? : "+ designerList.get(position).content
+        holder.id.text=designerList.get(position).id
 
 
     }
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val title=itemView.findViewById<TextView>(R.id.title)
+        val place=itemView.findViewById<TextView>(R.id.place)
         val content=itemView.findViewById<TextView>(R.id.content)
+        val id=itemView.findViewById<TextView>(R.id.oursesid)
 
 
     }

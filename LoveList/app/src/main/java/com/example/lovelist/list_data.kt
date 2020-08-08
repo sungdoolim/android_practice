@@ -1,3 +1,3 @@
 package com.example.lovelist
 
-data class list_data(val title:String="",val content:String="")
+data class list_data(val place:String="",val content:String="",val index:Int=-1,val id:String="")
