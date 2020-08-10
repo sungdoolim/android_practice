@@ -153,7 +153,12 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // 메서드가 통일 된것!!!!! drawer + bottomnavi
         when(item.itemId){
-            R.id.access-> Toast.makeText(this,"접근",Toast.LENGTH_SHORT).show()
+            R.id.access->{ Toast.makeText(this,"접근",Toast.LENGTH_SHORT).show()
+                var intent=Intent(this,graph_prac::class.java)
+                startActivity(intent)
+
+
+            }
             R.id.email-> Toast.makeText(this,"메일",Toast.LENGTH_SHORT).show()
             R.id.message-> Toast.makeText(this,"문자",Toast.LENGTH_SHORT).show()
 

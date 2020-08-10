@@ -1,7 +1,13 @@
 <resources>
     <string name="app_name">MyHairDiary_c</string>
-    <string name="title_activity_settings">Settings</string>
 
+
+    <string name="appbar_scrolling_view_behavior" translatable="false">
+        com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior
+    </string>
+
+
+    <string name="title_activity_settings">Settings</string>
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>

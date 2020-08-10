@@ -22,12 +22,21 @@ class list_adapter (val context: Context, val designerList:ArrayList<list_data>)
                 val curPos:Int=adapterPosition
                 var dl: list_data =designerList.get(curPos)
 
-              //  val intent = Intent(view.getContext(), detailedDesigner::class.java)
+                val intent = Intent(view.getContext(), detail_list::class.java)
                 val pref=context.getSharedPreferences("selected",0)
-                val edit=pref.edit()
-                edit.clear()
 
-                //context.startActivity(intent)
+                val edit=pref.edit()
+
+                edit.clear()
+                edit.putString("content",dl.content)
+                edit.putString("id",dl.id)
+                edit.putInt("index",dl.index)
+                edit.putString("place",dl.place)
+                edit.apply()
+
+
+
+                context.startActivity(intent)
 
                 //  Toast.makeText(parent.context,"이름 :${profile.name}", Toast.LENGTH_SHORT).show()
             }

@@ -1,14 +1,15 @@
 package com.example.myhairdiary_c.main
 
-import android.app.SearchManager
 import android.content.Intent
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
+import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.ArrayAdapter
-import android.widget.SearchView
+import android.view.View
+import android.view.ViewTreeObserver.OnScrollChangedListener
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -28,9 +29,11 @@ import kotlinx.android.synthetic.main.activity_home2.*
 
 class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelectedListener{
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home2)
+
 
 
         var    Album= album(this)
@@ -81,14 +84,31 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
         }
 
 
-
         settings.setOnClickListener(){
             var intent= Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
+        var ybefore:Int=0
+        var ynow:Int=0
 
 
+        scrollView2.getViewTreeObserver()
+            .addOnScrollChangedListener(OnScrollChangedListener {
+//                var x= scrollView2.scrollX
+//                var y= scrollView2.scrollY
+             ybefore=ynow
+                ynow=scrollView2.scrollY
+
+                if(ynow-ybefore>0){
+                    botnav.visibility= View.INVISIBLE
+                }else{
+                    botnav.visibility= View.VISIBLE
+                }
+                println(" y :  ${ynow}")
+            })
         botnav.setOnNavigationItemSelectedListener(this)
+       // botnav.visibility= View.INVISIBLE
+
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 

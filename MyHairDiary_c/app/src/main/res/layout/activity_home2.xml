@@ -1,12 +1,16 @@
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/ic_launcher_foreground"
     >
 
-    <ScrollView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,7 +24,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout2"
-                android:layout_width="410dp"
+                android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:background="@color/cardview_shadow_start_color"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -237,21 +241,29 @@
                     app:layout_constraintTop_toBottomOf="@+id/recommend_designer_list">
 
 
+
                 </LinearLayout>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:id="@+id/botnav"
-        android:background="@color/cardview_dark_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.952"
-        app:menu="@menu/bottomnavi_x" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/botnav"
+                android:layout_width="match_parent"
+
+                android:layout_height="120dp"
+                android:background="@color/cardview_dark_background"
+app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:menu="@menu/bottomnavi_x" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

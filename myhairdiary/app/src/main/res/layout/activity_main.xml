@@ -51,13 +51,13 @@
                 android:layout_height="wrap_content"
                 android:text="mypage" />
 
-            <Button
-                android:id="@+id/calendar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="calendar" />
+                    <Button
+                        android:id="@+id/calendar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="calendar" />
 
-            <Button
+                    <Button
                 android:id="@+id/naver_map"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,11 +80,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Rcalendar" />
+
                     <Button
+                        android:id="@+id/testmain"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/testmain"
-                        android:text="testmain"/>
+                        android:text="testmain" />
+
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
