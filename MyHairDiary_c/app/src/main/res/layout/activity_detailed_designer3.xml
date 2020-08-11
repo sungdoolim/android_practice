@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/back"
     tools:context=".designers.detailedDesigner3">
 
             <LinearLayout
@@ -65,7 +66,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="24dp"
-            android:src="@drawable/ic_launcher_foreground"
+            android:src="@drawable/search_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.483"
             app:layout_constraintStart_toEndOf="@+id/spin_gender"

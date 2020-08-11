@@ -20,7 +20,7 @@ class detailedDesigner : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed_designer)
-        bt1.setBackgroundColor(R.color.colorAccent)
+     //   bt1.setBackgroundColor(R.color.colorAccent)
         val prefselected=getSharedPreferences("selected",0)
 
         bt2.setOnClickListener(){

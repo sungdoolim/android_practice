@@ -14,9 +14,7 @@
     <item android:id="@+id/bottom4"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="bottom4"/>
-    <item android:id="@+id/bottom5"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="bottom5"/>
+
 
 </group>
 </menu>

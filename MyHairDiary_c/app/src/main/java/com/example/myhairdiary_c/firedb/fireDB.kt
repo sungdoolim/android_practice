@@ -14,7 +14,7 @@ class fireDB(parent: Context?){
 
     public fun createData( a:String, b:String){// 실제 되는거 확인 했음
         var userDTO=
-            designer(a, 1, b, 1, "2", 3, "1")
+            designer(a, 0, b, 0, "", 0, "")
         // 밑에 document를 공백으로 두면 임의의 아이디를 생성해서 추가함
         firestore?.collection("hair_diary")?.document()?.set(userDTO)
             .addOnCompleteListener {
