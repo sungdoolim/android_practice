@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.util.Log
+import android.webkit.JavascriptInterface
 import android.webkit.WebChromeClient
+import android.webkit.WebSettings
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_nlogin.*
@@ -13,6 +15,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 class nlogin : AppCompatActivity() {
 
@@ -25,7 +28,11 @@ class nlogin : AppCompatActivity() {
         wvnaver.webChromeClient= WebChromeClient()
       //  wvnaver.loadUrl("https://www.naver.com")
        wvnaver.loadUrl("http://172.30.1.8:8052/web/nlogin.do")
-
+        val webSettings: WebSettings = wvnaver.getSettings()
+        webSettings.javaScriptEnabled = true
+        wvnaver.addJavascriptInterface(AndroidBridge(), "MyTestApp")
+        // 웹뷰에서 이클립스에 MyTestApp으로 보내는 메서드가 있어!
+        // naverSuccess.jsp 안에 스크립트로 존재하고 CallAndroid() 로 정보 보내기!
 
 
         val mHandler: Handler = object : Handler() {
@@ -44,6 +51,21 @@ class nlogin : AppCompatActivity() {
 
 
     }
+
+    class AndroidBridge {
+
+        @JavascriptInterface
+       fun AlertMsg(arg:String) { // 웹뷰내의 페이지에서 호출하는 함수
+            Handler().post( Runnable() {
+                println("log : :--------------------------------------------------------------------------------  : ${arg}")
+//                    Toast.makeText( this,, Toast.LENGTH_SHORT).show();
+            });
+        }
+    }
+
+
+
+
     fun f(){// 단일 클래스를 받음
 
         var retrofit = Retrofit.Builder()
@@ -81,4 +103,7 @@ class nlogin : AppCompatActivity() {
 
         })
     }
+
+
+
 }

@@ -6,6 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="naver_login or auto register"
+        android:id="@+id/Nloginbt"/>
+    <WebView
+        android:id="@+id/wvN_login"
+        android:layout_width="match_parent"
+        android:layout_height="700dp"
+ />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,6 +93,6 @@
         android:id="@+id/dlist"
         android:text="디자이너 리스트"/>
 
-
-
+    </LinearLayout>
+    </ScrollView>
 </LinearLayout>

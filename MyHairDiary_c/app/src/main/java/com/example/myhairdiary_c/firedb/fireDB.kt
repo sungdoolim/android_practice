@@ -1,13 +1,12 @@
 package com.example.myhairdiary_c.firedb
 
 import android.content.Context
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myhairdiary_c.designers.designer
 import com.example.myhairdiary_c.designers.designer_inter
 import com.example.myhairdiary_c.designers.photourl
 import com.google.firebase.firestore.FirebaseFirestore
 
-class fireDB(parent :Context){
+class fireDB(parent: Context?){
     var firestore = FirebaseFirestore.getInstance()
     var parent=parent
 

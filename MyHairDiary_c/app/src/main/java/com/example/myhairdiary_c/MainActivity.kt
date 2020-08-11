@@ -1,13 +1,21 @@
 package com.example.myhairdiary_c
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
+import android.webkit.JavascriptInterface
+import android.webkit.WebChromeClient
+import android.webkit.WebSettings
+import android.webkit.WebViewClient
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.startActivity
 import com.example.myhairdiary_c.designers.designer
 import com.example.myhairdiary_c.designers.designer_list
 import com.example.myhairdiary_c.firedb.fireDB
@@ -22,6 +30,24 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        wvN_login.settings.javaScriptEnabled=true
+        wvN_login.webViewClient= WebViewClient()
+        wvN_login.webChromeClient= WebChromeClient()
+        wvN_login.loadUrl("http://172.30.1.8:8052/web/nlogin.do")
+        //  wvnaver.loadUrl("https://www.naver.com")
+        val webSettings: WebSettings = wvN_login.getSettings()
+        webSettings.javaScriptEnabled = true
+        wvN_login.addJavascriptInterface(AndroidBridge(this), "MyTestApp")
+        wvN_login.addJavascriptInterface(AndroidBridge(this), "MyTestApp_logout")
+
+
+        Nloginbt.setOnClickListener(){
+        wvN_login.reload()
+
+
+        }
+
 
         val pref=getSharedPreferences("session",0)
         var edit=pref.edit()
@@ -57,6 +83,7 @@ class MainActivity : AppCompatActivity() {
                             edit.apply()
                         }
                         var intent= Intent(this, Home2::class.java)
+
                         startActivity(intent)
                     }else{
                         println("fail")
@@ -229,4 +256,88 @@ var db=fireDB(this)
             //
         }
     }
+    class AndroidBridge(context: Context) {
+        val db=fireDB(context)
+        val context=context
+        @JavascriptInterface
+        fun AlertMsg_logout(arg:String){
+            println("logout : ${arg}")
+            var pref=context.getSharedPreferences("session",0)
+            val edit=pref.edit()
+            edit.clear()
+            edit.apply()
+            var intent= Intent(context, Home2::class.java)
+            context.startActivity(intent)
+
+
+        }
+        @JavascriptInterface
+        fun AlertMsg(arg:String) { // 웹뷰내의 페이지에서 호출하는 함수
+            Handler().post( Runnable() {
+                var splitarg=arg.split(" ")
+               var name=splitarg[0]
+                var id=splitarg[1]
+                println("id : ${id} name : ${name}")
+
+                check_isprimaryid(id,name,context)
+
+
+
+//                    Toast.makeText( this,, Toast.LENGTH_SHORT).show();
+            });
+        }
+
+
+
+        public fun check_isprimaryid(id:String,name:String,context:Context){
+            println("read")
+            val pref=context.getSharedPreferences("session",0)
+            val edit=pref.edit()
+            db.firestore?.collection("hair_diary").whereEqualTo("id",id).get()
+                .addOnCompleteListener {
+                    if(it.isSuccessful){
+                        if(it.result!!.documents.size==0){
+                            db.createData(id.toString(),name.toString())
+                        }
+
+
+                        edit.putString("id",id.toString())
+                        edit.apply()
+                        var firestore = FirebaseFirestore.getInstance()
+                        firestore?.collection("hair_diary").whereEqualTo("id",id.toString()).get()
+                            .addOnCompleteListener {
+                                if(it.isSuccessful){
+                                    for(dc in it.result!!.documents){
+                                        println("\nget test!!! : ${dc.getString("ttttt")}")
+                                        //  println("${len+1} : ${dc.toString()}")
+                                        edit.putString("perm",dc.toObject(designer::class.java)?.perm.toString())
+                                        edit.putString("name",dc.toObject(designer::class.java)?.name.toString())
+                                        edit.putInt("year", dc.toObject(designer::class.java)?.year!!.toInt())
+                                        edit.putInt("index",dc.toObject(designer::class.java)?.index!!.toInt())
+                                        edit.putString("memo",dc.toObject(designer::class.java)?.memo.toString())
+                                        edit.putString("phone",dc.toObject(designer::class.java)?.phone.toString())
+                                        edit.putInt("age",dc.toObject(designer::class.java)?.age!!.toInt())
+                                        edit.putString("profile",dc.toObject(designer::class.java)?.profile.toString())
+
+                                        edit.apply()
+                                    }
+                                    var intent= Intent(context, Home2::class.java)
+                                    context.startActivity(intent)
+                                }else{
+                                    println("fail")
+                                }
+                            }
+
+
+
+                    }else{
+                        println("fail")
+                    }
+                }
+            println("read end")
+        }
+
+    }
+
+
 }
