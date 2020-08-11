@@ -159,7 +159,13 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
 
 
             }
-            R.id.email-> Toast.makeText(this,"메일",Toast.LENGTH_SHORT).show()
+            R.id.email-> {
+                Toast.makeText(this,"메일",Toast.LENGTH_SHORT).show()
+                var intent=Intent(this,nlogin::class.java)
+                startActivity(intent)
+
+
+            }
             R.id.message-> Toast.makeText(this,"문자",Toast.LENGTH_SHORT).show()
 
             R.id.num1->supportFragmentManager.beginTransaction().replace(R.id.framelayout, farg1()).commit()// fragment로 화면 전환 bottomnavi
