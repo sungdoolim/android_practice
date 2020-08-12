@@ -19,7 +19,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout8"
-                android:layout_width="437dp"
+                android:layout_width="match_parent"
                 android:layout_height="642dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
 
                 <ImageView
                     android:id="@+id/selected_style_img"
-                    android:layout_width="422dp"
+                    android:layout_width="match_parent"
                     android:layout_height="410dp"
                     android:src="@drawable/ic_launcher_foreground"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -83,6 +83,14 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/wecantotv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="We Can Do!!"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
+
             <androidx.recyclerview.widget.RecyclerView
 
                 android:id="@+id/wecando_rv"
@@ -92,7 +100,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.6"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
+                app:layout_constraintTop_toBottomOf="@+id/wecantotv" />
 
             <ImageView
                 android:id="@+id/overview_recom"

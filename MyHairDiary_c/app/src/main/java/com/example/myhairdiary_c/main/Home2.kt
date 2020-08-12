@@ -60,7 +60,7 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
         if(pref.getString("id","")!=""){
         User_greeting.text="환영합니다 "+pref.getString("id","")+" 님"
         }
-        editSearch.hint="ddfsefd"
+
         editSearch.setOnClickListener(){
 
 //            constraintLayout2.addView()

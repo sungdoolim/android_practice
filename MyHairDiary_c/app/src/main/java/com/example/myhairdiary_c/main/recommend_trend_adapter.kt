@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
@@ -49,9 +50,7 @@ class recommend_trend_adapter (val context: Context, val designerList:ArrayList<
                     2->{
 
                 }
-                    3->{
 
-                }
                     else->{
                         val intent = Intent(view.getContext(), detailedRecommend::class.java)
                         context.startActivity(intent)
@@ -70,6 +69,7 @@ class recommend_trend_adapter (val context: Context, val designerList:ArrayList<
 
 
         holder.dimg.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
+        holder.desc.text="description"
 
         Glide.with(context).load(designerList.get(position).url).into(holder.dimg)
 
@@ -78,6 +78,7 @@ class recommend_trend_adapter (val context: Context, val designerList:ArrayList<
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
         val dimg=itemView.findViewById<ImageView>(R.id.search_imageurl)
+        val desc=itemView.findViewById<TextView>(R.id.search_desc)
 
 
     }

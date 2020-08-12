@@ -117,6 +117,9 @@
                 <TextView
                     android:textSize="14dp"
                     android:fontFamily="sans-serif-black"
+                    android:includeFontPadding="false"
+
+
                     android:id="@+id/textView16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -131,7 +134,13 @@
 
                 <TextView
                     android:id="@+id/User_greeting"
+                    android:autoSizePresetSizes="false"
+                    android:autoSizeTextType="none"
+                    android:typeface="serif"
+                    android:fontFeatureSettings="14dp"
                     android:textSize="14dp"
+                    android:textFontWeight="14"
+
                     android:fontFamily="sans-serif-black"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -163,7 +172,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout4"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="200dp"
                 android:layout_marginTop="34dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -181,7 +190,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recommendlist"
                     android:layout_width="match_parent"
-                    android:layout_height="124dp"
+                    android:layout_height="170dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -195,7 +204,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout3"
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="200dp"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.022"
@@ -216,7 +225,7 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/trendlist"
                     android:layout_width="match_parent"
-                    android:layout_height="124dp"
+                    android:layout_height="170dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView5" />
