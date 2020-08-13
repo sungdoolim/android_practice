@@ -75,14 +75,10 @@ class detailedDesigner : AppCompatActivity(), BottomNavigationView.OnNavigationI
                 var intent= Intent(this, second_home::class.java)
                 startActivity(intent)
             }
-//            R.id.bottom3->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
             R.id.bottom4->{
                 var intent= Intent(this, Mypage::class.java)
                 startActivity(intent)
-
-
             }
-//            R.id.bottom5->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
             else ->""
         }
         return true;
