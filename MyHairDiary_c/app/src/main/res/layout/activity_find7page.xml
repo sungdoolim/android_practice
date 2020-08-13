@@ -41,14 +41,15 @@
         app:layout_constraintTop_toBottomOf="@+id/textView24" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomconst"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/findcomplete_designer"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="0.414">
 
         <TextView
             android:id="@+id/textView20"
@@ -61,6 +62,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/retext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="다시 찾기를 통해 처음으로 돌아가 답변을 다르게 해보세요!"
@@ -86,5 +88,17 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/textView20" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/botnav"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/cardview_dark_background"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottomconst"
+        app:menu="@menu/bottomnavi_x" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

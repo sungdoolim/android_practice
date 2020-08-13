@@ -17,9 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Mypage2"></activity>
+        <activity android:name=".mypage.Mypage2"></activity>
         <activity android:name=".Setting" />
-        <activity android:name=".Mypage" />
+        <activity android:name=".mypage.Mypage" />
         <activity android:name=".main.second.findpage.find8page" />
         <activity android:name=".main.second.findpage.find7page" />
         <activity android:name=".main.second.findpage.find6page" />

@@ -16,6 +16,9 @@ class detail_list : AppCompatActivity() {
         val firestore=FirebaseFirestore.getInstance()
         val pref=getSharedPreferences("selected",0)
         var index=pref.getInt("index",-1)
+        val ischecked=pref.getBoolean("ischecked",false)
+        iscpt.isChecked=ischecked
+
         detail_place.hint="어디서~? "+pref.getString("place","")
         detail_content.hint="뭐하고싶어~? "+pref.getString("content","")
 
@@ -26,7 +29,7 @@ class detail_list : AppCompatActivity() {
 
         }
         detail_mod.setOnClickListener(){
-
+            var ischec=iscpt.isChecked
             var place=detail_place.text.toString()
             var content=detail_content.text.toString()
             println("1111place : ${place}, content : ${content}")
@@ -34,17 +37,37 @@ class detail_list : AppCompatActivity() {
             if(place==""){place=detail_place.hint.toString().split(" ")[1]}
             if(content==""){content=detail_content.hint.toString().split(" ")[1]}
             println("2222place : ${place}, content : ${content}")
-            modeData(firestore,place,content,index)
+            modeData(firestore,place,content,index,ischec)
 
             Toast.makeText(this,"변경중~ 좀만 기다려주세용~",Toast.LENGTH_SHORT).show()
 
         }
 
     }
-    fun modeData(firestore:FirebaseFirestore,place:String,content:String,index:Int){
+    fun completeData(firestore:FirebaseFirestore,index :Int){
+        var map= mutableMapOf<String,Any>()
+        firestore?.collection("ourlist").whereEqualTo("index",index).get()
+            .addOnCompleteListener {
+
+                map["ischecked"] =true
+                firestore?.collection("ourlist").document(it.result!!.documents[0].id).update(map)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            print("update")
+                        }
+                    }
+                var intent= Intent(this, MainActivity::class.java)
+                startActivity(intent)
+
+            }
+
+    }
+    fun modeData(firestore:FirebaseFirestore,place:String,content:String,index:Int,ischec:Boolean){
 
         var map= mutableMapOf<String,Any>()
         var map2= mutableMapOf<String,Any>()
+
+        var map3= mutableMapOf<String,Any>()
 
         firestore?.collection("ourlist").whereEqualTo("index",index).get()
             .addOnCompleteListener {
@@ -58,6 +81,13 @@ class detail_list : AppCompatActivity() {
                     }
                 map2["content"] =content
                 firestore?.collection("ourlist").document(it.result!!.documents[0].id).update(map2)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            print("update")
+                        }
+                    }
+                map3["ischecked"] =ischec
+                firestore?.collection("ourlist").document(it.result!!.documents[0].id).update(map3)
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
                             print("update")

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="녕이는 이거 있는 줄도 모르게찌이이ㅣㅇ"/>
+        <item android:id="@+id/hama"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="녕이로 로그인"/>
+
+        <item android:id="@+id/staris"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="내꺼다 저리가아ㅏ"/>
+
+
+
+
+
+
+
+
+
+
+    </group>
+</menu>

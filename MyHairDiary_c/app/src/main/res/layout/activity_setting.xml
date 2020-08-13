@@ -43,6 +43,17 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_centerInParent="true"
+        android:background="@color/colorgray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout9" />
+
+
     <LinearLayout
         android:background="@color/mint"
         android:layout_marginTop="70dp"
@@ -52,16 +63,22 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+            android:textSize="15dp"
+            android:layout_height="25dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
         android:text="\t\t\t공지사항"/>
+        <include layout="@layout/line"/>
         <TextView
+            android:textSize="15dp"
+            android:layout_height="25dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="\t\t\t이벤트 동의 설정"/>
+        <include layout="@layout/line"/>
         <TextView
+            android:textSize="15dp"
+            android:layout_height="25dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="\t\t\t도움말"/>
 
     </LinearLayout>
@@ -75,25 +92,36 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
+
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_height="25dp"
             android:text="\t\t\t위치기반 서비스 이용약관 동의 설정"/>
+        <include layout="@layout/line"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_height="25dp"
             android:text="\t\t\t프로필 정보 수집 및 이용에 대한 동의 설정"/>
+        <include layout="@layout/line"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_height="25dp"
             android:text="\t\t\t개인정보 처리방침"/>
+        <include layout="@layout/line"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_height="25dp"
             android:text="\t\t\t마이 헤어 다이어리 맞춤형 광고 안내"/>
+        <include layout="@layout/line"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_height="25dp"
             android:text="\t\t\t오픈소스 라이센스"/>
+
 
     </LinearLayout>
 
@@ -107,20 +135,28 @@
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_height="25dp"
             android:text="\t\t\t알림 설정"/>
+        <include layout="@layout/line"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_height="25dp"
             android:text="\t\t\t앱 평가하기"/>
+        <include layout="@layout/line"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_height="25dp"
             android:text="\t\t\t로그아웃"/>
+        <include layout="@layout/line"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:layout_height="25dp"
             android:text="\t\t\t탈퇴하기"/>
+        <include layout="@layout/line"/>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -128,14 +164,17 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_height="25dp"
                 android:text="\t\t\t현재 버전"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:textSize="15dp"
+                android:layout_height="25dp"
+                android:textColor="@color/colorred"
                 android:text="4.0.28"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -143,6 +182,16 @@
 
     </LinearLayout>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/botnav"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/cardview_dark_background"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        app:layout_constraintEnd_toEndOf="parent"
 
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottomnavi_x" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

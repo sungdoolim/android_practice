@@ -7,16 +7,19 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myhairdiary_c.frag.home
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.bottom_nav.*
 
 
-class MainActivity : AppCompatActivity()  , BottomNavigationView.OnNavigationItemSelectedListener{
+class MainActivity : AppCompatActivity()  ,NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,36 +31,50 @@ class MainActivity : AppCompatActivity()  , BottomNavigationView.OnNavigationIte
             startActivity(intent)
         }
 
-//        val fragment: Fragment = home() // Fragment 생성
-//        val bundle=Bundle()
-//        bundle.putString("param", "dfsef") // Key, Value
-//        fragment.arguments = bundle
         val pref=getSharedPreferences("Rnd",0)
         val edit=pref.edit()
         edit.putString("id","누꿍")
         edit.apply()
         Toast.makeText(this,"누꿍 안냥?",Toast.LENGTH_LONG).show()
         botnav.setOnNavigationItemSelectedListener(this)
+        naviView.setNavigationItemSelectedListener (this)
     }
 
-
+    override fun onBackPressed() {
+        ActivityCompat.finishAffinity(this)
+        finish()
+    }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.bottom1->{
-                       val pref=getSharedPreferences("Rnd",0)
+                var intent= Intent(this, this::class.java)
+                startActivity(intent)
+                   }
+            R.id.bottom2->{
+                var intent= Intent(this, unChecked::class.java)
+                startActivity(intent)
+
+                   }
+            R.id.bottom3->{
+                var intent= Intent(this, Checked::class.java)
+                startActivity(intent)
+            }
+            R.id.hama->{
+                val pref=getSharedPreferences("Rnd",0)
                 val edit=pref.edit()
                 edit.putString("id","누꿍")
                 edit.apply()
                 Toast.makeText(this,"누꿍 안냥?",Toast.LENGTH_LONG).show()
-                   }
-            R.id.bottom2->{
+            }
+            R.id.staris->{
                 val pref=getSharedPreferences("Rnd",0)
                 val edit=pref.edit()
                 edit.putString("id","내꿍")
                 edit.apply()
                 Toast.makeText(this,"냐오옹 이거아냐아아아 저리가아ㅏㅇ아",Toast.LENGTH_LONG).show()
-                   }
+            }else->{}
     }
+        layout_drawer.closeDrawers()
         return true
     }
     fun selectList(container: Context){
@@ -68,12 +85,8 @@ class MainActivity : AppCompatActivity()  , BottomNavigationView.OnNavigationIte
                     var userDTO=ArrayList<list_data>()
                     for(dc in it.result!!.documents){
                         dc.toObject(list_data::class.java)?.let { it1 ->
-                            // println("reviewcount : ${it1.reviewcount}")
-                            userDTO.add(it1) } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                            userDTO.add(it1) }
                     }
-                 //   println("designers  len = ${userDTO.size}")
-
-                    // recommend_designer_list 는 id로 얻어온 recyclerview 임
 
                     listrv.layoutManager=
                         LinearLayoutManager(container, LinearLayoutManager.VERTICAL,false)

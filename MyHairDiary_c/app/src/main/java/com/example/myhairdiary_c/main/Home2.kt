@@ -1,12 +1,10 @@
 package com.example.myhairdiary_c.main
 
-import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewTreeObserver.OnScrollChangedListener
@@ -16,8 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.myhairdiary_c.MainActivity
-import com.example.myhairdiary_c.Mypage
+import com.example.myhairdiary_c.mypage.Mypage
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.Setting
 import com.example.myhairdiary_c.designers.designer
@@ -100,6 +97,7 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
         var ynow:Int=0
 
 
+
         scrollView2.getViewTreeObserver()
             .addOnScrollChangedListener(OnScrollChangedListener {
 //                var x= scrollView2.scrollX
@@ -145,7 +143,7 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
         ActivityCompat.finishAffinity(this)
         finish()
     }
-    public fun select_recommend_designerList(firestore: FirebaseFirestore) {// 지금은 recommend리스트랑 똑같음 // 얘가 맨 마지막애인가바
+     fun select_recommend_designerList(firestore: FirebaseFirestore) {// 지금은 recommend리스트랑 똑같음 // 얘가 맨 마지막애인가바
 
         firestore?.collection("hair_diary").whereEqualTo("perm",1).get()
             .addOnCompleteListener {
