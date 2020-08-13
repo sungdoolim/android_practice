@@ -39,7 +39,7 @@ class photorvAdapter (val context: Context, val designerList:ArrayList<photourl>
         holder.did.text=designerList.get(position).id
         holder.memo.text=designerList.get(position).memo
         holder.dimg.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
-       // Glide.with(context).load(designerList.get(position).profile).into(holder.dimg)
+        Glide.with(context).load(designerList.get(position).url).into(holder.dimg)
     }
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val did=itemView.findViewById<TextView>(R.id.Did)

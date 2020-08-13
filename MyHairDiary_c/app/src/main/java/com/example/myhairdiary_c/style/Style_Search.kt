@@ -75,7 +75,9 @@ class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
 
     }
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
 override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
     when(item.itemId){

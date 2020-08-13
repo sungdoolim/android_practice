@@ -114,7 +114,9 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
 
     public fun openAlbum() {
         var intent = Intent(Intent.ACTION_PICK)

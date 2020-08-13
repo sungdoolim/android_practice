@@ -86,5 +86,6 @@ class detailedRecommend : AppCompatActivity() {
             }
     }
 
+
 }
 

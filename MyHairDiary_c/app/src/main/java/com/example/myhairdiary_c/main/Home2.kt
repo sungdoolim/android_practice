@@ -1,25 +1,31 @@
 package com.example.myhairdiary_c.main
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewTreeObserver.OnScrollChangedListener
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.MainActivity
+import com.example.myhairdiary_c.Mypage
 import com.example.myhairdiary_c.R
+import com.example.myhairdiary_c.Setting
 import com.example.myhairdiary_c.designers.designer
 import com.example.myhairdiary_c.designers.designerAdapter
 import com.example.myhairdiary_c.designers.photourl
 import com.example.myhairdiary_c.firedb.album
 import com.example.myhairdiary_c.firedb.fireDB
+import com.example.myhairdiary_c.main.second.second_home
 import com.example.myhairdiary_c.style.Style_Search
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
@@ -33,7 +39,8 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home2)
-
+//        val handler = Handler()
+//        handler.postDelayed({ finish() }, 2000)
 
 
         var    Album= album(this)
@@ -61,6 +68,7 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
         User_greeting.text="환영합니다 "+pref.getString("id","")+" 님"
         }
 
+
         editSearch.setOnClickListener(){
 
 //            constraintLayout2.addView()
@@ -85,7 +93,7 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
 
 
         settings.setOnClickListener(){
-            var intent= Intent(this, MainActivity::class.java)
+            var intent= Intent(this, Setting::class.java)
             startActivity(intent)
         }
         var ybefore:Int=0
@@ -113,21 +121,30 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when(item.itemId){
-//            R.id.bottom1->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()// fragment로 화면 전환 bottomnavi
-//            R.id.bottom2->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+
+            R.id.bottom2->
+            {
+                var intent= Intent(this, second_home::class.java)
+                startActivity(intent)
+            }
 //            R.id.bottom3->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
-//            R.id.bottom4->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+            R.id.bottom4->{
+                var intent= Intent(this, Mypage::class.java)
+                startActivity(intent)
+
+
+            }
 //            R.id.bottom5->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
-
-
-
             else ->""
         }
         return true;
     }
 
 
-
+    override fun onBackPressed() {
+        ActivityCompat.finishAffinity(this)
+        finish()
+    }
     public fun select_recommend_designerList(firestore: FirebaseFirestore) {// 지금은 recommend리스트랑 똑같음 // 얘가 맨 마지막애인가바
 
         firestore?.collection("hair_diary").whereEqualTo("perm",1).get()

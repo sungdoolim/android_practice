@@ -1,15 +1,19 @@
 package com.example.myhairdiary_c.designers
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityCompat.finishAffinity
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.firedb.fireDB
+import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.style.MyAdapter
 import kotlinx.android.synthetic.main.activity_detailed_designer.*
 import kotlinx.android.synthetic.main.detailed_designer_uppertab.*
@@ -54,6 +58,11 @@ class detailedDesigner : AppCompatActivity() {
         }
 
 
+    }    override fun onBackPressed() {
+       // super.onBackPressed()
+
+        var intent= Intent(this, Home2::class.java)
+        startActivity(intent)
     }
     fun selectList(did:String){
         var firestore= fireDB(this).firestore

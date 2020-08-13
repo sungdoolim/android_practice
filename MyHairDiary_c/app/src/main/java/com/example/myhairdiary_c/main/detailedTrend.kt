@@ -16,4 +16,5 @@ class detailedTrend : AppCompatActivity() {
         val url=pref.getString("url","")
         Glide.with(this).load(url).into(selected_trend)
     }
+
 }

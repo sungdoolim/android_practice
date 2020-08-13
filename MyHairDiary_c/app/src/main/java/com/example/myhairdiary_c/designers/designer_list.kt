@@ -17,6 +17,9 @@ class designer_list : AppCompatActivity() {
         select_designer_list(db.firestore)
 
 
+    }    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
     public fun select_designer_list(firestore:FirebaseFirestore) {
 

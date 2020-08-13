@@ -15,9 +15,28 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".main.detailedTrend"></activity>
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".Mypage2"></activity>
+        <activity android:name=".Setting" />
+        <activity android:name=".Mypage" />
+        <activity android:name=".main.second.findpage.find8page" />
+        <activity android:name=".main.second.findpage.find7page" />
+        <activity android:name=".main.second.findpage.find6page" />
+        <activity android:name=".main.second.findpage.find5page" />
+        <activity android:name=".main.second.findpage.find4page" />
+        <activity android:name=".main.second.findpage.find2page_man" />
+        <activity android:name=".main.second.findpage.find2page_woman" />
+        <activity android:name=".main.second.findpage.find1page" />
+        <activity android:name=".main.second.second_home" />
+        <activity android:name=".logo_home">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".main.detailedTrend" />
         <activity android:name=".main.detailedRecommend" />
         <activity android:name=".designers.detailedDesigner4" />
         <activity android:name=".designers.detailedDesigner3" />
@@ -25,13 +44,7 @@
         <activity android:name=".designers.detailedDesigner" />
         <activity android:name=".style.Style_Search" />
         <activity android:name=".designers.designer_list" />
-        <activity android:name=".main.Home2">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".main.Home2" />
         <activity android:name=".Home" />
         <activity android:name=".MainActivity" />
     </application>

@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.firedb.fireDB
+import com.example.myhairdiary_c.main.Home2
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_detailed_designer2.*
 import kotlinx.android.synthetic.main.detailed_designer_uppertab.*
