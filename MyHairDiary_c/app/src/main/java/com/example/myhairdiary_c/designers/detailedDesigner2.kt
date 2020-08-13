@@ -4,16 +4,21 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.firedb.fireDB
 import com.example.myhairdiary_c.main.Home2
+import com.example.myhairdiary_c.main.second.second_home
+import com.example.myhairdiary_c.mypage.Mypage
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_detailed_designer2.*
+import kotlinx.android.synthetic.main.bottom_navi.*
 import kotlinx.android.synthetic.main.detailed_designer_uppertab.*
 
-class detailedDesigner2 : AppCompatActivity() {
+class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,8 +43,29 @@ class detailedDesigner2 : AppCompatActivity() {
 
 val db= fireDB(this)
         select_hair(db.firestore,did!!) // recommend 리스트 출력
+        botnav.setOnNavigationItemSelectedListener(this)
+
+    }
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+
+            R.id.bottom2->
+            {
+                var intent= Intent(this, second_home::class.java)
+                startActivity(intent)
+            }
+//            R.id.bottom3->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+            R.id.bottom4->{
+                var intent= Intent(this, Mypage::class.java)
+                startActivity(intent)
 
 
+            }
+//            R.id.bottom5->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+            else ->""
+        }
+        return true;
     }
 
     public fun select_hair(firestore: FirebaseFirestore,did:String) {// 지금은 recommend리스트랑 똑같음

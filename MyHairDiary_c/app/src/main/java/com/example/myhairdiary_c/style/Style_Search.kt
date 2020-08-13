@@ -1,6 +1,7 @@
 package com.example.myhairdiary_c.style
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,9 +17,12 @@ import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.photourl
+import com.example.myhairdiary_c.main.second.second_home
+import com.example.myhairdiary_c.mypage.Mypage
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_style__search.*
+import kotlinx.android.synthetic.main.bottom_navi.*
 
 class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener{
 
@@ -73,26 +77,31 @@ class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         botnav.getMenu().getItem(1).setChecked(true);
         botnav.setOnNavigationItemSelectedListener(this)
 
-
     }
     override fun onBackPressed() {
         super.onBackPressed()
     }
-override fun onNavigationItemSelected(item: MenuItem): Boolean {
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
-    when(item.itemId){
-//            R.id.bottom1->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()// fragment로 화면 전환 bottomnavi
-//            R.id.bottom2->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+        when(item.itemId){
+
+            R.id.bottom2->
+            {
+                var intent= Intent(this, second_home::class.java)
+                startActivity(intent)
+            }
 //            R.id.bottom3->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
-//            R.id.bottom4->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+            R.id.bottom4->{
+                var intent= Intent(this, Mypage::class.java)
+                startActivity(intent)
+
+
+            }
 //            R.id.bottom5->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
-
-
-
-        else ->""
+            else ->""
+        }
+        return true;
     }
-    return true;
-}
 
 // 밑에 노가다 selectlist있음
 

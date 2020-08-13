@@ -126,20 +126,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/botnav"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:background="@color/cardview_dark_background"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
-        app:layout_constraintBottom_toBottomOf="parent"
 
+
+    <include layout="@layout/bottom_navi"
+        android:layout_width="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/findcomplete_designer"
-        app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/bottomnavi_x" />
+        android:layout_height="120dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

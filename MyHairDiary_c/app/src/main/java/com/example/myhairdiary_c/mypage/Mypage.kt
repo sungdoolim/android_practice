@@ -3,15 +3,19 @@ package com.example.myhairdiary_c.mypage
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.designer
 import com.example.myhairdiary_c.designers.photourl
 import com.example.myhairdiary_c.firedb.fireDB
+import com.example.myhairdiary_c.main.second.second_home
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_mypage.*
+import kotlinx.android.synthetic.main.bottom_navi.*
 
-class Mypage : AppCompatActivity() {
+class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelectedListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +29,28 @@ class Mypage : AppCompatActivity() {
 
             var intent= Intent(this, Mypage2::class.java)
             startActivity(intent)
-
+            botnav.setOnNavigationItemSelectedListener(this)
         }
+    }
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+
+            R.id.bottom2->
+            {
+                var intent= Intent(this, second_home::class.java)
+                startActivity(intent)
+            }
+//            R.id.bottom3->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+            R.id.bottom4->{
+                var intent= Intent(this, Mypage::class.java)
+                startActivity(intent)
+
+
+            }
+//            R.id.bottom5->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+            else ->""
+        }
+        return true;
     }
     public fun select_mydesigner(firestore: FirebaseFirestore) {// 지금은 recommend리스트랑 똑같음 // 얘가 맨 마지막애인가바
 

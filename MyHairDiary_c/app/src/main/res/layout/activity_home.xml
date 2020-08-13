@@ -23,14 +23,5 @@
 
         </FrameLayout>
     </ScrollView>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:layout_width="407dp"
-        android:layout_height="131dp"
-        android:id="@+id/botnav"
-        android:background="@color/cardview_dark_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="0.952"
-        app:menu="@menu/bottomnavi_x" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
