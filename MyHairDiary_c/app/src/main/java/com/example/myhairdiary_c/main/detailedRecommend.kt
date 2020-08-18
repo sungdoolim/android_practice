@@ -29,9 +29,10 @@ class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigatio
         val edit=prefrecommend.edit()
         var did=prefrecommend.getString("did","")
         var url=prefrecommend.getString("url","")
+        val style=prefrecommend.getString("style","")
         Glide.with(this).load(url.toString()).into(selected_style_img)
         var db= fireDB(this)
-        select_wecando(db.firestore,did!!)
+        select_wecando(db.firestore,style!!)
         select_another_style(db.firestore,did!!)
         overview_recom.setOnClickListener(){
 
@@ -45,13 +46,19 @@ class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigatio
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when(item.itemId){
+            R.id.bottom1-> {
+                var intent= Intent(this, Home2::class.java)
+                startActivity(intent)
+            }
 
             R.id.bottom2->
             {
                 var intent= Intent(this, second_home::class.java)
                 startActivity(intent)
             }
-//            R.id.bottom3->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+            R.id.bottom3->{
+
+            }
             R.id.bottom4->{
                 var intent= Intent(this, Mypage::class.java)
                 startActivity(intent)
@@ -63,8 +70,8 @@ class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigatio
         }
         return true;
     }
-    fun select_wecando(firestore:FirebaseFirestore,did:String){
-        firestore?.collection("hair_diary").whereEqualTo("perm",1).get()
+    fun select_wecando(firestore:FirebaseFirestore,style:String){// 이 스타일이 가능한 또다른 디자이너
+        firestore?.collection("hair_diary").whereEqualTo("perm",1).whereEqualTo("major",style).get()
             .addOnCompleteListener {
                 if(it.isSuccessful){
                     var userDTO=ArrayList<designer>()
@@ -87,7 +94,7 @@ class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigatio
                 }
             }
     }
-    fun select_another_style(firestore:FirebaseFirestore,did:String){
+    fun select_another_style(firestore:FirebaseFirestore,did:String){// 이 디자이너의 또다른 스타일
         firestore?.collection("hair_photo").whereEqualTo("id",did).get()
             .addOnCompleteListener {
                 if(it.isSuccessful){

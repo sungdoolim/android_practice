@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import com.example.myhairdiary_c.R
+import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.second_home
 import com.example.myhairdiary_c.mypage.Mypage
 import com.example.myhairdiary_c.style.MyAdapter
@@ -43,7 +44,10 @@ class detailedDesigner3 : AppCompatActivity(), BottomNavigationView.OnNavigation
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when(item.itemId){
-
+            R.id.bottom1-> {
+                var intent= Intent(this, Home2::class.java)
+                startActivity(intent)
+            }
             R.id.bottom2->
             {
                 var intent= Intent(this, second_home::class.java)

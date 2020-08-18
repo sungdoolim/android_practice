@@ -12,6 +12,7 @@ import com.example.myhairdiary_c.frag.home
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.bottom_navi.*
 import kotlinx.android.synthetic.main.home.*
 /*home frag trying....*/
 

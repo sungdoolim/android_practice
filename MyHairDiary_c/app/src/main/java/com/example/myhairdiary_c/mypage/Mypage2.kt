@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import com.example.myhairdiary_c.R
+import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.second_home
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_mypage2.*
@@ -16,6 +17,8 @@ class Mypage2 : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mypage2)
+
+        botnav.getMenu().getItem(3).setChecked(true);
         mypage2_save.setOnClickListener(){
             var iscpt=mypage2_cptbox.isChecked
             println(iscpt)
@@ -32,15 +35,21 @@ class Mypage2 : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
 
         when(item.itemId){
 
+            R.id.bottom1-> {
+                var intent= Intent(this, Home2::class.java)
+                startActivity(intent)
+            }
+
             R.id.bottom2->
             {
                 var intent= Intent(this, second_home::class.java)
                 startActivity(intent)
             }
-//            R.id.bottom3->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+            R.id.bottom3->{
+
+            }
             R.id.bottom4->{
-                var intent= Intent(this, Mypage::class.java)
-                startActivity(intent)
+
 
 
             }

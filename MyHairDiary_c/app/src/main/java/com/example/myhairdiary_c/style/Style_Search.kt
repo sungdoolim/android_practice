@@ -17,6 +17,7 @@ import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.photourl
+import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.second_home
 import com.example.myhairdiary_c.mypage.Mypage
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -85,12 +86,19 @@ class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         when(item.itemId){
 
+            R.id.bottom1-> {
+                var intent= Intent(this, Home2::class.java)
+                startActivity(intent)
+            }
+
             R.id.bottom2->
             {
                 var intent= Intent(this, second_home::class.java)
                 startActivity(intent)
             }
-//            R.id.bottom3->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+            R.id.bottom3->{
+
+            }
             R.id.bottom4->{
                 var intent= Intent(this, Mypage::class.java)
                 startActivity(intent)

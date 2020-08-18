@@ -2,12 +2,12 @@
 <resources>
     <string-array name="style">
         <item>""</item>
-        <item>댄디컷</item>
-        <item>리젠트컷</item>
-        <item>스왓컷</item>
-        <item>크롭컷</item>
-        <item>포머드</item>
-        <item>쉼표머리</item>
+        <item>컷</item>
+        <item>일반펌</item>
+        <item>열펌(세팅/볼륨매직 등)</item>
+        <item>염색(탈색/뿌리염색 등)</item>
+        <item>클리닉</item>
+        <item>스타일링/드라이</item>
     </string-array>
 
 </resources>

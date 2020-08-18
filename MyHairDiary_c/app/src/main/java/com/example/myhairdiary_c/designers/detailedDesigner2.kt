@@ -27,6 +27,8 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
        // bt2.setBackgroundColor(R.color.colorAccent)
         val prefselected=getSharedPreferences("selected",0)
         var did=prefselected.getString("did","")
+        val db= fireDB(this)
+        select_hair(db.firestore,did!!) // recommend 리스트 출력
         bt1.setOnClickListener(){
             var intent= Intent(this, detailedDesigner::class.java)
             startActivity(intent)
@@ -40,9 +42,11 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
             var intent= Intent(this, detailedDesigner4::class.java)
             startActivity(intent)
         }
+        search_commit.setOnClickListener(){
 
-val db= fireDB(this)
-        select_hair(db.firestore,did!!) // recommend 리스트 출력
+            select_hair(db.firestore,did!!) // recommend 리스트 출력
+        }
+
         botnav.setOnNavigationItemSelectedListener(this)
 
     }

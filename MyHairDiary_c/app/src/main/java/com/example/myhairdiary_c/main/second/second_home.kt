@@ -9,8 +9,10 @@ import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.designer_list
 import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.findpage.find1page
+import com.example.myhairdiary_c.mypage.Mypage
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_second_home.*
+import kotlinx.android.synthetic.main.bottom_navi.*
 
 class second_home : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -44,10 +46,18 @@ class second_home : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
                 var intent= Intent(this, Home2::class.java)
                 startActivity(intent)
             }
+
+            R.id.bottom2->
+            {
+
+            }
             R.id.bottom3->{
 
             }
             R.id.bottom4->{
+                var intent= Intent(this, Mypage::class.java)
+                startActivity(intent)
+
 
             }
 //            R.id.bottom5->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()

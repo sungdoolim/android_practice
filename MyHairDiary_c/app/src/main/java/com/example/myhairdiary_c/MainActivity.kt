@@ -80,6 +80,10 @@ class MainActivity : AppCompatActivity() {
                             edit.putInt("age",dc.toObject(designer::class.java)?.age!!.toInt())
                             edit.putString("profile",dc.toObject(designer::class.java)?.profile.toString())
 
+                            edit.putString("major",dc.toObject(designer::class.java)?.major.toString())
+                            edit.putString("major_length",dc.toObject(designer::class.java)?.major_length.toString())
+
+                            edit.putString("region",dc.toObject(designer::class.java)?.region.toString())
                             edit.apply()
                         }
                         var intent= Intent(this, Home2::class.java)

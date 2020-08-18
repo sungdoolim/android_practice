@@ -2,9 +2,11 @@
 <resources>
     <string-array name="len">
         <item>""</item>
-        <item>긴</item>
-        <item>짧은</item>
-        <item>중간</item>
+        <item>턱선까지</item>
+        <item>어깨선까지</item>
+        <item>가슴선까지</item>
+        <item>가슴선 아래</item>
+        <item>기타</item>
     </string-array>
 
 </resources>

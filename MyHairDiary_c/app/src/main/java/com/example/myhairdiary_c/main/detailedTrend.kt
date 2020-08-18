@@ -28,12 +28,19 @@ class detailedTrend : AppCompatActivity(), BottomNavigationView.OnNavigationItem
 
         when(item.itemId){
 
+            R.id.bottom1-> {
+                var intent= Intent(this, Home2::class.java)
+                startActivity(intent)
+            }
+
             R.id.bottom2->
             {
                 var intent= Intent(this, second_home::class.java)
                 startActivity(intent)
             }
-//            R.id.bottom3->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+            R.id.bottom3->{
+
+            }
             R.id.bottom4->{
                 var intent= Intent(this, Mypage::class.java)
                 startActivity(intent)
