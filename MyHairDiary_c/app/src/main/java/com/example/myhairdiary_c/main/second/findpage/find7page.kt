@@ -1,8 +1,6 @@
 package com.example.myhairdiary_c.main.second.findpage
-
 import android.content.Context
 import android.content.Intent
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -168,7 +166,6 @@ if(region=="전지역"){
                     var userDTO=ArrayList<designer>()
                     for(dc in it.result!!.documents){
                         dc.toObject(designer::class.java)?.let { it1 ->
-
                             if(length=="기타"){
                                 userDTO.add(it1)
                             }else{
