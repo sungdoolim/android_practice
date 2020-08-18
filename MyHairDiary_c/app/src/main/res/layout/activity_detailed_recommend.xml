@@ -36,26 +36,26 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/imageView7"
+                    android:id="@+id/isscrab"
                     android:layout_width="59dp"
                     android:layout_height="38dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="20dp"
-                    android:src="@drawable/ic_launcher_foreground"
+                    android:src="@drawable/star_icon"
                     app:layout_constraintBottom_toTopOf="@+id/textView14"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/selected_style_img" />
 
-                <ImageView
-                    android:layout_width="59dp"
+                <Button
+                    android:layout_width="wrap_content"
                     android:layout_height="38dp"
                     android:layout_marginStart="36dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="20dp"
-                    android:src="@drawable/ic_launcher_foreground"
+                   android:text="공유버튼이래~"
                     app:layout_constraintBottom_toTopOf="@+id/textView14"
-                    app:layout_constraintStart_toEndOf="@+id/imageView7"
+                    app:layout_constraintStart_toEndOf="@+id/isscrab"
                     app:layout_constraintTop_toBottomOf="@+id/selected_style_img" />
 
                 <TextView

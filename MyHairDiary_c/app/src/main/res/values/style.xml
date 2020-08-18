@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="style">
-        <item>""</item>
+        <item>스타일</item>
         <item>컷</item>
         <item>일반펌</item>
         <item>열펌(세팅/볼륨매직 등)</item>

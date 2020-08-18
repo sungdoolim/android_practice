@@ -6,7 +6,9 @@ data class designer(val id:String="",val dimg:Int=0,val name:String="",
 val profile:String="",
                     val gender:String="",
                     val major_length:String="",
-                    val major:String="",val region:String=""
-                    ,val memo:String=""
+                    val major:String="",val region:String="",val region2:String="전 지역"
+                    ,val memo:String="",
+                    val customid:String=""
+
 ) {}
 //성별/머리길이/주요시술/지역/희망사항

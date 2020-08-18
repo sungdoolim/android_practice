@@ -88,19 +88,19 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="레이어드컷"/>
+            android:text="레이어드"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="레이어드컷"/>
+            android:text="레이어드"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="레이어드컷"/>
+            android:text="레이어드"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="레이어드컷"/>
+            android:text="레이어드"/>
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
@@ -135,22 +135,22 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
         </LinearLayout>
 
         <TextView
@@ -168,17 +168,17 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -201,17 +201,17 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -233,22 +233,22 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
         </LinearLayout>
 
         <TextView
@@ -265,22 +265,22 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
         </LinearLayout>
 
         <TextView
@@ -297,22 +297,22 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
         </LinearLayout>
 
         <TextView
@@ -330,22 +330,22 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="레이어드컷" />
+                android:text="레이어드" />
         </LinearLayout>
     </LinearLayout>
         <LinearLayout

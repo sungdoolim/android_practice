@@ -40,15 +40,9 @@ class MainActivity : AppCompatActivity() {
         webSettings.javaScriptEnabled = true
         wvN_login.addJavascriptInterface(AndroidBridge(this), "MyTestApp")
         wvN_login.addJavascriptInterface(AndroidBridge(this), "MyTestApp_logout")
-
-
         Nloginbt.setOnClickListener(){
         wvN_login.reload()
-
-
         }
-
-
         val pref=getSharedPreferences("session",0)
         var edit=pref.edit()
         val db= fireDB(this)

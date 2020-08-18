@@ -34,7 +34,7 @@ class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         val pref=getSharedPreferences("session",0)
         var style=intent.getStringExtra("style").toString()
-        selectList(style, "", "")
+        selectList(style, "길이", "성별")
         var len:String=""
         var gender:String=""
 
@@ -177,10 +177,8 @@ class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         //하.... 나중에 개선 합시다....
         var firestore=FirebaseFirestore.getInstance()
-        if(style==""&&len==""&&gender==""){
-        }
-        else if(style==""&&len!=""&&gender==""){
-            firestore?.collection("hair_photo").whereEqualTo("len",len).get()
+        if(style=="스타일"&&(len=="길이"||len=="기타")&&(gender=="성별")){
+            firestore?.collection("hair_photo").get()
                 .addOnCompleteListener {
                     var userDTO=ArrayList<photourl>()
                     if(it.isSuccessful){
@@ -203,7 +201,32 @@ class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     }
                 }
         }
-        else if(style==""&&len==""&&gender!=""){
+        else if(style=="스타일"&&(len!="길이"&&len!="기타")&&(gender==""||gender=="성별")){
+            firestore?.collection("hair_photo").whereEqualTo("length",len).get()
+                .addOnCompleteListener {
+                    var userDTO=ArrayList<photourl>()
+                    if(it.isSuccessful){
+                        for(dc in it.result!!.documents){
+                            dc.toObject(photourl::class.java)?.let { it1 -> userDTO.add(it1) }
+                        }
+                        var adapter = MyAdapter(
+                            applicationContext,
+                            R.layout.search_grid_adapter,  // GridView 항목의 레이아웃 row.xml
+                            userDTO
+                        )
+                        search_grid.adapter = adapter
+                        search_grid.setOnItemClickListener { parent, view, position, id ->
+                            var item= search_grid.adapter.getItem(position) as photourl
+                            println("${item.name}")// 이렇게 데이터 받을수 있고...
+                        }
+                        print("select list clear")
+                    }else{
+                        println("fail")
+                    }
+                }
+        }
+        //style=="스타일을 선택하세요"&&(len=="길이를 선택하세요"||len=="기타")&&(gender=="성별을 선택하세요")
+        else if(style=="스타일"&&len=="길이"&&gender!="성별"){
             firestore?.collection("hair_photo").whereEqualTo("gender",gender).get()
                 .addOnCompleteListener {
                     var userDTO=ArrayList<photourl>()
@@ -227,9 +250,9 @@ class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     }
                 }
         }
-        else if(style==""&&len!=""&&gender!=""){
+         else if(style=="스타일"&&(len!="길이"&&len!="기타")&&gender!="성별"){
             var firestore=FirebaseFirestore.getInstance()
-            firestore?.collection("hair_photo").whereEqualTo("len",len).whereEqualTo("gender",gender).get()
+            firestore?.collection("hair_photo").whereEqualTo("length",len).whereEqualTo("gender",gender).get()
                 .addOnCompleteListener {
                     var userDTO=ArrayList<photourl>()
                     if(it.isSuccessful){
@@ -252,7 +275,7 @@ class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     }
                 }
         }
-        else if(style!=""&&len==""&&gender==""){
+        else if(style!="스타일"&&(len=="길이"||len=="기타")&&gender=="성별"){
             firestore?.collection("hair_photo").whereEqualTo("style",style).get()
                 .addOnCompleteListener {
                     var userDTO=ArrayList<photourl>()
@@ -276,8 +299,8 @@ class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     }
                 }
         }
-        else if(style!=""&&len!=""&&gender==""){
-            firestore?.collection("hair_photo").whereEqualTo("style",style).whereEqualTo("len",len).get()
+        else if(style!="스타일"&&(len!="길이"&&len!="기타")&&gender=="성별"){
+            firestore?.collection("hair_photo").whereEqualTo("style",style).whereEqualTo("length",len).get()
                 .addOnCompleteListener {
                     var userDTO=ArrayList<photourl>()
                     if(it.isSuccessful){
@@ -300,7 +323,7 @@ class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                     }
                 }
         }
-        else if(style!=""&&len==""&&gender!=""){
+        else if(style!="스타일"&&(len=="길이"||len=="기타")&&gender!="성별"){
             firestore?.collection("hair_photo").whereEqualTo("style",style).whereEqualTo("gender",gender).get()
                 .addOnCompleteListener {
                     var userDTO=ArrayList<photourl>()
@@ -325,7 +348,7 @@ class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 }
         }
         else {
-            firestore?.collection("hair_photo").whereEqualTo("style",style).whereEqualTo("len",len).whereEqualTo("gender",gender).get()
+            firestore?.collection("hair_photo").whereEqualTo("style",style).whereEqualTo("length",len).whereEqualTo("gender",gender).get()
                 .addOnCompleteListener {
                     var userDTO=ArrayList<photourl>()
                     if(it.isSuccessful){

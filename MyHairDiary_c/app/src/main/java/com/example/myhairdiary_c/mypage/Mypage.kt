@@ -4,8 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.designer
 import com.example.myhairdiary_c.designers.photourl
@@ -25,14 +25,17 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
         setContentView(R.layout.activity_mypage)
 
         botnav.getMenu().getItem(3).setChecked(true);
-
         botnav.setOnNavigationItemSelectedListener(this)
+        val pref=getSharedPreferences("session",0)
+        val id=pref.getString("id","").toString()
+
+        Glide.with(this).load(pref.getString("profile","")).into(User_Profile_Photo)
 
         val db= fireDB(this)
         val firestore=db.firestore
         //   myfav_designer /   myfav_style
-        select_mystyle(firestore)
-        select_mydesigner(firestore)
+        select_mystyle(firestore,id)
+        select_mydesigner(firestore,id)
         gotomypage2.setOnClickListener(){
 
             var intent= Intent(this, Mypage2::class.java)
@@ -40,9 +43,12 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
         }
     }
 
-    public fun select_mydesigner(firestore: FirebaseFirestore) {// 지금은 recommend리스트랑 똑같음 // 얘가 맨 마지막애인가바
+    public fun select_mydesigner(
+        firestore: FirebaseFirestore,
+        id: String
+    ) {// 지금은 recommend리스트랑 똑같음 // 얘가 맨 마지막애인가바
 
-        firestore?.collection("hair_diary").whereEqualTo("perm",1).get()
+        firestore?.collection("hair_mydesigner").whereEqualTo("customid",id).get()
             .addOnCompleteListener {
                 if(it.isSuccessful){
                     var userDTO=ArrayList<designer>()
@@ -66,9 +72,12 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
             }
     }
 
-    fun select_mystyle(firestore: FirebaseFirestore) {// 지금은 recommend리스트랑 똑같음 // 얘가 맨 마지막애인가바
+    fun select_mystyle(
+        firestore: FirebaseFirestore,
+        id: String
+    ) {// 지금은 recommend리스트랑 똑같음 // 얘가 맨 마지막애인가바
 
-        firestore?.collection("hair_photo").get()
+        firestore?.collection("hair_mystyle").whereEqualTo("customid",id).get()
             .addOnCompleteListener {
                 if(it.isSuccessful){
                     var userDTO=ArrayList<photourl>()

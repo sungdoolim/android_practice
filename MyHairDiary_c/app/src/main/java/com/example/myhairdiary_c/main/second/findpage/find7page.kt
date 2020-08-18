@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.designer
-import com.example.myhairdiary_c.designers.designerAdapter
 import com.example.myhairdiary_c.firedb.fireDB
 import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.second_home
@@ -42,11 +41,19 @@ class find7page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
     val length=pref.getString("length","").toString()
     val kind=pref.getString("kind","").toString()
     val region=pref.getString("region","").toString()
+    val region2=pref.getString("region2","").toString()
     val demand=pref.getString("demand","").toString()
 
+if(region=="전지역"){
+    select_designer_listAll(db.firestore,gender,length,kind,region,region2,demand)
+}else if(region2=="전지역"){
+    select_designer_listPartAll(db.firestore,gender,length,kind,region,region2,demand)
 
-    select_designer_list(db.firestore,gender,length,kind,region,demand)
-    println("${gender}, ${length}, ${kind}, ${region}, ${demand}")
+}else {
+    select_designer_list(db.firestore, gender, length, kind, region, region2, demand)
+}
+
+    println("${gender}, ${length}, ${kind}, ${region}, ${region2},  ${demand}")
     retry_find.setOnClickListener(){
         var intent= Intent(this, second_home::class.java)
         startActivity(intent)
@@ -78,27 +85,99 @@ class find7page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
         }
         return true;
     }
-    public fun select_designer_list(firestore: FirebaseFirestore,gender:String,length:String,kind:String,region:String,demand:String) {
 
 
+    fun select_designer_listAll(firestore: FirebaseFirestore,gender:String,length:String,kind:String,region:String,region2:String,demand:String){
         firestore?.collection("hair_diary").whereEqualTo("perm",1)
-            .whereEqualTo("region",region).whereEqualTo("major",kind).get()
+            .whereEqualTo("major",kind).get()
             .addOnCompleteListener {
+
 
                 if(it.isSuccessful){
                     var userDTO=ArrayList<designer>()
                     for(dc in it.result!!.documents){
                         dc.toObject(designer::class.java)?.let { it1 ->
-                            println("reviewcount : ${it1.reviewcount}")
-                        if(length=="기타"){
-                            userDTO.add(it1)
-                        }else{
-                            if(it1.major_length==length){
+                            if(length=="기타"){
                                 userDTO.add(it1)
                             }else{
-
+                                if(it1.major_length==length){
+                                    userDTO.add(it1)
+                                }else{
+                                }
                             }
-                        }
+                        } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                    }
+                    findcomplete_designer.addItemDecoration(DividerItemDecoration(applicationContext,
+                        HORIZONTAL))// 경계선 추가!!!!
+                    findcomplete_designer.layoutManager=
+                        LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+                    findcomplete_designer.setHasFixedSize(true)
+                    findcomplete_designer.adapter=
+                        findcompleteAdapter(
+                            this,
+                            userDTO
+                        )
+                }else{
+                    println("fail")
+                }
+            }
+    }
+    fun select_designer_listPartAll(firestore: FirebaseFirestore,gender:String,length:String,kind:String,region:String,region2:String,demand:String){
+        firestore?.collection("hair_diary").whereEqualTo("perm",1)
+            .whereEqualTo("region",region).whereEqualTo("major",kind).get()
+            .addOnCompleteListener {
+                if(it.isSuccessful){
+                    var userDTO=ArrayList<designer>()
+                    for(dc in it.result!!.documents){
+                        dc.toObject(designer::class.java)?.let { it1 ->
+
+                            if(length=="기타"){
+                                userDTO.add(it1)
+                            }else{
+                                if(it1.major_length==length){
+                                    userDTO.add(it1)
+                                }else{
+
+                                }
+                            }
+
+                        } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                    }
+                    findcomplete_designer.addItemDecoration(DividerItemDecoration(applicationContext,
+                        HORIZONTAL))// 경계선 추가!!!!
+                    findcomplete_designer.layoutManager=
+                        LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+                    findcomplete_designer.setHasFixedSize(true)
+                    findcomplete_designer.adapter=
+                        findcompleteAdapter(
+                            this,
+                            userDTO
+                        )
+                }else{
+                    println("fail")
+                }
+            }
+    }
+    public fun select_designer_list(firestore: FirebaseFirestore,gender:String,length:String,kind:String,region:String,region2:String,demand:String) {
+        firestore?.collection("hair_diary").whereEqualTo("perm",1)
+            .whereEqualTo("region",region).whereEqualTo("region2",region2).whereEqualTo("major",kind).get()
+            .addOnCompleteListener {
+
+
+                if(it.isSuccessful){
+                    var userDTO=ArrayList<designer>()
+                    for(dc in it.result!!.documents){
+                        dc.toObject(designer::class.java)?.let { it1 ->
+
+                            if(length=="기타"){
+                                userDTO.add(it1)
+                            }else{
+                                if(it1.major_length==length){
+                                    userDTO.add(it1)
+                                }else{
+
+                                }
+                            }
 
                         } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }

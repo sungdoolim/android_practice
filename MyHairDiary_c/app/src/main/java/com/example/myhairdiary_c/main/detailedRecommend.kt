@@ -26,22 +26,80 @@ class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigatio
         setContentView(R.layout.activity_detailed_recommend)
 
         val prefrecommend=getSharedPreferences("recommended",0)
+        val pref=getSharedPreferences("session",0)
         val edit=prefrecommend.edit()
+        val id=pref.getString("id","").toString()
         var did=prefrecommend.getString("did","")
-        var url=prefrecommend.getString("url","")
+        var url=prefrecommend.getString("url","").toString()
         val style=prefrecommend.getString("style","")
-        Glide.with(this).load(url.toString()).into(selected_style_img)
+        Glide.with(this).load(url).into(selected_style_img)
         var db= fireDB(this)
         select_wecando(db.firestore,style!!)
         select_another_style(db.firestore,did!!)
+        isScrab(db.firestore,id,url)
+
+        isscrab.setOnClickListener(){
+            addmystyle(db.firestore,id,did,url)
+        }
+
+
+
+
         overview_recom.setOnClickListener(){
-
-
             var intent= Intent(this, designer_list::class.java)
-
             startActivity(intent)
         }
         botnav.setOnNavigationItemSelectedListener(this)
+    }
+    fun addmystyle(        firestore: FirebaseFirestore,        id: String,        did: String,        url: String    ){
+
+        var userDTO=
+            photourl(url,did,-1,"","","","","",id)
+        // 밑에 document를 공백으로 두면 임의의 아이디를 생성해서 추가함
+        firestore?.collection("hair_mystyle").whereEqualTo("customid",id)
+            .whereEqualTo("id",did).whereEqualTo("url",url).get().addOnCompleteListener{
+                if( it.result!!.documents.size!=0){
+                 firestore?.collection("hair_mystyle").document(it.result!!.documents.get(0).id).delete()
+                        .addOnCompleteListener {
+                            if(it.isSuccessful)
+
+                                isscrab.setImageResource(R.drawable.star_icon)
+                        }
+
+                }else{
+                    firestore?.collection("hair_mystyle")?.document()?.set(userDTO)
+                        .addOnCompleteListener {
+                            if(it.isSuccessful)
+
+                                isscrab.setImageResource(R.drawable.fullstart_icon)
+                        }
+                }
+            }
+
+
+
+    }
+   fun isScrab(firestore: FirebaseFirestore, id: String,url:String) {
+
+       firestore?.collection("hair_mystyle").whereEqualTo("customid",id).get()
+           .addOnCompleteListener {
+               if(it.isSuccessful){
+                   var userDTO=ArrayList<photourl>()
+
+                   for(dc in it.result!!.documents){
+                       dc.toObject(photourl::class.java)?.let { it1 ->
+                       if(it1.url==url){
+                       isscrab.setImageResource(R.drawable.fullstart_icon)
+                       }
+                       } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                   }
+
+               }else{
+                   println("fail")
+               }
+           }
+
+
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 

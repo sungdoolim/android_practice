@@ -19,6 +19,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_find8page.*
 import kotlinx.android.synthetic.main.bottom_navi.*
+import androidx.recyclerview.widget.DividerItemDecoration.HORIZONTAL
 
 class find8page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -28,9 +29,16 @@ class find8page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
 
         botnav.getMenu().getItem(1).setChecked(true);
         val prefselected=getSharedPreferences("selected",0)
-
         val db= fireDB(this)
-        select_designer_list(db.firestore)
+        val pref=getSharedPreferences("tab2",0)
+        val edit=pref.edit()
+        val gender=pref.getString("gender","").toString()
+        val length=pref.getString("length","").toString()
+        val kind=pref.getString("kind","").toString()
+        val region=pref.getString("region","").toString()
+        val region2=pref.getString("region2","").toString()
+        val demand=pref.getString("demand","").toString()
+        select_designer_list(db.firestore,gender,length,kind,region,demand)
         var url=prefselected.getString("profile","")
         var did=prefselected.getString("did","")
 //intent.getStringExtra("profile")
@@ -71,26 +79,32 @@ class find8page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
         }
         return true;
     }
-    public fun select_designer_list(firestore: FirebaseFirestore) {
+    public fun select_designer_list(firestore: FirebaseFirestore,gender:String,length:String,kind:String,region:String,demand:String) {
 
-        firestore?.collection("hair_diary").whereEqualTo("perm",1).get()
+
+        firestore?.collection("hair_diary").whereEqualTo("perm",1)
+            .whereEqualTo("region",region).whereEqualTo("major",kind).get()
             .addOnCompleteListener {
+
                 if(it.isSuccessful){
                     var userDTO=ArrayList<designer>()
                     for(dc in it.result!!.documents){
                         dc.toObject(designer::class.java)?.let { it1 ->
                             println("reviewcount : ${it1.reviewcount}")
-                            userDTO.add(it1) } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                            if(length=="기타"){
+                                userDTO.add(it1)
+                            }else{
+                                if(it1.major_length==length){
+                                    userDTO.add(it1)
+                                }else{
+
+                                }
+                            }
+
+                        } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
-
-
-                    findcomplete_designer.addItemDecoration(
-                        DividerItemDecoration(applicationContext,
-                            DividerItemDecoration.HORIZONTAL
-                        )
-                    )// 경계선 추가!!!!
-
-
+                    findcomplete_designer.addItemDecoration(DividerItemDecoration(applicationContext,
+                        HORIZONTAL))// 경계선 추가!!!!
                     findcomplete_designer.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
                     findcomplete_designer.setHasFixedSize(true)

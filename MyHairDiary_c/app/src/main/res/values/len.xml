@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="len">
-        <item>""</item>
+        <item>길이</item>
         <item>턱선까지</item>
         <item>어깨선까지</item>
         <item>가슴선까지</item>

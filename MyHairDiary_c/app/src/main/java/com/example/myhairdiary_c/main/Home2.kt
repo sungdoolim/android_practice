@@ -90,6 +90,7 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
         }
         search_bt.setOnClickListener(){
             var key=editSearch.text.toString()
+            println("key test....")
             var intent= Intent(this, Style_Search::class.java)
             intent.putExtra("style",key)
             startActivity(intent)

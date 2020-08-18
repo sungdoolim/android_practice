@@ -9,34 +9,33 @@
     android:layout_height="50dp">
 
 
-
         <ImageView
             android:id="@+id/bt1"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="50dp"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:layout_width="52dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/num1_icon" />
 
         <ImageView
             android:id="@+id/bt2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:layout_width="52dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="0dp"
+            android:src="@drawable/num2_icon" />
 
         <ImageView
             android:id="@+id/bt3"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:layout_width="52dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="0dp"
+            android:src="@drawable/num3_icon" />
 
         <ImageView
             android:id="@+id/bt4"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="20dp"
-            android:src="@drawable/ic_launcher_foreground" />
+            android:layout_width="52dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="0dp"
+            android:src="@drawable/num4_icon" />
 
 
 </LinearLayout>
