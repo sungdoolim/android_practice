@@ -61,23 +61,16 @@ class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigatio
                 if( it.result!!.documents.size!=0){
                  firestore?.collection("hair_mystyle").document(it.result!!.documents.get(0).id).delete()
                         .addOnCompleteListener {
-                            if(it.isSuccessful)
-
-                                isscrab.setImageResource(R.drawable.star_icon)
+                           isscrab.setImageResource(R.drawable.star_icon)
                         }
-
                 }else{
                     firestore?.collection("hair_mystyle")?.document()?.set(userDTO)
                         .addOnCompleteListener {
                             if(it.isSuccessful)
-
                                 isscrab.setImageResource(R.drawable.fullstart_icon)
                         }
                 }
             }
-
-
-
     }
    fun isScrab(firestore: FirebaseFirestore, id: String,url:String) {
 

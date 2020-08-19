@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
+import com.example.myhairdiary_c.Setting
 import com.example.myhairdiary_c.designers.designer
 import com.example.myhairdiary_c.designers.photourl
 import com.example.myhairdiary_c.firedb.fireDB
@@ -28,7 +29,10 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
         botnav.setOnNavigationItemSelectedListener(this)
         val pref=getSharedPreferences("session",0)
         val id=pref.getString("id","").toString()
+        val mail=pref.getString("mail","").toString()
 
+        myname.text=id+" 님!"
+        myemail.text="오늘도 기분 좋은 하루 되세요~"
         Glide.with(this).load(pref.getString("profile","")).into(User_Profile_Photo)
 
         val db= fireDB(this)
@@ -36,6 +40,10 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
         //   myfav_designer /   myfav_style
         select_mystyle(firestore,id)
         select_mydesigner(firestore,id)
+        settingsbt.setOnClickListener(){
+            var intent= Intent(this, Setting::class.java)// 이게 공지나...그런 설정들
+            startActivity(intent)
+        }
         gotomypage2.setOnClickListener(){
 
             var intent= Intent(this, Mypage2::class.java)
@@ -43,11 +51,8 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
         }
     }
 
-    public fun select_mydesigner(
-        firestore: FirebaseFirestore,
-        id: String
-    ) {// 지금은 recommend리스트랑 똑같음 // 얘가 맨 마지막애인가바
-
+    public fun select_mydesigner(        firestore: FirebaseFirestore,        id: String ) {
+        // 지금은 recommend리스트랑 똑같음 // 얘가 맨 마지막애인가바
         firestore?.collection("hair_mydesigner").whereEqualTo("customid",id).get()
             .addOnCompleteListener {
                 if(it.isSuccessful){
@@ -58,9 +63,7 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
                             userDTO.add(it1) } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
                     println("designers  len = ${userDTO.size}")
-
                     // recommend_designer_list 는 id로 얻어온 recyclerview 임
-
                     myfav_designer.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
                     myfav_designer.setHasFixedSize(true)
@@ -76,7 +79,6 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
         firestore: FirebaseFirestore,
         id: String
     ) {// 지금은 recommend리스트랑 똑같음 // 얘가 맨 마지막애인가바
-
         firestore?.collection("hair_mystyle").whereEqualTo("customid",id).get()
             .addOnCompleteListener {
                 if(it.isSuccessful){
@@ -87,9 +89,7 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
                             userDTO.add(it1) } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
                     println("designers  len = ${userDTO.size}")
-
                     // recommend_designer_list 는 id로 얻어온 recyclerview 임
-
                     myfav_style.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
                     myfav_style.setHasFixedSize(true)
@@ -100,15 +100,12 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
                 }
             }
     }
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-
             R.id.bottom1-> {
                 var intent= Intent(this, Home2::class.java)
                 startActivity(intent)
             }
-
             R.id.bottom2->
             {
                 var intent= Intent(this, second_home::class.java)
@@ -120,13 +117,10 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
             R.id.bottom4->{
                 var intent= Intent(this, Mypage::class.java)
                 startActivity(intent)
-
-
             }
 //            R.id.bottom5->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
             else ->""
         }
         return true
     }
-
 }

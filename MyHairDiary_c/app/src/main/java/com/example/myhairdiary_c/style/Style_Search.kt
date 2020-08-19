@@ -9,10 +9,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.BaseAdapter
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
@@ -34,6 +31,7 @@ class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
         val pref=getSharedPreferences("session",0)
         var style=intent.getStringExtra("style").toString()
+        if(style==""){style="스타일"}
         selectList(style, "길이", "성별")
         var len:String=""
         var gender:String=""
@@ -192,8 +190,10 @@ class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                         )
                         search_grid.adapter = adapter
                         search_grid.setOnItemClickListener { parent, view, position, id ->
-                            var item= search_grid.adapter.getItem(position) as photourl
-                            println("${item.name}")// 이렇게 데이터 받을수 있고...
+                            search_grid.adapter.getItem(position)
+
+                            
+
                         }
                         print("select list clear")
                     }else{

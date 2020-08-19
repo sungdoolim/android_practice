@@ -69,14 +69,16 @@
                                 android:src="@drawable/book_icon" />
                         </LinearLayout>
 
+
                         <ImageView
                             android:id="@+id/settings"
                             android:layout_width="48dp"
                             android:layout_height="34dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="4dp"
                             android:src="@drawable/setting_icon"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
-
 
                         <EditText
                             android:id="@+id/editSearch"
@@ -122,7 +124,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="150dp"
                         android:layout_marginTop="208dp"
-                        android:background="@color/cardview_dark_background"
+                        android:background="@color/coloryellow_b"
                         android:orientation="horizontal"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:layout_editor_absoluteX="0dp">
@@ -148,7 +150,6 @@
 
                             android:layout_marginStart="64dp"
                             android:layout_marginTop="24dp"
-                            android:background="@drawable/border"
                             android:fontFamily="sans-serif-black"
                             android:includeFontPadding="false"
                             android:text="My Information"
@@ -167,7 +168,6 @@
                             android:autoSizePresetSizes="false"
                             android:autoSizeTextType="none"
 
-                            android:background="@drawable/border"
                             android:fontFamily="sans-serif-black"
                             android:fontFeatureSettings="14dp"
                             android:text="로그인이 필요합니다."
@@ -179,13 +179,12 @@
                             app:layout_constraintStart_toEndOf="@+id/User_Profile_Photo"
                             app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
+                        <!--android:background="@drawable/border"-->
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="64dp"
                             android:layout_marginTop="12dp"
-                            android:background="@drawable/border"
-
                             android:fontFamily="sans-serif-black"
                             android:text="머리자른지 ~ 됐습니다"
                             android:textSize="14dp"
@@ -198,8 +197,9 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout4"
                         android:layout_width="match_parent"
+                        android:background="@color/coloryellow_b"
                         android:layout_height="200dp"
-                        android:layout_marginTop="34dp"
+                        android:layout_marginTop="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
@@ -231,7 +231,9 @@
                         android:id="@+id/constraintLayout3"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
+                        android:background="@color/coloryellow_b"
 
+                        android:layout_marginTop="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.022"
                         app:layout_constraintStart_toStartOf="parent"
@@ -263,7 +265,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
+                        android:background="@color/coloryellow_b"
                         app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginTop="20dp"
                         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
                         <TextView

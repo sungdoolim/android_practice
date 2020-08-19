@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.second_home
@@ -18,6 +19,11 @@ class Mypage2 : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mypage2)
 
+        val pref=getSharedPreferences("session",0)
+        val profile=pref.getString("profile","").toString()
+        val name=pref.getString("name","").toString()
+        Glide.with(this).load(profile).into(mypage2_profile)
+        mypage2_name.text=name
         botnav.getMenu().getItem(3).setChecked(true);
         mypage2_save.setOnClickListener(){
             var iscpt=mypage2_cptbox.isChecked
