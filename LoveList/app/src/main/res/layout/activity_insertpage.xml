@@ -11,18 +11,17 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="80dp"
         android:text="어디 갈껀대에ㅔ엥~?:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/goplace"
-        android:layout_width="156dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="64dp"
+        android:layout_width="197dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="68dp"
         android:hint="냐옹"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,18 +30,18 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="120dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="148dp"
         android:text="하고싶은거!!"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
         android:id="@+id/gocontent"
-        android:layout_width="225dp"
-        android:layout_height="154dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="256dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="96dp"
         android:hint="멍멍"
         app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/goplace" />
@@ -53,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="136dp"
         android:layout_marginBottom="204dp"
+        android:background="@color/coloryellow_b"
         android:text="확인"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

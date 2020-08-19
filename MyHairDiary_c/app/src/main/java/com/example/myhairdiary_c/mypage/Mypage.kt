@@ -44,9 +44,19 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
             var intent= Intent(this, Setting::class.java)// 이게 공지나...그런 설정들
             startActivity(intent)
         }
+        goback.setOnClickListener(){
+            this.onBackPressed()
+        }
         gotomypage2.setOnClickListener(){
-
             var intent= Intent(this, Mypage2::class.java)
+            startActivity(intent)
+        }
+        mydesigners.setOnClickListener(){
+            var intent= Intent(this, glide_mydesigners::class.java)
+            startActivity(intent)
+        }
+        mystyles.setOnClickListener(){
+            var intent= Intent(this, glide_mystyles::class.java)
             startActivity(intent)
         }
     }

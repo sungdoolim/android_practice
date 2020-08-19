@@ -23,6 +23,7 @@ class detailedDesigner3 : AppCompatActivity(), BottomNavigationView.OnNavigation
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed_designer3)
       //  bt3.setBackgroundColor(R.color.colorAccent)
+        bt3.setImageResource(R.drawable.num3_icon)
         val prefselected=getSharedPreferences("selected",0)
         var did=prefselected.getString("did","")
         selectList(did!!)

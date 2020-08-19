@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.photourl
+import com.example.myhairdiary_c.main.detailedRecommend
 
 class heart_mystyleAdapter (val context: Context, val designerList:ArrayList<photourl>): RecyclerView.Adapter<heart_mystyleAdapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -20,6 +21,7 @@ class heart_mystyleAdapter (val context: Context, val designerList:ArrayList<pho
             view
         ).apply {
             itemView.setOnClickListener {
+
                 val curPos:Int=adapterPosition
                 var dl: photourl =designerList.get(curPos)
                 val prefrecommend=context.getSharedPreferences("recommended",0)
@@ -33,6 +35,9 @@ class heart_mystyleAdapter (val context: Context, val designerList:ArrayList<pho
                 edit.putString("style",dl.style)
                 edit.putInt("pcount",dl.pcount)
                 edit.apply()
+
+                var intent= Intent(view.getContext(), detailedRecommend::class.java)// 이게 공지나...그런 설정들
+                context.startActivity(intent)
 
 //                println("${dl.url}")
 //                println("${dl.gender}")

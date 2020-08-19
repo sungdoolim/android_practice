@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.designer
+import com.example.myhairdiary_c.designers.detailedDesigner
 
 class heart_mydesignerAdapter (val context: Context, val designerList:ArrayList<designer>): RecyclerView.Adapter<heart_mydesignerAdapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -22,14 +23,24 @@ class heart_mydesignerAdapter (val context: Context, val designerList:ArrayList<
             itemView.setOnClickListener {
                 val curPos:Int=adapterPosition
                 var dl: designer =designerList.get(curPos)
-                val prefrecommend=context.getSharedPreferences("recommended",0)
-                val edit=prefrecommend.edit()
+                val pref=context.getSharedPreferences("selected",0)
+                val edit=pref.edit()
+                edit.clear()
+
                 edit.putString("did",dl.id)
+                edit.putInt("age",dl.age)
                 edit.putString("memo",dl.memo)
                 edit.putString("name",dl.name)
-
+                edit.putString("phone",dl.phone)
+                edit.putInt("index",dl.index)
+                edit.putInt("year",dl.year)
+                edit.putInt("monthc",dl.monthc)
+                edit.putString("major",dl.major)
+                edit.putInt("reviewcount",dl.reviewcount)
+                edit.putString("profile",dl.profile)
                 edit.apply()
-
+                val intent = Intent(view.getContext(), detailedDesigner::class.java)
+                context.startActivity(intent)
 //                println("${dl.url}")
 //                println("${dl.gender}")
 //                println("${dl.id}")

@@ -25,6 +25,9 @@ class Mypage2 : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
         Glide.with(this).load(profile).into(mypage2_profile)
         mypage2_name.text=name
         botnav.getMenu().getItem(3).setChecked(true);
+        goback2.setOnClickListener(){
+            this.onBackPressed()
+        }
         mypage2_save.setOnClickListener(){
             var iscpt=mypage2_cptbox.isChecked
             println(iscpt)

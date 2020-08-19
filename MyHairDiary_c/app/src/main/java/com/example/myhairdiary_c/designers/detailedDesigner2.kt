@@ -25,6 +25,7 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed_designer2)
        // bt2.setBackgroundColor(R.color.colorAccent)
+        bt2.setImageResource(R.drawable.num2_icon)
         val prefselected=getSharedPreferences("selected",0)
         var did=prefselected.getString("did","")
         val db= fireDB(this)

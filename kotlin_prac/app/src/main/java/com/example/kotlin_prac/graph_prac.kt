@@ -38,23 +38,23 @@ class graph_prac : AppCompatActivity() {
     }
 
 fun colorpic(savedInstanceState: Bundle?) {
-    colorPicker.subscribe({ color, fromUser, shouldPropagate ->
+    colorPicker.subscribe { color, fromUser, shouldPropagate ->
         var c=color.toString()
 
-       // pickedColor.setBackgroundColor(Integer.parseInt(c))
+        // pickedColor.setBackgroundColor(Integer.parseInt(c))
 
-      //  Toast.makeText(this,"setbackground : ${color.toString()}",Toast.LENGTH_SHORT).show()
+        //  Toast.makeText(this,"setbackground : ${color.toString()}",Toast.LENGTH_SHORT).show()
 
         // colorHex.text=colorHex(color).toString()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-         //   window.statusBarColor = Integer.parseInt(c)
+            //   window.statusBarColor = Integer.parseInt(c)
         }
         val actionBar: ActionBar? = supportActionBar
         if (actionBar != null) {// 여기서 색상 바뀌는 거 확인 가능
 
 
-        //    Toast.makeText(this,"",Toast.LENGTH_SHORT).show()
+            //    Toast.makeText(this,"",Toast.LENGTH_SHORT).show()
 
 
             actionBar.setBackgroundDrawable(ColorDrawable(Integer.parseInt(c)))
@@ -78,7 +78,7 @@ fun colorpic(savedInstanceState: Bundle?) {
             iffunc(R,G,B)
 
         }
-    })
+    }
 
     var color: Long = INITIAL_COLOR
     if (savedInstanceState != null) {

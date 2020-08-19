@@ -35,6 +35,7 @@ class detailedDesigner : AppCompatActivity(), BottomNavigationView.OnNavigationI
 
         val prefselected=getSharedPreferences("selected",0)
         val pref=getSharedPreferences("session",0)
+        bt1.setImageResource(R.drawable.num1_icon)
 
         bt2.setOnClickListener(){
             var intent= Intent(this, detailedDesigner2::class.java)
@@ -70,15 +71,15 @@ class detailedDesigner : AppCompatActivity(), BottomNavigationView.OnNavigationI
         botnav.setOnNavigationItemSelectedListener(this)
         isScrab(db.firestore,id,did)
         isscrab.setOnClickListener(){
-            addmystyle(db.firestore,id,did)
+            addmystyle(db.firestore,id,did,url!!)
         }
     }
-    fun addmystyle(firestore: FirebaseFirestore,id: String,did: String ){
+    fun addmystyle(firestore: FirebaseFirestore,id: String,did: String,url:String=""){
 
         var userDTO=
             designer(did,0,"",0,"",0,1,0,0,
-                "","","","",0,"","","",
-                "","","","","",id)
+                "","","","",0,"","",url,
+                "","","","","","",id)
         // 밑에 document를 공백으로 두면 임의의 아이디를 생성해서 추가함
         firestore?.collection("hair_mydesigner").whereEqualTo("customid",id)
             .whereEqualTo("id",did).get().addOnCompleteListener{

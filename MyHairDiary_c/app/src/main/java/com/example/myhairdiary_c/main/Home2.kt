@@ -98,8 +98,9 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
 
 
         settings.setOnClickListener(){
-         //   var intent= Intent(this, Setting::class.java)// 이게 공지나...그런 설정들
-            var intent=Intent(this,MainActivity::class.java)
+           // var intent= Intent(this, Setting::class.java)// 이게 공지나...그런 설정들
+            var intent=Intent(this,MainActivity::class.java)   // 얘는 임의로 데이터 집어넣는 곳... 네이버 로그인...
+         //   var intent=Intent(this,Mypage::class.java)
 
             startActivity(intent)
         }
