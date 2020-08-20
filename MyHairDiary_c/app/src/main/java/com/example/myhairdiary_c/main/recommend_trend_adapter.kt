@@ -69,7 +69,7 @@ class recommend_trend_adapter (val context: Context, val designerList:ArrayList<
 
 
         holder.dimg.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
-        holder.desc.text="description"
+        holder.desc.text=designerList.get(position).style
 
         Glide.with(context).load(designerList.get(position).url).into(holder.dimg)
 

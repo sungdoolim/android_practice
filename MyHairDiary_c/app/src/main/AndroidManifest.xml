@@ -46,7 +46,10 @@
         <activity android:name=".designers.detailedDesigner" />
         <activity android:name=".style.Style_Search" />
         <activity android:name=".designers.designer_list" />
-        <activity android:name=".main.Home2" />
+        <activity android:name=".main.Home2" >
+
+
+        </activity>
         <activity android:name=".Home" />
         <activity android:name=".MainActivity" />
     </application>

@@ -5,16 +5,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.myhairdiary_c.frag.home
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.bottom_nav.*
 
@@ -26,8 +22,11 @@ class MainActivity : AppCompatActivity()  ,NavigationView.OnNavigationItemSelect
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-       // supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+        // supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
         selectList(this)
+
+
+
         insertone?.setOnClickListener(){
             var intent= Intent(this, insertpage::class.java)
             startActivity(intent)
@@ -76,12 +75,12 @@ class MainActivity : AppCompatActivity()  ,NavigationView.OnNavigationItemSelect
             R.id.bottom1->{
                 var intent= Intent(this, this::class.java)
                 startActivity(intent)
-                   }
+            }
             R.id.bottom2->{
                 var intent= Intent(this, unChecked::class.java)
                 startActivity(intent)
 
-                   }
+            }
             R.id.bottom3->{
                 var intent= Intent(this, Checked::class.java)
                 startActivity(intent)
@@ -111,7 +110,7 @@ class MainActivity : AppCompatActivity()  ,NavigationView.OnNavigationItemSelect
 
             layout_drawer.closeDrawers()
         }
-    }
+        }
         return true
     }
     fun selectList(container: Context){

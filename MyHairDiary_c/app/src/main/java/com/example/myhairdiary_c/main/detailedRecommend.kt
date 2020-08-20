@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
@@ -17,6 +18,7 @@ import com.example.myhairdiary_c.mypage.Mypage
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_detailed_recommend.*
+import kotlinx.android.synthetic.main.activity_find8page.*
 import kotlinx.android.synthetic.main.bottom_navi.*
 
 class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelectedListener{
@@ -26,6 +28,7 @@ class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigatio
         setContentView(R.layout.activity_detailed_recommend)
 
         val prefrecommend=getSharedPreferences("recommended",0)
+        styledesc.text=prefrecommend.getString("memo","")
         val pref=getSharedPreferences("session",0)
         val edit=prefrecommend.edit()
         val id=pref.getString("id","").toString()
@@ -128,10 +131,13 @@ class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigatio
                     var userDTO=ArrayList<designer>()
                     for(dc in it.result!!.documents){
                         dc.toObject(designer::class.java)?.let { it1 ->
-                            // println("reviewcount : ${it1.reviewcount}")
                             userDTO.add(it1) } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
-                    //    println("userdto len = ${userDTO.size}")
+                    wecando_rv.addItemDecoration(
+                        DividerItemDecoration(applicationContext,
+                            DividerItemDecoration.HORIZONTAL
+                        )
+                    )// 경계선 추가!!!!
                     wecando_rv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
                     wecando_rv.setHasFixedSize(true)
@@ -156,6 +162,11 @@ class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigatio
                             userDTO.add(it1) } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
                     //    println("userdto len = ${userDTO.size}")
+                    another_rv.addItemDecoration(
+                        DividerItemDecoration(applicationContext,
+                            DividerItemDecoration.HORIZONTAL
+                        )
+                    )// 경계선 추가!!!!
                     another_rv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
                     another_rv.setHasFixedSize(true)

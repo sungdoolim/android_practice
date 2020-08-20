@@ -24,7 +24,7 @@ class detail_list : AppCompatActivity() {
 
 
         detail_del.setOnClickListener(){
-        deleteData(firestore,index)
+            deleteData(firestore,index)
             Toast.makeText(this,"삭제 중~ 좀만 기다려주세용~",Toast.LENGTH_SHORT).show()
 
         }

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
@@ -15,7 +16,9 @@ import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.second_home
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_home2.*
 import kotlinx.android.synthetic.main.activity_mypage.*
+import kotlinx.android.synthetic.main.activity_mypage.User_Profile_Photo
 import kotlinx.android.synthetic.main.bottom_navi.*
 
 
@@ -74,6 +77,11 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
                     }
                     println("designers  len = ${userDTO.size}")
                     // recommend_designer_list 는 id로 얻어온 recyclerview 임
+                    myfav_designer.addItemDecoration(
+                        DividerItemDecoration(applicationContext,
+                            DividerItemDecoration.HORIZONTAL
+                        )
+                    )// 경계선 추가!!!!
                     myfav_designer.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
                     myfav_designer.setHasFixedSize(true)
@@ -100,6 +108,11 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
                     }
                     println("designers  len = ${userDTO.size}")
                     // recommend_designer_list 는 id로 얻어온 recyclerview 임
+                    myfav_style.addItemDecoration(
+                        DividerItemDecoration(applicationContext,
+                            DividerItemDecoration.HORIZONTAL
+                        )
+                    )// 경계선 추가!!!!
                     myfav_style.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
                     myfav_style.setHasFixedSize(true)

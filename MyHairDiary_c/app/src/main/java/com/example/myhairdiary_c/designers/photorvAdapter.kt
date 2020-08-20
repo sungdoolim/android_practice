@@ -14,7 +14,7 @@ import com.example.myhairdiary_c.R
 
 class photorvAdapter (val context: Context, val designerList:ArrayList<photourl>): RecyclerView.Adapter<photorvAdapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
-        val view= LayoutInflater.from(parent.context).inflate(R.layout.designer_adapter,parent,false)
+        val view= LayoutInflater.from(parent.context).inflate(R.layout.photorv_adapter,parent,false)
         /////////////////////////// 내가 쓸 custom_rev지정!
         return CustomViewHolder(
             view

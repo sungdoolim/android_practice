@@ -55,13 +55,25 @@ class detailedDesigner : AppCompatActivity(), BottomNavigationView.OnNavigationI
 
 
         var id=pref.getString("id","").toString()
-        var url=prefselected.getString("profile","")
-        var did=prefselected.getString("did","")
+
+        var url=prefselected.getString("profile","").toString()
+        var did=prefselected.getString("did","").toString()
+        val age=prefselected.getInt("age",0).toString()
+        val major=prefselected.getString("major","").toString()
+        val reviewcount=prefselected.getInt("reviewcount",0).toString()
+        detailed_designer_name.text="이름 : "+pref.getString("name","")+"\nID : "+did
+        designer_greeting.text="나이 : "+age+"\n경력 : "+"\n전문 분야 : "+major+"\n리뷰 수 : "+reviewcount
+        memo.text=prefselected.getString("memo","").toString()
+        var mymajor=pref.getString("major","").toString()
+        recommended_url(db.firestore,did,mymajor)
+
+
+
 //intent.getStringExtra("profile")
         Glide.with(this).load(url).into(designer_photo)
         designer_photo.setBackground(ShapeDrawable(OvalShape()));
         designer_photo.setClipToOutline(true)
-        selectList(did!!)
+        selectList(db.firestore,did!!)
 
         review_imgbt.setOnClickListener(){
             Toast.makeText(this,"toast!",Toast.LENGTH_SHORT).show()
@@ -73,6 +85,21 @@ class detailedDesigner : AppCompatActivity(), BottomNavigationView.OnNavigationI
         isscrab.setOnClickListener(){
             addmystyle(db.firestore,id,did,url!!)
         }
+    }
+    fun recommended_url(firestore:FirebaseFirestore,did:String,mymajor:String){
+        firestore?.collection("hair_photo").whereEqualTo("id",did).whereEqualTo("style",mymajor).get()
+            .addOnCompleteListener {
+                var userDTO=ArrayList<photourl>()
+                if(it.isSuccessful){
+                    if(it.result!!.documents.size!=0){
+                        //Toast.makeText(this,"${it.result!!.documents[0]["url"]}",Toast.LENGTH_SHORT).show()
+                        Glide.with(this).load(it.result!!.documents[0]["url"]).into(clicyourstyle)
+                        photomemo.text=it.result!!.documents[0]["memo"].toString()
+                    }
+                }else{
+                    println("fail")
+                }
+            }
     }
     fun addmystyle(firestore: FirebaseFirestore,id: String,did: String,url:String=""){
 
@@ -139,8 +166,7 @@ class detailedDesigner : AppCompatActivity(), BottomNavigationView.OnNavigationI
         var intent= Intent(this, Home2::class.java)
         startActivity(intent)
     }
-    fun selectList(did:String){
-        var firestore= fireDB(this).firestore
+    fun selectList(firestore: FirebaseFirestore,did:String){
         firestore?.collection("hair_photo").whereEqualTo("id",did).get()
             .addOnCompleteListener {
                 var userDTO=ArrayList<photourl>()

@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.second_home
@@ -84,6 +85,7 @@ class detailedDesigner3 : AppCompatActivity(), BottomNavigationView.OnNavigation
                             R.layout.search_grid_adapter,  // GridView 항목의 레이아웃 row.xml
                             userDTO
                         )
+
                         style_grid.adapter = adapter
                         style_grid.setOnItemClickListener { parent, view, position, id ->
                             var item= style_grid.adapter.getItem(position) as photourl

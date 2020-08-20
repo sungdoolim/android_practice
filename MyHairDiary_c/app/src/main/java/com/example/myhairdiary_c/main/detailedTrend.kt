@@ -9,7 +9,7 @@ import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.main.second.second_home
 import com.example.myhairdiary_c.mypage.Mypage
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_detailed_recommend.*
+
 import kotlinx.android.synthetic.main.activity_detailed_trend.*
 import kotlinx.android.synthetic.main.bottom_navi.*
 
@@ -22,6 +22,7 @@ class detailedTrend : AppCompatActivity(), BottomNavigationView.OnNavigationItem
         val url=pref.getString("url","")
         Glide.with(this).load(url).into(selected_trend)
 
+        styledesc.text=pref.getString("memo","")
         botnav.setOnNavigationItemSelectedListener(this)
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

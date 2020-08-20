@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.firedb.fireDB
@@ -159,6 +160,10 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
                         } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
                     // recommend_designer_list 는 id로 얻어온 recyclerview 임
+                    hair_photo_listRv.addItemDecoration(
+                        DividerItemDecoration(applicationContext,
+                            DividerItemDecoration.HORIZONTAL
+                        ))
                     hair_photo_listRv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     hair_photo_listRv.setHasFixedSize(true)
@@ -182,6 +187,10 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
                         } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
                     // recommend_designer_list 는 id로 얻어온 recyclerview 임
+                    hair_photo_listRv.addItemDecoration(
+                        DividerItemDecoration(applicationContext,
+                            DividerItemDecoration.HORIZONTAL
+                        ))
                     hair_photo_listRv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     hair_photo_listRv.setHasFixedSize(true)
@@ -206,6 +215,10 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
                         } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
                     // recommend_designer_list 는 id로 얻어온 recyclerview 임
+                    hair_photo_listRv.addItemDecoration(
+                        DividerItemDecoration(applicationContext,
+                            DividerItemDecoration.HORIZONTAL
+                        ))
                     hair_photo_listRv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     hair_photo_listRv.setHasFixedSize(true)
@@ -233,6 +246,10 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
                         } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
                     // recommend_designer_list 는 id로 얻어온 recyclerview 임
+                    hair_photo_listRv.addItemDecoration(
+                        DividerItemDecoration(applicationContext,
+                            DividerItemDecoration.HORIZONTAL
+                        ))
                     hair_photo_listRv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     hair_photo_listRv.setHasFixedSize(true)
@@ -261,6 +278,10 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
                         } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
                     // recommend_designer_list 는 id로 얻어온 recyclerview 임
+                    hair_photo_listRv.addItemDecoration(
+                        DividerItemDecoration(applicationContext,
+                            DividerItemDecoration.HORIZONTAL
+                        ))
                     hair_photo_listRv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     hair_photo_listRv.setHasFixedSize(true)
@@ -288,6 +309,10 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
                         } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
                     // recommend_designer_list 는 id로 얻어온 recyclerview 임
+                    hair_photo_listRv.addItemDecoration(
+                        DividerItemDecoration(applicationContext,
+                            DividerItemDecoration.HORIZONTAL
+                        ))
                     hair_photo_listRv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     hair_photo_listRv.setHasFixedSize(true)
@@ -322,6 +347,10 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
                         } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
                     // recommend_designer_list 는 id로 얻어온 recyclerview 임
+                    hair_photo_listRv.addItemDecoration(
+                        DividerItemDecoration(applicationContext,
+                            DividerItemDecoration.HORIZONTAL
+                        ))
                     hair_photo_listRv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     hair_photo_listRv.setHasFixedSize(true)
@@ -345,6 +374,10 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
                         } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
                     // recommend_designer_list 는 id로 얻어온 recyclerview 임
+                    hair_photo_listRv.addItemDecoration(
+                        DividerItemDecoration(applicationContext,
+                            DividerItemDecoration.HORIZONTAL
+                        ))
                     hair_photo_listRv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     hair_photo_listRv.setHasFixedSize(true)

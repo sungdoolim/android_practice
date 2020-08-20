@@ -42,7 +42,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/selected_trend" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/styledesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -57,7 +57,7 @@
                 android:layout_height="35dp"
                 android:text="버튼?"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintTop_toBottomOf="@+id/styledesc" />
 
             <Button
                 android:id="@+id/button2"
@@ -65,7 +65,7 @@
                 android:layout_height="36dp"
                 android:text="아니면"
                 app:layout_constraintStart_toEndOf="@+id/button"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintTop_toBottomOf="@+id/styledesc" />
 
             <Button
                 android:id="@+id/button3"
@@ -73,7 +73,7 @@
                 android:layout_height="38dp"
                 android:text="키워드???"
                 app:layout_constraintStart_toEndOf="@+id/button2"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintTop_toBottomOf="@+id/styledesc" />
 
             <ImageView
                 android:id="@+id/imageView6"

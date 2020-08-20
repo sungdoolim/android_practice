@@ -2,18 +2,16 @@ package com.example.lovelist
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import android.graphics.Color as Color
 
 
-class list_adapter (val context: Context, val designerList:ArrayList<list_data>): RecyclerView.Adapter<list_adapter.CustomViewHolder>() {
+class list_adapter(val context: Context?, val designerList:ArrayList<list_data>): RecyclerView.Adapter<list_adapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view= LayoutInflater.from(parent.context).inflate(R.layout.listadapter,parent,false)
         // 내가 쓸 custom_rev지정!
@@ -25,7 +23,7 @@ class list_adapter (val context: Context, val designerList:ArrayList<list_data>)
                 var dl: list_data =designerList.get(curPos)
 
                 val intent = Intent(view.getContext(), detail_list::class.java)
-                val pref=context.getSharedPreferences("selected",0)
+                val pref=context!!.getSharedPreferences("selected",0)
 
                 val edit=pref.edit()
 

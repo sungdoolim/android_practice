@@ -21,10 +21,9 @@ class logo_home : AppCompatActivity() {
         }
 
         Handler().postDelayed(Runnable
-        // 1 초 후에 실행
-        {          var intent= Intent(this, Home2::class.java)
+        {
+            var intent= Intent(this, Home2::class.java)
             startActivity(intent)
-
             //  var a=wvnaver.
             // 실행할 동작 코딩
             mHandler.sendEmptyMessage(0) // 실행이 끝난후 알림

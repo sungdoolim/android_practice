@@ -110,20 +110,19 @@
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="70dp"
-                    android:layout_marginTop="24dp"
-                    android:background="@drawable/border"
+                    android:layout_marginStart="68dp"
+                    android:fontFamily="sans-serif-black"
                     android:text="My Information"
+                    android:textSize="20dp"
                     app:layout_constraintStart_toEndOf="@+id/designer_photo"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/detailed_designer_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="68dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/border"
+                    android:layout_marginStart="72dp"
+                    android:layout_marginTop="8dp"
                     android:text="자기소개 입니다"
                     app:layout_constraintStart_toEndOf="@+id/designer_photo"
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
@@ -134,53 +133,41 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="68dp"
                     android:layout_marginTop="12dp"
-                    android:background="@drawable/border"
                     android:text="자기소개 2 입니다"
                     app:layout_constraintStart_toEndOf="@+id/designer_photo"
-                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                    app:layout_constraintTop_toBottomOf="@+id/detailed_designer_name" />
 
                 <TextView
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="44dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="64dp"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="sans-serif-black"
                     android:text="Introduce"
+                    android:textSize="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/designer_photo" />
 
                 <TextView
-                    android:id="@+id/textView8"
-                    android:layout_width="247dp"
-                    android:layout_height="43dp"
+                    android:id="@+id/memo"
+                    android:layout_width="321dp"
+                    android:layout_height="73dp"
                     android:layout_marginStart="64dp"
                     android:layout_marginTop="16dp"
                     android:text="intro 입니다...."
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-                <TextView
-                    android:id="@+id/tvtv"
-                    android:layout_width="253dp"
-                    android:layout_height="43dp"
-                    android:layout_marginStart="64dp"
-                    android:text="intro 입니다...."
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
                 <ImageView
                     android:id="@+id/isscrab"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginStart="44dp"
+                    android:layout_width="97dp"
+                    android:layout_height="46dp"
                     android:src="@drawable/star_icon"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvtv" />
-
-
-                "
-                    android:layout_height="40dp"
-                    android:src="@drawable/star_icon"/>
+                    app:layout_constraintTop_toBottomOf="@+id/memo" />
+                />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -207,13 +194,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="sans-serif-black"
                     android:text="Click your style"
+                    android:textSize="20dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/imageView5"
+                    android:id="@+id/clicyourstyle"
                     android:layout_width="93dp"
                     android:layout_height="89dp"
                     android:layout_marginStart="32dp"
@@ -227,18 +216,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="40dp"
-                    android:layout_marginTop="76dp"
+                    android:layout_marginTop="60dp"
+                    android:fontFamily="sans-serif-black"
                     android:text="Recommned Style"
-                    app:layout_constraintStart_toEndOf="@+id/imageView5"
+                    android:textSize="20dp"
+                    app:layout_constraintStart_toEndOf="@+id/clicyourstyle"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:layout_width="210dp"
+                    android:id="@+id/photomemo"
                     android:layout_height="59dp"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="4dp"
                     android:text="소개글 입니다."
-                    app:layout_constraintStart_toEndOf="@+id/imageView5"
+                    app:layout_constraintStart_toEndOf="@+id/clicyourstyle"
                     app:layout_constraintTop_toBottomOf="@+id/textView12" />
                 <include layout="@layout/line"
                   app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
@@ -273,6 +265,11 @@
                         android:id="@+id/detailed_grid"
                         android:layout_width="match_parent"
                         android:layout_height="400dp"
+
+                        android:horizontalSpacing="2dp"
+                        android:verticalSpacing="2dp"
+
+
                         android:layout_marginTop="48dp"
                         android:numColumns="3"
                         app:layout_constraintBottom_toBottomOf="parent"

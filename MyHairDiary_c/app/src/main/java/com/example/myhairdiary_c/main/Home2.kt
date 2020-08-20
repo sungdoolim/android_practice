@@ -5,6 +5,7 @@ import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewTreeObserver.OnScrollChangedListener
@@ -12,6 +13,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.MainActivity
@@ -23,14 +25,17 @@ import com.example.myhairdiary_c.designers.designerAdapter
 import com.example.myhairdiary_c.designers.photourl
 import com.example.myhairdiary_c.firedb.album
 import com.example.myhairdiary_c.firedb.fireDB
+import com.example.myhairdiary_c.logo_home
 import com.example.myhairdiary_c.main.second.second_home
 import com.example.myhairdiary_c.style.Style_Search
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_detailed_recommend.*
 import kotlinx.android.synthetic.main.activity_home2.*
 import kotlinx.android.synthetic.main.bottom_navi.*
-
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
 
 
 class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelectedListener{
@@ -38,12 +43,8 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home2)
-//        val handler = Handler()
-//        handler.postDelayed({ finish() }, 2000)
+            setContentView(R.layout.activity_home2)
 
-
-        var    Album= album(this)
         var db= fireDB(this)
         val pref=getSharedPreferences("session",0)
         val id:String=pref.getString("id","").toString()
@@ -54,38 +55,21 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
 
         User_Profile_Photo.setBackground(ShapeDrawable(OvalShape()));
         User_Profile_Photo.setClipToOutline(true)
-
         select_recommend_list(db.firestore,major) // recommend 리스트 출력
-
         select_trend_list(db.firestore) // recommend 리스트 출력
-
         select_recommend_designerList(db.firestore)
 
 
 
-        if(id!=""&&profile!="")
-            Glide.with(this).load(profile).into(User_Profile_Photo)
-
-        println("url : ${profile}")
+        if(id!=""&&profile!=""){
+            Glide.with(this).load(profile).into(User_Profile_Photo)}
 
         if(pref.getString("id","")!=""){
-        User_greeting.text="환영합니다 "+pref.getString("id","")+" 님"
+            User_greeting.text="환영합니다 "+pref.getString("id","")+" 님"
         }
 
 
         editSearch.setOnClickListener(){
-
-//            constraintLayout2.addView()
-//            var item=arrayOf("1","2","3")
-//            search_lv.adapter= ArrayAdapter <Any>(this, android.R.layout.simple_list_item_1, item)
-//            search_lv.setOnItemClickListener { parent, view, position, id ->
-//                println(position)
-//                println(search_lv.getItemAtPosition(position))
-//            }
-
-
-
-
             Toast.makeText(this,"냐옹",Toast.LENGTH_SHORT).show()
         }
         search_bt.setOnClickListener(){
@@ -95,19 +79,14 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
             intent.putExtra("style",key)
             startActivity(intent)
         }
-
-
         settings.setOnClickListener(){
            // var intent= Intent(this, Setting::class.java)// 이게 공지나...그런 설정들
             var intent=Intent(this,MainActivity::class.java)   // 얘는 임의로 데이터 집어넣는 곳... 네이버 로그인...
          //   var intent=Intent(this,Mypage::class.java)
-
             startActivity(intent)
         }
         var ybefore:Int=0
         var ynow:Int=0
-
-
 
         scrollView2.getViewTreeObserver()
             .addOnScrollChangedListener(OnScrollChangedListener {
@@ -115,7 +94,6 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
 //                var y= scrollView2.scrollY
              ybefore=ynow
                 ynow=scrollView2.scrollY
-
                 if(ynow-ybefore>0){
                     botnav.visibility= View.INVISIBLE
                 }else{
@@ -173,7 +151,11 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
                     println("designers  len = ${userDTO.size}")
 
                     // recommend_designer_list 는 id로 얻어온 recyclerview 임
-
+                    recommend_designer_list.addItemDecoration(
+                        DividerItemDecoration(applicationContext,
+                            DividerItemDecoration.HORIZONTAL
+                        )
+                    )// 경계선 추가!!!!
                     recommend_designer_list.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
                     recommend_designer_list.setHasFixedSize(true)
@@ -200,6 +182,11 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
                             // println("reviewcount : ${it1.reviewcount}")
                             userDTO.add(it1) } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }                 //   println("userdto len = ${userDTO.size}")
+                    trendlist.addItemDecoration(
+                        DividerItemDecoration(applicationContext,
+                            DividerItemDecoration.HORIZONTAL
+                        )
+                    )// 경계선 추가!!!!
                     trendlist.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
                     trendlist.setHasFixedSize(true)
@@ -228,6 +215,11 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
                             userDTO.add(it1) } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
                 //    println("userdto len = ${userDTO.size}")
+                    recommendlist.addItemDecoration(
+                        DividerItemDecoration(applicationContext,
+                            DividerItemDecoration.HORIZONTAL
+                        )
+                    )// 경계선 추가!!!!
                     recommendlist.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
                     recommendlist.setHasFixedSize(true)

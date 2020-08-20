@@ -72,10 +72,9 @@
 
                         <ImageView
                             android:id="@+id/settings"
-                            android:layout_width="48dp"
-                            android:layout_height="34dp"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginEnd="4dp"
+                            android:layout_width="33dp"
+                            android:layout_height="29dp"
+                            android:layout_marginTop="24dp"
                             android:src="@drawable/setting_icon"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -91,28 +90,19 @@
                             android:hint="검색하세요"
                             android:textSize="14dp"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.363"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <ListView
-                            android:id="@+id/search_lv"
-                            android:layout_width="310dp"
-                            android:layout_height="41dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/editSearch" />
-
                         <ImageView
                             android:id="@+id/search_bt"
-                            android:layout_width="43dp"
-                            android:layout_height="38dp"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
                             android:layout_marginTop="4dp"
-                            android:layout_marginBottom="52dp"
+                            android:layout_marginBottom="56dp"
                             android:src="@drawable/search_icon"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintHorizontal_bias="1.0"
                             app:layout_constraintStart_toEndOf="@+id/editSearch"
                             app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
@@ -121,13 +111,15 @@
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_marginTop="208dp"
+                        android:layout_width="354dp"
+                        android:layout_height="143dp"
+                        android:layout_marginTop="168dp"
                         android:background="@color/coloryellow_b"
                         android:orientation="horizontal"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:layout_editor_absoluteX="0dp">
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.487"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
                         <ImageView
                             android:id="@+id/User_Profile_Photo"
@@ -146,15 +138,13 @@
                             android:id="@+id/textView16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-
-
                             android:layout_marginStart="64dp"
                             android:layout_marginTop="24dp"
                             android:fontFamily="sans-serif-black"
                             android:includeFontPadding="false"
                             android:text="My Information"
 
-                            android:textSize="14dp"
+                            android:textSize="20dp"
 
                             app:layout_constraintStart_toEndOf="@+id/User_Profile_Photo"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -209,8 +199,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-black"
-                            android:text="Recommend Style"
-                            android:textSize="14dp" />
+                            android:text="\t\tRecommend Style"
+                            android:textSize="20dp" />
 
 
                         <androidx.recyclerview.widget.RecyclerView
@@ -230,7 +220,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout3"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="match_parent"
                         android:background="@color/coloryellow_b"
 
                         android:layout_marginTop="20dp"
@@ -245,15 +235,15 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:fontFamily="sans-serif-black"
-                            android:text="Hair Trend"
-                            android:textSize="14dp"
+                            android:text="\t\tHair Trend"
+                            android:textSize="20dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/trendlist"
                             android:layout_width="match_parent"
-                            android:layout_height="170dp"
+                            android:layout_height="190dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -275,15 +265,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-black"
-                            android:text="AD\n 오늘의 추천 디자이너 입니다"
-                            android:textSize="14dp"
+                            android:text="\t\tAD\n\t\t오늘의 추천 디자이너 입니다"
+                            android:textSize="20dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recommend_designer_list"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"
+                            android:layout_height="165dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"

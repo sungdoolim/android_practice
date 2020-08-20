@@ -36,9 +36,6 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         appbarbt1.setOnClickListener(){
             var intent=Intent(this, MyHair::class.java)
             startActivity(intent)
-
-
-
         }
         appbarbt2.setOnClickListener(){
             // 구글맵
@@ -47,10 +44,8 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         }
         appbarbt3.setOnClickListener(){
             // 네이버 웹뷰
-
             var intent=Intent(this, NMapsActivity::class.java)
             startActivity(intent)
-
         }
 
         fire.setOnClickListener(){

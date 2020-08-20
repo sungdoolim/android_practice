@@ -33,10 +33,10 @@ class insertpage : AppCompatActivity() {
 
         }
     }
-     fun update_index(
-         index: Int,
-         firestore: FirebaseFirestore
-     ){// 잘됨
+    fun update_index(
+        index: Int,
+        firestore: FirebaseFirestore
+    ){// 잘됨
         var map= mutableMapOf<String,Any>()
         map["index"] =index
         firestore?.collection("oursession").document("GVCRjP2s9Q9alROm03Rl").update(map)

@@ -42,9 +42,6 @@ class MyAdapter(    context: Context,    layout: Int,    userDTO:ArrayList<photo
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) // 이거 없으면 인텐트 불가
         context.startActivity(intent)
 
-
-
-
         Toast.makeText(context,"toast : ${position}",Toast.LENGTH_SHORT).show()
         return userDTO[position]
     }

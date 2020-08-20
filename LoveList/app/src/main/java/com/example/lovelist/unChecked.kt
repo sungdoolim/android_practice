@@ -8,7 +8,6 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_un_checked.*
 import kotlinx.android.synthetic.main.bottom_nav.*
 
@@ -56,7 +55,7 @@ class unChecked : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
                             if(!it1.ischecked){
                                 userDTO.add(it1)
                             }
-                            }
+                        }
                     }
 
                     unchecked_rv.layoutManager=

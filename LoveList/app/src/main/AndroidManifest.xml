@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".unChecked"></activity>
+        <activity android:name=".StartScene">
+
+
+        </activity>
+        <activity android:name=".unChecked" />
         <activity android:name=".Checked" />
         <activity android:name=".detail_list" />
         <activity android:name=".insertpage" />

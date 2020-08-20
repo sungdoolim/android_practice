@@ -2,6 +2,7 @@ package com.example.myhairdiary_c.designers
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.firedb.fireDB
@@ -32,6 +33,11 @@ class designer_list : AppCompatActivity() {
                             println("reviewcount : ${it1.reviewcount}")
                             userDTO.add(it1) } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
                     }
+                    designerlist.addItemDecoration(
+                        DividerItemDecoration(applicationContext,
+                            DividerItemDecoration.HORIZONTAL
+                        )
+                    )// 경계선 추가!!!!
                     designerlist.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     designerlist.setHasFixedSize(true)
