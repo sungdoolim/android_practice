@@ -4,7 +4,28 @@
     <group android:checkableBehavior="single">
         <item
             android:icon="@drawable/ic_launcher_foreground"
-            android:title="녕이는 이거 있는 줄도 모르게찌이이ㅣㅇ"/>
+            android:id="@+id/nav1"
+            android:title="녕이느으은~"/>
+        <item
+            android:icon="@drawable/ic_launcher_foreground"
+            android:id="@+id/nav2"
+            android:title="요거~"/>
+        <item
+            android:icon="@drawable/ic_launcher_foreground"
+            android:id="@+id/nav3"
+            android:title="있는줄~"/>
+        <item
+            android:icon="@drawable/ic_launcher_foreground"
+            android:id="@+id/nav4"
+            android:title="모르꼬야~"/>
+        <item
+            android:icon="@drawable/ic_launcher_foreground"
+            android:id="@+id/nav5"
+            android:title="바부~"/>
+        <item
+            android:icon="@drawable/ic_launcher_foreground"
+            android:id="@+id/nav6"
+            android:title="멍츙이야~"/>
         <item android:id="@+id/hama"
             android:icon="@drawable/ic_launcher_foreground"
             android:title="녕이로 로그인"/>

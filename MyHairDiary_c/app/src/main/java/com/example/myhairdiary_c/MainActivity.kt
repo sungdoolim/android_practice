@@ -413,8 +413,6 @@ var db=fireDB(this)
     }
 
 
-
-
     fun uploadPhoto_diary_to_Customer(photoUri: Uri) {
         var db=fireDB(this)
         val pref=getSharedPreferences("session",0)
@@ -427,9 +425,6 @@ var db=fireDB(this)
                 db.updateData_one("profile",uri.toString(),id)
             }
             Toast.makeText(this, "url? :${it.toString()}", Toast.LENGTH_LONG).show()
-
-
-            //
         }
 
     }
@@ -445,7 +440,7 @@ var db=fireDB(this)
         val pref=getSharedPreferences("session",0)
         var edit=pref.edit()
         var id=pref.getString("id","").toString()
-        if(id==""){return ;}
+        if(id==""){return;}
         var storageRef = FirebaseStorage.getInstance().reference.child("images")
         storageRef=storageRef.child(id).child(name)//Timestamp(java.util.Date()).toString()
         storageRef.putFile(photoUri).addOnSuccessListener {
@@ -456,7 +451,7 @@ var db=fireDB(this)
                 edit.apply()
             }
             Toast.makeText(this, "url? :${it.toString()}", Toast.LENGTH_LONG).show()
-            //
+
         }
     }
     class AndroidBridge(context: Context) {
@@ -471,8 +466,6 @@ var db=fireDB(this)
             edit.apply()
             var intent= Intent(context, Home2::class.java)
             context.startActivity(intent)
-
-
         }
         @JavascriptInterface
         fun AlertMsg(arg:String) { // 웹뷰내의 페이지에서 호출하는 함수
@@ -481,18 +474,11 @@ var db=fireDB(this)
                var name=splitarg[0]
                 var id=splitarg[1]
                 println("id : ${id} name : ${name}")
-
                 check_isprimaryid(id,name,context)
-
-
-
-//                    Toast.makeText( this,, Toast.LENGTH_SHORT).show();
-            });
+            })
         }
 
-
-
-        public fun check_isprimaryid(id:String,name:String,context:Context){
+         fun check_isprimaryid(id:String,name:String,context:Context){
             println("read")
             val pref=context.getSharedPreferences("session",0)
             val edit=pref.edit()
@@ -502,9 +488,7 @@ var db=fireDB(this)
                         if(it.result!!.documents.size==0){
                             db.createData(id.toString(),name.toString())
                         }
-
-
-                        edit.putString("id",id.toString())
+                        edit.putString("id",id)
                         edit.apply()
                         var firestore = FirebaseFirestore.getInstance()
                         firestore?.collection("hair_diary").whereEqualTo("id",id.toString()).get()
@@ -521,7 +505,6 @@ var db=fireDB(this)
                                         edit.putString("phone",dc.toObject(designer::class.java)?.phone.toString())
                                         edit.putInt("age",dc.toObject(designer::class.java)?.age!!.toInt())
                                         edit.putString("profile",dc.toObject(designer::class.java)?.profile.toString())
-
                                         edit.apply()
                                     }
                                     var intent= Intent(context, Home2::class.java)
@@ -530,9 +513,6 @@ var db=fireDB(this)
                                     println("fail")
                                 }
                             }
-
-
-
                     }else{
                         println("fail")
                     }

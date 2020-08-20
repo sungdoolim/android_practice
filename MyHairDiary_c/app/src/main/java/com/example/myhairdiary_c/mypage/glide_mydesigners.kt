@@ -19,22 +19,13 @@ class glide_mydesigners : AppCompatActivity() {
         val pref=getSharedPreferences("session",0)
         val id=pref.getString("id","").toString()
         sort_submit.setOnClickListener(){
-            if(fav_sort.isChecked){
+            val fav=fav_sort.isChecked
+            val near=near_sort.isChecked
+            val review=review_sort.isChecked
 
 
-            }
 
-            if(near_sort.isChecked){
-
-
-            }
-
-            if(review_sort.isChecked){
-
-
-            }
-
-
+            selectList(db.firestore,id)
         }
 
 

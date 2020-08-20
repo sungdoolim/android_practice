@@ -18,22 +18,41 @@ class glide_mystyles : AppCompatActivity() {
         val pref=getSharedPreferences("session",0)
         val id=pref.getString("id","").toString()
         sort_submit.setOnClickListener(){
-            if(fav_sort.isChecked){
-
-
+            val fav=fav_sort.isChecked
+            val near=near_sort.isChecked
+            val review=review_sort.isChecked
+// 8가지 경우가 나오는데... 이렇게 하는게 맞을까...
+            if(fav){
+                if(near){
+                    if(review){
+                        //111
+                    }else{
+                        //110
+                    }
+                }else{
+                    if(review){
+                        //101
+                    }else{
+                        //100
+                    }
+                }
+            }else{
+                if(near){
+                    if(review){
+                        //011
+                    }else{
+                        //010
+                    }
+                }else{
+                    if(review){
+                        //001
+                    }else{
+                        //000
+                    }
+                }
             }
 
-            if(near_sort.isChecked){
-
-
-            }
-
-            if(review_sort.isChecked){
-
-
-            }
-
-
+            selectList(db.firestore,id)
         }
 
 

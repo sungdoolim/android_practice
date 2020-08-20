@@ -21,6 +21,8 @@ import kotlinx.android.synthetic.main.bottom_nav.*
 
 class MainActivity : AppCompatActivity()  ,NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener{
 
+
+    var Ltoast: Toast? =null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,17 +37,42 @@ class MainActivity : AppCompatActivity()  ,NavigationView.OnNavigationItemSelect
         val edit=pref.edit()
         edit.putString("id","누꿍")
         edit.apply()
-        Toast.makeText(this,"누꿍 안냥?",Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"누꿍 안냥?",Toast.LENGTH_SHORT).show()
         botnav.setOnNavigationItemSelectedListener(this)
         naviView.setNavigationItemSelectedListener (this)
     }
-
     override fun onBackPressed() {
         ActivityCompat.finishAffinity(this)
         finish()
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
+            R.id.nav1->{
+                Ltoast?.cancel()
+                Ltoast=Toast.makeText(this,"녕이야~",Toast.LENGTH_SHORT)
+                Ltoast?.show()
+            }
+            R.id.nav2->{
+                Ltoast?.cancel()
+                Ltoast=Toast.makeText(this,"내가내가~",Toast.LENGTH_SHORT)
+                Ltoast?.show()
+            }
+            R.id.nav3->{
+                Ltoast?.cancel()
+                Ltoast=Toast.makeText(this,"마니나미 사랑해~~~",Toast.LENGTH_SHORT)
+                Ltoast?.show()
+            }
+            R.id.nav4->{
+                Ltoast?.cancel()
+                Ltoast=Toast.makeText(this,"군데군데~",Toast.LENGTH_SHORT)
+                Ltoast?.show()
+            }
+            R.id.nav5->{
+                Ltoast?.cancel()
+                Ltoast=Toast.makeText(this,"녕이눈~~~~",Toast.LENGTH_SHORT)
+                Ltoast?.show()
+            }
+
             R.id.bottom1->{
                 var intent= Intent(this, this::class.java)
                 startActivity(intent)
@@ -64,17 +91,27 @@ class MainActivity : AppCompatActivity()  ,NavigationView.OnNavigationItemSelect
                 val edit=pref.edit()
                 edit.putString("id","누꿍")
                 edit.apply()
-                Toast.makeText(this,"누꿍 안냥?",Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"누꿍 안냥?",Toast.LENGTH_SHORT).show()
+
+                layout_drawer.closeDrawers()
             }
             R.id.staris->{
                 val pref=getSharedPreferences("Rnd",0)
                 val edit=pref.edit()
                 edit.putString("id","내꿍")
                 edit.apply()
-                Toast.makeText(this,"냐오옹 이거아냐아아아 저리가아ㅏㅇ아",Toast.LENGTH_LONG).show()
-            }else->{}
+                Toast.makeText(this,"냐오옹 이거아냐아아아 저리가아ㅏㅇ아",Toast.LENGTH_SHORT).show()
+
+                layout_drawer.closeDrawers()
+            }else->{
+            Ltoast?.cancel()
+
+            Ltoast=Toast.makeText(this,"바보멍청이말미쟐해삼!!!!꺆!",Toast.LENGTH_SHORT)
+            Ltoast?.show()
+
+            layout_drawer.closeDrawers()
+        }
     }
-        layout_drawer.closeDrawers()
         return true
     }
     fun selectList(container: Context){

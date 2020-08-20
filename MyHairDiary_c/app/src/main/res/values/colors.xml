@@ -11,6 +11,8 @@
     <color name="coloryellow">#FAE84D</color>
     <color name="coloryellow_b">#F3E99A</color>
     <color name="colorgray">#BCB8B8</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 
     <color name="back">#F1ECD2</color>
     <color name="colorgreen">#21F42A</color>

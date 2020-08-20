@@ -20,6 +20,9 @@ class Main4Activity : AppCompatActivity() {
 //        //wv.loadUrl("https://www.naver.com")
 //            wv.loadUrl("http://192.168.56.1:8052/web/andtest")
 
+
+
+
     }
 
     override fun onBackPressed() {

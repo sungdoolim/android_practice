@@ -4,13 +4,13 @@
 
     <item android:id="@+id/bottom1"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="bottom1"/>
+       android:title="All-List"/>
     <item android:id="@+id/bottom2"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="bottom2"/>
+        android:title="Unchecked"/>
     <item android:id="@+id/bottom3"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="bottom2"/>
+        android:title="Checked"/>
 
 
 

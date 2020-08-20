@@ -1,40 +1,24 @@
 package com.example.kotlin_prac
 
 import android.content.Intent
-import android.content.pm.PackageInfo
-import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Base64
-import android.util.Log
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.Toast
-import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.example.kotlin_prac.myhair.MyHair
-import com.example.template_prac.farg1
-import com.example.template_prac.frag2
+import com.example.template_prac.frag1
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
-import com.kakao.sdk.auth.AuthApiClient
-import com.kakao.sdk.auth.AuthCodeClient
-import com.kakao.sdk.auth.rx
-import com.kakao.sdk.user.UserApiClient
-import com.kakao.sdk.user.rx
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.addTo
-import io.reactivex.schedulers.Schedulers
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.appbar_prac.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
 
 class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -44,7 +28,10 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        val transaction=supportFragmentManager.beginTransaction()
+        val f1= frag1()
+        transaction.replace(R.id.framelayout,f1)
+        transaction.commit()
 
         appbarbt1.setOnClickListener(){
             var intent=Intent(this, MyHair::class.java)
@@ -168,8 +155,8 @@ class MainActivity : AppCompatActivity(),NavigationView.OnNavigationItemSelected
             }
             R.id.message-> Toast.makeText(this,"문자",Toast.LENGTH_SHORT).show()
 
-            R.id.num1->supportFragmentManager.beginTransaction().replace(R.id.framelayout, farg1()).commit()// fragment로 화면 전환 bottomnavi
-            R.id.num2->supportFragmentManager.beginTransaction().replace(R.id.framelayout, frag2()).commit()
+         //   R.id.num1->supportFragmentManager.beginTransaction().replace(R.id.framelayout, farg1()).commit()// fragment로 화면 전환 bottomnavi
+          //  R.id.num2->supportFragmentManager.beginTransaction().replace(R.id.framelayout, frag2()).commit()
 
         }
         layout_drawer.closeDrawers()
