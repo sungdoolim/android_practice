@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_find2page_man.*
 import kotlinx.android.synthetic.main.activity_find4page.*
 
 class find4page : AppCompatActivity() {
-
+//컷 종류 선택
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find4page)

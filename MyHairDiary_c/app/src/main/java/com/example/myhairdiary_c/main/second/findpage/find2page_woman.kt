@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_find2page_man.*
 import kotlinx.android.synthetic.main.activity_find2page_woman.*
 
 class find2page_woman : AppCompatActivity() {
-
+    //성별에 따라 길이가 달라집니다
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find2page_woman)

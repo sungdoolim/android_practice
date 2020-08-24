@@ -27,6 +27,7 @@ import kotlinx.android.synthetic.main.bottom_navi.*
 
 class find7page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 // complete find 페이지 // + 어댑터를 여기다 만들었음
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find7page)
@@ -42,6 +43,7 @@ class find7page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
     val region=pref.getString("region","").toString()
     val region2=pref.getString("region2","").toString()
     val demand=pref.getString("demand","").toString()
+        // 모든 데이터를 받아옵니다.
 
 if(region=="전 지역"||region=="선택 하기"){
     select_designer_listAll(db.firestore,gender,length,kind,region,region2,demand)
@@ -51,6 +53,7 @@ if(region=="전 지역"||region=="선택 하기"){
 }else {
     select_designer_list(db.firestore, gender, length, kind, region, region2, demand)
 }
+        // 데이터에 따라 메서드를 불러옵니다.
 
     println("${gender}, ${length}, ${kind}, ${region}, ${region2},  ${demand}")
     retry_find.setOnClickListener(){
@@ -77,10 +80,7 @@ if(region=="전 지역"||region=="선택 하기"){
             R.id.bottom4->{
                 var intent= Intent(this, Mypage::class.java)
                 startActivity(intent)
-
-
             }
-//            R.id.bottom5->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
             else ->""
         }
         return true;
@@ -88,11 +88,11 @@ if(region=="전 지역"||region=="선택 하기"){
 
 
     fun select_designer_listAll(firestore: FirebaseFirestore,gender:String,length:String,kind:String,region:String,region2:String,demand:String){
+        // 로직은 밑 두 메서드와 같습니다.
+        // 유저가 선택한 조건에 맞게 리스트를 구성해 recyclerview로 넘깁니다.
         firestore?.collection("hair_diary").whereEqualTo("perm",1)
             .whereEqualTo("major",kind).get()
             .addOnCompleteListener {
-
-
                 if(it.isSuccessful){
                     var userDTO=ArrayList<designer>()
                     for(dc in it.result!!.documents){
@@ -141,18 +141,14 @@ if(region=="전 지역"||region=="선택 하기"){
                                 }
                             }
 
-                        } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                        }
                     }
                     findcomplete_designer.addItemDecoration(DividerItemDecoration(applicationContext,
-                        HORIZONTAL))// 경계선 추가!!!!
-                    findcomplete_designer.layoutManager=
-                        LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
+                        HORIZONTAL))
+                    findcomplete_designer.layoutManager=LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
                     findcomplete_designer.setHasFixedSize(true)
                     findcomplete_designer.adapter=
-                        findcompleteAdapter(
-                            this,
-                            userDTO
-                        )
+                        findcompleteAdapter(this,userDTO)
                 }else{
                     println("fail")
                 }
@@ -178,38 +174,21 @@ if(region=="전 지역"||region=="선택 하기"){
                                 }
                             }
 
-                        } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                        }
                     }
                     findcomplete_designer.addItemDecoration(DividerItemDecoration(applicationContext,
-                        HORIZONTAL))// 경계선 추가!!!!
+                        HORIZONTAL))
                     findcomplete_designer.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
                     findcomplete_designer.setHasFixedSize(true)
                     findcomplete_designer.adapter=
-                        findcompleteAdapter(
-                            this,
-                            userDTO
-                        )
+                        findcompleteAdapter( this,userDTO)
                 }else{
                     println("fail")
                 }
             }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// adapter를 따로 파일로 만들지 않고 바로 클래스를 만들어 사용합니다.
     class findcompleteAdapter (val context: Context, val designerList:ArrayList<designer>): RecyclerView.Adapter<findcompleteAdapter.CustomViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
             val view= LayoutInflater.from(parent.context).inflate(R.layout.complete_designer_adapter,parent,false)
@@ -237,22 +216,7 @@ if(region=="전 지역"||region=="선택 하기"){
                     edit.putInt("reviewcount",dl.reviewcount)
                     edit.putString("profile",dl.profile)
                     edit.apply()
-//
-//
-//                    intent.putExtra("did",dl.id)
-//                    intent.putExtra("age",dl.age)
-//                    intent.putExtra("memo",dl.memo)
-//                    intent.putExtra("name",dl.name)
-//                    intent.putExtra("phone",dl.phone)
-//                    intent.putExtra("index",dl.index.toString())
-//                    intent.putExtra("year",dl.year)
-//                    intent.putExtra("monthc",dl.monthc)
-//                    intent.putExtra("major",dl.major)
-//                    intent.putExtra("reviewcount",dl.reviewcount)
-//                    intent.putExtra("profile",dl.profile)
                     context.startActivity(intent)
-
-                    //  Toast.makeText(parent.context,"이름 :${profile.name}", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -260,30 +224,17 @@ if(region=="전 지역"||region=="선택 하기"){
             return designerList.size
         }
         override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-            // holder.memo.setImageResource(1)
-
             holder.name.text=designerList.get(position).name
             holder.did.text=designerList.get(position).id
             holder.age.text=designerList.get(position).age.toString()
-            //   holder.memo.text=designerList.get(position).memo
-
-            holder.dimg.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
-
+            holder.dimg.setImageResource(R.drawable.ic_launcher_foreground)
             Glide.with(context).load(designerList.get(position).profile).into(holder.dimg)
-
-
         }
         class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
             val did=itemView.findViewById<TextView>(R.id.Did_com)
             val dimg=itemView.findViewById<ImageView>(R.id.Dimg_com)
             val name=itemView.findViewById<TextView>(R.id.Dname_com)
             val age=itemView.findViewById<TextView>(R.id.Dage_com)
-
         }
-
-
-
-
-
     }
 }

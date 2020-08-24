@@ -1,6 +1,7 @@
 package com.example.myhairdiary_c.main
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -31,22 +32,22 @@ class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigatio
         styledesc.text=prefrecommend.getString("memo","")
         val pref=getSharedPreferences("session",0)
         val edit=prefrecommend.edit()
+
         val id=pref.getString("id","").toString()
         var did=prefrecommend.getString("did","")
         var url=prefrecommend.getString("url","").toString()
         val style=prefrecommend.getString("style","")
+        // 추천받은 스타일의 정보를 가져옵니다.
+
         Glide.with(this).load(url).into(selected_style_img)
         var db= fireDB(this)
-        select_wecando(db.firestore,style!!)
-        select_another_style(db.firestore,did!!)
-        isScrab(db.firestore,id,url)
-
+        select_wecando(db.firestore,style!!)// 이 스타일을 할 수 있는 디자이너를 띄웁니다
+        select_another_style(db.firestore,did!!)// 또다른 추천 스타일을 띄웁니다.
+        isScrab(db.firestore,id,url)// 지금 스타일의 스크랩 여부에 따른 별 표를 바꿉니다
         isscrab.setOnClickListener(){
-            addmystyle(db.firestore,id,did,url)
+            val like=prefrecommend.getInt("like",0)
+            addmystyle(db,id,did,url,like,edit) // 좋아요 수를 변동/   db 삭제를 합니다.
         }
-
-
-
 
         overview_recom.setOnClickListener(){
             var intent= Intent(this, designer_list::class.java)
@@ -54,8 +55,8 @@ class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigatio
         }
         botnav.setOnNavigationItemSelectedListener(this)
     }
-    fun addmystyle(        firestore: FirebaseFirestore,        id: String,        did: String,        url: String    ){
-
+    fun addmystyle(db:fireDB, id: String, did: String, url: String, like: Int, selecedit: SharedPreferences.Editor,){
+        val firestore=db.firestore
         var userDTO=
             photourl(url,did,-1,"","","","","",id)
         // 밑에 document를 공백으로 두면 임의의 아이디를 생성해서 추가함
@@ -65,12 +66,20 @@ class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigatio
                  firestore?.collection("hair_mystyle").document(it.result!!.documents.get(0).id).delete()
                         .addOnCompleteListener {
                            isscrab.setImageResource(R.drawable.star_icon)
+                            db.updateData_oneInt_url("hair_photo","like",like-1,url)
+                            selecedit.putInt("like",like-1)
+                            selecedit.apply()
                         }
                 }else{
                     firestore?.collection("hair_mystyle")?.document()?.set(userDTO)
                         .addOnCompleteListener {
-                            if(it.isSuccessful)
+                            if(it.isSuccessful){
                                 isscrab.setImageResource(R.drawable.fullstart_icon)
+                                db.updateData_oneInt_url("hair_photo","like",like+1,url)
+                                selecedit.putInt("like",like+1)
+                                selecedit.apply()
+
+                            }
                         }
                 }
             }

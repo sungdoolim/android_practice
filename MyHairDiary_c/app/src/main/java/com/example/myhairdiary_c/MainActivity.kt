@@ -71,23 +71,22 @@ class MainActivity : AppCompatActivity() {
             var firestore = FirebaseFirestore.getInstance()
             firestore?.collection("hair_diary").whereEqualTo("id",id.toString()).get()
                 .addOnCompleteListener {
+                    var dclass:designer=designer()
                     if(it.isSuccessful){
                         for(dc in it.result!!.documents){
-                            println("\nget test!!! : ${dc.getString("ttttt")}")
-                            //  println("${len+1} : ${dc.toString()}")
-                            edit.putString("perm",dc.toObject(designer::class.java)?.perm.toString())
-                            edit.putString("name",dc.toObject(designer::class.java)?.name.toString())
-                            edit.putInt("year", dc.toObject(designer::class.java)?.year!!.toInt())
-                            edit.putInt("index",dc.toObject(designer::class.java)?.index!!.toInt())
-                            edit.putString("memo",dc.toObject(designer::class.java)?.memo.toString())
-                            edit.putString("phone",dc.toObject(designer::class.java)?.phone.toString())
-                            edit.putInt("age",dc.toObject(designer::class.java)?.age!!.toInt())
-                            edit.putString("profile",dc.toObject(designer::class.java)?.profile.toString())
+                           dclass=dc.toObject(designer::class.java)!!
 
-                            edit.putString("major",dc.toObject(designer::class.java)?.major.toString())
-                            edit.putString("major_length",dc.toObject(designer::class.java)?.major_length.toString())
-
-                            edit.putString("region",dc.toObject(designer::class.java)?.region.toString())
+                            edit.putInt("perm",dclass.perm)
+                            edit.putString("name",dclass.name)
+                            edit.putInt("year", dclass.year)
+                            edit.putInt("index",dclass.index)
+                            edit.putString("memo",dclass.memo)
+                            edit.putString("phone",dclass.phone)
+                            edit.putInt("age",dclass.age)
+                            edit.putString("profile",dclass.profile)
+                            edit.putString("major",dclass.major)
+                            edit.putString("major_length",dclass.major_length)
+                            edit.putString("region",dclass.region)
                             edit.apply()
                         }
                         var intent= Intent(this, Home2::class.java)
@@ -391,7 +390,7 @@ var db=fireDB(this)
         storageRef=storageRef.child(id).child("profile")
         storageRef.putFile(photoUri).addOnSuccessListener {
            storageRef.downloadUrl.addOnSuccessListener { uri->
-               db.updateData_one("profile",uri.toString(),id)
+               db.updateData_one("hair_diary","profile",uri.toString(),id)
                edit.putString("profile",uri.toString())
                edit.apply()
 
@@ -422,7 +421,7 @@ var db=fireDB(this)
         storageRef=storageRef.child(id).child("profile")
         storageRef.putFile(photoUri).addOnSuccessListener {
             storageRef.downloadUrl.addOnSuccessListener { uri->
-                db.updateData_one("profile",uri.toString(),id)
+                db.updateData_one("hair_diary","profile",uri.toString(),id)
             }
             Toast.makeText(this, "url? :${it.toString()}", Toast.LENGTH_LONG).show()
         }
@@ -434,7 +433,7 @@ var db=fireDB(this)
         name: String,
         style: String,
         length: String,
-        gender:String
+        gender:String,
     ) {
         var db=fireDB(this)
         val pref=getSharedPreferences("session",0)

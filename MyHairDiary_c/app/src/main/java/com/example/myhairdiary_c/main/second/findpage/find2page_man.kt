@@ -9,7 +9,7 @@ import com.example.myhairdiary_c.R
 import kotlinx.android.synthetic.main.activity_find2page_man.*
 
 class find2page_man : AppCompatActivity() {
-
+//성별에 따라 길이가 달라집니다
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find2page_man)

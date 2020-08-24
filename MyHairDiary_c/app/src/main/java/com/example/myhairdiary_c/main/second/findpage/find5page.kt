@@ -11,7 +11,7 @@ import com.example.myhairdiary_c.R
 import kotlinx.android.synthetic.main.activity_find5page.*
 
 class find5page : AppCompatActivity() {
-
+// 지역 선택
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find5page)

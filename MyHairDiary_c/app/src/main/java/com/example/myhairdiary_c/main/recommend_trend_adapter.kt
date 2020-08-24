@@ -29,6 +29,7 @@ class recommend_trend_adapter (val context: Context, val designerList:ArrayList<
                 edit.putString("gender",dl.gender)
                 edit.putString("did",dl.id)
                 edit.putString("length",dl.length)
+                edit.putInt("like",dl.like)
                 edit.putString("memo",dl.memo)
                 edit.putString("name",dl.name)
                 edit.putString("style",dl.style)

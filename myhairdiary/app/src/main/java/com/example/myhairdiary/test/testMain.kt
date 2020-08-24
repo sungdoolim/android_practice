@@ -58,7 +58,6 @@ test_image4.start()
 var url=it.toString().split("token")
                         println(url[0].toString())
                         //Glide.with(this).load(it.toString()).into(test_image1)
-
                     }
 
                 }

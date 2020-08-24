@@ -11,21 +11,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
 
+//designerAdapter 와 로직이 같습니다.
 
 class photorvAdapter (val context: Context, val designerList:ArrayList<photourl>): RecyclerView.Adapter<photorvAdapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view= LayoutInflater.from(parent.context).inflate(R.layout.photorv_adapter,parent,false)
-        /////////////////////////// 내가 쓸 custom_rev지정!
         return CustomViewHolder(
             view
         ).apply {
             itemView.setOnClickListener {
                 val curPos:Int=adapterPosition
                 var dl: photourl =designerList.get(curPos)
-
-
-
-                //  Toast.makeText(parent.context,"이름 :${profile.name}", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -33,8 +29,7 @@ class photorvAdapter (val context: Context, val designerList:ArrayList<photourl>
         return designerList.size
     }
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
-        // holder.memo.setImageResource(1)
-       // designerList.get(position)
+
         holder.name.text=designerList.get(position).name
         holder.did.text=designerList.get(position).id
         holder.memo.text=designerList.get(position).memo

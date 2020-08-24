@@ -9,7 +9,7 @@ import com.example.myhairdiary_c.R
 import kotlinx.android.synthetic.main.activity_find1page.*
 
 class find1page : AppCompatActivity() {
-
+// 선택한 성별에 따른 페이지 이동이 이루어 집니다
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find1page)

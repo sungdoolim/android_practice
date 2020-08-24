@@ -10,6 +10,8 @@ import androidx.core.app.ActivityCompat.startActivityForResult
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_main.*
+// 안쓰이나..?
+
 
 class album(parent : Context): AppCompatActivity(){
     val GALLERY=0

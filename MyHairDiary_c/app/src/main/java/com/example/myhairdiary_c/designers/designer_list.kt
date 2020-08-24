@@ -15,15 +15,14 @@ class designer_list : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_designer_list)
         val db= fireDB(this)
-        select_designer_list(db.firestore)
-
-
-    }    override fun onBackPressed() {
+        select_designer_list(db.firestore) // 모든 디자이너 출력입니다.
+    }
+    override fun onBackPressed() {
         super.onBackPressed()
         finish()
     }
     public fun select_designer_list(firestore:FirebaseFirestore) {
-
+        // 로직은 Home2의 select_recommend_designerList와 같습니다.
         firestore?.collection("hair_diary").whereEqualTo("perm",1).get()
             .addOnCompleteListener {
                 if(it.isSuccessful){

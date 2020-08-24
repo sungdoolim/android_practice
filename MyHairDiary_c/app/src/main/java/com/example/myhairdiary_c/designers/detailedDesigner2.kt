@@ -37,8 +37,7 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
         var gender:String=""
         spin_style.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                style=""
-
+                style="스타일"
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 style= spin_style.selectedItem.toString() // 스피너는 요렇게 가져오는 구나
@@ -46,8 +45,7 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
         }
         spin_len.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                len=""
-
+                len="길이"
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 len= spin_len.selectedItem.toString() // 스피너는 요렇게 가져오는 구나
@@ -55,15 +53,16 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
         }
         spin_gender.onItemSelectedListener = object: AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                gender=""
+                gender="성별"
 
             }
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
                 gender= spin_gender.selectedItem.toString() // 스피너는 요렇게 가져오는 구나
-
             }
         }
+        // 여기까지는 스피너의 값을 받아오는 것 입니다.
+
+
 
         bt1.setOnClickListener(){
             var intent= Intent(this, detailedDesigner::class.java)
@@ -79,55 +78,42 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
             startActivity(intent)
         }
         search_commit.setOnClickListener(){
-            if(style==""){
-                if(len==""||len=="기타"){
-                    if(gender==""){
+            // 검색 버튼으로 스피너 값 조건에 맞게 출력합니다.
+            if(style=="스타일"){
+                if(len=="길이"||len=="기타"){
+                    if(gender=="기타"||gender=="성별"){
                         select_hair(db.firestore,did!!)
                     }else{
                         select_hair_gender(db.firestore,did!!,gender)
                     }
-
                 }else{
-                    if(gender==""){
+                    if(gender=="기타"||gender=="성별"){
                         select_hair_len(db.firestore,did!!,len)
-
                     }else{
                         select_hair_len_gender(db.firestore,did!!,len,gender)
                     }
-
                 }
-
             }else{
-                if(len==""||len=="기타"){
+                if(len=="길이"||len=="기타"){
                     if(gender==""){
                             select_hair_style(db.firestore,did!!,style)
                     }else{
                             select_hair_style_gender(db.firestore,did!!,style,gender)
                     }
-
                 }else{
-                    if(gender==""){
+                    if(gender=="기타"||gender=="성별"){
                         select_hair_style_len(db.firestore,did!!,style,len)
-
                     }else{
                         select_hair_all(db.firestore,did!!,style,len,gender)
-
                     }
-
                 }
             }
-
-
-
         }
-
         botnav.setOnNavigationItemSelectedListener(this)
-
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when(item.itemId){
-
             R.id.bottom2->
             {
                 var intent= Intent(this, second_home::class.java)
@@ -137,44 +123,39 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
             R.id.bottom4->{
                 var intent= Intent(this, Mypage::class.java)
                 startActivity(intent)
-
-
             }
-//            R.id.bottom5->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
             else ->""
         }
         return true;
     }
 
 
-    public fun select_hair_all(firestore: FirebaseFirestore,did: String,style:String,len:String,gender:String) {// 지금은 recommend리스트랑 똑같음
+    public fun select_hair_all(firestore: FirebaseFirestore,did: String,style:String,len:String,gender:String) {
+        // 이 밑의 7개 메서드는 전부 로직이 같습니다.
+        // 다만 하나의 메서드로 만들기에 생각할 점이 많아져 따로 분리했습니다
+
         firestore?.collection("hair_photo").whereEqualTo("id",did)
             .whereEqualTo("style",style).whereEqualTo("length",len).whereEqualTo("gender",gender).get()
             .addOnCompleteListener {
+                // 선택한 스피너에 맞는 값(사진)만을 불러옵니다.
                 if(it.isSuccessful){
                     var userDTO=ArrayList<photourl>()
                     for(dc in it.result!!.documents){
                         dc.toObject(photourl::class.java)?.let { it1 ->
-                            // println("reviewcount : ${it1.reviewcount}")
+
                             userDTO.add(it1)
-                        } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                        }
                     }
-                    // recommend_designer_list 는 id로 얻어온 recyclerview 임
-                    hair_photo_listRv.addItemDecoration(
-                        DividerItemDecoration(applicationContext,
-                            DividerItemDecoration.HORIZONTAL
-                        ))
-                    hair_photo_listRv.layoutManager=
-                        LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+                    hair_photo_listRv.addItemDecoration(DividerItemDecoration(applicationContext,DividerItemDecoration.HORIZONTAL))
+                    hair_photo_listRv.layoutManager=LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     hair_photo_listRv.setHasFixedSize(true)
-                    hair_photo_listRv.adapter=
-                        photorvAdapter( this,  userDTO)
+                    hair_photo_listRv.adapter=photorvAdapter( this,  userDTO)
                 }else{
                     println("fail")
                 }
             }
     }
-    public fun select_hair_style_len(firestore: FirebaseFirestore,did: String,style:String,len:String) {// 지금은 recommend리스트랑 똑같음
+     fun select_hair_style_len(firestore: FirebaseFirestore,did: String,style:String,len:String) {
         firestore?.collection("hair_photo").whereEqualTo("id",did)
             .whereEqualTo("style",style).whereEqualTo("length",len).get()
             .addOnCompleteListener {
@@ -182,27 +163,21 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
                     var userDTO=ArrayList<photourl>()
                     for(dc in it.result!!.documents){
                         dc.toObject(photourl::class.java)?.let { it1 ->
-                            // println("reviewcount : ${it1.reviewcount}")
                             userDTO.add(it1)
-                        } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                        }
                     }
-                    // recommend_designer_list 는 id로 얻어온 recyclerview 임
-                    hair_photo_listRv.addItemDecoration(
-                        DividerItemDecoration(applicationContext,
-                            DividerItemDecoration.HORIZONTAL
-                        ))
+                    hair_photo_listRv.addItemDecoration( DividerItemDecoration(applicationContext,  DividerItemDecoration.HORIZONTAL  ))
                     hair_photo_listRv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     hair_photo_listRv.setHasFixedSize(true)
-                    hair_photo_listRv.adapter=
-                        photorvAdapter( this,  userDTO)
+                    hair_photo_listRv.adapter=  photorvAdapter( this,  userDTO)
                 }else{
                     println("fail")
                 }
             }
     }
 
-    public fun select_hair_style_gender(firestore: FirebaseFirestore,did: String,style:String,gender:String) {// 지금은 recommend리스트랑 똑같음
+    public fun select_hair_style_gender(firestore: FirebaseFirestore,did: String,style:String,gender:String) {
         firestore?.collection("hair_photo").whereEqualTo("id",did)
             .whereEqualTo("style",style).whereEqualTo("gender",gender).get()
             .addOnCompleteListener {
@@ -210,30 +185,22 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
                     var userDTO=ArrayList<photourl>()
                     for(dc in it.result!!.documents){
                         dc.toObject(photourl::class.java)?.let { it1 ->
-                            // println("reviewcount : ${it1.reviewcount}")
                             userDTO.add(it1)
-                        } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                        }
                     }
-                    // recommend_designer_list 는 id로 얻어온 recyclerview 임
-                    hair_photo_listRv.addItemDecoration(
-                        DividerItemDecoration(applicationContext,
-                            DividerItemDecoration.HORIZONTAL
-                        ))
+                        hair_photo_listRv.addItemDecoration(
+                        DividerItemDecoration(applicationContext,DividerItemDecoration.HORIZONTAL ))
                     hair_photo_listRv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     hair_photo_listRv.setHasFixedSize(true)
-                    hair_photo_listRv.adapter=
-                        photorvAdapter( this,  userDTO)
+                    hair_photo_listRv.adapter=photorvAdapter( this,  userDTO)
                 }else{
                     println("fail")
                 }
             }
     }
 
-
-
-
-    public fun select_hair_style(firestore: FirebaseFirestore,did: String,style:String) {// 지금은 recommend리스트랑 똑같음
+     fun select_hair_style(firestore: FirebaseFirestore,did: String,style:String) {
         firestore?.collection("hair_photo").whereEqualTo("id",did)
             .whereEqualTo("style",style).get()
             .addOnCompleteListener {
@@ -241,31 +208,22 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
                     var userDTO=ArrayList<photourl>()
                     for(dc in it.result!!.documents){
                         dc.toObject(photourl::class.java)?.let { it1 ->
-                            // println("reviewcount : ${it1.reviewcount}")
-                            userDTO.add(it1)
-                        } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                         userDTO.add(it1)
+                        }
                     }
-                    // recommend_designer_list 는 id로 얻어온 recyclerview 임
                     hair_photo_listRv.addItemDecoration(
-                        DividerItemDecoration(applicationContext,
-                            DividerItemDecoration.HORIZONTAL
-                        ))
+                        DividerItemDecoration(applicationContext,DividerItemDecoration.HORIZONTAL))
                     hair_photo_listRv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     hair_photo_listRv.setHasFixedSize(true)
-                    hair_photo_listRv.adapter=
-                        photorvAdapter( this,  userDTO)
+                    hair_photo_listRv.adapter=photorvAdapter( this,  userDTO)
                 }else{
                     println("fail")
                 }
             }
     }
 
-
-
-
-
-    public fun select_hair_len_gender(firestore: FirebaseFirestore,did: String,len:String,gender:String) {// 지금은 recommend리스트랑 똑같음
+    fun select_hair_len_gender(firestore: FirebaseFirestore,did: String,len:String,gender:String) {// 지금은 recommend리스트랑 똑같음
         firestore?.collection("hair_photo").whereEqualTo("id",did)
             .whereEqualTo("length",len).whereEqualTo("gender",gender).get()
             .addOnCompleteListener {
@@ -273,15 +231,11 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
                     var userDTO=ArrayList<photourl>()
                     for(dc in it.result!!.documents){
                         dc.toObject(photourl::class.java)?.let { it1 ->
-                            // println("reviewcount : ${it1.reviewcount}")
                             userDTO.add(it1)
-                        } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                        }
                     }
-                    // recommend_designer_list 는 id로 얻어온 recyclerview 임
-                    hair_photo_listRv.addItemDecoration(
-                        DividerItemDecoration(applicationContext,
-                            DividerItemDecoration.HORIZONTAL
-                        ))
+
+                    hair_photo_listRv.addItemDecoration(DividerItemDecoration(applicationContext,DividerItemDecoration.HORIZONTAL))
                     hair_photo_listRv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     hair_photo_listRv.setHasFixedSize(true)
@@ -296,7 +250,7 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
 
 
 
-    public fun select_hair_gender(firestore: FirebaseFirestore,did: String,gender:String) {// 지금은 recommend리스트랑 똑같음
+    public fun select_hair_gender(firestore: FirebaseFirestore,did: String,gender:String) {
         firestore?.collection("hair_photo").whereEqualTo("id",did)
             .whereEqualTo("gender",gender).get()
             .addOnCompleteListener {
@@ -304,37 +258,22 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
                     var userDTO=ArrayList<photourl>()
                     for(dc in it.result!!.documents){
                         dc.toObject(photourl::class.java)?.let { it1 ->
-                            // println("reviewcount : ${it1.reviewcount}")
-                            userDTO.add(it1)
-                        } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                        userDTO.add(it1)
+                        }
                     }
-                    // recommend_designer_list 는 id로 얻어온 recyclerview 임
-                    hair_photo_listRv.addItemDecoration(
-                        DividerItemDecoration(applicationContext,
-                            DividerItemDecoration.HORIZONTAL
-                        ))
+                 hair_photo_listRv.addItemDecoration(
+                        DividerItemDecoration(applicationContext,DividerItemDecoration.HORIZONTAL))
                     hair_photo_listRv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     hair_photo_listRv.setHasFixedSize(true)
-                    hair_photo_listRv.adapter=
-                        photorvAdapter( this,  userDTO)
+                    hair_photo_listRv.adapter= photorvAdapter( this,  userDTO)
                 }else{
                     println("fail")
                 }
             }
     }
 
-
-
-
-
-
-
-
-
-
-
-    public fun select_hair_len(firestore: FirebaseFirestore,did: String,len:String) {// 지금은 recommend리스트랑 똑같음
+    public fun select_hair_len(firestore: FirebaseFirestore,did: String,len:String) {
         firestore?.collection("hair_photo").whereEqualTo("id",did)
             .whereEqualTo("length",len).get()
             .addOnCompleteListener {
@@ -342,47 +281,37 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
                     var userDTO=ArrayList<photourl>()
                     for(dc in it.result!!.documents){
                         dc.toObject(photourl::class.java)?.let { it1 ->
-                            // println("reviewcount : ${it1.reviewcount}")
-                            userDTO.add(it1)
-                        } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                           userDTO.add(it1)
+                        }
                     }
-                    // recommend_designer_list 는 id로 얻어온 recyclerview 임
                     hair_photo_listRv.addItemDecoration(
-                        DividerItemDecoration(applicationContext,
-                            DividerItemDecoration.HORIZONTAL
-                        ))
+                        DividerItemDecoration(applicationContext,DividerItemDecoration.HORIZONTAL))
                     hair_photo_listRv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     hair_photo_listRv.setHasFixedSize(true)
-                    hair_photo_listRv.adapter=
-                        photorvAdapter( this,  userDTO)
+                    hair_photo_listRv.adapter=photorvAdapter( this,  userDTO)
                 }else{
                     println("fail")
                 }
             }
     }
 
-    public fun select_hair(firestore: FirebaseFirestore,did: String) {// 지금은 recommend리스트랑 똑같음
+    public fun select_hair(firestore: FirebaseFirestore,did: String) {
         firestore?.collection("hair_photo").whereEqualTo("id",did).get()
             .addOnCompleteListener {
                 if(it.isSuccessful){
                     var userDTO=ArrayList<photourl>()
                     for(dc in it.result!!.documents){
                         dc.toObject(photourl::class.java)?.let { it1 ->
-                            // println("reviewcount : ${it1.reviewcount}")
                             userDTO.add(it1)
-                        } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                        }
                     }
-                    // recommend_designer_list 는 id로 얻어온 recyclerview 임
                     hair_photo_listRv.addItemDecoration(
-                        DividerItemDecoration(applicationContext,
-                            DividerItemDecoration.HORIZONTAL
-                        ))
+                        DividerItemDecoration(applicationContext,DividerItemDecoration.HORIZONTAL))
                     hair_photo_listRv.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
                     hair_photo_listRv.setHasFixedSize(true)
-                    hair_photo_listRv.adapter=
-                        photorvAdapter( this,  userDTO)
+                    hair_photo_listRv.adapter=photorvAdapter( this,  userDTO)
                 }else{
                     println("fail")
                 }

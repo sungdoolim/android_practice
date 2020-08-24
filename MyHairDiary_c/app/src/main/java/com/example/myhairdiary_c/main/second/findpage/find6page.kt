@@ -7,7 +7,7 @@ import com.example.myhairdiary_c.R
 import kotlinx.android.synthetic.main.activity_find6page.*
 
 class find6page : AppCompatActivity() {
-
+// 유저의 요청 사항 -> 밑 코드와 같이 데이터는 받지만 아직 데이터를 활요하지 않았습니다.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find6page)
