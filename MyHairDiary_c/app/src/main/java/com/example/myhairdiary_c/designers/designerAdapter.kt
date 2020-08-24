@@ -2,11 +2,14 @@ package com.example.myhairdiary_c.designers
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.OvalShape
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
@@ -14,6 +17,7 @@ import com.example.myhairdiary_c.R
 
 class designerAdapter (val context: Context, val designerList:ArrayList<designer>): RecyclerView.Adapter<designerAdapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
+
         val view= LayoutInflater.from(parent.context).inflate(R.layout.designer_adapter,parent,false)
         // 내가 쓸 custom_rev지정!
         return CustomViewHolder(
@@ -21,8 +25,7 @@ class designerAdapter (val context: Context, val designerList:ArrayList<designer
         ).apply {
             itemView.setOnClickListener {
                 val curPos:Int=adapterPosition
-                var dl: designer =designerList.get(curPos)
-
+                val dl: designer =designerList.get(curPos)
                 val intent = Intent(view.getContext(), detailedDesigner::class.java)
                 val pref=context.getSharedPreferences("selected",0)
                 val edit=pref.edit()
@@ -40,6 +43,7 @@ class designerAdapter (val context: Context, val designerList:ArrayList<designer
                 edit.putString("major",dl.major)
                 edit.putInt("reviewcount",dl.reviewcount)
                 edit.putString("profile",dl.profile)
+                edit.putInt("like",dl.like)
                 edit.apply()
 
 
@@ -65,6 +69,7 @@ class designerAdapter (val context: Context, val designerList:ArrayList<designer
     }
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         // holder.memo.setImageResource(1)
+
         holder.did.text="아이디 : "+designerList.get(position).id+"\t"
         holder.name.text="이름 : "+designerList.get(position).name+"\t"
         holder.age.text="나이 : "+designerList.get(position).age.toString()+"\t"
@@ -75,12 +80,16 @@ class designerAdapter (val context: Context, val designerList:ArrayList<designer
       //  holder.monthc.text="월 평균 손님 수 : "+designerList.get(position).monthc.toString()
 
         holder.dimg.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
-
+        //holder.constlay.setBackground(R.drawable.back_line)
+//        holder.constlay.setClipToOutline(true)
+//        User_Profile_Photo.setBackground(ShapeDrawable(OvalShape()));
+//        User_Profile_Photo.setClipToOutline(true)
         Glide.with(context).load(designerList.get(position).profile).into(holder.dimg)
 
 
     }
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        val constlay=itemView.findViewById<ConstraintLayout>(R.id.designer_adpt)
         val did=itemView.findViewById<TextView>(R.id.Did)
         val dimg=itemView.findViewById<ImageView>(R.id.Dimg)
         val name=itemView.findViewById<TextView>(R.id.Dname)

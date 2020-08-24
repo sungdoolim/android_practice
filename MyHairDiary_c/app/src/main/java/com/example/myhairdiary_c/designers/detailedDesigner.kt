@@ -40,7 +40,6 @@ class detailedDesigner : AppCompatActivity(), BottomNavigationView.OnNavigationI
         bt2.setOnClickListener(){
             var intent= Intent(this, detailedDesigner2::class.java)
             startActivity(intent)
-
         }
         bt3.setOnClickListener(){
             var intent= Intent(this, detailedDesigner3::class.java)
@@ -50,15 +49,11 @@ class detailedDesigner : AppCompatActivity(), BottomNavigationView.OnNavigationI
             var intent= Intent(this, detailedDesigner4::class.java)
             startActivity(intent)
         }
-
-
-
-
         var id=pref.getString("id","").toString()
-
         var url=prefselected.getString("profile","").toString()
         var did=prefselected.getString("did","").toString()
         val age=prefselected.getInt("age",0).toString()
+        val like=prefselected.getInt("like",0)
         val major=prefselected.getString("major","").toString()
         val reviewcount=prefselected.getInt("reviewcount",0).toString()
         detailed_designer_name.text="이름 : "+pref.getString("name","")+"\nID : "+did
@@ -66,9 +61,6 @@ class detailedDesigner : AppCompatActivity(), BottomNavigationView.OnNavigationI
         memo.text=prefselected.getString("memo","").toString()
         var mymajor=pref.getString("major","").toString()
         recommended_url(db.firestore,did,mymajor)
-
-
-
 //intent.getStringExtra("profile")
         Glide.with(this).load(url).into(designer_photo)
         designer_photo.setBackground(ShapeDrawable(OvalShape()));
@@ -83,7 +75,7 @@ class detailedDesigner : AppCompatActivity(), BottomNavigationView.OnNavigationI
         botnav.setOnNavigationItemSelectedListener(this)
         isScrab(db.firestore,id,did)
         isscrab.setOnClickListener(){
-            addmystyle(db.firestore,id,did,url!!)
+            addmystyle(db.firestore,id,did,url!!,like)
         }
     }
     fun recommended_url(firestore:FirebaseFirestore,did:String,mymajor:String){
@@ -101,25 +93,33 @@ class detailedDesigner : AppCompatActivity(), BottomNavigationView.OnNavigationI
                 }
             }
     }
-    fun addmystyle(firestore: FirebaseFirestore,id: String,did: String,url:String=""){
-
-        var userDTO=
-            designer(did,0,"",0,"",0,1,0,0,
-                "","","","",0,"","",url,
-                "","","","","","",id)
+    fun addmystyle(firestore: FirebaseFirestore,id: String,did: String,url:String="",like:Int){
         // 밑에 document를 공백으로 두면 임의의 아이디를 생성해서 추가함
         firestore?.collection("hair_mydesigner").whereEqualTo("customid",id)
             .whereEqualTo("id",did).get().addOnCompleteListener{
                 if( it.result!!.documents.size!=0){
                     firestore?.collection("hair_mydesigner").document(it.result!!.documents.get(0).id).delete()
                         .addOnCompleteListener {
+                            var userDTO=
+                                designer(did,0,"",0,"",0,1,0,0,
+                                    "","","","",0,"","",url,
+                                    "","","","","","",id,like-1)
                                 isscrab.setImageResource(R.drawable.star_icon)
+                            firestore?.collection("hair_mydesigner")?.document()?.set(userDTO)
+                                .addOnCompleteListener{
+                                    Toast.makeText(this,"좋아요 취소",Toast.LENGTH_SHORT).show()
+                                }
                         }
                 }else{
+                    var userDTO=
+                        designer(did,0,"",0,"",0,1,0,0,
+                            "","","","",0,"","",url,
+                            "","","","","","",id,like+1)
                     firestore?.collection("hair_mydesigner")?.document()?.set(userDTO)
                         .addOnCompleteListener {
-                            if(it.isSuccessful)
+                            if(it.isSuccessful){
                                 isscrab.setImageResource(R.drawable.fullstart_icon)
+                                Toast.makeText(this,"좋아요 추가",Toast.LENGTH_SHORT).show()}
                         }
                 }
             }

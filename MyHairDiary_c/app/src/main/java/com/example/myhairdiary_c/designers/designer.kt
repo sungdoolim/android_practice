@@ -8,7 +8,8 @@ val profile:String="",
                     val major_length:String="",
                     val major:String="",val region:String="",val region2:String="전 지역"
                     ,val memo:String="",
-                    val customid:String=""
+                    val customid:String="",
+                    val like:Int=0
 
 ) {}
 //성별/머리길이/주요시술/지역/희망사항

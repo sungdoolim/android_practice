@@ -32,6 +32,7 @@ class find7page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
         setContentView(R.layout.activity_find7page)
 
     botnav.getMenu().getItem(1).setChecked(true);
+    botnav.setOnNavigationItemSelectedListener(this)
     val db= fireDB(this)
     val pref=getSharedPreferences("tab2",0)
     val edit=pref.edit()
@@ -42,9 +43,9 @@ class find7page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
     val region2=pref.getString("region2","").toString()
     val demand=pref.getString("demand","").toString()
 
-if(region=="전지역"){
+if(region=="전 지역"||region=="선택 하기"){
     select_designer_listAll(db.firestore,gender,length,kind,region,region2,demand)
-}else if(region2=="전지역"){
+}else if(region2=="전 지역"||region2=="선택 하기"){
     select_designer_listPartAll(db.firestore,gender,length,kind,region,region2,demand)
 
 }else {
@@ -67,7 +68,8 @@ if(region=="전지역"){
 
             R.id.bottom2->
             {
-
+                var intent= Intent(this, second_home::class.java)
+                startActivity(intent) // 다시찾기
             }
             R.id.bottom3->{
 
