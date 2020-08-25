@@ -27,6 +27,7 @@ class fireDB(parent: Context?){
         firestore?.collection(path).whereEqualTo("id",id).get()
             .addOnCompleteListener {
                 if(it.isSuccessful){
+
                     firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
                 }
             }

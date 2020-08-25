@@ -32,6 +32,9 @@ class Mypage2 : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
             var iscpt=mypage2_cptbox.isChecked
             println(iscpt)
             if(iscpt){
+                // 체크 여부에 따른 동의 / 비동의 처리를 해야합니다.
+                // 구현되지 않았습니다.
+
             Toast.makeText(this,"체크됨",Toast.LENGTH_SHORT).show()
             }
             else{
@@ -59,10 +62,7 @@ class Mypage2 : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
             }
             R.id.bottom4->{
 
-
-
             }
-//            R.id.bottom5->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
             else ->""
         }
         return true;

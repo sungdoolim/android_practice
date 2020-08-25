@@ -68,6 +68,9 @@ class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 //gender=position
             }
         }
+        // 스피너에 대한 값을 저장한 것 입니다 gender/ len / style
+
+
         search_commit.setOnClickListener(){
             println("${style} and ${len} and ${gender}")
             selectList(style,len,gender)
@@ -172,8 +175,8 @@ class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
 
 
     public fun selectList(style: String, len: String, gender: String) {
+            // 밑 if/elif들의 논리는 같습니다.
 
-        //하.... 나중에 개선 합시다....
         var firestore=FirebaseFirestore.getInstance()
         if(style=="스타일"&&(len=="길이"||len=="기타")&&(gender=="성별")){
             firestore?.collection("hair_photo").get()

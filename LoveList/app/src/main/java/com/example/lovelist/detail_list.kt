@@ -34,8 +34,22 @@ class detail_list : AppCompatActivity() {
             var content=detail_content.text.toString()
             println("1111place : ${place}, content : ${content}")
 
-            if(place==""){place=detail_place.hint.toString().split(" ")[1]}
-            if(content==""){content=detail_content.hint.toString().split(" ")[1]}
+            if(place==""){
+                val placesplit=detail_place.hint.toString().split(" ")//abc def
+                for(i in 1..placesplit.size-1){//1~3
+                    place+=placesplit[i]+" "
+                }
+
+            }
+            if(content==""){
+
+                val contentsplit=detail_content.hint.toString().split(" ")
+                for(i in 1..contentsplit.size-1){//1~3
+                    content+=contentsplit[i]+" "
+                }
+
+
+            }
             println("2222place : ${place}, content : ${content}")
             modeData(firestore,place,content,index,ischec)
 

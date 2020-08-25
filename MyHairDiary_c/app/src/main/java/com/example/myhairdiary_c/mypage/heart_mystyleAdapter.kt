@@ -16,12 +16,12 @@ import com.example.myhairdiary_c.main.detailedRecommend
 class heart_mystyleAdapter (val context: Context, val designerList:ArrayList<photourl>): RecyclerView.Adapter<heart_mystyleAdapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view= LayoutInflater.from(parent.context).inflate(R.layout.heart_mystyle_adapter,parent,false)
-        // 내가 쓸 custom_rev지정!
+        // recyclerview 어뎁터
         return CustomViewHolder(
             view
         ).apply {
             itemView.setOnClickListener {
-
+            // 클릭시 동작
                 val curPos:Int=adapterPosition
                 var dl: photourl =designerList.get(curPos)
                 val prefrecommend=context.getSharedPreferences("recommended",0)
@@ -38,15 +38,7 @@ class heart_mystyleAdapter (val context: Context, val designerList:ArrayList<pho
 
                 var intent= Intent(view.getContext(), detailedRecommend::class.java)// 이게 공지나...그런 설정들
                 context.startActivity(intent)
-
-//                println("${dl.url}")
-//                println("${dl.gender}")
-//                println("${dl.id}")
-//                println("${dl.name}")
-
                 // 정보 다 받을수 있음
-
-
             }
         }
     }
@@ -55,10 +47,7 @@ class heart_mystyleAdapter (val context: Context, val designerList:ArrayList<pho
     }
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         // holder.memo.setImageResource(1)
-
         Glide.with(context).load(designerList.get(position).url).into(holder.mystyle)
-
-
     }
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 

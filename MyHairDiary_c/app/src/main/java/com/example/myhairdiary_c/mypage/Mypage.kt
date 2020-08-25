@@ -28,7 +28,7 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mypage)
 
-        botnav.getMenu().getItem(3).setChecked(true);
+        botnav.getMenu().getItem(3).setChecked(true) // 바텀네비 고정입니다. 원래 이런식으로 하는건 아니죠....
         botnav.setOnNavigationItemSelectedListener(this)
         val pref=getSharedPreferences("session",0)
         val id=pref.getString("id","").toString()
@@ -41,8 +41,8 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
         val db= fireDB(this)
         val firestore=db.firestore
         //   myfav_designer /   myfav_style
-        select_mystyle(firestore,id)
-        select_mydesigner(firestore,id)
+        select_mystyle(firestore,id)// 내가 스크랩한 스타일 사진을 로드
+        select_mydesigner(firestore,id)// 내가 스크랩한 디자이너를 로드
         settingsbt.setOnClickListener(){
             var intent= Intent(this, Setting::class.java)// 이게 공지나...그런 설정들
             startActivity(intent)
@@ -64,60 +64,48 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
         }
     }
 
-    public fun select_mydesigner(        firestore: FirebaseFirestore,        id: String ) {
-        // 지금은 recommend리스트랑 똑같음 // 얘가 맨 마지막애인가바
+    public fun select_mydesigner(firestore: FirebaseFirestore,id: String ) {
         firestore?.collection("hair_mydesigner").whereEqualTo("customid",id).get()
             .addOnCompleteListener {
                 if(it.isSuccessful){
                     var userDTO=ArrayList<designer>()
                     for(dc in it.result!!.documents){
                         dc.toObject(designer::class.java)?.let { it1 ->
-                            // println("reviewcount : ${it1.reviewcount}")
-                            userDTO.add(it1) } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
-                    }
+
+                            userDTO.add(it1) } }
                     println("designers  len = ${userDTO.size}")
-                    // recommend_designer_list 는 id로 얻어온 recyclerview 임
+
                     myfav_designer.addItemDecoration(
-                        DividerItemDecoration(applicationContext,
-                            DividerItemDecoration.HORIZONTAL
-                        )
-                    )// 경계선 추가!!!!
+                        DividerItemDecoration(applicationContext,DividerItemDecoration.HORIZONTAL)
+                    )
                     myfav_designer.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
                     myfav_designer.setHasFixedSize(true)
-                    myfav_designer.adapter=
-                        heart_mydesignerAdapter(this,userDTO)
+                    myfav_designer.adapter=heart_mydesignerAdapter(this,userDTO)
+                    // 어뎁터를 연결합니다.
                 }else{
                     println("fail")
                 }
             }
     }
 
-    fun select_mystyle(
-        firestore: FirebaseFirestore,
-        id: String
-    ) {// 지금은 recommend리스트랑 똑같음 // 얘가 맨 마지막애인가바
+    fun select_mystyle(firestore: FirebaseFirestore,id: String) {
         firestore?.collection("hair_mystyle").whereEqualTo("customid",id).get()
             .addOnCompleteListener {
+                // 쿼리에 따른 사진들을 얻어와서 출력합니다
                 if(it.isSuccessful){
                     var userDTO=ArrayList<photourl>()
                     for(dc in it.result!!.documents){
                         dc.toObject(photourl::class.java)?.let { it1 ->
-                            // println("reviewcount : ${it1.reviewcount}")
-                            userDTO.add(it1) } // println("success ${userDTO[len].toString()}")// 비동기식으로 되는건가봐 맨 마지막에 출력되네
+                            userDTO.add(it1) }
                     }
                     println("designers  len = ${userDTO.size}")
-                    // recommend_designer_list 는 id로 얻어온 recyclerview 임
-                    myfav_style.addItemDecoration(
-                        DividerItemDecoration(applicationContext,
-                            DividerItemDecoration.HORIZONTAL
-                        )
-                    )// 경계선 추가!!!!
+                    myfav_style.addItemDecoration(DividerItemDecoration(applicationContext,DividerItemDecoration.HORIZONTAL))
+
                     myfav_style.layoutManager=
                         LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
                     myfav_style.setHasFixedSize(true)
-                    myfav_style.adapter=
-                        heart_mystyleAdapter(this,userDTO)
+                    myfav_style.adapter=heart_mystyleAdapter(this,userDTO)
                 }else{
                     println("fail")
                 }
@@ -141,7 +129,6 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
                 var intent= Intent(this, Mypage::class.java)
                 startActivity(intent)
             }
-//            R.id.bottom5->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
             else ->""
         }
         return true

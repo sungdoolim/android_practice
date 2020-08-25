@@ -11,6 +11,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.bottom_navi.*
 
 class Setting : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
+    // 설정 페이지 입니다.
+    // 각종 버튼이벤트가 추가되어야 합니다.
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,9 +22,7 @@ class Setting : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
         botnav.getMenu().getItem(3).setChecked(true);
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-
         when(item.itemId){
-
             R.id.bottom1-> {
                 var intent= Intent(this, Home2::class.java)
                 startActivity(intent)
@@ -38,7 +39,6 @@ class Setting : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
                 var intent= Intent(this, Mypage::class.java)
                 startActivity(intent)
             }
-//            R.id.bottom5->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
             else ->""
         }
         return true;

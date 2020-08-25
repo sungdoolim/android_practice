@@ -16,7 +16,7 @@ import com.example.myhairdiary_c.designers.photourl
 class recommend_trend_adapter (val context: Context, val designerList:ArrayList<photourl>,val whatodo:Int): RecyclerView.Adapter<recommend_trend_adapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view= LayoutInflater.from(parent.context).inflate(R.layout.search_grid_adapter,parent,false)
-        // 내가 쓸 custom_rev지정!
+
         return CustomViewHolder(
             view
         ).apply {

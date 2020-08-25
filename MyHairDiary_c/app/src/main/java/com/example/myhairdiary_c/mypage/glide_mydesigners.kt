@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_glide_mydesigners.*
 
 
 class glide_mydesigners : AppCompatActivity() {
+// 안쓰는 건가..?
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

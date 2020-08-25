@@ -14,8 +14,8 @@ import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.detailedDesigner
 import com.example.myhairdiary_c.designers.photourl
 import com.example.myhairdiary_c.main.detailedRecommend
-
-class MyAdapter(    context: Context,    layout: Int,    userDTO:ArrayList<photourl>) :
+// 얘도 gridview 어댑터 입니다
+class MyAdapter(context: Context,layout: Int,userDTO:ArrayList<photourl>) :
     BaseAdapter() {
     var context: Context
     var layout: Int

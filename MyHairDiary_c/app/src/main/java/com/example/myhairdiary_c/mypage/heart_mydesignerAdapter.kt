@@ -16,11 +16,13 @@ import com.example.myhairdiary_c.designers.detailedDesigner
 class heart_mydesignerAdapter (val context: Context, val designerList:ArrayList<designer>): RecyclerView.Adapter<heart_mydesignerAdapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view= LayoutInflater.from(parent.context).inflate(R.layout.heart_mydesigner_adapter,parent,false)
-        // 내가 쓸 custom_rev지정!
+        // recyclerview 어뎁터
+
         return CustomViewHolder(
             view
         ).apply {
             itemView.setOnClickListener {
+                //클릭시 동작
                 val curPos:Int=adapterPosition
                 var dl: designer =designerList.get(curPos)
                 val pref=context.getSharedPreferences("selected",0)
@@ -41,13 +43,7 @@ class heart_mydesignerAdapter (val context: Context, val designerList:ArrayList<
                 edit.apply()
                 val intent = Intent(view.getContext(), detailedDesigner::class.java)
                 context.startActivity(intent)
-//                println("${dl.url}")
-//                println("${dl.gender}")
-//                println("${dl.id}")
-//                println("${dl.name}")
-
-                // 정보 다 받을수 있음
-                            }
+                }
         }
     }
     override fun getItemCount(): Int {
@@ -55,21 +51,11 @@ class heart_mydesignerAdapter (val context: Context, val designerList:ArrayList<
     }
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         // holder.memo.setImageResource(1)
-
-
-
-
-
         Glide.with(context).load(designerList.get(position).profile).into(holder.mydesigner)
-
-
     }
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-
         val mydesigner=itemView.findViewById<ImageView>(R.id.heart_mydesigner)
         val heart=itemView.findViewById<ImageView>(R.id.heart_mydesigner_heart)
-
-
     }
 
 

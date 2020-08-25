@@ -45,23 +45,7 @@ class designerAdapter (val context: Context, val designerList:ArrayList<designer
                 edit.putString("profile",dl.profile)
                 edit.putInt("like",dl.like)
                 edit.apply()
-                // 데이터를 intent에 담았을때 휘발성 문제가 있어 edit으로 사용했습니다.
-
-
-//                intent.putExtra("did",dl.id)
-//                intent.putExtra("age",dl.age)
-//                intent.putExtra("memo",dl.memo)
-//                intent.putExtra("name",dl.name)
-//                intent.putExtra("phone",dl.phone)
-//                intent.putExtra("index",dl.index.toString())
-//                intent.putExtra("year",dl.year)
-//                intent.putExtra("monthc",dl.monthc)
-//                intent.putExtra("major",dl.major)
-//                intent.putExtra("reviewcount",dl.reviewcount)
-//                intent.putExtra("profile",dl.profile)
                 context.startActivity(intent)
-
-                //  Toast.makeText(parent.context,"이름 :${profile.name}", Toast.LENGTH_SHORT).show()
             }
         }
     }

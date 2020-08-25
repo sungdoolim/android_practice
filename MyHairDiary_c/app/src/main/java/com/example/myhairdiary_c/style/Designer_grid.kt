@@ -14,6 +14,8 @@ import com.example.myhairdiary_c.designers.designer
 import com.example.myhairdiary_c.designers.photourl
 import com.example.myhairdiary_c.main.detailedRecommend
 
+
+// recyclerview 가 아닌 gridview의 어뎁터 입니다.
 class grid_adapter(context: Context, layout: Int, userDTO:ArrayList<designer>) :
     BaseAdapter() {
     var context: Context
@@ -24,11 +26,11 @@ class grid_adapter(context: Context, layout: Int, userDTO:ArrayList<designer>) :
         return userDTO.size
     }
     override fun getItem(position: Int): Any {
+        // 선택됬을때 여기서 처리합니다.
         val pref=context.getSharedPreferences("selected",0)
         val edit=pref.edit()
         val dl=userDTO[position]
         edit.clear()
-
         edit.putString("did",dl.id)
         edit.putInt("age",dl.age)
         edit.putString("memo",dl.memo)
@@ -44,9 +46,7 @@ class grid_adapter(context: Context, layout: Int, userDTO:ArrayList<designer>) :
         val intent = Intent(context, detailedRecommend::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) // 이거 없으면 인텐트 불가
         context.startActivity(intent)
-
         return userDTO[position]
-
     }
     override fun getItemId(position: Int): Long {
         return position.toLong()
@@ -57,15 +57,10 @@ class grid_adapter(context: Context, layout: Int, userDTO:ArrayList<designer>) :
         parent: ViewGroup?
     ): View? {
         var convertView = convertView
-        if (convertView == null) convertView = inf.inflate(layout, null)
-//            val iv =
-//                convertView!!.findViewById<View>(R.id.imV) as ImageView
-        //   iv.setImageResource(img[position])
+        if (convertView == null) {convertView = inf.inflate(layout, null)}
+
         val iv=convertView!!.findViewById<ImageView>(R.id.search_imageurl)
-      //  val tv=convertView!!.findViewById<TextView>(R.id.search_desc)
-      //  tv.text=userDTO[position].name
         Glide.with(context).load(userDTO[position].profile).into(iv)
-        // iv.setImageResource(imgurl[position])
         return convertView
     }
     init {

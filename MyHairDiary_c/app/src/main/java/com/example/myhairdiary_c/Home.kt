@@ -15,24 +15,15 @@ import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.bottom_navi.*
 import kotlinx.android.synthetic.main.home.*
 /*home frag trying....*/
-
+// 안씁니다
 class Home : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelectedListener{
      private var arraylist: ArrayList<String>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-
-
         botnav.setOnNavigationItemSelectedListener(this)
         supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
         var pref=getSharedPreferences("session",0)
-        var a="ddddd"
-        editSearch.hint=a
-//       var list = ArrayList<String>();
-//       list= settingList(list);
-//        arraylist?.addAll(list!!)
-//
-
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
