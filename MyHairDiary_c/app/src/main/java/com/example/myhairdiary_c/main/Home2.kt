@@ -23,6 +23,7 @@ import com.example.myhairdiary_c.Setting
 import com.example.myhairdiary_c.designers.designer
 import com.example.myhairdiary_c.designers.designerAdapter
 import com.example.myhairdiary_c.designers.photourl
+import com.example.myhairdiary_c.diary.MyHairDiary
 import com.example.myhairdiary_c.firedb.album
 import com.example.myhairdiary_c.firedb.fireDB
 import com.example.myhairdiary_c.logo_home
@@ -45,9 +46,6 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
             setContentView(R.layout.activity_home2)
         // 실제 앱 시작 첫 화면입니다.
-        home2_float.setOnClickListener(){
-            Toast.makeText(this,"플로팅 버튼!",Toast.LENGTH_SHORT).show()
-        }
 
 
         var db= fireDB(this)  // 클래스로 firebase관련 목록을 따로 설정하여 사용하고자 했으나 많은 활용을 하지 못했습니다.
@@ -114,10 +112,10 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
                 ynow=scrollView2.scrollY
                 if(ynow-ybefore>0){
                     botnav.visibility= View.INVISIBLE
-                    home2_float.visibility=View.INVISIBLE
+//                    home2_float.visibility=View.INVISIBLE
                 }else{
                     botnav.visibility= View.VISIBLE
-                    home2_float.visibility=View.VISIBLE
+//                    home2_float.visibility=View.VISIBLE
                 }
                 println(" y :  ${ynow}")
             })
@@ -137,7 +135,8 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
                 startActivity(intent)
             }
             R.id.bottom3->{
-
+                var intent= Intent(this, MyHairDiary::class.java)
+                startActivity(intent)
             }
             R.id.bottom4->{
                 var intent= Intent(this, Mypage::class.java)
