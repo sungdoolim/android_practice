@@ -4,12 +4,19 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.VelocityTracker
 import android.view.View
+import android.widget.AbsListView
+import android.widget.LinearLayout
+import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.marginTop
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.load.engine.Resource
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.photourl
 import com.example.myhairdiary_c.firedb.fireDB
@@ -19,12 +26,16 @@ import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_detailed_designer3.*
 import kotlinx.android.synthetic.main.activity_home2.*
 import kotlinx.android.synthetic.main.activity_my_hair_diary.*
+import kotlinx.android.synthetic.main.activity_my_hair_diary.view.*
+import kotlinx.android.synthetic.main.bottom_navi.*
 import kotlinx.android.synthetic.main.diary_uppertab.*
 
 class MyHairDiary : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_hair_diary)
+
         // 다이어리 탭입니다
         val db=fireDB(this)
 
@@ -37,7 +48,6 @@ class MyHairDiary : AppCompatActivity() {
 
 
         diary_uppertab.addOnTabSelectedListener(object:TabLayout.OnTabSelectedListener{
-            @RequiresApi(Build.VERSION_CODES.Q)
             override fun onTabSelected(tab: TabLayout.Tab) {
                 var i = tab.position
 
@@ -71,6 +81,15 @@ class MyHairDiary : AppCompatActivity() {
             var intent= Intent(this, MyBoard::class.java)
             startActivity(intent)
         }
+        mhd_iv1.setOnClickListener(){
+            if(mhd_gridview.top==450){
+                mhd_gridview.top=600
+            }else{
+                mhd_gridview.top=450
+            }
+        }
+
+
 
 
         select_my_register(db,id)// 처음 화면은 내가 올린 게시물을 보는 것 입니다.
@@ -79,7 +98,7 @@ class MyHairDiary : AppCompatActivity() {
     }
     fun select_my_register(db: fireDB,id:String) {
         val firestore=db.firestore
-        firestore?.collection("mydiary_photo").whereEqualTo("id",id).get()
+        firestore?.collection("hair_photo").whereEqualTo("id",id).get()
             .addOnCompleteListener {
 
                 if(it.isSuccessful){
@@ -93,21 +112,46 @@ class MyHairDiary : AppCompatActivity() {
                     }
                     if(userDTO.size==0){
                         // 만약 아직 기록이 없다면...
-                        mhd_const1.visibility=View.VISIBLE
+                        mhd_gridview.visibility=View.INVISIBLE
+                        isexist.visibility=View.VISIBLE
+
+                     //   mhd_gridview.y= 100f// 이거로 변경해도 되나....
+
                         Toast.makeText(this,"아직 나의 헤어 기록이 없어요!",Toast.LENGTH_SHORT).show()
+                        mhd_gridview.removeAllViewsInLayout()
+
+                        mhd_gridview.refreshDrawableState()
+                        var adapter = MyAdapter(
+                            applicationContext,
+                            R.layout.mhdgrid_adapter,  // GridView 항목의 레이아웃 row.xml
+                            userDTO,-1
+                        )
+
+                        mhd_gridview.adapter = adapter
+                        mhd_gridview.setOnItemClickListener { parent, view, position, id ->
+                            var item= style_grid.adapter.getItem(position) as photourl
+                            println("${item.name}")// 이렇게 데이터 받을수 있고...
+                        }
+
+
 
                     }else{// 기록이 있으면 어댑터 적용
-                        mhd_const1.visibility=View.INVISIBLE
-                        mhd_iv1.top=110
+
+                        mhd_gridview.visibility=View.VISIBLE
+                        isexist.visibility=View.INVISIBLE
+
+                     //   mhd_gridview.y= 500f// 이거로 변경해도 되나....
+  //                      mhd_iv1.layoutParams= ConstraintLayout.LayoutParams(50,50)
+
                     var adapter = MyAdapter(
                         applicationContext,
                         R.layout.mhdgrid_adapter,  // GridView 항목의 레이아웃 row.xml
-                        userDTO
+                        userDTO,1
                     )
 
                     mhd_gridview.adapter = adapter
                     mhd_gridview.setOnItemClickListener { parent, view, position, id ->
-                        var item= style_grid.adapter.getItem(position) as photourl
+                        var item= mhd_gridview.adapter.getItem(position) as photourl
                         println("${item.name}")// 이렇게 데이터 받을수 있고...
                     }
 
@@ -119,7 +163,6 @@ class MyHairDiary : AppCompatActivity() {
                 }
             }
     }
-    @RequiresApi(Build.VERSION_CODES.Q)
     fun select_designer_register(db: fireDB, id:String) {
         val firestore=db.firestore
         firestore?.collection("mydiary_designer").whereEqualTo("customid",id).get()
@@ -138,27 +181,41 @@ class MyHairDiary : AppCompatActivity() {
 
                     if(userDTO.size==0) {
 
+                        mhd_gridview.visibility=View.INVISIBLE
+                        isexist.visibility=View.VISIBLE
 
-                        mhd_const1.visibility=View.VISIBLE
                         //mhd_iv1.setLeftTopRightBottom(0,10,0,100)
+                        var adapter = MyAdapter(
+                            applicationContext,
+                            R.layout.mhdgrid_adapter,  // GridView 항목의 레이아웃 row.xml
+                            userDTO,-1
+                        )
 
+                        mhd_gridview.adapter = adapter
+                        mhd_gridview.setOnItemClickListener { parent, view, position, id ->
+                            var item= style_grid.adapter.getItem(position) as photourl
+                            println("${item.name}")// 이렇게 데이터 받을수 있고...
+                        }
 
                     Toast.makeText(this,"아직 나의 헤어 기록이 없어요!",Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        mhd_const1.visibility=View.INVISIBLE
-                        mhd_iv1.top=110
+                        mhd_gridview.visibility=View.VISIBLE
+                        isexist.visibility=View.INVISIBLE
+
+                        //     mhd_iv1.top=110
                         var adapter = MyAdapter(
                         applicationContext,
                         R.layout.mhdgrid_adapter,  // GridView 항목의 레이아웃 row.xml
-                        userDTO
+                        userDTO,1
                     )
 
                     mhd_gridview.adapter = adapter
                     mhd_gridview.setOnItemClickListener { parent, view, position, id ->
                         var item= style_grid.adapter.getItem(position) as photourl
                         println("${item.name}")// 이렇게 데이터 받을수 있고...
-                    }}
+                    }
+                    }
 
 
                 }else{

@@ -18,51 +18,40 @@ class detail_list : AppCompatActivity() {
         var index=pref.getInt("index",-1)
         val ischecked=pref.getBoolean("ischecked",false)
         iscpt.isChecked=ischecked
-
         detail_place.hint="어디서~? "+pref.getString("place","")
+        detail_place.setText(pref.getString("place",""))
         detail_content.hint="뭐하고싶어~? "+pref.getString("content","")
-
-
+        detail_content.setText(pref.getString("content",""))
         detail_del.setOnClickListener(){
             deleteData(firestore,index)
             Toast.makeText(this,"삭제 중~ 좀만 기다려주세용~",Toast.LENGTH_SHORT).show()
-
         }
         detail_mod.setOnClickListener(){
             var ischec=iscpt.isChecked
             var place=detail_place.text.toString()
             var content=detail_content.text.toString()
             println("1111place : ${place}, content : ${content}")
-
             if(place==""){
                 val placesplit=detail_place.hint.toString().split(" ")//abc def
                 for(i in 1..placesplit.size-1){//1~3
                     place+=placesplit[i]+" "
                 }
-
             }
             if(content==""){
-
                 val contentsplit=detail_content.hint.toString().split(" ")
                 for(i in 1..contentsplit.size-1){//1~3
                     content+=contentsplit[i]+" "
                 }
-
-
             }
             println("2222place : ${place}, content : ${content}")
             modeData(firestore,place,content,index,ischec)
-
             Toast.makeText(this,"변경중~ 좀만 기다려주세용~",Toast.LENGTH_SHORT).show()
-
         }
-
     }
     fun completeData(firestore:FirebaseFirestore,index :Int){
         var map= mutableMapOf<String,Any>()
         firestore?.collection("ourlist").whereEqualTo("index",index).get()
             .addOnCompleteListener {
-
                 map["ischecked"] =true
                 firestore?.collection("ourlist").document(it.result!!.documents[0].id).update(map)
                     .addOnCompleteListener {
@@ -70,17 +59,14 @@ class detail_list : AppCompatActivity() {
                             print("update")
                         }
                     }
-                var intent= Intent(this, MainActivity::class.java)
+                var intent= Intent(this, unChecked::class.java)
                 startActivity(intent)
-
             }
-
     }
     fun modeData(firestore:FirebaseFirestore,place:String,content:String,index:Int,ischec:Boolean){
 
         var map= mutableMapOf<String,Any>()
         var map2= mutableMapOf<String,Any>()
-
         var map3= mutableMapOf<String,Any>()
 
         firestore?.collection("ourlist").whereEqualTo("index",index).get()
@@ -107,17 +93,11 @@ class detail_list : AppCompatActivity() {
                             print("update")
                         }
                     }
-
-                var intent= Intent(this, MainActivity::class.java)
+                var intent= Intent(this, unChecked::class.java)
                 startActivity(intent)
-
             }
-
-
     }
     fun deleteData(firestore: FirebaseFirestore,index:Int) {// 잘됨
-
-
         firestore?.collection("ourlist").whereEqualTo("index",index).get()
             .addOnCompleteListener {
                 if(it.isSuccessful) {
@@ -127,7 +107,7 @@ class detail_list : AppCompatActivity() {
                                 print("delete")
                             }
                         }
-                    var intent= Intent(this, MainActivity::class.java)
+                    var intent= Intent(this, unChecked::class.java)
                     startActivity(intent)
                 }
             }

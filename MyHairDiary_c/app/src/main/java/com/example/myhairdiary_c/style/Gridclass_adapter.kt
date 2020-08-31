@@ -15,12 +15,13 @@ import com.example.myhairdiary_c.designers.detailedDesigner
 import com.example.myhairdiary_c.designers.photourl
 import com.example.myhairdiary_c.main.detailedRecommend
 // 얘도 gridview 어댑터 입니다
-class MyAdapter(context: Context,layout: Int,userDTO:ArrayList<photourl>) :
+class MyAdapter(context: Context,layout: Int,userDTO:ArrayList<photourl>,locate:Int=0) :
     BaseAdapter() {
     var context: Context
     var layout: Int
     var userDTO:ArrayList<photourl>
     var inf: LayoutInflater
+    var locate=locate
     override fun getCount(): Int {
         return userDTO.size
     }
@@ -54,8 +55,17 @@ class MyAdapter(context: Context,layout: Int,userDTO:ArrayList<photourl>) :
 //            val iv =
 //                convertView!!.findViewById<View>(R.id.imV) as ImageView
         //   iv.setImageResource(img[position])
-        val iv=convertView!!.findViewById<ImageView>(R.id.search_imageurl)
-        val tv=convertView!!.findViewById<TextView>(R.id.search_desc)
+        var iv=convertView!!.findViewById<ImageView>(R.id.search_imageurl)
+        var tv=convertView!!.findViewById<TextView>(R.id.search_desc)
+
+if(locate==1) {
+     iv = convertView!!.findViewById<ImageView>(R.id.mhdgrid_myimg)
+     tv = convertView!!.findViewById<TextView>(R.id.mhdgrid_mydesc)
+}else if(locate==-1){
+    iv = convertView!!.findViewById<ImageView>(R.id.mhdgrid_myimg)
+    tv = convertView!!.findViewById<TextView>(R.id.mhdgrid_mydesc)
+
+}
         tv.text=userDTO[position].name
         Glide.with(context).load(userDTO[position].url).into(iv)
         // iv.setImageResource(imgurl[position])

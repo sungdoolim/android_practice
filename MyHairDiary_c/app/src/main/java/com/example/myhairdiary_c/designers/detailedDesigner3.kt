@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.myhairdiary_c.R
+import com.example.myhairdiary_c.diary.MyHairDiary
 import com.example.myhairdiary_c.firedb.fireDB
 import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.second_home
@@ -24,7 +25,6 @@ class detailedDesigner3 : AppCompatActivity(), BottomNavigationView.OnNavigation
 
     // 여기는 detailedDesigner2와 같은데 gridview를 사용합니다. 디자이너 분들의 의도가 맞는지 확인이 필요합니다.
 
-    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed_designer3)
@@ -120,6 +120,10 @@ class detailedDesigner3 : AppCompatActivity(), BottomNavigationView.OnNavigation
                 var intent= Intent(this, second_home::class.java)
                 startActivity(intent)
             }
+            R.id.bottom3->{
+                var intent= Intent(this, MyHairDiary::class.java)
+                startActivity(intent)
+            }
 //            R.id.bottom3->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
             R.id.bottom4->{
                 var intent= Intent(this, Mypage::class.java)
@@ -161,10 +165,6 @@ class detailedDesigner3 : AppCompatActivity(), BottomNavigationView.OnNavigation
 
 
     }
-
-
-
-
 
 
 
@@ -284,9 +284,6 @@ class detailedDesigner3 : AppCompatActivity(), BottomNavigationView.OnNavigation
                 }
             }
     }
-
-
-
 
     public fun select_hair_gender(firestore: FirebaseFirestore,did: String,gender:String) {
         firestore?.collection("hair_photo").whereEqualTo("id",did)

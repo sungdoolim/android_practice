@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
+import com.example.myhairdiary_c.diary.MyHairDiary
 import com.example.myhairdiary_c.firedb.fireDB
 import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.second_home
@@ -24,7 +25,6 @@ import kotlinx.android.synthetic.main.detailed_designer_uppertab.*
 
 class detailedDesigner : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
-    @SuppressLint("ResourceAsColor", "SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed_designer)
@@ -174,7 +174,8 @@ class detailedDesigner : AppCompatActivity(), BottomNavigationView.OnNavigationI
                 startActivity(intent)
             }
             R.id.bottom3->{
-
+                var intent= Intent(this, MyHairDiary::class.java)
+                startActivity(intent)
             }
             R.id.bottom4->{
                 var intent= Intent(this, Mypage::class.java)

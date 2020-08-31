@@ -28,7 +28,7 @@ class insertpage : AppCompatActivity() {
             var index=pref.getInt("index",0)
             println("index : ${index}")
             insert_onelist(firestore, place, content, index + 1, id,edit)
-            var intent= Intent(this, MainActivity::class.java)
+            var intent= Intent(this, unChecked::class.java)
             startActivity(intent)
 
         }

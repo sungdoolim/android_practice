@@ -14,6 +14,7 @@ import androidx.annotation.RequiresApi
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.photourl
+import com.example.myhairdiary_c.diary.MyHairDiary
 import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.second_home
 import com.example.myhairdiary_c.mypage.Mypage
@@ -98,7 +99,8 @@ class Style_Search : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 startActivity(intent)
             }
             R.id.bottom3->{
-
+                var intent= Intent(this, MyHairDiary::class.java)
+                startActivity(intent)
             }
             R.id.bottom4->{
                 var intent= Intent(this, Mypage::class.java)

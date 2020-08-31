@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import com.example.myhairdiary_c.diary.MyHairDiary
 import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.second_home
 import com.example.myhairdiary_c.mypage.Mypage
@@ -33,7 +34,8 @@ class Setting : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
                 startActivity(intent)
             }
             R.id.bottom3->{
-
+                var intent= Intent(this, MyHairDiary::class.java)
+                startActivity(intent)
             }
             R.id.bottom4->{
                 var intent= Intent(this, Mypage::class.java)

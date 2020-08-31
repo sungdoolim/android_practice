@@ -10,7 +10,9 @@ import android.widget.AdapterView
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myhairdiary_c.R
+import com.example.myhairdiary_c.diary.MyHairDiary
 import com.example.myhairdiary_c.firedb.fireDB
+import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.second_home
 import com.example.myhairdiary_c.mypage.Mypage
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -21,7 +23,7 @@ import kotlinx.android.synthetic.main.detailed_designer_uppertab.*
 
 class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
-    @SuppressLint("ResourceAsColor")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detailed_designer2)
@@ -114,9 +116,17 @@ class detailedDesigner2 : AppCompatActivity(), BottomNavigationView.OnNavigation
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when(item.itemId){
+            R.id.bottom1->{
+                var intent= Intent(this, Home2::class.java)
+                startActivity(intent)
+            }
             R.id.bottom2->
             {
                 var intent= Intent(this, second_home::class.java)
+                startActivity(intent)
+            }
+            R.id.bottom3->{
+                var intent= Intent(this, MyHairDiary::class.java)
                 startActivity(intent)
             }
 //            R.id.bottom3->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()

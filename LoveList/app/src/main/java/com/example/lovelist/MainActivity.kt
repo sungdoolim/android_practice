@@ -25,13 +25,6 @@ class MainActivity : AppCompatActivity()  ,NavigationView.OnNavigationItemSelect
         // supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
         selectList(this)
 
-
-
-        insertone?.setOnClickListener(){
-            var intent= Intent(this, insertpage::class.java)
-            startActivity(intent)
-        }
-
         val pref=getSharedPreferences("Rnd",0)
         val edit=pref.edit()
         edit.putString("id","누꿍")
@@ -41,8 +34,8 @@ class MainActivity : AppCompatActivity()  ,NavigationView.OnNavigationItemSelect
         naviView.setNavigationItemSelectedListener (this)
     }
     override fun onBackPressed() {
-        ActivityCompat.finishAffinity(this)
-        finish()
+        var intent= Intent(this, unChecked::class.java)
+        startActivity(intent)
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){

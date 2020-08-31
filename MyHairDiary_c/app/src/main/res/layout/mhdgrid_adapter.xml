@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="200dp"
-    android:layout_height="400dp"
+    android:layout_height="wrap_content"
     android:background="@color/back"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mhdgrid_myimg"
         android:id="@+id/mhdgrid_mydesc"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         android:text="일단 textview 하나만..."/>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

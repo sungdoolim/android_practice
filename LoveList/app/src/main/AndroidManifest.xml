@@ -13,16 +13,18 @@
 
 
         </activity>
-        <activity android:name=".unChecked" />
-        <activity android:name=".Checked" />
-        <activity android:name=".detail_list" />
-        <activity android:name=".insertpage" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".unChecked" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".Checked" />
+        <activity android:name=".detail_list" />
+        <activity android:name=".insertpage" />
+        <activity android:name=".MainActivity">
+
         </activity>
     </application>
 

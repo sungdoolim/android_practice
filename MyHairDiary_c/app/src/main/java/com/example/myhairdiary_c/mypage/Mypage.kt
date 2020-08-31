@@ -11,6 +11,7 @@ import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.Setting
 import com.example.myhairdiary_c.designers.designer
 import com.example.myhairdiary_c.designers.photourl
+import com.example.myhairdiary_c.diary.MyHairDiary
 import com.example.myhairdiary_c.firedb.fireDB
 import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.second_home
@@ -123,7 +124,8 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
                 startActivity(intent)
             }
             R.id.bottom3->{
-
+                var intent= Intent(this, MyHairDiary::class.java)
+                startActivity(intent)
             }
             R.id.bottom4->{
                 var intent= Intent(this, Mypage::class.java)

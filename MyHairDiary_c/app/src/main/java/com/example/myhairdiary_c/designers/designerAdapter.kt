@@ -3,13 +3,14 @@ package com.example.myhairdiary_c.designers
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.ShapeDrawable
-import android.graphics.drawable.shapes.OvalShape
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -23,6 +24,12 @@ class designerAdapter (val context: Context, val designerList:ArrayList<designer
         return CustomViewHolder(
             view
         ).apply {
+            itemView.setOnLongClickListener(){
+                val curPos:Int=adapterPosition
+                val dl: designer =designerList.get(curPos)
+                Toast.makeText(context,"long clic",Toast.LENGTH_SHORT).show()
+                true
+            }
             itemView.setOnClickListener {
                 // 아이템을 눌렀을때의 이벤트 입니다.
                 val curPos:Int=adapterPosition
@@ -53,10 +60,13 @@ class designerAdapter (val context: Context, val designerList:ArrayList<designer
         return designerList.size
     }
 
-    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         // holder.memo.setImageResource(1)
 // 연결한 xml에 값을 지정합니다.
+
+
+
+
         holder.did.text="아이디 : "+designerList.get(position).id+"\t"
         holder.name.text="이름 : "+designerList.get(position).name+"\t"
         holder.age.text="나이 : "+designerList.get(position).age.toString()+"\t"
@@ -67,8 +77,16 @@ class designerAdapter (val context: Context, val designerList:ArrayList<designer
         Glide.with(context).load(designerList.get(position).profile).into(holder.dimg)
 
 
+
+
+
+
+
+// 애니메이션 추가가
+
     }
-    class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+
+   class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         // layoutxml을 연결합니다.
         val constlay=itemView.findViewById<ConstraintLayout>(R.id.designer_adpt)
         val did=itemView.findViewById<TextView>(R.id.Did)

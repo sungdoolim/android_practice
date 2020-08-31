@@ -33,7 +33,6 @@ class Home : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelected
             R.id.bottom2->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
             R.id.bottom3->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
             R.id.bottom4->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
-
             else ->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
         }
         return true;

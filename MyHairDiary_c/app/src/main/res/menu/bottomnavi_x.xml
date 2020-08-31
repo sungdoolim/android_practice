@@ -10,7 +10,7 @@
         android:title="FindDesigner"/>
     <item android:id="@+id/bottom3"
         android:icon="@drawable/ic_launcher_foreground"
-        android:title="bottom3"/>
+        android:title="Diary"/>
     <item android:id="@+id/bottom4"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="MyPage"/>

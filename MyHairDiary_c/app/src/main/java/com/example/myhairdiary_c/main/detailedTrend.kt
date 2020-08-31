@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
+import com.example.myhairdiary_c.diary.MyHairDiary
 import com.example.myhairdiary_c.main.second.second_home
 import com.example.myhairdiary_c.mypage.Mypage
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -40,7 +41,8 @@ class detailedTrend : AppCompatActivity(), BottomNavigationView.OnNavigationItem
                 startActivity(intent)
             }
             R.id.bottom3->{
-
+                var intent= Intent(this, MyHairDiary::class.java)
+                startActivity(intent)
             }
             R.id.bottom4->{
                 var intent= Intent(this, Mypage::class.java)

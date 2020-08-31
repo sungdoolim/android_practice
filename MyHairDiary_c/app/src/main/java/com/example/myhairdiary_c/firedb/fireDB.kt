@@ -27,7 +27,6 @@ class fireDB(parent: Context?){
         firestore?.collection(path).whereEqualTo("id",id).get()
             .addOnCompleteListener {
                 if(it.isSuccessful){
-
                     firestore?.collection("hair_diary").document(it.result!!.documents[0].id).update(map)
                 }
             }
@@ -52,11 +51,26 @@ class fireDB(parent: Context?){
                 }
             }
     }
-    public fun insert_onephoto(  url: String = "", id: String = "", pcount: Int = -1, name: String = "", style: String = "",
-        length: String="",  gender:String="",){
+    public fun insert_onephoto(
+        url: String = "",
+        id: String = "",
+        pcount: Int = -1,
+        name: String = "",
+        style: String = "",
+        length: String = "",
+        gender: String = "",
+        content: String,
+        customid: String,
+        like: Int,
+        reply: String,
+        range: String,
+        search: String,
+        permission: String,
+        public: String,){
        // val url:String="",val id:String="",val pcount:Int=-1,val name:String=""
         var userDTO=
-            photourl(url,id,pcount,name,style,length,gender)
+            photourl(url,id,pcount,name,style,length,gender,content,customid,like,reply,range,search,permission)
+       // photourl(url,id,pcount,name,style,length,gender,1,1,1,1,1,1,1)
 
         firestore?.collection("hair_photo")?.document()?.set(userDTO)
             .addOnCompleteListener {
@@ -64,7 +78,6 @@ class fireDB(parent: Context?){
                     print("create성공")
             }
         updateData_oneInt("hair_diary","index",pcount+1,id)
-
     }
     public fun deleteData() {// 잘됨
         firestore?.collection("baby").document("document1").delete()
@@ -98,8 +111,6 @@ class fireDB(parent: Context?){
                 }else{
                     println("fail")
                 }
-
-
             }
         println("read end")
 

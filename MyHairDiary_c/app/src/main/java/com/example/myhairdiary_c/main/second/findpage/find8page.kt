@@ -20,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_find8page.*
 import kotlinx.android.synthetic.main.bottom_navi.*
 import androidx.recyclerview.widget.DividerItemDecoration.HORIZONTAL
+import com.example.myhairdiary_c.diary.MyHairDiary
 import com.example.myhairdiary_c.main.second.second_home
 
 class find8page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -81,7 +82,8 @@ class find8page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
 
             }
             R.id.bottom3->{
-
+                var intent= Intent(this, MyHairDiary::class.java)
+                startActivity(intent)
             }
             R.id.bottom4->{
                 var intent= Intent(this, Mypage::class.java)

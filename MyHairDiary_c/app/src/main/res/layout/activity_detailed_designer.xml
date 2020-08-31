@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/back"
-    tools:context=".designers.detailedDesigner">
+    tools:context=".designers.detailedDesigner"
+    >
 
 
     <ScrollView
@@ -42,44 +43,7 @@
             </LinearLayout>
 
 
-<!--            <LinearLayout-->
-<!--                android:id="@+id/linearLayout6"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:orientation="horizontal"-->
-<!--                app:layout_constraintEnd_toEndOf="parent"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent">-->
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/bt1"-->
-<!--                    android:layout_width="30dp"-->
-<!--                    android:layout_height="30dp"-->
-<!--                    android:layout_marginLeft="50dp"-->
-<!--                    android:src="@drawable/ic_launcher_foreground" />-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/bt2"-->
-<!--                    android:layout_width="30dp"-->
-<!--                    android:layout_height="30dp"-->
-<!--                    android:layout_marginLeft="20dp"-->
-<!--                    android:src="@drawable/ic_launcher_foreground" />-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/bt3"-->
-<!--                    android:layout_width="30dp"-->
-<!--                    android:layout_height="30dp"-->
-<!--                    android:layout_marginLeft="20dp"-->
-<!--                    android:src="@drawable/ic_launcher_foreground" />-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/bt4"-->
-<!--                    android:layout_width="30dp"-->
-<!--                    android:layout_height="30dp"-->
-<!--                    android:layout_marginLeft="20dp"-->
-<!--                    android:src="@drawable/ic_launcher_foreground" />-->
-
-<!--            </LinearLayout>-->
 
             <androidx.constraintlayout.widget.ConstraintLayout
 

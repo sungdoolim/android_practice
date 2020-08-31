@@ -126,7 +126,8 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
 // bottom navigation의 버튼 이벤트 입니다.
         when(item.itemId){
             R.id.bottom1-> {
-
+                var intent= Intent(this, this::class.java)
+                startActivity(intent)
             }
 
             R.id.bottom2->
@@ -186,14 +187,18 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
         // 로직인 위 select_recommend_designerlist와 똑같습니다.
         // 때문에 하나의 메서드로 합칠까 고민 했지만 실패하여 따로 작성했습니다.
 
-        firestore?.collection("hair_trend").get()
-            .addOnCompleteListener {
+        firestore?.collection("hair_photo").whereEqualTo("pcount",0).get()
+            .addOnCompleteListener {// 나중에은 where("perm",1)도 해줘야 할듯  -> 지금은 default값으로 0 만 들어가고 있음 // 또는 아예 hair_trend라는 table 만들기
                 if(it.isSuccessful){
                     var userDTO=ArrayList<photourl>()
+
+                    userDTO.add(photourl("","",0,"","오늘의 추천 트렌드를 만나보세요! ->","","","","",
+                        0,"","","","","",0))
                     for(dc in it.result!!.documents){
                         dc.toObject(photourl::class.java)?.let { it1 ->
                             userDTO.add(it1) }
                     }
+                    println("userdtop len : ${userDTO.size}")
                     trendlist.addItemDecoration(
                         DividerItemDecoration(applicationContext,DividerItemDecoration.HORIZONTAL)
                     )
@@ -218,6 +223,7 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
             .addOnCompleteListener {
                 if(it.isSuccessful){
                     var userDTO=ArrayList<photourl>()
+
                     for(dc in it.result!!.documents){
                         dc.toObject(photourl::class.java)?.let { it1 ->
                         userDTO.add(it1) }

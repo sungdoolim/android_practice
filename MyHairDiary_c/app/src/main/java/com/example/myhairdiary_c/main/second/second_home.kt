@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.designer_list
+import com.example.myhairdiary_c.diary.MyHairDiary
 import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.findpage.find1page
 import com.example.myhairdiary_c.mypage.Mypage
@@ -64,10 +65,12 @@ class second_home : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
 
             R.id.bottom2->
             {
-
+                var intent= Intent(this, this::class.java)
+                startActivity(intent)
             }
             R.id.bottom3->{
-
+                var intent= Intent(this, MyHairDiary::class.java)
+                startActivity(intent)
             }
             R.id.bottom4->{
                 var intent= Intent(this, Mypage::class.java)

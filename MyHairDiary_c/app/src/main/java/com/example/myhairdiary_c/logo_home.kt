@@ -20,7 +20,6 @@ class logo_home : AppCompatActivity() {
             override fun handleMessage(msg: Message?) {  // 실행이 끝난후 확인 가능
             }
         }
-
         Handler().postDelayed(Runnable
         {
             var intent= Intent(this, Home2::class.java)
@@ -28,12 +27,8 @@ class logo_home : AppCompatActivity() {
             //  var a=wvnaver.
             // 실행할 동작 코딩
             mHandler.sendEmptyMessage(0) // 실행이 끝난후 알림
-        }, 500 // 0.5초후에 Home2로 이동합니다.
+        }, 2100 // 2.1초후에 Home2로 이동합니다.
         )
-
-
-
-
     }    override fun onBackPressed() {
         super.onBackPressed()
     }

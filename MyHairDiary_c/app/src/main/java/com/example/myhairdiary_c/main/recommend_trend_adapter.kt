@@ -69,11 +69,13 @@ class recommend_trend_adapter (val context: Context, val designerList:ArrayList<
 
 
 
-        holder.dimg.setImageResource(R.drawable.ic_launcher_foreground)//designerList.get(position).dimg
         holder.desc.text=designerList.get(position).style
+        if(designerList.get(position).url==""){
 
-        Glide.with(context).load(designerList.get(position).url).into(holder.dimg)
-
+            holder.dimg.setImageResource(R.drawable.trend_text)//designerList.get(position).dimg
+        }else {
+            Glide.with(context).load(designerList.get(position).url).into(holder.dimg)
+        }
 
     }
     class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

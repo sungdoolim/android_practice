@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
+import com.example.myhairdiary_c.diary.MyHairDiary
 import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.second_home
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -58,10 +59,12 @@ class Mypage2 : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
                 startActivity(intent)
             }
             R.id.bottom3->{
-
+                var intent= Intent(this, MyHairDiary::class.java)
+                startActivity(intent)
             }
             R.id.bottom4->{
-
+                var intent= Intent(this, Mypage::class.java)
+                startActivity(intent)
             }
             else ->""
         }

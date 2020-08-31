@@ -30,9 +30,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_main.*
 import org.eazegraph.lib.models.BarModel
-import org.tensorflow.lite.DataType
 import org.tensorflow.lite.Interpreter
-import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.FileInputStream
 import java.io.IOException
 import java.nio.MappedByteBuffer
@@ -69,23 +67,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         //tf
-        val tflite=getTfliteInterpreter("first_model.tflite")
-        if (tflite != null) {
-            val input=1
-            val input2=intArrayOf(25)
-            val inp=TensorBuffer.createFixedSize(input2, DataType.UINT8)
-            val output=intArrayOf(1,3)
-            tflite.run(input2, output)
-
-            Toast.makeText(this, "냐옹...", Toast.LENGTH_SHORT).show()
-
-
-        }else{
-            Toast.makeText(this, "실패", Toast.LENGTH_SHORT).show()
-        }
-
+//        val tflite=getTfliteInterpreter("first_model.tflite")
+//        if (tflite != null) {
+//            val input=1
+//            val input2=intArrayOf(25)
+//            val inp=TensorBuffer.createFixedSize(input2, DataType.UINT8)
+//            val output=intArrayOf(1,3)
+//            tflite.run(input2, output)
+//
+//            Toast.makeText(this, "냐옹...", Toast.LENGTH_SHORT).show()
+//
+//
+//        }else{
+//            Toast.makeText(this, "실패", Toast.LENGTH_SHORT).show()
+//        }
 
         wvN_login.settings.javaScriptEnabled=true
         wvN_login.webViewClient= WebViewClient()
@@ -394,7 +390,7 @@ class MainActivity : AppCompatActivity() {
         var index=pref.getInt("index", -1)
         if(requestCode==GALLERY){
             var photoUri=data?.data!!
-            //album_imageview.setImageURI(photoUri)
+            album_imageview.setImageURI(photoUri)
             when(happen){
                 1 -> {
                     var builder = AlertDialog.Builder(this)
@@ -454,15 +450,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    fun deletePhoto() {
-        // 이거 삭제인데 수정은 그냥 같은 이름으로 putfile하면 되는 거잖아???
-        FirebaseStorage.getInstance().reference.child("images")
-            .child("").delete()
-            .addOnSuccessListener {
-                Toast.makeText(this, "Delete photo completed", Toast.LENGTH_LONG).show()
-            }
-    }
-
 
     fun uploadPhoto_diary_to_Customer(photoUri: Uri) {
         // 디자이너 폴더 -> customer 폴더를 만들고 그 안에 사진을 올립니다.
@@ -480,14 +467,7 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    fun uploadPhoto(
-        photoUri: Uri,
-        index: Int,
-        name: String,
-        style: String,
-        length: String,
-        gender: String,
-    ) {
+    fun uploadPhoto(photoUri: Uri, index: Int,name: String,style: String,length: String,gender: String,) {
         // 디자이너가 사진을 올립니다. 포트폴리오용 입니다.
         var db=fireDB(this)
         val pref=getSharedPreferences("session", 0)
@@ -499,7 +479,23 @@ class MainActivity : AppCompatActivity() {
         storageRef.putFile(photoUri).addOnSuccessListener {
             storageRef.downloadUrl.addOnSuccessListener { uri->
                 //url:String="",id:String="",pcount:Int=-1,name:String="")
-                db.insert_onephoto(uri.toString(), id, index, name, style, length, gender)
+                db.insert_onephoto(
+                    uri.toString(),
+                    id,
+                    index,
+                    name,
+                    style,
+                    length,
+                    gender,
+                    "content",
+                    "",
+                    0,
+                    "reply",
+                    "range",
+                    "search",
+                    "permission",
+                    "public"
+                )
                 edit.putInt("index", index + 1)
                 edit.apply()
             }
@@ -507,6 +503,19 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+
+    fun deletePhoto() {
+        // 이거 삭제인데 수정은 그냥 같은 이름으로 putfile하면 되는 거잖아???
+        FirebaseStorage.getInstance().reference.child("images")
+            .child("").delete()
+            .addOnSuccessListener {
+                Toast.makeText(this, "Delete photo completed", Toast.LENGTH_LONG).show()
+            }
+    }
+
+
+
+
     class AndroidBridge(context: Context) {
         val db=fireDB(context)
         val context=context

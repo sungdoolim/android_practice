@@ -2,59 +2,75 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_hair_diary_const"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".diary.MyHairDiary">
 
-    <include
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent">
+        <include
         android:id="@+id/myhairdiary_uppertab"
         layout="@layout/diary_uppertab"
 
-        />
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:id="@+id/mhd_const1"
-        app:layout_constraintTop_toBottomOf="@id/myhairdiary_uppertab"
-        android:visibility="invisible"
-        android:layout_height="wrap_content">
-<TextView
-    android:layout_width="match_parent"
-    android:id="@+id/mhd_tv1"
-    android:textAlignment="center"
-    app:layout_constraintTop_toTopOf="parent"
-    android:layout_height="50dp"
-    android:text="아직 나의 헤억리록이 없어요!"/>
-        <TextView
-            app:layout_constraintTop_toBottomOf="@+id/mhd_tv1"
-            android:id="@+id/mhd_tv2"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:textAlignment="center"
-            android:text="아래에 아이콘을 선택해 나의 헤어 상태를\n기록해 보세요!"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/mhd_iv1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:src="@drawable/book_icon"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myhairdiary_uppertab" />
+        tools:layout_editor_absoluteX="3dp" />
 
-    <GridView
-        android:id="@+id/mhd_gridview"
-        android:layout_width="match_parent"
-        android:layout_height="496dp"
-        android:layout_marginTop="16dp"
-        android:numColumns="2"
-        app:layout_constraintTop_toBottomOf="@+id/mhd_iv1"
-        tools:layout_editor_absoluteX="68dp">
+        <ImageView
+            android:id="@+id/mhd_iv1"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/book_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myhairdiary_uppertab" />
 
 
-    </GridView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:visibility="invisible"
+            android:id="@+id/isexist"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mhd_iv1">
+
+            <TextView
+                android:id="@+id/mhd_tv1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="아직 나의 헤어기록이 없어요"
+                android:textAlignment="center" />
+
+            <TextView
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mhd_tv1"
+                android:id="@+id/mhd_tv2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="아래에 아이콘을 선택해 나의 헤어 상태를\n기록해 보세요!"
+                android:textAlignment="center" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <GridView
+            android:id="@+id/mhd_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="595dp"
+            android:background="@color/back"
+            android:numColumns="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/mhd_iv1" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/mhd_float"
@@ -85,7 +101,6 @@
         android:src="@drawable/back_line"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
 
 
 
