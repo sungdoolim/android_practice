@@ -4,8 +4,9 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorred">#D3291D</color>
     <color name="colorsky">#4DA6ED</color>
+    <color name="colormintd">#8EF0FB</color>
     <color name="colorsea">#A9E3FD</color>
-
+    <color name="coloryellow_db">#FDE301</color>
     <color name="mint">#D9F3F6</color>
     <color name="colorpink">#FF4E8A</color>
     <color name="coloryellow">#FAE84D</color>

@@ -36,7 +36,7 @@ import java.io.IOException
 import java.nio.MappedByteBuffer
 import java.nio.channels.FileChannel
 
-// 임시 로그인/ 임시 네이버 로그인/ 임시 색상지정 코드입니다.
+// 임시 로그인/ 임시 네이버 로그인/ 임시 색상지정 코드입니다. 잡다한 기능들을 가집니다... 연습용..?
 
 
 
@@ -517,6 +517,7 @@ class MainActivity : AppCompatActivity() {
 
 
     class AndroidBridge(context: Context) {
+        // 네이버로그인 웹으로 구현 완료... 근데 굳이.?
         val db=fireDB(context)
         val context=context
         @JavascriptInterface
@@ -584,6 +585,4 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-
 }

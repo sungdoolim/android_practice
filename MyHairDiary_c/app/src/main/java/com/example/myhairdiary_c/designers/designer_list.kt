@@ -34,7 +34,7 @@ class designer_list : AppCompatActivity() {
                     }
                     designerlist.addItemDecoration(
                         DividerItemDecoration(applicationContext,
-                            DividerItemDecoration.HORIZONTAL
+                            DividerItemDecoration.VERTICAL
                         )
                     )// 경계선 추가!!!!
                     designerlist.layoutManager=

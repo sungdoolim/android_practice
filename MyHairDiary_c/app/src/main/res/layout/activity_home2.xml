@@ -29,7 +29,7 @@
                         android:id="@+id/constraintLayout2"
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
-                        android:background="@color/coloryellow_b"
+                        android:background="@drawable/round_yellowdb"
 
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
@@ -115,7 +115,7 @@
                         android:layout_width="354dp"
                         android:layout_height="143dp"
                         android:layout_marginTop="168dp"
-                        android:background="@color/coloryellow_b"
+                        android:background="@drawable/round_yellowb"
                         android:orientation="horizontal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.487"
@@ -144,6 +144,7 @@
                             android:fontFamily="sans-serif-black"
                             android:includeFontPadding="false"
                             android:text="My Information"
+                            android:background="@drawable/round_yellowdb"
 
                             android:textSize="20dp"
 
@@ -188,7 +189,6 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout4"
                         android:layout_width="match_parent"
-                        android:background="@color/coloryellow_b"
                         android:layout_height="200dp"
                         android:layout_marginTop="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -197,17 +197,20 @@
 
                         <TextView
                             android:id="@+id/textView4"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="sans-serif-black"
+                            android:background="@drawable/round_yellowdb"
                             android:text="\t\tRecommend Style"
-                            android:textSize="20dp" />
+                            android:fontFamily="sans-serif-black"
+                            android:textSize="20dp"
+                            app:layout_constraintStart_toStartOf="parent" />
 
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recommendlist"
                             android:layout_width="match_parent"
                             android:layout_height="170dp"
+                            android:background="@color/back"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
@@ -222,7 +225,6 @@
                         android:id="@+id/constraintLayout3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@color/coloryellow_b"
 
                         android:layout_marginTop="20dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -232,10 +234,11 @@
 
                         <TextView
                             android:id="@+id/textView5"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
                             android:fontFamily="sans-serif-black"
+                            android:background="@drawable/round_yellowdb"
                             android:text="\t\tHair Trend"
                             android:textSize="20dp"
                             app:layout_constraintStart_toStartOf="parent"
@@ -268,7 +271,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
-                        android:background="@color/coloryellow_b"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginTop="20dp"
                         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
@@ -278,6 +280,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-black"
+                            android:background="@drawable/round_yellowdb"
                             android:text="\t\tAD\n\t\t오늘의 추천 디자이너 입니다"
                             android:textSize="20dp"
                             app:layout_constraintStart_toStartOf="parent"
@@ -317,7 +320,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_height="120dp" />
+                android:layout_height="wrap_content" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -25,8 +25,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/designerlist"
-        android:layout_width="404dp"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="670dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,5 +48,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_height="120dp" />
+        android:layout_height="wrap_content" />
 </androidx.constraintlayout.widget.ConstraintLayout>

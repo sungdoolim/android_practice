@@ -35,9 +35,8 @@
         android:layout_height="95dp"
         android:layout_marginTop="36dp"
 
-        android:text="어딜가든 원하는 디자이너 선생님이 없었나요?
-        \n내 현재 머리상태 내가 추구하는 스타일, 디자이너 타입등
-\n나만의 스타일링을 해줄 수 있는 디자이너 선생님을 저희와 함께 찾아보아요!"
+        android:text="어딜가든 원하는 디자이너 선생님이 없었나요?\n
+        내 현재 머리상태 내가 추구하는 스타일, 디자이너 타입 등 나만의 스타일링을 해줄 수 있는 디자이너 선생님을 저희와 함께 찾아보아요!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.569"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +62,6 @@
         android:background="@color/coloryellow"
         android:text="모두의 디자이너 만나기  go >"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/findmydesigner" />
 
@@ -74,7 +72,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_height="120dp" />
-
+        android:layout_height="wrap_content" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

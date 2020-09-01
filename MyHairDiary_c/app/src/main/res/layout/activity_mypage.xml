@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/mint"
     tools:context=".mypage.Mypage">
     <ScrollView
         android:id="@+id/sc"
+        android:background="@color/mint"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,12 +35,13 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_width="90dp"
+                android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:layout_marginStart="104dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginStart="116dp"
+                android:layout_marginTop="4dp"
                 android:text="마이페이지"
-                android:textSize="18dp"
+                android:fontFamily="serif"
+                android:textSize="22dp"
                 app:layout_constraintEnd_toStartOf="@+id/imageView9"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/goback"
@@ -60,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginTop="8dp"
-        android:background="@color/mint"
+        android:background="@drawable/round_mintd"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -167,7 +170,7 @@
             android:src="@drawable/book_icon"
 
 
-            android:background="@color/mint"
+            android:background="@drawable/round_mintd"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -182,9 +185,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/second_const"
-        android:background="@color/mint"
-        android:layout_width="402dp"
+        android:background="@color/colorsea"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -193,24 +197,29 @@
         <TextView
             android:id="@+id/mydesigners"
 
-            android:background="@color/colorsea"
-            android:layout_width="match_parent"
+            android:background="@drawable/round_mintd"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="40dp"
             android:layout_height="wrap_content"
-
+            android:fontFamily="sans-serif-black"
+            android:textSize="20dp"
             android:layout_marginTop="12dp"
-            android:text="\t\t\t\t\t\t관심 디자이너"
+            android:text="관심 디자이너"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
         <TextView
             android:id="@+id/textView25"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorsea"
-
-            android:textAlignment="center"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif-black"
+            android:textSize="20dp"
+            android:background="@drawable/round_mintd"
             android:text="나의 관심"
-            android:textSize="16dp"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -225,11 +234,14 @@
 
         <TextView
             android:id="@+id/mystyles"
-            android:background="@color/colorsea"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:background="@drawable/round_mintd"
 
-            android:text="\t\t\t\t\t\t관심스타일"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:textSize="20dp"
+            android:text="관심스타일"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/myfav_designer" />
 
@@ -248,12 +260,14 @@
 
         <TextView
             android:id="@+id/customcenter"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="40dp"
             android:layout_height="wrap_content"
 
-            android:background="@color/colorsea"
-
-            android:text="\t\t\t\t\t\t고객센터"
+            android:background="@drawable/round_mintd"
+            android:fontFamily="sans-serif-black"
+            android:textSize="20dp"
+            android:text="고객센터"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/second_const" />
 
@@ -345,22 +359,26 @@
 
         <TextView
             android:id="@+id/textView30"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:text="\t\t\t\t\t\t브랜드 스토리"
-
-            android:background="@color/colorsea"
+            android:fontFamily="sans-serif-black"
+            android:textSize="20dp"
+            android:background="@drawable/round_mintd"
+            android:text="브랜드 스토리"
+android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/thirdconst" />
 
         <TextView
             android:id="@+id/event"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorsea"
-
-            android:text="\t\t\t\t\t\t공지 [이벤트]"
+            android:background="@drawable/round_mintd"
+            android:layout_marginLeft="40dp"
+            android:fontFamily="sans-serif-black"
+            android:textSize="20dp"
+            android:text="공지 [이벤트]"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/forthconst" />
 
@@ -435,7 +453,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="60dp"
             android:orientation="vertical"
 
             app:layout_constraintBottom_toBottomOf="parent"
@@ -451,6 +469,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_height="120dp" />
-
+        android:layout_height="wrap_content" />
 </androidx.constraintlayout.widget.ConstraintLayout>

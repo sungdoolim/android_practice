@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.VelocityTracker
 import android.view.View
@@ -21,7 +22,10 @@ import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.photourl
 import com.example.myhairdiary_c.firedb.fireDB
 import com.example.myhairdiary_c.main.Home2
+import com.example.myhairdiary_c.main.second.second_home
+import com.example.myhairdiary_c.mypage.Mypage
 import com.example.myhairdiary_c.style.MyAdapter
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_detailed_designer3.*
 import kotlinx.android.synthetic.main.activity_home2.*
@@ -30,12 +34,14 @@ import kotlinx.android.synthetic.main.activity_my_hair_diary.view.*
 import kotlinx.android.synthetic.main.bottom_navi.*
 import kotlinx.android.synthetic.main.diary_uppertab.*
 
-class MyHairDiary : AppCompatActivity() {
+class MyHairDiary : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_hair_diary)
 
+        botnav.getMenu().getItem(2).setChecked(true) // 바텀네비 고정입니다. 원래 이런식으로 하는건 아니죠....
+        botnav.setOnNavigationItemSelectedListener(this)
         // 다이어리 탭입니다
         val db=fireDB(this)
 
@@ -96,6 +102,37 @@ class MyHairDiary : AppCompatActivity() {
 
 
     }
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+// bottom navigation의 버튼 이벤트 입니다.
+        when(item.itemId){
+            R.id.bottom1-> {
+                var intent= Intent(this, this::class.java)
+                startActivity(intent)
+            }
+
+            R.id.bottom2->
+            {
+                var intent= Intent(this, second_home::class.java)
+                startActivity(intent)
+            }
+
+            R.id.bottom3->{
+                var intent= Intent(this, this::class.java)
+                startActivity(intent)
+            }
+            R.id.bottom4->{
+                var intent= Intent(this, Mypage::class.java)
+                startActivity(intent)
+            }
+//            R.id.bottom5->supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
+            else ->""
+        }
+        return true;
+    }
+
+
+
+
     fun select_my_register(db: fireDB,id:String) {
         val firestore=db.firestore
         firestore?.collection("hair_photo").whereEqualTo("id",id).get()
@@ -223,4 +260,5 @@ class MyHairDiary : AppCompatActivity() {
                 }
             }
     }
+
 }

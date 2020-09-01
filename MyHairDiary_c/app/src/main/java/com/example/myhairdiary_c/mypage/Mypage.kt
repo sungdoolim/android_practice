@@ -1,9 +1,13 @@
 package com.example.myhairdiary_c.mypage
 
 import android.content.Intent
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.OvalShape
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewTreeObserver
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -28,9 +32,31 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mypage)
-
+        User_Profile_Photo.setBackground(ShapeDrawable(OvalShape()));
+        User_Profile_Photo.setClipToOutline(true)
+        // 로그인한 유저의 프로필 사진 배경은 흑색 원형입니다.
         botnav.getMenu().getItem(3).setChecked(true) // 바텀네비 고정입니다. 원래 이런식으로 하는건 아니죠....
         botnav.setOnNavigationItemSelectedListener(this)
+        var ybefore=0
+        var ynow=0
+        sc.getViewTreeObserver()
+            .addOnScrollChangedListener(ViewTreeObserver.OnScrollChangedListener {
+                // 스크롤을 내리고, 올릴때의 값들을 얻어 스크롤을 내릴때는 bottomnavigation이 사라지며
+                // 스크롤을 올릴때는 bottom navigation이 나타납니다.
+                // 생각보다 예민하게 작동되어 수정이 필요 할 수 있습니다.
+                ybefore = ynow
+                ynow = sc.scrollY
+                if (ynow - ybefore > 0) {
+                    botnav.visibility = View.INVISIBLE
+//                    home2_float.visibility=View.INVISIBLE
+                } else {
+                    botnav.visibility = View.VISIBLE
+//                    home2_float.visibility=View.VISIBLE
+                }
+                println(" y :  ${ynow}")
+            })
+
+
         val pref=getSharedPreferences("session",0)
         val id=pref.getString("id","").toString()
         val mail=pref.getString("mail","").toString()

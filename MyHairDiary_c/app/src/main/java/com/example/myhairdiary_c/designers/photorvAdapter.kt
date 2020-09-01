@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
+import com.example.myhairdiary_c.main.detailedRecommend
 
 //designerAdapter 와 로직이 같습니다.
 
@@ -21,7 +22,26 @@ class photorvAdapter (val context: Context, val designerList:ArrayList<photourl>
         ).apply {
             itemView.setOnClickListener {
                 val curPos:Int=adapterPosition
-                var dl: photourl =designerList.get(curPos)
+                var userDTO: photourl =designerList.get(curPos)
+
+
+                val pref=context.getSharedPreferences("recommended",0)
+                val edit=pref.edit()
+                edit.putString("name",userDTO.name)
+                edit.putString("did",userDTO.id)
+                edit.putString("gender",userDTO.gender)
+                edit.putString("url",userDTO.url)
+                edit.putString("customid",userDTO.customid)
+                edit.putString("length",userDTO.length)
+                edit.putString("memo",userDTO.memo)
+                edit.putInt("pcount",userDTO.pcount)
+                edit.putString("style",userDTO.style)
+                edit.apply()
+                val intent = Intent(context, detailedRecommend::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) // 이거 없으면 인텐트 불가
+                context.startActivity(intent)
+
+
             }
         }
     }
