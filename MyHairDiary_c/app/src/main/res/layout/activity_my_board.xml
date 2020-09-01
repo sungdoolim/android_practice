@@ -75,13 +75,29 @@
             app:layout_constraintStart_toEndOf="@+id/myboard_uplocation"
             app:layout_constraintTop_toBottomOf="@+id/myboard_back"  />
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <EditText
-        android:id="@+id/myboard_title"
-        app:layout_constraintTop_toBottomOf="@+id/myboard_const1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="제목"/>
-    <EditText
+
+        <EditText
+            android:id="@+id/myboard_title"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:hint="제목"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myboard_const1" />
+
+        <EditText
+            android:id="@+id/myboard_customid"
+            android:layout_width="170dp"
+            android:visibility="invisible"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+
+            android:hint="customid"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/myboard_title"
+            app:layout_constraintTop_toBottomOf="@+id/myboard_const1" />
+
+        <EditText
         app:layout_constraintTop_toBottomOf="@+id/myboard_title"
         android:id="@+id/myboard_content"
 

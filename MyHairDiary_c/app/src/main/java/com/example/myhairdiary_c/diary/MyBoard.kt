@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.Toast
@@ -24,6 +25,7 @@ class MyBoard : AppCompatActivity() {
     var public=""
     var search=""
     var permission=""
+    var customid=""
     lateinit var real_photoUri: Uri
 
     @SuppressLint("ResourceAsColor")
@@ -32,6 +34,11 @@ class MyBoard : AppCompatActivity() {
         setContentView(R.layout.activity_my_board)
         val pref=getSharedPreferences("session", 0)
         var edit=pref.edit()
+        if(pref.getInt("perm",0)==0){
+            myboard_customid.visibility= View.INVISIBLE
+        }else{
+            myboard_customid.visibility= View.VISIBLE
+        }
         val db= fireDB(this)
 
 
@@ -85,19 +92,25 @@ class MyBoard : AppCompatActivity() {
              public=findViewById<RadioButton>(radioGroup2.checkedRadioButtonId).text.toString()
              search=findViewById<RadioButton>(radioGroup3.checkedRadioButtonId).text.toString()
              permission=findViewById<RadioButton>(radioGroup4.checkedRadioButtonId).text.toString()
+            customid=myboard_customid.text.toString()
 println("range : ${range} title : ${title}, content : ${content}, reply :${reply} " +
         "public : ${public} searh : ${search}, permisiont : ${permission}")
 
             var happen=1
             var index=pref.getInt("index", -1)
 
+            if(customid!=""){
+                    happen=2
+                }
             when(happen){
                 1 -> {
                     uploadPhoto(real_photoUri, index, title, "style", "length", "gender")
                 }
-                2 -> uploadPhoto_diary_to_Customer(real_photoUri)
+                2 -> uploadPhoto_diary_to_Customer(real_photoUri, index, title, "style", "length", "gender",customid)
                 else-> uploadPhoto_profile(real_photoUri)
             }
+            var intent= Intent(this, MyHairDiary::class.java)
+            startActivity(intent)
         }
 
     }
@@ -149,17 +162,29 @@ println("range : ${range} title : ${title}, content : ${content}, reply :${reply
 
     }
 
-    fun uploadPhoto_diary_to_Customer(photoUri: Uri) {
+    fun uploadPhoto_diary_to_Customer(
+        photoUri: Uri,
+        index: Int,
+        title: String,
+        style: String,
+        length: String,
+        gender: String,
+        customid: String
+    ) {
         // 디자이너 폴더 -> customer 폴더를 만들고 그 안에 사진을 올립니다.
         var db=fireDB(this)
         val pref=getSharedPreferences("session", 0)
         var id=pref.getString("id", "").toString()
         if(id==""){return ;}
         var storageRef = FirebaseStorage.getInstance().reference.child("images")
-        storageRef=storageRef.child(id).child("profile")
+        storageRef=storageRef.child(id).child(customid).child(title)
         storageRef.putFile(photoUri).addOnSuccessListener {
             storageRef.downloadUrl.addOnSuccessListener { uri->
-                db.updateData_one("hair_diary", "profile", uri.toString(), id)
+                val pref=getSharedPreferences("session", 0)
+                var edit=pref.edit()
+                db.insert_onephoto(uri.toString(), id, index, title, style, length, gender,content,customid,0,reply,range,search,permission,public)
+                edit.putInt("index", index + 1)
+                edit.apply()
             }
             Toast.makeText(this, "url? :${it.toString()}", Toast.LENGTH_LONG).show()
         }

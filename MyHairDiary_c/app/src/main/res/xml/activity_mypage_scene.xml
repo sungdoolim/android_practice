@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:autoTransition="animateToEnd"
+        motion:duration="10000">
+        <KeyFrameSet>
+
+            <KeyAttribute
+                motion:motionTarget="@+id/m"
+                motion:framePosition="0"
+                android:rotation="80" />
+            <KeyAttribute
+                motion:motionTarget="@+id/m"
+                motion:framePosition="0"
+                android:rotation="80" />
+            <KeyAttribute
+                motion:motionTarget="@+id/m"
+                motion:framePosition="0"
+                android:rotation="80" />
+            <KeyAttribute
+                motion:motionTarget="@+id/m"
+                motion:framePosition="0"
+                android:rotation="80" />
+            <KeyAttribute />
+
+            <KeyAttribute
+                motion:motionTarget="@+id/m"
+                motion:framePosition="0"
+                android:alpha="0.5" />
+            <KeyAttribute android:alpha="0.5" />
+            <KeyAttribute
+                motion:motionTarget="@+id/myh"
+                motion:framePosition="0"
+                android:rotation="80"
+                android:alpha="0.5" />
+            <KeyAttribute
+                motion:motionTarget="@+id/myha"
+                motion:framePosition="0"
+                android:rotation="80" />
+            <KeyAttribute
+                motion:motionTarget="@+id/myhai"
+                motion:framePosition="0"
+                android:rotation="80"
+                android:alpha="0.5" />
+            <KeyAttribute
+                motion:motionTarget="@+id/myhair"
+                motion:framePosition="0"
+                android:rotation="80"
+                android:alpha="0.5" />
+            <KeyAttribute
+                motion:motionTarget="@+id/myhaird"
+                motion:framePosition="0"
+                android:rotation="80"
+                android:alpha="0.5" />
+            <KeyAttribute
+                motion:motionTarget="@+id/myhairdi"
+                motion:framePosition="0"
+                android:rotation="80"
+                android:alpha="0.5" />
+            <KeyAttribute
+                motion:motionTarget="@+id/myhairdia"
+                motion:framePosition="0"
+                android:rotation="80"
+                android:alpha="0.5" />
+            <KeyAttribute
+                motion:motionTarget="@+id/myhairdiary"
+                motion:framePosition="0"
+                android:rotation="80" />
+            <KeyAttribute
+                motion:motionTarget="@+id/my"
+                motion:framePosition="0"
+                android:rotation="80" />
+            <KeyAttribute
+                motion:motionTarget="@+id/myhairdiar"
+                motion:framePosition="0"
+                android:rotation="80" />
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+    </ConstraintSet>
+</MotionScene>

@@ -47,16 +47,16 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/selected_style_img" />
 
-                <Button
-                    android:layout_width="wrap_content"
+                <ImageView
+                    android:layout_width="54dp"
                     android:layout_height="38dp"
-                    android:layout_marginStart="36dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="20dp"
-                   android:text="공유버튼이래~"
+                    android:src="@drawable/share_icon"
                     app:layout_constraintBottom_toTopOf="@+id/textView14"
                     app:layout_constraintStart_toEndOf="@+id/isscrab"
-                    app:layout_constraintTop_toBottomOf="@+id/selected_style_img" />
+                    app:layout_constraintTop_toBottomOf="@+id/selected_style_img"
+                    app:layout_constraintVertical_bias="0.486" />
 
                 <TextView
                     android:id="@+id/textView14"
@@ -64,6 +64,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="69dp"
+                    android:textSize="20dp"
+                    android:fontFamily="serif"
+                    android:background="@drawable/round_yellowdb"
                     android:text="Recommend Style"
                     app:layout_constraintBottom_toTopOf="@+id/styledesc"
                     app:layout_constraintStart_toStartOf="parent"
@@ -88,6 +91,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="We Can Do!!"
+                android:fontFamily="serif"
+                android:textSize="20dp"
+                android:background="@drawable/round_yellowdb"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
 
@@ -127,11 +133,16 @@
 
             <TextView
                 android:id="@+id/textView26"
-                android:layout_width="match_parent"
-                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:textSize="20dp"
+                android:background="@drawable/round_yellowdb"
+                android:fontFamily="serif"
                 android:text="Another Style"
                 android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/overview_recom" />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/another_rv"

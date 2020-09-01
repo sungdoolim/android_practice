@@ -106,7 +106,7 @@ class MyHairDiary : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
 // bottom navigation의 버튼 이벤트 입니다.
         when(item.itemId){
             R.id.bottom1-> {
-                var intent= Intent(this, this::class.java)
+                var intent= Intent(this, Home2::class.java)
                 startActivity(intent)
             }
 
@@ -202,7 +202,7 @@ class MyHairDiary : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
     }
     fun select_designer_register(db: fireDB, id:String) {
         val firestore=db.firestore
-        firestore?.collection("mydiary_designer").whereEqualTo("customid",id).get()
+        firestore?.collection("hair_photo").whereEqualTo("customid",id).get()
             .addOnCompleteListener {
 
                 if(it.isSuccessful){

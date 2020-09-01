@@ -31,7 +31,7 @@ class Mypage : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelect
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_mypage)
+       setContentView(R.layout.activity_mypage)
         User_Profile_Photo.setBackground(ShapeDrawable(OvalShape()));
         User_Profile_Photo.setClipToOutline(true)
         // 로그인한 유저의 프로필 사진 배경은 흑색 원형입니다.
