@@ -31,7 +31,7 @@ class designer_review : AppCompatActivity() {
     var search=""
     var permission=""
     var customid=""
-    lateinit var real_photoUri: Uri
+     var real_photoUri: Uri? =null
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,8 +61,15 @@ class designer_review : AppCompatActivity() {
             println("range : ${range} title : ${title}, content : ${content}, reply :${reply} " +
                     "public : ${public} searh : ${search}, permisiont : ${permission}")
 
+            if(real_photoUri!=null){
+                upload_review(db, id,
+                    real_photoUri!!, index, title, "style", "length", "gender", did)
 
-            upload_review(db,id,real_photoUri, index, title, "style", "length", "gender",did)
+            }else {
+                Toast.makeText(this,"사진 리뷰는 필수 입니다",Toast.LENGTH_SHORT).show()
+
+            }
+
           //  uploadPhoto_diary_to_Customer(real_photoUri, index, title, "style", "length", "gender",customid)
 
 

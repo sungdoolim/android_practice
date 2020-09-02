@@ -139,12 +139,12 @@
                             android:id="@+id/textView16"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="64dp"
-                            android:layout_marginTop="24dp"
+                            android:layout_marginStart="28dp"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/round_yellowdb"
                             android:fontFamily="sans-serif-black"
                             android:includeFontPadding="false"
                             android:text="My Information"
-                            android:background="@drawable/round_yellowdb"
 
                             android:textSize="20dp"
 
@@ -152,11 +152,22 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="28dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="sans-serif-black"
+                            android:text="머리 자른지 약 3주 됐습니다"
+                            android:textSize="14dp"
+                            app:layout_constraintStart_toEndOf="@+id/User_Profile_Photo"
+                            app:layout_constraintTop_toBottomOf="@+id/User_greeting" />
+
+                        <TextView
                             android:id="@+id/User_greeting"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="64dp"
-                            android:layout_marginTop="24dp"
+                            android:layout_marginStart="28dp"
+                            android:layout_marginTop="16dp"
                             android:autoSizePresetSizes="false"
                             android:autoSizeTextType="none"
 
@@ -172,16 +183,6 @@
                             app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
                         <!--android:background="@drawable/border"-->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="64dp"
-                            android:layout_marginTop="12dp"
-                            android:fontFamily="sans-serif-black"
-                            android:text="머리자른지 ~ 됐습니다"
-                            android:textSize="14dp"
-                            app:layout_constraintStart_toEndOf="@+id/User_Profile_Photo"
-                            app:layout_constraintTop_toBottomOf="@+id/User_greeting" />
 
 
                     </androidx.constraintlayout.widget.ConstraintLayout>

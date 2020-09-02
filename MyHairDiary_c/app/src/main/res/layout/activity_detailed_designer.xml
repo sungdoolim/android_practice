@@ -268,7 +268,7 @@
                     android:id="@+id/review_imgbt"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:text="아마 리뷰 버튼...?"
+                    android:text="리뷰 쓰러 가기"
                     android:background="@color/coloryellow_b"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

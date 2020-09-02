@@ -9,11 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".StartScene">
-
-
-        </activity>
-        <activity android:name=".unChecked" >
+        <activity android:name=".upcoupon"></activity>
+        <activity android:name=".couponList" />
+        <activity android:name=".StartScene" />
+        <activity android:name=".unChecked">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,9 +22,7 @@
         <activity android:name=".Checked" />
         <activity android:name=".detail_list" />
         <activity android:name=".insertpage" />
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

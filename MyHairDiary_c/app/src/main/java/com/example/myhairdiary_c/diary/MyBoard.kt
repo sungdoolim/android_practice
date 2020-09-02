@@ -26,7 +26,7 @@ class MyBoard : AppCompatActivity() {
     var search=""
     var permission=""
     var customid=""
-    lateinit var real_photoUri: Uri
+     var real_photoUri: Uri? =null
 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +36,7 @@ class MyBoard : AppCompatActivity() {
         val pref=getSharedPreferences("session", 0)
         var edit=pref.edit()
         if(pref.getInt("perm",0)==0){
+            // 권한에 따라 디자이너라면 고객 아이디를 입력하는 입력창이 나오게 됩니다.
             myboard_customid.visibility= View.INVISIBLE
         }else{
             myboard_customid.visibility= View.VISIBLE
@@ -47,11 +48,8 @@ class MyBoard : AppCompatActivity() {
             onBackPressed()
         }
         myboard_all.setOnClickListener(){
-            var param=ConstraintLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,50)
-
-
-
-            range="전체"
+            // 버튼 클릭에 따라 이벤트를 처리했습니다. 효율적이지 않으나.... 라디오 버튼을 흉내내려 한 것 입니다.
+             range="전체"
             myboard_all.setTextColor(Color.parseColor("#A9E3FD"))
             myboard_neighb.setTextColor(Color.BLACK)
             myboard_neineigh.setTextColor(Color.BLACK)
@@ -99,16 +97,30 @@ println("range : ${range} title : ${title}, content : ${content}, reply :${reply
 
             var happen=1
             var index=pref.getInt("index", -1)
-
             if(customid!=""){
                     happen=2
                 }
             when(happen){
                 1 -> {
-                    uploadPhoto(real_photoUri, index, title, "style", "length", "gender")
+                    if(real_photoUri!=null){
+                        uploadPhoto(real_photoUri!!, index, title, "style", "length", "gender")
+                    }else {
+                        Toast.makeText(this,"사진 리뷰는 필수 입니다",Toast.LENGTH_SHORT).show()
+                    }
                 }
-                2 -> uploadPhoto_diary_to_Customer(real_photoUri, index, title, "style", "length", "gender",customid)
-                else-> uploadPhoto_profile(real_photoUri)
+                2 -> {
+                    if(real_photoUri!=null){
+                        uploadPhoto_diary_to_Customer(real_photoUri!!, index, title, "style", "length", "gender",customid)
+                    }else {
+                        Toast.makeText(this,"사진 리뷰는 필수 입니다",Toast.LENGTH_SHORT).show()
+                    }
+                    }
+                else-> {// 사실 이 경우는 없는것 같습니다.
+                    if(real_photoUri!=null){
+                        uploadPhoto_profile(real_photoUri!!)
+                    }else {
+                        Toast.makeText(this,"사진 리뷰는 필수 입니다",Toast.LENGTH_SHORT).show()
+                    }}
             }
             var intent= Intent(this, MyHairDiary::class.java)
             startActivity(intent)
@@ -147,6 +159,7 @@ println("range : ${range} title : ${title}, content : ${content}, reply :${reply
         val pref=getSharedPreferences("session", 0)
         val edit=pref.edit()
         var id=pref.getString("id", "").toString()
+
         if(id==""){return ;}
         var storageRef = FirebaseStorage.getInstance().reference.child("images")
         storageRef=storageRef.child(id).child("profile")
@@ -176,6 +189,7 @@ println("range : ${range} title : ${title}, content : ${content}, reply :${reply
         var db=fireDB(this)
         val pref=getSharedPreferences("session", 0)
         var id=pref.getString("id", "").toString()
+
         if(id==""){return ;}
         var storageRef = FirebaseStorage.getInstance().reference.child("images")
         storageRef=storageRef.child(id).child(customid).child(title)
@@ -207,6 +221,7 @@ println("range : ${range} title : ${title}, content : ${content}, reply :${reply
         val pref=getSharedPreferences("session", 0)
         var edit=pref.edit()
         var id=pref.getString("id", "").toString()
+
         if(id==""){return;}
         var storageRef = FirebaseStorage.getInstance().reference.child("images")
         storageRef=storageRef.child(id).child(name)//Timestamp(java.util.Date()).toString()

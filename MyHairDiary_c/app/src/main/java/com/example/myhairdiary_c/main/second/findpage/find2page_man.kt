@@ -16,6 +16,8 @@ class find2page_man : AppCompatActivity() {
         length_radio_man.check(R.id.length_radio1_man)
         val pref=getSharedPreferences("tab2",0)
         val edit=pref.edit()
+    val prefsession=getSharedPreferences("session",0)
+    textView24.text=prefsession.getString("id","").toString()+" 님의 머리 길이는 어떤가요?"
         findnext2_man.setOnClickListener(){
             var id=length_radio_man.checkedRadioButtonId
             val radiotext=findViewById<RadioButton>(id)

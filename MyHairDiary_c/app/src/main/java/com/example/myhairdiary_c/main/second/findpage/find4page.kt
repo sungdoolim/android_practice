@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.RadioButton
 import android.widget.Toast
 import com.example.myhairdiary_c.R
-import kotlinx.android.synthetic.main.activity_find2page_man.*
 import kotlinx.android.synthetic.main.activity_find4page.*
 
 class find4page : AppCompatActivity() {
@@ -17,6 +16,8 @@ class find4page : AppCompatActivity() {
         kinds_radio.check(R.id.kinds_radio1)
         val pref=getSharedPreferences("tab2",0)
         val edit=pref.edit()
+    val prefsession=getSharedPreferences("session",0)
+    textView24.text=prefsession.getString("id","")+" 님이 중요하게 생각하는 시술은 어떤 것이 있을까요?"
         findnext4.setOnClickListener(){
             var id=kinds_radio.checkedRadioButtonId
             val radiotext=findViewById<RadioButton>(id)

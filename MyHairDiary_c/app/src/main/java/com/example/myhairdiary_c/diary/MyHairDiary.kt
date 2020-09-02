@@ -88,6 +88,7 @@ class MyHairDiary : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
             startActivity(intent)
         }
         mhd_iv1.setOnClickListener(){
+            // 이걸로 그리드뷰의 넓이를 조절하려 했으나 실패했습니다...
             if(mhd_gridview.top==450){
                 mhd_gridview.top=600
             }else{
@@ -134,6 +135,7 @@ class MyHairDiary : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
 
 
     fun select_my_register(db: fireDB,id:String) {
+        // 내가 올린 사진을 불러옵니다
         val firestore=db.firestore
         firestore?.collection("hair_photo").whereEqualTo("id",id).get()
             .addOnCompleteListener {
@@ -201,6 +203,7 @@ class MyHairDiary : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
             }
     }
     fun select_designer_register(db: fireDB, id:String) {
+        // 디자이너가 찍은 내 사진을 불러옵니다.
         val firestore=db.firestore
         firestore?.collection("hair_photo").whereEqualTo("customid",id).get()
             .addOnCompleteListener {

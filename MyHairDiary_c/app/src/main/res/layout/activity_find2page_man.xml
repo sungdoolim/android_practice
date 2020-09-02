@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/back"
     app:layoutDescription="@xml/activity_find2page_man_scene"
-    tools:context=".main.second.findpage.find1page">
+>
 
     <TextView
         android:id="@+id/textView23"

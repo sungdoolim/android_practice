@@ -16,9 +16,11 @@ class find1page : AppCompatActivity() {
         gender_radio.check(R.id.gender_radio1)
         val pref=getSharedPreferences("tab2",0)
         val edit=pref.edit()
+    val prefsession=getSharedPreferences("session",0)
 
 
 
+    textView24.text=prefsession.getString("id","").toString()+" 님의 성별은 무엇인가요?"
         findnext1.setOnClickListener(){
             var id=gender_radio.checkedRadioButtonId
             val radiotext=findViewById<RadioButton>(id)
