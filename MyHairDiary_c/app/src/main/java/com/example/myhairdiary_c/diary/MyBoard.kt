@@ -32,6 +32,7 @@ class MyBoard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_board)
+
         val pref=getSharedPreferences("session", 0)
         var edit=pref.edit()
         if(pref.getInt("perm",0)==0){

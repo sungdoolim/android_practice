@@ -17,8 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-
-
+        <activity android:name=".designers.reviewList"></activity>
+        <activity android:name=".designers.designer_review" />
         <activity android:name=".diary.MyBoard" />
         <activity android:name=".diary.MyHairDiary" />
         <activity android:name=".mypage.glide_mystyles" />

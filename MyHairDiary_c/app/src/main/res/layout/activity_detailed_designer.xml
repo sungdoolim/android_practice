@@ -233,18 +233,18 @@
                     <GridView
 
                         android:id="@+id/detailed_grid"
-                        android:layout_width="match_parent"
-                        android:layout_height="400dp"
-
-                        android:horizontalSpacing="2dp"
-                        android:verticalSpacing="2dp"
-
+                        android:layout_width="391dp"
+                        android:layout_height="345dp"
 
                         android:layout_marginTop="48dp"
+                        android:horizontalSpacing="2dp"
+
+
                         android:numColumns="3"
+                        android:verticalSpacing="2dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView10"
-                        tools:layout_editor_absoluteX="16dp">
+                        tools:layout_editor_absoluteX="2dp">
 
                     </GridView>
                     <include layout="@layout/line"

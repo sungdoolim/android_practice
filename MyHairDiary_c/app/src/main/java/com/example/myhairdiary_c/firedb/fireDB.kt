@@ -145,4 +145,33 @@ class fireDB(parent: Context?){
                 }
             }
     }
+
+    fun insertReview_onephoto(
+        url: String = "",
+        id: String = "",
+        pcount: Int = -1,
+        name: String = "",
+        style: String = "",
+        length: String = "",
+        gender: String = "",
+        content: String,
+        customid: String,
+        like: Int,
+        reply: String,
+        range: String,
+        search: String,
+        permission: String,
+        public: String,
+    ) {
+        var userDTO=
+            photourl(url,id,pcount,name,style,length,gender,content,customid,like,reply,range,search,permission)
+        // photourl(url,id,pcount,name,style,length,gender,1,1,1,1,1,1,1)
+
+        firestore?.collection("hair_review")?.document()?.set(userDTO)
+            .addOnCompleteListener {
+                if(it.isSuccessful)
+                    print("create성공")
+            }
+        updateData_oneInt("hair_diary","index",pcount+1,id)
+    }
 }

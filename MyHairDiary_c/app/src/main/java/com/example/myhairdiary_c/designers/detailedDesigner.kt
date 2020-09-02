@@ -73,9 +73,10 @@ class detailedDesigner : AppCompatActivity(), BottomNavigationView.OnNavigationI
         selectList(db.firestore,did!!) //선택된 디자이너가 올린 사진들을 출력합니다.
 
         review_imgbt.setOnClickListener(){
-            Toast.makeText(this,"toast!",Toast.LENGTH_SHORT).show()
             // 리뷰 보기 버튼 같은데 아직 레이아웃을 받지 못해 안했습니다.
             // 리뷰 다는 기능 역시 구현되어 있지 않습니다.
+            var intent= Intent(this, reviewList::class.java)
+            startActivity(intent)
         }
 
 
