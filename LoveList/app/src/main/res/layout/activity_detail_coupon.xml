@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:background="@color/mint"
+android:layout_height="match_parent"
+tools:context=".detail_coupon">
+
+
+    <ImageView
+        android:id="@+id/couponimg"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvplace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="44dp"
+        android:text="언제까지 : "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/couponimg" />
+
+    <TextView
+    android:id="@+id/tvcontent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="40dp"
+    android:text="얼마 남았더라 : "
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tvplace" />
+
+    <EditText
+        android:id="@+id/detail_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="140dp"
+        android:hint="duedate"
+        app:layout_constraintStart_toEndOf="@+id/tvplace"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/detail_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="12dp"
+        android:hint="rest_money"
+        app:layout_constraintStart_toEndOf="@+id/tvcontent"
+        app:layout_constraintTop_toBottomOf="@+id/detail_place" />
+
+    <Button
+    android:id="@+id/detail_del"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="44dp"
+    android:layout_marginTop="276dp"
+    android:text="삭제"
+    app:layout_constraintStart_toEndOf="@+id/detail_mod"
+    app:layout_constraintTop_toTopOf="parent" />
+
+
+
+<Button
+    android:id="@+id/detail_mod"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="276dp"
+
+    android:text="수정"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

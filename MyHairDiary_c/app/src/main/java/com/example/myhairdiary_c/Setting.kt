@@ -9,6 +9,7 @@ import com.example.myhairdiary_c.main.Home2
 import com.example.myhairdiary_c.main.second.second_home
 import com.example.myhairdiary_c.mypage.Mypage
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_setting.*
 import kotlinx.android.synthetic.main.bottom_navi.*
 
 class Setting : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -19,8 +20,18 @@ class Setting : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelect
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
+        // 여러 잡다한 사항들? 이 제시됩니다.
+        // 아마 텍스트 하나하나 화면 전환이 일어날 예정이지 않을까 생각합니다.
+
         botnav.setOnNavigationItemSelectedListener(this)
         botnav.getMenu().getItem(3).setChecked(true);
+        imageView8.setOnClickListener(){
+            onBackPressed()
+        }
+        imageView9.setOnClickListener(){
+            var intent=Intent(this,Home2::class.java)
+            startActivity(intent)
+        }
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){

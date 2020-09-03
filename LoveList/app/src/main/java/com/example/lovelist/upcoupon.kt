@@ -30,6 +30,7 @@ class upcoupon : AppCompatActivity() {
 
         var pref=getSharedPreferences("Rnd",0)
         var edit=pref.edit()
+
         loadindex(firestore,edit)
 
 
@@ -42,8 +43,11 @@ class upcoupon : AppCompatActivity() {
             openAlbum()
         }
         submit.setOnClickListener(){
+            val due=due.text.toString()
+            val rest=Integer.parseInt(rest.text.toString())
+
             if(real_photoUri!=null){
-                uploadPhoto(real_photoUri!!,index+1)
+                uploadPhoto(real_photoUri!!,index+1,due,rest)
             }else {
                 Toast.makeText(this,"사진 리뷰는 필수 입니다", Toast.LENGTH_SHORT).show()
             }
@@ -77,7 +81,7 @@ class upcoupon : AppCompatActivity() {
         }
     }
 
-    fun uploadPhoto(photoUri: Uri, index: Int) {
+    fun uploadPhoto(photoUri: Uri, index: Int, due: String, rest: Int) {
         // 디자이너가 사진을 올립니다. 포트폴리오용 입니다.
         var db=fireDB(this)
         val pref=getSharedPreferences("Rnd", 0)
@@ -91,7 +95,7 @@ class upcoupon : AppCompatActivity() {
                 //url:String="",id:String="",pcount:Int=-1,name:String="")
 
                 //photourl(url,id,pcount,name,style,length,gender,1,1,1,1,1,1,1)
-                db.insert_onephoto(uri.toString(),index)
+                db.insert_onephoto(uri.toString(),index,due,rest)
                 edit.putInt("index", index + 1)
                 edit.apply()
             }

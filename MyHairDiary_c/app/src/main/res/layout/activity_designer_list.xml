@@ -7,31 +7,31 @@
     android:background="@color/back"
     tools:context=".designers.designer_list">
 
-    <EditText
-        android:id="@+id/regionedit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="sort"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <EditText-->
+<!--        android:id="@+id/regionedit"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="sort"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <Button
-        android:id="@+id/sortdesigner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="sort"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/regionedit" />
+<!--    <Button-->
+<!--        android:id="@+id/sortdesigner"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="sort"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/regionedit" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/designerlist"
         android:layout_width="match_parent"
-        android:layout_height="670dp"
+        android:layout_height="721dp"
         android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:layoutAnimation="@anim/layout_ani"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sortdesigner" />
 
 

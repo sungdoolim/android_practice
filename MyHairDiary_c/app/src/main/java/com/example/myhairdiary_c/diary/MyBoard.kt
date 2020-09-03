@@ -116,6 +116,8 @@ println("range : ${range} title : ${title}, content : ${content}, reply :${reply
                 1 -> {
                     if(real_photoUri!=null){
                         uploadPhoto(real_photoUri!!, index, title, "style", "length", "gender")
+                        var intent= Intent(this, MyHairDiary::class.java)
+                        startActivity(intent)
                     }else {
                         Toast.makeText(this,"사진 리뷰는 필수 입니다",Toast.LENGTH_SHORT).show()
                     }
@@ -123,6 +125,8 @@ println("range : ${range} title : ${title}, content : ${content}, reply :${reply
                 2 -> {
                     if(real_photoUri!=null){
                         uploadPhoto_diary_to_Customer(real_photoUri!!, index, title, "style", "length", "gender",customid)
+                        var intent= Intent(this, MyHairDiary::class.java)
+                        startActivity(intent)
                     }else {
                         Toast.makeText(this,"사진 리뷰는 필수 입니다",Toast.LENGTH_SHORT).show()
                     }
@@ -130,12 +134,15 @@ println("range : ${range} title : ${title}, content : ${content}, reply :${reply
                 else-> {// 사실 이 경우는 없는것 같습니다.
                     if(real_photoUri!=null){
                         uploadPhoto_profile(real_photoUri!!)
+                        var intent= Intent(this, MyHairDiary::class.java)
+                        startActivity(intent)
                     }else {
                         Toast.makeText(this,"사진 리뷰는 필수 입니다",Toast.LENGTH_SHORT).show()
-                    }}
+                    }
+                }
             }
-            var intent= Intent(this, MyHairDiary::class.java)
-            startActivity(intent)
+//            var intent= Intent(this, MyHairDiary::class.java)
+//            startActivity(intent)
         }
 
     }
@@ -245,8 +252,6 @@ println("range : ${range} title : ${title}, content : ${content}, reply :${reply
                 edit.apply()
             }
             Toast.makeText(this, "url? :${it.toString()}", Toast.LENGTH_LONG).show()
-
         }
     }
-
 }

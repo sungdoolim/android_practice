@@ -23,8 +23,8 @@ class fireDB(parent: Context?){
     public fun insert_onephoto(
         url: String = "",
         index:Int=0,
-    rest:Int=0,
-    due:String=""){
+        due: String ="",
+        rest: Int =0){
         // val url:String="",val id:String="",val pcount:Int=-1,val name:String=""
         var userDTO=
             list_data("","",index,"",false,url,due,rest)

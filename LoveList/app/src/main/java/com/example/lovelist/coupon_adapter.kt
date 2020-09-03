@@ -23,12 +23,14 @@ class coupon_adapter(val context: Context?, val designerList:ArrayList<list_data
                 val curPos:Int=adapterPosition
                 var dl: list_data =designerList.get(curPos)
 
-                val intent = Intent(view.getContext(), detail_list::class.java)
-                val pref=context!!.getSharedPreferences("selected",0)
+                val intent = Intent(view.getContext(), detail_coupon::class.java)
+                val pref=context!!.getSharedPreferences("selected_coupon",0)
 
                 val edit=pref.edit()
 
                 edit.clear()
+                edit.putString("due",dl.due)
+                edit.putInt("rest",dl.rest)
                 edit.putString("content",dl.content)
                 edit.putString("id",dl.id)
                 edit.putInt("index",dl.index)

@@ -133,7 +133,6 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
                 var intent= Intent(this, this::class.java)
                 startActivity(intent)
             }
-
             R.id.bottom2->
             {
                 var intent= Intent(this, second_home::class.java)
