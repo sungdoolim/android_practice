@@ -13,6 +13,7 @@ import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.main.detailedRecommend
 
 //designerAdapter 와 로직이 같습니다.
+// designers/designerAdapter를 참고하십시오
 
 class photorvAdapter (val context: Context, val designerList:ArrayList<photourl>): RecyclerView.Adapter<photorvAdapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {

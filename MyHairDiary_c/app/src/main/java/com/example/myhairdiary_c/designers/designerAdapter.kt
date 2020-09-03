@@ -76,14 +76,6 @@ class designerAdapter (val context: Context, val designerList:ArrayList<designer
         holder.dimg.setImageResource(R.drawable.ic_launcher_foreground)
         Glide.with(context).load(designerList.get(position).profile).into(holder.dimg)
 
-
-
-
-
-
-
-// 애니메이션 추가가
-
     }
 
    class CustomViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         wvN_login.settings.javaScriptEnabled=true
         wvN_login.webViewClient= WebViewClient()
         wvN_login.webChromeClient= WebChromeClient()
-        wvN_login.loadUrl("http://172.30.1.8:8052/web/nlogin.do")
+        wvN_login.loadUrl("http://172.30.1.44:8052/web/nlogin.do")
         //  wvnaver.loadUrl("https://www.naver.com")
         val webSettings: WebSettings = wvN_login.getSettings()
         webSettings.javaScriptEnabled = true

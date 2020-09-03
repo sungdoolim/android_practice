@@ -42,6 +42,10 @@ class find8page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
         val region2=pref.getString("region2","").toString()
         val demand=pref.getString("demand","").toString()
     // 선택한 디자이너의 모든 정보를 가져옵니다.
+
+
+
+    // 지역의 선택 여부에 따라 실행되는 메서드가 달라집니다.
     if(region=="전 지역"||region=="선택 하기"){
         select_designer_listAll(db.firestore,gender,length,kind,region,region2,demand)
     }else if(region2=="전 지역"||region2=="선택 하기"){
@@ -94,6 +98,9 @@ class find8page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
         return true;
     }
     public fun select_designer_list(firestore: FirebaseFirestore,gender:String,length:String,kind:String,region:String,region2:String,demand:String) {
+        // 선택된 값들에 따라 불러오는 designer가 다릅니다.
+        // 밑에 두 메서드와 논리적으로 같습니다.
+
         firestore?.collection("hair_diary").whereEqualTo("perm",1)
             .whereEqualTo("region",region).whereEqualTo("major",kind).get()
             .addOnCompleteListener {
@@ -102,7 +109,6 @@ class find8page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
                     var userDTO=ArrayList<designer>()
                     for(dc in it.result!!.documents){
                         dc.toObject(designer::class.java)?.let { it1 ->
-                            println("reviewcount : ${it1.reviewcount}")
                             if(length=="기타"){
                                 userDTO.add(it1)
                             }else{
@@ -157,7 +163,6 @@ class find8page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
                             userDTO
                         )
                 }else{
-                    println("fail")
                 }
             }
     }
@@ -179,7 +184,6 @@ class find8page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
 
                                 }
                             }
-
                         }
                     }
                     findcomplete_designer.addItemDecoration(DividerItemDecoration(applicationContext,

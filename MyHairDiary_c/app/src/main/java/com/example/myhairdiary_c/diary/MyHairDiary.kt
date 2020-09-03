@@ -55,6 +55,9 @@ class MyHairDiary : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
 
         diary_uppertab.addOnTabSelectedListener(object:TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab) {
+                // 탭에 따라 메서드가 달라집니다.
+                // 내가 올린 사진 / 디자이너가 올려준 사진들을 보게 됩니다.
+
                 var i = tab.position
 
                 if(i==0){
@@ -69,8 +72,9 @@ class MyHairDiary : AppCompatActivity(), BottomNavigationView.OnNavigationItemSe
         })
         var isvisible=false
         mhd_float.setOnClickListener(){
+            // 플로팅 버튼입니다.  float2,3버튼을 보이게 하며 현재 기능은 3버튼만 기능을 가집니다.
             isvisible=!isvisible
-            Toast.makeText(this,"프로티이이ㅣ잉",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"floating test",Toast.LENGTH_SHORT).show()
             if(isvisible){
             mhd_float2.visibility= View.VISIBLE
             mhd_float3.visibility=View.VISIBLE

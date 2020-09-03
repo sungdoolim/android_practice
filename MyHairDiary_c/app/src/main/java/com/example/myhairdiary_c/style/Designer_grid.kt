@@ -13,7 +13,8 @@ import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.designer
 import com.example.myhairdiary_c.designers.photourl
 import com.example.myhairdiary_c.main.detailedRecommend
-
+//designerAdapter 와 로직이 같습니다.
+// designers/designerAdapter를 참고하십시오
 
 // recyclerview 가 아닌 gridview의 어뎁터 입니다.
 class grid_adapter(context: Context, layout: Int, userDTO:ArrayList<designer>) :

@@ -93,10 +93,14 @@ class Home2 : AppCompatActivity() , BottomNavigationView.OnNavigationItemSelecte
         settings.setOnClickListener(){
             // 오른쪽 맨 위 설정 버튼입니다. 설정으로 이동합니다.
 
-           // var intent= Intent(this, Setting::class.java)// 이게 공지나...그런 설정들
-            var intent=Intent(this,MainActivity::class.java)   // 얘는 임의로 데이터 집어넣는 곳... 네이버 로그인...
-         //   var intent=Intent(this,Mypage::class.java)
+            var intent= Intent(this, Setting::class.java)// 이게 공지나...그런 설정들
+
             startActivity(intent)
+        }
+        settings.setOnLongClickListener(){
+            var intent=Intent(this,MainActivity::class.java)
+            startActivity(intent)
+             true
         }
 
 

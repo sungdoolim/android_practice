@@ -14,7 +14,7 @@ class find6page : AppCompatActivity() {
         val pref=getSharedPreferences("tab2",0)
         val edit=pref.edit()
     val prefsession=getSharedPreferences("session",0)
-    textView24.text=prefsession.getString("id","").toString()+" 님의 문의 및 희망사항을 기재해 주세요!    "
+    textView24.text=prefsession.getString("id","").toString()+" 님의 문의 및 희망사항을 기재해 주세요!"
         findnext6.setOnClickListener(){
             var demand=demand_et.text.toString()
             edit.putString("demand",demand)

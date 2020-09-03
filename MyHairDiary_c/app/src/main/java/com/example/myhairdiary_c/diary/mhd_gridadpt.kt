@@ -14,6 +14,8 @@ import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.photourl
 import com.example.myhairdiary_c.main.detailedRecommend
 
+//designerAdapter 와 로직이 같습니다.
+// designers/designerAdapter를 참고하십시오
 
 class MyAdapter(context: Context, layout: Int, userDTO:ArrayList<photourl>) :
     BaseAdapter() {

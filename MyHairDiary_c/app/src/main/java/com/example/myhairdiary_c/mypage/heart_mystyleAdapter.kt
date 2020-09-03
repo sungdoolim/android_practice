@@ -12,7 +12,8 @@ import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.photourl
 import com.example.myhairdiary_c.main.detailedRecommend
-
+//designerAdapter 와 로직이 같습니다.
+// designers/designerAdapter를 참고하십시오
 class heart_mystyleAdapter (val context: Context, val designerList:ArrayList<photourl>): RecyclerView.Adapter<heart_mystyleAdapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val view= LayoutInflater.from(parent.context).inflate(R.layout.heart_mystyle_adapter,parent,false)

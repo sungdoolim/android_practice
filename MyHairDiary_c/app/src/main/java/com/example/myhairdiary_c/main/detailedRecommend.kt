@@ -64,6 +64,8 @@ class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigatio
         firestore?.collection("hair_mystyle").whereEqualTo("customid",id)
             .whereEqualTo("id",did).whereEqualTo("url",url).get().addOnCompleteListener{
                 if( it.result!!.documents.size!=0){
+                    //값이 이미 존재하는지의 여부에 따라 삭제 삽입이 결정됩니다.
+
                  firestore?.collection("hair_mystyle").document(it.result!!.documents.get(0).id).delete()
                         .addOnCompleteListener {
                            isscrab.setImageResource(R.drawable.star_icon)
@@ -91,6 +93,7 @@ class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigatio
            .addOnCompleteListener {
                if(it.isSuccessful){
                    var userDTO=ArrayList<photourl>()
+                    // 스크랩 여부를 판단합니다.
 
                    for(dc in it.result!!.documents){
                        dc.toObject(photourl::class.java)?.let { it1 ->
@@ -135,7 +138,8 @@ class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigatio
         }
         return true;
     }
-    fun select_wecando(firestore:FirebaseFirestore,style:String){// 이 스타일이 가능한 또다른 디자이너
+    fun select_wecando(firestore:FirebaseFirestore,style:String){
+        // 이 스타일이 가능한 또다른 디자이너를 찾습니다.
         firestore?.collection("hair_diary").whereEqualTo("perm",1).whereEqualTo("major",style).get()
             .addOnCompleteListener {
                 if(it.isSuccessful){
@@ -162,7 +166,8 @@ class detailedRecommend : AppCompatActivity() , BottomNavigationView.OnNavigatio
                 }
             }
     }
-    fun select_another_style(firestore:FirebaseFirestore,did:String){// 이 디자이너의 또다른 스타일
+    fun select_another_style(firestore:FirebaseFirestore,did:String){
+        // 이 디자이너의 또다른 스타일을 찾습니다.
         firestore?.collection("hair_photo").whereEqualTo("id",did).get()
             .addOnCompleteListener {
                 if(it.isSuccessful){

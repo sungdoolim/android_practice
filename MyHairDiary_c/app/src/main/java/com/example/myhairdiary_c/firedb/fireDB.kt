@@ -68,6 +68,8 @@ class fireDB(parent: Context?){
         permission: String,
         public: String,){
        // val url:String="",val id:String="",val pcount:Int=-1,val name:String=""
+        // 하나의 사진 정보를 저장하게 됩니다. 사진 자체를 올리는 것이 아닌 사진과 관련된 정보만을 저장하게 됩니다.
+
         var userDTO=
             photourl(url,id,pcount,name,style,length,gender,content,customid,like,reply,range,search,permission)
        // photourl(url,id,pcount,name,style,length,gender,1,1,1,1,1,1,1)
@@ -169,6 +171,7 @@ class fireDB(parent: Context?){
 
         firestore?.collection("hair_review")?.document()?.set(userDTO)
             .addOnCompleteListener {
+                // photourl 객체의 정보를 서버에 올립니다.
                 if(it.isSuccessful)
                     print("create성공")
             }

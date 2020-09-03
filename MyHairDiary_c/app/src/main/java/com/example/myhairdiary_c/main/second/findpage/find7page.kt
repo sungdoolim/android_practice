@@ -44,7 +44,7 @@ class find7page : AppCompatActivity(), BottomNavigationView.OnNavigationItemSele
     val region=pref.getString("region","").toString()
     val region2=pref.getString("region2","").toString()
     val demand=pref.getString("demand","").toString()
-        // 모든 데이터를 받아옵니다.
+        // 지금까지 선택한 모든 데이터를 받아옵니다.
 
 if(region=="전 지역"||region=="선택 하기"){
     select_designer_listAll(db.firestore,gender,length,kind,region,region2,demand)

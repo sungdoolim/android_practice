@@ -22,7 +22,9 @@ class designer_list : AppCompatActivity() {
         finish()
     }
     public fun select_designer_list(firestore:FirebaseFirestore) {
-        // 로직은 Home2의 select_recommend_designerList와 같습니다.
+        // 로직은 main/Home2의 select_recommend_designerList와 같습니다.
+        // main/Home2의 주석을 참고하십시오
+
         firestore?.collection("hair_diary").whereEqualTo("perm",1).get()
             .addOnCompleteListener {
                 if(it.isSuccessful){

@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myhairdiary_c.R
 import com.example.myhairdiary_c.designers.photourl
-
+//designerAdapter 와 로직이 같습니다.
+// designers/designerAdapter를 참고하십시오
 
 class recommend_trend_adapter (val context: Context, val designerList:ArrayList<photourl>,val whatodo:Int): RecyclerView.Adapter<recommend_trend_adapter.CustomViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {

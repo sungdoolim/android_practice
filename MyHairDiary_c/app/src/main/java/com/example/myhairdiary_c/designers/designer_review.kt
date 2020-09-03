@@ -37,12 +37,12 @@ class designer_review : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_designer_review)
+        // 리뷰를 작성하고 firebase서버에 올리는 곳 입니다.
 
         val db= fireDB(this)
         val pref=getSharedPreferences("session", 0)
-        var edit=pref.edit()
+
         val prefselected=getSharedPreferences("selected",0)
-        val selecedit=prefselected.edit()
         val did=prefselected.getString("did","").toString()
         var index=prefselected.getInt("index", -1)
         val id=pref.getString("id","").toString()
@@ -62,9 +62,12 @@ class designer_review : AppCompatActivity() {
                     "public : ${public} searh : ${search}, permisiont : ${permission}")
 
             if(real_photoUri!=null){
+                // 사진을 등록했는지를 체크하며 사진이 없으면 리뷰작성이 되지 않습니다.
                 upload_review(db, id,
                     real_photoUri!!, index, title, "style", "length", "gender", did)
 
+                var intent= Intent(this, MyHairDiary::class.java)
+                startActivity(intent)
             }else {
                 Toast.makeText(this,"사진 리뷰는 필수 입니다",Toast.LENGTH_SHORT).show()
 
@@ -72,12 +75,6 @@ class designer_review : AppCompatActivity() {
 
           //  uploadPhoto_diary_to_Customer(real_photoUri, index, title, "style", "length", "gender",customid)
 
-
-
-
-
-            var intent= Intent(this, MyHairDiary::class.java)
-            startActivity(intent)
         }
 
 
@@ -116,13 +113,20 @@ class designer_review : AppCompatActivity() {
 
 
         if(id==""){return ;}
+
         var storageRef = FirebaseStorage.getInstance().reference.child("images").child("review")
         storageRef=storageRef.child(customid).child(id).child(title)
+        // 저장할 firebase의 경로 입니다.
+
         storageRef.putFile(photoUri).addOnSuccessListener {
             storageRef.downloadUrl.addOnSuccessListener { uri->
+                // 사진을 저장하고 나서는 그 url주소를 따로 저장하게 됩니다.
+
                 val pref=getSharedPreferences("selected", 0)
                 var edit=pref.edit()
                 db.insertReview_onephoto(uri.toString(), customid, index, title, style, length, gender,content,id,0,reply,range,search,permission,public)
+                //사진을 저장후 그 url과 세부 데이터를 저장하는 부분입니다.
+
                 edit.putInt("index", index + 1)
                 edit.apply()
             }

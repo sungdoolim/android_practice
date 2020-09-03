@@ -16,7 +16,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_review_list.*
 import kotlinx.android.synthetic.main.bottom_navi.*
-
+//designerAdapter 와 로직이 같습니다.
+// designers/designerAdapter를 참고하십시오
 class reviewList : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

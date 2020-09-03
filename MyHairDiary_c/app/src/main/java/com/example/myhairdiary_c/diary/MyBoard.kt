@@ -32,6 +32,8 @@ class MyBoard : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_board)
+        // 게시물을 올리는 폼 입니다.
+
 
         val pref=getSharedPreferences("session", 0)
         var edit=pref.edit()
@@ -85,6 +87,9 @@ class MyBoard : AppCompatActivity() {
             openAlbum()
         }
         myboard_savebt.setOnClickListener(){
+            // 최종적으로 완료 버튼을 눌렀을때 입니다.
+            // 서버에 저장합니다.
+
              title=myboard_title.text.toString()
              content=myboard_content.text.toString()
              reply=findViewById<RadioButton>(radioGroup.checkedRadioButtonId).text.toString()
@@ -95,12 +100,19 @@ class MyBoard : AppCompatActivity() {
 println("range : ${range} title : ${title}, content : ${content}, reply :${reply} " +
         "public : ${public} searh : ${search}, permisiont : ${permission}")
 
+
+            //고객에게만 제공하는 사진 인지/ 포트폴리오 용으로 올리는 사진인지 happen변수를 사용해 구분합니다
+            //1은 포트폴리오 용으로 전체 공개 입니다.
+            //2는 고객의 다이어리 용입니다. 지금은 전체 공개로 되어있습니다.
+
             var happen=1
             var index=pref.getInt("index", -1)
             if(customid!=""){
                     happen=2
                 }
             when(happen){
+                // happen에 따라/ 사진 업로드를 하는지에 따른 구분입니다.
+
                 1 -> {
                     if(real_photoUri!=null){
                         uploadPhoto(real_photoUri!!, index, title, "style", "length", "gender")
@@ -145,6 +157,8 @@ println("range : ${range} title : ${title}, content : ${content}, reply :${reply
 
         if(requestCode==GALLERY){
             if(data!=null) {
+                // 사진첩을 열고 사진 선택시 그 url을 저장합니다.
+
                 var photoUri = data?.data!!
                 real_photoUri = photoUri
                 board_image.setImageURI(photoUri)
@@ -161,10 +175,13 @@ println("range : ${range} title : ${title}, content : ${content}, reply :${reply
         var id=pref.getString("id", "").toString()
 
         if(id==""){return ;}
+
         var storageRef = FirebaseStorage.getInstance().reference.child("images")
-        storageRef=storageRef.child(id).child("profile")
+        storageRef=storageRef.child(id).child("profile")// 이렇게 경로를 지정하고
+
         storageRef.putFile(photoUri).addOnSuccessListener {
             storageRef.downloadUrl.addOnSuccessListener { uri->
+                // 지정한 경로에 사진이 성공적으로 올라가면 사진 정보를 따로 서버에 올립니다.
                 db.updateData_one("hair_diary", "profile", uri.toString(), id)
                 edit.putString("profile", uri.toString())
                 edit.apply()
@@ -205,13 +222,6 @@ println("range : ${range} title : ${title}, content : ${content}, reply :${reply
         }
 
     }
-    //val url:String="",val id:String="",val pcount:Int=-1,
-    //                    val name:String="",val style : String="",val length:String="",val gender:String="",
-    //                    val memo:String="",val customid:String="",val like:Int=0,
-    //                    val per_reply:String="",
-    //                    val range:String="",
-    //                    val per_search:String="",
-    //                    val permission:String="",
 
 
     fun uploadPhoto(photoUri: Uri, index: Int, name: String, style: String, length: String, gender: String,
