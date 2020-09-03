@@ -1,5 +1,10 @@
 # android_practice
 안드로이드의 기본 사용법을 연습합니다.
+자바 프로젝트는 2020-06월 commit으로 이동시 볼 수 있습니다. 
+
+
+
+
 android
 
   toast :
@@ -29,6 +34,9 @@ FragmentTransaction transaction = getSupportFragmentManager().beginTransaction()
  transaction.replace(R.id.frag, fragment1);
 transaction.commit();
 
+
+
+
 frag1 extends Fragment
 return inflater.inflate(R.layout.frag1, container, false);
 
@@ -40,6 +48,10 @@ AlertDialog.Builder ad=new AlertDialog.Builder(MainActivity.this)
                 final EditText etet=new EditText(MainActivity.this);
                 ad.setView(etet);
 
+
+
+
+
  ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -48,6 +60,10 @@ AlertDialog.Builder ad=new AlertDialog.Builder(MainActivity.this)
                 dialogInterface.dismiss();
             }
         });
+        
+        
+        
+        
 negativebutton에는  dialogInterface.dismiss();
 마지막에 ad.show();
 
@@ -76,11 +92,19 @@ String tabname="customer";
                 String sql="create table if not exists "+ tabname + "(_id integer PRIMARY KEY autoincrement, name text,age int, mobile text)";
                 sqLiteDatabase.execSQL(sql);
 }
+
+
+
+
 onUpgrade(SQLiteDatabase sqLiteDatabase){
 sqLiteDatabase.execSQL("drop table if exists "+tabname);
 String sql="create table if not exists "+ tabname + "(_id integer PRIMARY KEY autoincrement, name text,age int, mobile text)";
           sqLiteDatabase.execSQL(sql);
 }}
+
+
+
+
 
 클래스 내에 SQLiteDatabase db;
 
@@ -92,20 +116,36 @@ openDatabase(String dbname){//내가 정의 하는 것임
  DatabaseHelper helper=new DatabaseHelper(this,dbname,null,3);
         db=helper.getWritableDatabase();
 }
+
+
+
+
 버튼2{createTable(tabname)}
 createTable(String tabname){
   String sql="create table if not exists "+ tabname + "(_id integer PRIMARY KEY autoincrement, name text,age int, mobile text)";
  db.execSQL(sql);
 }
+
+
+
+
 버튼3{
 String a=et.getText().toStrng().trim();....> a,b,c;
 insertData(a,b,c);
 }
+
+
+
+
 insertData(String a,String b,String c){
 String sql="insert into customer(name,age,mobile) values(?,?,?)";
 Object[] params={a,b,c};
   db.execSQL(sql,params);
 }
+
+
+
+
 버튼4{selectDate();}
 selectDate(){
  String sql="select name,age,mobile from "+tabname;
@@ -117,6 +157,10 @@ while(rs.moveToNext()){
                 println("#->"+name+","+age+","+mobile);
             }
 }
+
+
+
+
 
 session 대신 사용 가능 : = sharedpreferencs
    SharedPreferences sp=getSharedPreferences("testsp",Activity.MODE_PRIVATE);
