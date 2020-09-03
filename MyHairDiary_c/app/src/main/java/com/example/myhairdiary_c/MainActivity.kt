@@ -104,8 +104,8 @@ class MainActivity : AppCompatActivity() {
 
         register_bt.setOnClickListener(){
             var id=etid.getText()
-            var name=etpw.getText()
-            db.createData(id.toString(), name.toString())
+
+            db.createData(id.toString(), id.toString())
             var intent= Intent(this, MainActivity::class.java)
             startActivity(intent)
             // 회원 가입하면 db에 넣습니다.

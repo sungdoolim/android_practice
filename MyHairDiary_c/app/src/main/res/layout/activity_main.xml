@@ -31,38 +31,38 @@
         android:orientation="horizontal">
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/etid"
         android:hint="id"
 
         />
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etpw"
-        android:hint="pw"
+<!--    <EditText-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/etpw"-->
+<!--        android:hint="pw"-->
 
-        />
+<!--        />-->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="회원 가입"
         android:id="@+id/register_bt"/>
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/etloginid"
         android:hint="id"
 
         />
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etloginpw"
-        android:hint="pw"
+<!--    <EditText-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/etloginpw"-->
+<!--        android:hint="pw"-->
 
-        />
+<!--        />-->
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

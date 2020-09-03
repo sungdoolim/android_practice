@@ -7,13 +7,15 @@ android:layout_height="match_parent"
 android:background="@color/back"
 tools:context=".designers.reviewList">
 
-<Button
-    android:id="@+id/review_write"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="sort"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/regionedit" />
+    <Button
+        android:id="@+id/review_write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_yellowdb"
+        android:text="write review"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/regionedit" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/designerlist"
