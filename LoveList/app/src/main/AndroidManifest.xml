@@ -12,13 +12,16 @@
         <activity android:name=".detail_coupon"></activity>
         <activity android:name=".upcoupon" />
         <activity android:name=".couponList" />
-        <activity android:name=".StartScene" />
-        <activity android:name=".unChecked">
+        <activity android:name=".StartScene" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity android:name=".unChecked">
+
         </activity>
         <activity android:name=".Checked" />
         <activity android:name=".detail_list" />

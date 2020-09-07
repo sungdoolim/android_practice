@@ -7,76 +7,108 @@ android:background="@color/mint"
 android:layout_height="match_parent"
 tools:context=".detail_coupon">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 
     <ImageView
         android:id="@+id/couponimg"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="900dp"
+        android:layout_marginTop="32dp"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <TextView
         android:id="@+id/tvplace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
         android:text="언제까지 : "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/couponimg" />
 
     <TextView
-    android:id="@+id/tvcontent"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="8dp"
-    android:layout_marginTop="40dp"
-    android:text="얼마 남았더라 : "
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/tvplace" />
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="현재 금액 : "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/detail_place"
+        android:id="@+id/nowrest"
+        android:fontFamily="serif"
+        android:textSize="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginStart="100dp"
+
+        android:hint="읭...?"
+        app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvcontent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="44dp"
+        android:text="지금 얼마썼어! "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvplace" />
+
+    <EditText
+        android:id="@+id/due"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="16dp"
         android:hint="duedate"
         app:layout_constraintStart_toEndOf="@+id/tvplace"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/couponimg" />
 
     <EditText
         android:id="@+id/detail_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="12dp"
-        android:hint="rest_money"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:hint="알아서 계산해 줄께 쓴금액 얼만대에"
         app:layout_constraintStart_toEndOf="@+id/tvcontent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_place" />
+        app:layout_constraintTop_toBottomOf="@+id/due" />
+
 
     <Button
-    android:id="@+id/detail_del"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="44dp"
-    android:layout_marginTop="276dp"
-    android:text="삭제"
-    app:layout_constraintStart_toEndOf="@+id/detail_mod"
-    app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/detail_del"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="200dp"
+        android:text="다썻으면 삭제"
+        app:layout_constraintStart_toEndOf="@+id/detail_mod"
+        app:layout_constraintTop_toBottomOf="@+id/couponimg" />
 
+    <Button
+        android:id="@+id/detail_mod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
 
-
-<Button
-    android:id="@+id/detail_mod"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="16dp"
-    android:layout_marginTop="276dp"
-
-    android:text="수정"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
-
+        android:layout_marginTop="200dp"
+        android:text="수정"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/couponimg" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

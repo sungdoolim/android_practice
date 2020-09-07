@@ -8,7 +8,9 @@ import android.os.Bundle
 import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import kotlinx.android.synthetic.main.activity_un_checked.*
 import kotlinx.android.synthetic.main.activity_upcoupon.*
+import kotlinx.android.synthetic.main.bottom_nav.*
 
 class upcoupon : AppCompatActivity() {
     val GALLERY=0
@@ -36,24 +38,25 @@ class upcoupon : AppCompatActivity() {
 
 
         var index=pref.getInt("index",-1)
-
-
-
         openalbum.setOnClickListener(){
             openAlbum()
         }
         submit.setOnClickListener(){
+            var r=rest.text.toString()
             val due=due.text.toString()
-            val rest=Integer.parseInt(rest.text.toString())
+            var rest = 0
+            if(r!=""){
+                rest=Integer.parseInt(r)
+            }
 
             if(real_photoUri!=null){
                 uploadPhoto(real_photoUri!!,index+1,due,rest)
+                val intent=Intent(this,couponList::class.java)
+                startActivity(intent)
             }else {
                 Toast.makeText(this,"사진 리뷰는 필수 입니다", Toast.LENGTH_SHORT).show()
             }
         }
-
-
     }
     fun loadindex(
         firestore: FirebaseFirestore,
@@ -86,15 +89,12 @@ class upcoupon : AppCompatActivity() {
         var db=fireDB(this)
         val pref=getSharedPreferences("Rnd", 0)
         var edit=pref.edit()
-
         var storageRef = FirebaseStorage.getInstance().reference.child("lovelist")
         storageRef=storageRef.child(index.toString())
 
         storageRef.putFile(photoUri).addOnSuccessListener {
             storageRef.downloadUrl.addOnSuccessListener { uri->
-                //url:String="",id:String="",pcount:Int=-1,name:String="")
 
-                //photourl(url,id,pcount,name,style,length,gender,1,1,1,1,1,1,1)
                 db.insert_onephoto(uri.toString(),index,due,rest)
                 edit.putInt("index", index + 1)
                 edit.apply()

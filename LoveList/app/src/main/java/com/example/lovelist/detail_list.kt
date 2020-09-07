@@ -25,6 +25,7 @@ class detail_list : AppCompatActivity() {
         detail_del.setOnClickListener(){
             deleteData(firestore,index)
             Toast.makeText(this,"삭제 중~ 좀만 기다려주세용~",Toast.LENGTH_SHORT).show()
+
         }
         detail_mod.setOnClickListener(){
             var ischec=iscpt.isChecked

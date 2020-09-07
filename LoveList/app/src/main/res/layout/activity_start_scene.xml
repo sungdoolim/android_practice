@@ -1,12 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.motion.widget.MotionLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@color/back"
+tools:context=".StartScene"
+app:layoutDescription="@xml/activity_start_scene_scene"
+    >
+
+    <ImageView
+        android:id="@+id/myhairdiary"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="448dp"
+        android:src="@drawable/bigt"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/myh"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="170dp"
+        android:layout_marginTop="184dp"
+        android:src="@drawable/bigr"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+    android:id="@+id/myha"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_marginStart="100dp"
+    android:layout_marginTop="216dp"
+    android:src="@drawable/bigl"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<ImageView
+    android:id="@+id/myhai"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_marginStart="140dp"
+    android:layout_marginTop="264dp"
+    android:src="@drawable/bigo"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<ImageView
+    android:id="@+id/myhair"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_marginStart="190dp"
+    android:layout_marginTop="300dp"
+    android:src="@drawable/bigv"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/myhaird"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="430dp"
+        android:src="@drawable/bigl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/myhairdi"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="230dp"
+        android:layout_marginTop="350dp"
+        android:src="@drawable/bige"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/myhairdia"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="440dp"
+        android:src="@drawable/bigi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/myhairdiar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="420dp"
+        android:src="@drawable/bigs"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+    android:id="@+id/my"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_marginStart="124dp"
+    android:layout_marginTop="132dp"
+    android:src="@drawable/bigu"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+<ImageView
+    android:id="@+id/m"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_marginStart="68dp"
+    android:layout_marginTop="104dp"
+    android:src="@drawable/bigo"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+<TextView
+    android:id="@+id/textView17"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".StartScene">
-<com.google.android.material.circularreveal.CircularRevealFrameLayout
-    android:id="@+id/framelayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
-</LinearLayout>
+    android:textAlignment="center"
+    android:layout_height="37dp"
+    android:layout_marginBottom="188dp"
+    android:text="Our LoveList"
+    android:textSize="30dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent" />
+
+
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

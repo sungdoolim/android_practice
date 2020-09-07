@@ -393,7 +393,7 @@ class MainActivity : AppCompatActivity() {
             album_imageview.setImageURI(photoUri)
             when(happen){
                 1 -> {
-                    var builder = AlertDialog.Builder(this)
+                        var builder = AlertDialog.Builder(this)
                     builder.setTitle("사진 올리기")
                     val li = LinearLayout(this)
                     li.setOrientation(LinearLayout.VERTICAL)

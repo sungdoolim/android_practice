@@ -25,11 +25,11 @@ class MainActivity : AppCompatActivity()  ,NavigationView.OnNavigationItemSelect
         // supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
         selectList(this)
 
-        val pref=getSharedPreferences("Rnd",0)
-        val edit=pref.edit()
-        edit.putString("id","누꿍")
-        edit.apply()
-        Toast.makeText(this,"누꿍 안냥?",Toast.LENGTH_SHORT).show()
+//        val pref=getSharedPreferences("Rnd",0)
+//        val edit=pref.edit()
+//        edit.putString("id","누꿍")
+//        edit.apply()
+//        Toast.makeText(this,"누꿍 안냥?",Toast.LENGTH_SHORT).show()
         botnav.setOnNavigationItemSelectedListener(this)
         naviView.setNavigationItemSelectedListener (this)
     }
@@ -76,6 +76,10 @@ class MainActivity : AppCompatActivity()  ,NavigationView.OnNavigationItemSelect
             }
             R.id.bottom3->{
                 var intent= Intent(this, Checked::class.java)
+                startActivity(intent)
+            }
+            R.id.bottom4->{
+                var intent= Intent(this, couponList::class.java)
                 startActivity(intent)
             }
             R.id.hama->{

@@ -70,28 +70,28 @@ class unchec: Fragment(), NavigationView.OnNavigationItemSelectedListener, Botto
                 Ltoast= Toast.makeText(this.context,"녕이눈~~~~", Toast.LENGTH_SHORT)
                 Ltoast?.show()
             }
-
-            R.id.bottom1->{
-                val transaction= activity?.supportFragmentManager?.beginTransaction()
-                var f2= home()
-                transaction?.replace(R.id.framelayout,f2)
-                transaction?.commit()
-            }
-            R.id.bottom2->{
-                val transaction= activity?.supportFragmentManager?.beginTransaction()
-                var f2= chec()
-                transaction?.replace(R.id.framelayout,f2)
-                transaction?.commit()
-
-
-            }
-            R.id.bottom3->{
-                val transaction= activity?.supportFragmentManager?.beginTransaction()
-                var f2= unchec()
-                transaction?.replace(R.id.framelayout,f2)
-                transaction?.commit()
-
-            }
+//
+//            R.id.bottom1->{
+//                val transaction= activity?.supportFragmentManager?.beginTransaction()
+//                var f2= home()
+//                transaction?.replace(R.id.framelayout,f2)
+//                transaction?.commit()
+//            }
+//            R.id.bottom2->{
+//                val transaction= activity?.supportFragmentManager?.beginTransaction()
+//                var f2= chec()
+//                transaction?.replace(R.id.framelayout,f2)
+//                transaction?.commit()
+//
+//
+//            }
+//            R.id.bottom3->{
+//                val transaction= activity?.supportFragmentManager?.beginTransaction()
+//                var f2= unchec()
+//                transaction?.replace(R.id.framelayout,f2)
+//                transaction?.commit()
+//
+//            }
             R.id.hama->{
                 val pref=requireContext().getSharedPreferences("Rnd",0)
                 val edit=pref.edit()

@@ -73,6 +73,10 @@ class Checked : AppCompatActivity() , NavigationView.OnNavigationItemSelectedLis
                 var intent= Intent(this, this::class.java)
                 startActivity(intent)
             }
+            R.id.bottom4->{
+                var intent= Intent(this, couponList::class.java)
+                startActivity(intent)
+            }
             R.id.hama->{
                 val pref=getSharedPreferences("Rnd",0)
                 val edit=pref.edit()
@@ -82,6 +86,7 @@ class Checked : AppCompatActivity() , NavigationView.OnNavigationItemSelectedLis
 
                 layout_drawer.closeDrawers()
             }
+
             R.id.staris->{
                 val pref=getSharedPreferences("Rnd",0)
                 val edit=pref.edit()

@@ -1,5 +1,6 @@
 package com.example.myhairdiary_c
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +17,8 @@ class logo_home : AppCompatActivity() {
 
 
 
-        val mHandler: Handler = object : Handler() {
+        val mHandler: Handler = @SuppressLint("HandlerLeak")
+        object : Handler() {
             override fun handleMessage(msg: Message?) {  // 실행이 끝난후 확인 가능
             }
         }

@@ -29,6 +29,7 @@ class coupon_adapter(val context: Context?, val designerList:ArrayList<list_data
                 val edit=pref.edit()
 
                 edit.clear()
+                edit.putString("url",dl.url)
                 edit.putString("due",dl.due)
                 edit.putInt("rest",dl.rest)
                 edit.putString("content",dl.content)

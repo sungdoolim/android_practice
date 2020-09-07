@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -14,7 +15,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_coupon_list.*
 import kotlinx.android.synthetic.main.activity_coupon_list.insertone
 import kotlinx.android.synthetic.main.activity_coupon_list.layout_drawer
-import kotlinx.android.synthetic.main.activity_un_checked.*
+
+import kotlinx.android.synthetic.main.bottom_nav.*
 
 class couponList : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -23,11 +25,14 @@ class couponList : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coupon_list)
 
+        botnav.getMenu().getItem(3).setChecked(true);
         insertone.setOnClickListener(){
             var intent= Intent(this, upcoupon::class.java)
             startActivity(intent)
         }
         selectList(this)
+        botnav.setOnNavigationItemSelectedListener(this)
+        naviView.setNavigationItemSelectedListener (this)
     }
     override fun onBackPressed() {
         ActivityCompat.finishAffinity(this)
@@ -67,7 +72,7 @@ class couponList : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
                 startActivity(intent)
             }
             R.id.bottom2->{
-                var intent= Intent(this, this::class.java)
+                var intent= Intent(this, unChecked::class.java)
                 startActivity(intent)
 
             }
@@ -76,7 +81,7 @@ class couponList : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
                 startActivity(intent)
             }
             R.id.bottom4->{
-                var intent= Intent(this, couponList::class.java)
+                var intent= Intent(this, this::class.java)
                 startActivity(intent)
             }
             R.id.hama->{
@@ -126,6 +131,9 @@ class couponList : AppCompatActivity(), NavigationView.OnNavigationItemSelectedL
                     coupon_rv.layoutManager=
                         LinearLayoutManager(container, LinearLayoutManager.VERTICAL,false)
                     coupon_rv.setHasFixedSize(true)
+                    coupon_rv.addItemDecoration(
+                        DividerItemDecoration(applicationContext, DividerItemDecoration.VERTICAL)
+                    )// 경계선을 추가합니다
                     coupon_rv.adapter=
                         coupon_adapter(
                             container,
