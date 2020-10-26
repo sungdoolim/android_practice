@@ -7,11 +7,15 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.layout_drawer
+import kotlinx.android.synthetic.main.activity_main.naviView
+import kotlinx.android.synthetic.main.activity_un_checked.*
 import kotlinx.android.synthetic.main.bottom_nav.*
 
 
@@ -24,7 +28,6 @@ class MainActivity : AppCompatActivity()  ,NavigationView.OnNavigationItemSelect
         setContentView(R.layout.activity_main)
         // supportFragmentManager.beginTransaction().replace(R.id.framelayout, home()).commit()
         selectList(this)
-
 //        val pref=getSharedPreferences("Rnd",0)
 //        val edit=pref.edit()
 //        edit.putString("id","누꿍")
@@ -110,6 +113,7 @@ class MainActivity : AppCompatActivity()  ,NavigationView.OnNavigationItemSelect
         }
         return true
     }
+
     fun selectList(container: Context){
         val firestore= FirebaseFirestore.getInstance()
         firestore?.collection("ourlist").orderBy("index").get()
@@ -124,6 +128,9 @@ class MainActivity : AppCompatActivity()  ,NavigationView.OnNavigationItemSelect
                     listrv.layoutManager=
                         LinearLayoutManager(container, LinearLayoutManager.VERTICAL,false)
                     listrv.setHasFixedSize(true)
+                    listrv.addItemDecoration(
+                            DividerItemDecoration(applicationContext, DividerItemDecoration.VERTICAL)
+                            )
                     listrv.adapter=
                         list_adapter(
                             container,

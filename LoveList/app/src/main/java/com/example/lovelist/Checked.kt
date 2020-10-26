@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -125,6 +126,9 @@ class Checked : AppCompatActivity() , NavigationView.OnNavigationItemSelectedLis
                     checked_rv.layoutManager=
                         LinearLayoutManager(container, LinearLayoutManager.VERTICAL,false)
                     checked_rv.setHasFixedSize(true)
+                    checked_rv.addItemDecoration(
+                        DividerItemDecoration(applicationContext, DividerItemDecoration.VERTICAL)
+                    )
                     checked_rv.adapter=
                         list_adapter(
                             container,

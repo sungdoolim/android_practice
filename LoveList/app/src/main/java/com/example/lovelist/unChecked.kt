@@ -7,12 +7,15 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.android.synthetic.main.activity_coupon_list.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_un_checked.*
+import kotlinx.android.synthetic.main.activity_un_checked.insertone
 import kotlinx.android.synthetic.main.activity_un_checked.layout_drawer
 import kotlinx.android.synthetic.main.activity_un_checked.naviView
 import kotlinx.android.synthetic.main.bottom_nav.*
@@ -23,7 +26,7 @@ class unChecked : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_un_checked)
-
+        selectourIndex(this)
         val pref=getSharedPreferences("Rnd",0)
         val edit=pref.edit()
         edit.putString("id","누꿍")
@@ -41,6 +44,32 @@ class unChecked : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
             startActivity(intent)
         }
 
+    }
+    fun selectourIndex(container:Context){
+        val firestore= FirebaseFirestore.getInstance()
+        firestore?.collection("oursession").get()
+            .addOnCompleteListener {
+                val pref=getSharedPreferences("Rnd",0)
+                val edit=pref.edit()
+                edit.putString("id","누꿍")
+                if(it.isSuccessful){
+                    var userDTO=ArrayList<list_data>()
+                    for(dc in it.result!!.documents){
+                        dc.toObject(list_data::class.java)?.let { it1 ->
+                            userDTO.add(it1)
+
+                            edit.putInt("index", it1.index)
+                            edit.apply()
+
+                        }
+                    }
+
+                    Toast.makeText(this,pref.getInt("index",-1).toString(),Toast.LENGTH_SHORT).show()
+
+                }else{
+                    println("fail")
+                }
+            }
     }
 
     override fun onBackPressed() {
@@ -140,6 +169,9 @@ class unChecked : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
                     unchecked_rv.layoutManager=
                         LinearLayoutManager(container, LinearLayoutManager.VERTICAL,false)
                     unchecked_rv.setHasFixedSize(true)
+                    unchecked_rv.addItemDecoration(
+                        DividerItemDecoration(applicationContext, DividerItemDecoration.VERTICAL)
+                    )
                     unchecked_rv.adapter=
                         list_adapter(
                             container,

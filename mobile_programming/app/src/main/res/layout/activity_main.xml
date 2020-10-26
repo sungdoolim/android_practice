@@ -35,6 +35,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="animation"
+                android:id="@+id/ani"/>
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -65,7 +70,43 @@
                 android:onClick="istoggle"
                 />
 
+            <TextView
+                android:id="@+id/ctvtest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="context view test"/>
 
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="시간"
+                android:id="@+id/bttime"
+                android:onClick="onclic"/>
+            <Button
+                android:id="@+id/btcal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="날짜"
+                android:onClick="onclic"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/variousView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="various view"/>
+                <Button
+                    android:id="@+id/variousIntent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="intent"/>
+
+
+
+            </LinearLayout>
 
         </LinearLayout>
 

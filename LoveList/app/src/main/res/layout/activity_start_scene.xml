@@ -118,19 +118,18 @@ app:layoutDescription="@xml/activity_start_scene_scene"
     android:src="@drawable/bigo"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent" />
-<TextView
-    android:id="@+id/textView17"
-    android:layout_width="match_parent"
-    android:textAlignment="center"
-    android:layout_height="37dp"
-    android:layout_marginBottom="188dp"
-    android:text="Our LoveList"
-    android:textSize="30dp"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent" />
 
-
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="188dp"
+        android:text="사랑해 영이야!"
+        android:textAlignment="center"
+        android:textSize="45dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

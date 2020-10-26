@@ -57,6 +57,7 @@ class coupon_adapter(val context: Context?, val designerList:ArrayList<list_data
 
         holder.due.text=designerList.get(position).due
         holder.rest.text= designerList.get(position).rest.toString()
+        holder.index.text=designerList.get(position).index.toString()
         if (context != null) {
             Glide.with(context).load(designerList.get(position).url).into(holder.img)
         }
@@ -68,6 +69,7 @@ class coupon_adapter(val context: Context?, val designerList:ArrayList<list_data
         val layout=itemView.findViewById<androidx.constraintlayout.widget.ConstraintLayout>(R.id.lay)
         val due=itemView.findViewById<TextView>(R.id.due)
         val rest=itemView.findViewById<TextView>(R.id.rest)
+        val index=itemView.findViewById<TextView>(R.id.index)
         val img=itemView.findViewById<ImageView>(R.id.imageView)
 
 
