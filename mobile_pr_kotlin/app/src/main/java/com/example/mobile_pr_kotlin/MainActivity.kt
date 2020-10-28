@@ -19,8 +19,12 @@ import android.widget.Toast
 import android.widget.ToggleButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mobile_pr_kotlin.adapter.recycleAdapter
 import com.example.mobile_pr_kotlin.frag.frag1
 import com.example.mobile_pr_kotlin.frag.frag2
+import com.example.mobile_pr_kotlin.vo.VO
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.custom_dialog.*
 import java.util.*
@@ -59,7 +63,20 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
+        //recyclerview
+        var vo=ArrayList<VO>()
+        vo.add(VO())
+        vo.add(VO())
+        vo.add(VO())
+        recyclerView.addItemDecoration(DividerItemDecoration(applicationContext,DividerItemDecoration.VERTICAL) )// 경계선 추가!!!!
+        recyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.adapter=recycleAdapter(this,vo)
     }
+
+
+
     fun ischeck(v: View) { // 체크 박스
         when (v.id) {
             R.id.cb1 -> Toast.makeText(this, "cb버튼1 테스트!!!", Toast.LENGTH_SHORT).show()
