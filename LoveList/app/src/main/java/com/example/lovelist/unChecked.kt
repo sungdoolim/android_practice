@@ -118,10 +118,7 @@ class unChecked : AppCompatActivity(), NavigationView.OnNavigationItemSelectedLi
                 var intent= Intent(this@unChecked, Checked::class.java)
                 startActivity(intent)
             }
-            R.id.bottom4->{
-                var intent= Intent(this@unChecked, couponList::class.java)
-                startActivity(intent)
-            }
+
             R.id.hama->{
                 val pref=getSharedPreferences("Rnd",0)
                 val edit=pref.edit()

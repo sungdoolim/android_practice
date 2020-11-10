@@ -1,7 +1,6 @@
 package com.example.mobile_pr_kotlin
 
 import android.app.*
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -59,9 +58,9 @@ class MainActivity : AppCompatActivity() {
             val ft = manager.beginTransaction()
             ft.replace(R.id.framecontainer, frag2(), "one")
             ft.commitAllowingStateLoss()
+
+
         }
-
-
 
 
         //recyclerview
@@ -69,10 +68,36 @@ class MainActivity : AppCompatActivity() {
         vo.add(VO())
         vo.add(VO())
         vo.add(VO())
-        recyclerView.addItemDecoration(DividerItemDecoration(applicationContext,DividerItemDecoration.VERTICAL) )// 경계선 추가!!!!
-        recyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false)
+        recyclerView.addItemDecoration(
+            DividerItemDecoration(
+                applicationContext,
+                DividerItemDecoration.VERTICAL
+            )
+        )// 경계선 추가!!!!
+        recyclerView.layoutManager= LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.setHasFixedSize(true)
-        recyclerView.adapter=recycleAdapter(this,vo)
+        recyclerView.adapter=recycleAdapter(this, vo)
+    }
+
+
+
+
+    //어떤 버튼 눌러서
+//    Intent in = new Intent(MainActivity.this, SubActivity.class);
+//    startActivityForResult(in, GET_STRING);
+
+    // 그리고 서브에서
+//    Intent intent = new Intent();
+//    intent.putExtra("INPUT_TEXT", edit.getText().toString());
+//    setResult(RESULT_OK, intent);
+//    finish();
+    override protected fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode ==1) {
+            if (resultCode == RESULT_OK) {
+             // 여기다 할꺼 쓰면 되는데
+            }
+        }
     }
 
 
